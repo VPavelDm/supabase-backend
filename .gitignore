@@ -1,0 +1,11 @@
+# Supabase CLI generated state
+.branches/
+.temp/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
