@@ -10,7 +10,18 @@ Deno.serve(async (req) => {
   try {
     const supabase = createSupabaseClient(req);
 
-    const { data, error } = await supabase.rpc("get_capsules");
+    let params: { limit?: number; offset?: number; ascending?: boolean } = {};
+    try {
+      params = await req.json();
+    } catch {
+      // No body — keep defaults for backwards compatibility with older clients.
+    }
+
+    const { data, error } = await supabase.rpc("get_capsules", {
+      p_limit: params.limit ?? 50,
+      p_offset: params.offset ?? 0,
+      p_ascending: params.ascending ?? true,
+    });
     if (error) {
       console.error("get-capsules RPC failed:", error);
       return errorResponse("Internal server error", 500);
