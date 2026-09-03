@@ -1,5 +1,20 @@
 # CLAUDE.md — Supabase Backend
 
+## Shared project
+
+This Supabase project (`ttjzshiaatqvszckjlhw`) hosts several apps. Futura's
+tables live in the `futura` schema (moved 2026-09-03); the `public` RPC
+functions are the shipped app's API and stay in `public` with their bodies
+resolving tables via `SET search_path TO 'futura'`. Other apps follow the
+same pattern (e.g. Treddy: `treddy` schema, `treddy/<route>` edge function,
+`treddy-*` cron jobs, `TREDDY_*` secrets). This repo owns the project's
+migration history — other apps apply their idempotent DDL outside
+`supabase db push`.
+
+When writing new DB code here: tables, indexes, and triggers go in `futura`;
+only the app-facing RPC functions go in `public`, always with
+`SET search_path TO 'futura'`.
+
 ## Structure
 
 ```
