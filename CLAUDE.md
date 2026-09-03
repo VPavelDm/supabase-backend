@@ -1,10 +1,16 @@
 # CLAUDE.md — shared Supabase backend
 
-This repo is the single source of truth for the shared Supabase project
+This repo (github: VPavelDm/supabase-backend, local:
+~/Developer/supabase-backend, formerly FuturaBE inside the futura folder) is
+the single source of truth for the shared Supabase project
 `ttjzshiaatqvszckjlhw` (org name "Futura"), which hosts several apps on one
 plan. It owns the migration history, every edge function, and the shared
 utilities. App repos (Treddy, Futura iOS) contain no backend code — they
 point here.
+
+Layout: everything lives under `supabase/` — the CLI's canonical layout. It
+looks for `supabase/config.toml` below the working directory, so run
+commands from the repo root; files at the root itself are invisible to it.
 
 ## Conventions — everything an app owns is namespaced
 
