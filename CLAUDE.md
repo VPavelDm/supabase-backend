@@ -1,91 +1,85 @@
-# CLAUDE.md — Supabase Backend
+# CLAUDE.md — shared Supabase backend
 
-## Shared project
+This repo is the single source of truth for the shared Supabase project
+`ttjzshiaatqvszckjlhw` (org name "Futura"), which hosts several apps on one
+plan. It owns the migration history, every edge function, and the shared
+utilities. App repos (Treddy, Futura iOS) contain no backend code — they
+point here.
 
-This Supabase project (`ttjzshiaatqvszckjlhw`) hosts several apps. Futura's
-tables live in the `futura` schema (moved 2026-09-03); the `public` RPC
-functions are the shipped app's API and stay in `public` with their bodies
-resolving tables via `SET search_path TO 'futura'`. Other apps follow the
-same pattern (e.g. Treddy: `treddy` schema, `treddy/<route>` edge function,
-`treddy-*` cron jobs, `TREDDY_*` secrets). This repo owns the project's
-migration history — other apps apply their idempotent DDL outside
-`supabase db push`.
+## Conventions — everything an app owns is namespaced
 
-When writing new DB code here: tables, indexes, and triggers go in `futura`;
-only the app-facing RPC functions go in `public`, always with
-`SET search_path TO 'futura'`.
+| Piece            | Convention                      | Treddy                          | Futura |
+|------------------|---------------------------------|---------------------------------|--------|
+| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) |
+| Postgres schema  | one schema per app              | `treddy`                        | `futura` |
+| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary |
+| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — |
+| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — |
+| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — |
 
-## Structure
+Cross-app pieces live under `shared`: the `shared` Postgres schema
+(`shared.set_updated_at`), the `shared-` cron prefix
+(`shared-purge-cron-history`), and `functions/_shared/` (router, direct-db
+client, cron auth, APNs client, CORS/response helpers, supabase-js client).
+`OPENAI_API_KEY` without a prefix is the project-wide fallback key.
 
-```
-supabase/
-├── migrations/     — Postgres migrations (timestamped SQL files)
-├── functions/      — Deno edge functions (one folder per function)
-│   └── _shared/   — Shared utilities (cors, response, supabase-client)
-├── config.toml     — Supabase project config
-└── seed.sql        — Seed data (if needed)
-```
+## Architecture per app
 
-## Common Commands
+**Treddy** (`treddy` schema: accounts, posts, devices, job_runs, ai_usage):
+the schema is NOT exposed through PostgREST — it holds Threads tokens. Routes
+use the direct Postgres connection (`SUPABASE_DB_URL`, `_shared/db.ts`) and
+carry their own auth: `link` proves ownership with the Threads token and
+issues a sync secret; `sync`/`settings`/`generate` take the sync secret as
+bearer; `generate` pre-link (onboarding) takes the `x-treddy-app-key` header
+instead; `publish-due`/`refresh-tokens` take pg_cron's Vault secret;
+`threads-oauth` is Meta's OAuth redirect target. Generation prompts, model,
+and caps are server-side; the app sends only per-action input, and the user's
+brief + writing samples live in `accounts.settings`.
 
-All commands must be run from the `supabase/` directory.
+**Futura** (`futura` schema: capsules, capsule_photos, capsule_voice_notes,
+profiles): routes are thin pass-throughs to `public` RPCs whose bodies
+resolve tables via `SET search_path TO 'futura'`; auth is the caller's JWT
+riding into PostgREST, enforced by `auth.uid()` + RLS. Storage: private
+buckets `capsule-photos` / `capsule-voice-notes`, files scoped to
+`{user_id}/{capsule_id}/{uuid}.{ext}`, signed URLs from `get-capsules`.
+The legacy single-route functions are wrappers around
+`functions/futura/handlers/` — delete them (and their config.toml entries)
+after the app's force update.
+
+## Commands
+
+Run from the repo root.
 
 ```bash
-supabase start                          # Start local (API:54321, DB:54322, Studio:54323)
-supabase db push                        # Apply migrations to remote
+supabase db push                        # Apply new migrations to remote
 supabase functions deploy               # Deploy all edge functions
-supabase functions deploy function-name # Deploy a single edge function
+supabase functions deploy treddy        # Deploy one app's function
 supabase migration list                 # Check migration status
-supabase migration repair --status reverted MIGRATION_VERSION  # Revert failed migration
+supabase start                          # Local stack (API:54321, DB:54322, Studio:54323)
 ```
 
-## DB Function Conventions
+## Migration rules
 
-- Use `SECURITY DEFINER` and `auth.uid()` for auth — never accept authID as a parameter
-- **Always add `GRANT EXECUTE ON FUNCTION ... TO authenticated`** when creating new functions — without this, PostgREST won't expose them (error PGRST202)
-- `CREATE OR REPLACE FUNCTION` only replaces when the full signature (params + return type) matches. Adding parameters or changing return types creates a **new overload**. Drop the old one explicitly to avoid error 42725 ("function is not unique")
-- Parameters use `p_` prefix (e.g., `p_capsule_id`, `p_storage_path`)
-- Local variables use `v_` prefix (e.g., `v_auth_id`, `v_capsule_id`)
-- Return JSONB via `jsonb_build_object()`
+- One history for the whole project; never apply DDL outside `db push`.
+- Name new files `<timestamp>_<app>_<desc>.sql` (`shared` counts as an app).
+- Tables, indexes, and triggers go in the app's schema; only app-facing RPC
+  functions go in `public`, always with `SET search_path TO '<schema>'`.
+- Keep migrations idempotent where cheap (`if not exists`, `cron.schedule`
+  upserts by name) — the shared project is long-lived and re-runs happen.
 
-## Edge Function Template
+## DB function conventions (Futura RPC style)
 
-```typescript
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { createSupabaseClient } from "../_shared/supabase-client.ts";
-import { jsonResponse, errorResponse, corsResponse, methodNotAllowedResponse } from "../_shared/response.ts";
+- `SECURITY DEFINER` + `auth.uid()` for auth — never accept authID as a parameter
+- **Always `GRANT EXECUTE ON FUNCTION ... TO authenticated`** — without it
+  PostgREST won't expose the function (error PGRST202)
+- `CREATE OR REPLACE FUNCTION` only replaces on an exact signature match;
+  changed params/return types create an overload — drop the old one (error 42725)
+- Params `p_`, locals `v_`, return JSONB via `jsonb_build_object()`
 
-Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return corsResponse();
-  if (req.method !== "POST") return methodNotAllowedResponse();
-  try {
-    const supabase = createSupabaseClient(req);
-    const params = await req.json();
-    const { data, error } = await supabase.rpc("function_name", params);
-    if (error) {
-      console.error("function-name RPC failed:", error);
-      return errorResponse("Internal server error", 500);
-    }
-    return jsonResponse(data);
-  } catch (e) {
-    console.error("function-name unexpected error:", e);
-    return errorResponse("Internal server error", 500);
-  }
-});
-```
+## Operability
 
-## Auth Model
-
-- Edge functions receive the user's JWT via `Authorization` header
-- `createSupabaseClient(req)` creates a client scoped to that user
-- DB functions use `auth.uid()` to get the current user — no authID is passed from the client
-- RLS policies enforce row-level access; `SECURITY DEFINER` functions bypass RLS when needed
-
-## Storage
-
-- Two private buckets: `capsule-photos` and `capsule-voice-notes`
-- Files are scoped to `{user_id}/{capsule_id}/{uuid}.{ext}`
-- Storage policies restrict access to the user's own folder
-- `upload-media` edge function handles file upload + metadata registration via RPC
-- `get-capsules` generates signed URLs (1h expiry) for photos and voice notes
-- `delete-capsule` cleans up storage files after DB cascade delete
+- `treddy.job_runs` records every cron run's outcome:
+  `select * from treddy.job_runs order by finished_at desc limit 20;`
+- `cron.job_run_details` shows the pg_cron side; `shared-purge-cron-history`
+  keeps a week of it.
+- `treddy.ai_usage` backs /generate's per-caller daily cap.

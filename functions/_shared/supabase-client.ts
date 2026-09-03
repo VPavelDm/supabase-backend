@@ -1,4 +1,4 @@
-import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, SupabaseClient } from "npm:@supabase/supabase-js@2.47.10";
 
 export function createSupabaseClient(req: Request): SupabaseClient {
   return createClient(
