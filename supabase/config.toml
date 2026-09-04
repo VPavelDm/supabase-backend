@@ -383,15 +383,17 @@ s3_access_key = "env(S3_ACCESS_KEY)"
 # Configures AWS_SECRET_ACCESS_KEY for S3 bucket
 s3_secret_key = "env(S3_SECRET_KEY)"
 
-# One router function per app (treddy/<route>, futura/<route>). The legacy
-# single-route Futura functions below stay until old app versions are
-# force-updated away. All deploy with JWT verification off: Treddy's routes
-# carry their own auth (sync secret / app key / cron secret), and Futura's
-# pass the caller's JWT through to PostgREST where auth.uid() + RLS enforce
-# access.
+# One router function per app (treddy/<route>, futura/<route>,
+# lyncil/<route>). The legacy single-route Futura functions below stay until
+# old app versions are force-updated away. All deploy with JWT verification
+# off: Treddy's and Lyncil's routes carry their own auth (sync secret / app
+# key / cron secret), and Futura's pass the caller's JWT through to PostgREST
+# where auth.uid() + RLS enforce access.
 [functions.treddy]
 verify_jwt = false
 [functions.futura]
+verify_jwt = false
+[functions.lyncil]
 verify_jwt = false
 [functions.get-capsules]
 verify_jwt = false

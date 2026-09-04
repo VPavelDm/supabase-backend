@@ -5,8 +5,8 @@ This repo (github: VPavelDm/supabase-backend, local:
 the single source of truth for the shared Supabase project
 `ttjzshiaatqvszckjlhw` (org name "Futura"), which hosts several apps on one
 plan. It owns the migration history, every edge function, and the shared
-utilities. App repos (Treddy, Futura iOS) contain no backend code — they
-point here.
+utilities. App repos (Treddy, Futura iOS, Lyncil iOS) contain no backend
+code — they point here.
 
 Layout: everything lives under `supabase/` — the CLI's canonical layout. It
 looks for `supabase/config.toml` below the working directory, so run
@@ -14,14 +14,14 @@ commands from the repo root; files at the root itself are invisible to it.
 
 ## Conventions — everything an app owns is namespaced
 
-| Piece            | Convention                      | Treddy                          | Futura |
-|------------------|---------------------------------|---------------------------------|--------|
-| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) |
-| Postgres schema  | one schema per app              | `treddy`                        | `futura` |
-| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary |
-| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — |
-| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — |
-| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — |
+| Piece            | Convention                      | Treddy                          | Futura | Lyncil |
+|------------------|---------------------------------|---------------------------------|--------|--------|
+| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` |
+| Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` |
+| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` |
+| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) |
+| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — |
+| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) |
 
 Cross-app pieces live under `shared`: the `shared` Postgres schema
 (`shared.set_updated_at`), the `shared-` cron prefix
@@ -54,6 +54,19 @@ buckets `capsule-photos` / `capsule-voice-notes`, files scoped to
 The legacy single-route functions are wrappers around
 `functions/futura/handlers/` — delete them (and their config.toml entries)
 after the app's force update.
+
+**Lyncil** (`lyncil` schema: ai_usage): one route, `generate-lyrics`, which
+writes two distinct sets of song lyrics in a single model call from the
+user's idea plus their genre / mood / artist pickers. The app has no
+accounts and no Supabase auth, so the route authenticates with the app key
+baked into the binary (`x-lyncil-app-key`, secret `LYNCIL_APP_KEY`) and caps
+every caller per day by IP through `lyncil.ai_usage` — a shipped key is
+extractable, and the cap is what keeps the OpenAI key from being drained.
+The prompt template, the model, the strict JSON schema, and the genre / mood
+/ artist fallbacks all live server-side; the app sends only the user's
+choices, so prompts iterate without an App Store release. This replaced a
+raw GPT proxy on Lyncil's own Supabase project that anyone with the anon key
+could drive with any model on our OpenAI key.
 
 ## Commands
 
@@ -91,4 +104,5 @@ supabase start                          # Local stack (API:54321, DB:54322, Stud
   `select * from treddy.job_runs order by finished_at desc limit 20;`
 - `cron.job_run_details` shows the pg_cron side; `shared-purge-cron-history`
   keeps a week of it.
-- `treddy.ai_usage` backs /generate's per-caller daily cap.
+- `treddy.ai_usage` and `lyncil.ai_usage` back the per-caller daily caps on
+  /generate and /generate-lyrics.
