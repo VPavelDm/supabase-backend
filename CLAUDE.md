@@ -34,13 +34,16 @@ client, cron auth, APNs client, CORS/response helpers, supabase-js client).
 **Treddy** (`treddy` schema: accounts, posts, devices, job_runs, ai_usage):
 the schema is NOT exposed through PostgREST — it holds Threads tokens. Routes
 use the direct Postgres connection (`SUPABASE_DB_URL`, `_shared/db.ts`) and
-carry their own auth: `link` proves ownership with the Threads token and
-issues a sync secret; `sync`/`settings`/`generate` take the sync secret as
-bearer; `generate` pre-link (onboarding) takes the `x-treddy-app-key` header
+carry their own auth: `link` proves ownership with the Threads token,
+issues a sync secret, and returns the account's stored settings (null until
+onboarding was completed somewhere — how the app tells a returning user from
+a new one) and posts; `sync`/`settings`/`generate`/`account` (DELETE — full
+removal, cascades posts and devices) take the sync secret as bearer; `generate` pre-link (onboarding) takes the `x-treddy-app-key` header
 instead; `publish-due`/`refresh-tokens` take pg_cron's Vault secret;
 `threads-oauth` is Meta's OAuth redirect target. Generation prompts, model,
 and caps are server-side; the app sends only per-action input, and the user's
-brief + writing samples live in `accounts.settings`.
+brief + writing samples + planning defaults (posting times, plan days) live in
+`accounts.settings`.
 
 **Futura** (`futura` schema: capsules, capsule_photos, capsule_voice_notes,
 profiles): routes are thin pass-throughs to `public` RPCs whose bodies

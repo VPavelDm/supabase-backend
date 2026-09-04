@@ -7,7 +7,7 @@
 import { corsHeaders } from "./cors.ts";
 
 export type Handler = (req: Request) => Response | Promise<Response>;
-export type MethodHandlers = Partial<Record<"GET" | "POST", Handler>>;
+export type MethodHandlers = Partial<Record<"GET" | "POST" | "DELETE", Handler>>;
 
 export function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
