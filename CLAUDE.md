@@ -55,18 +55,25 @@ The legacy single-route functions are wrappers around
 `functions/futura/handlers/` — delete them (and their config.toml entries)
 after the app's force update.
 
-**Lyncil** (`lyncil` schema: ai_usage): one route, `generate-lyrics`, which
-writes two distinct sets of song lyrics in a single model call from the
-user's idea plus their genre / mood / artist pickers. The app has no
-accounts and no Supabase auth, so the route authenticates with the app key
-baked into the binary (`x-lyncil-app-key`, secret `LYNCIL_APP_KEY`) and caps
-every caller per day by IP through `lyncil.ai_usage` — a shipped key is
-extractable, and the cap is what keeps the OpenAI key from being drained.
-The prompt template, the model, the strict JSON schema, and the genre / mood
-/ artist fallbacks all live server-side; the app sends only the user's
-choices, so prompts iterate without an App Store release. This replaced a
-raw GPT proxy on Lyncil's own Supabase project that anyone with the anon key
-could drive with any model on our OpenAI key.
+**Lyncil** (`lyncil` schema: songs, ai_usage): the app signs every install
+in **anonymously** on launch (Supabase anonymous sign-ins must be enabled on
+the project; the session lives in the iOS Keychain, which survives a
+reinstall, so the same anonymous user comes back with their library). Songs
+live in `lyncil.songs` — the user's pickers (genre, mood, artist, voice),
+their prompt, the generated name and lyrics, and the library state — reached
+through Futura-style public RPCs `lyncil_get_songs()`, `lyncil_upsert_song(…)`,
+`lyncil_delete_song(uuid)` (SECURITY DEFINER, `auth.uid()`, dates as epoch
+seconds). One route, `generate-lyrics`, writes two distinct sets of song
+lyrics in a single model call from the user's idea plus their pickers. It
+requires the caller's user token (no token, or the bare anon key → 401) AND
+the app key baked into the binary (`x-lyncil-app-key`, secret
+`LYNCIL_APP_KEY`), and caps every user per day through `lyncil.ai_usage` —
+a shipped key is extractable, and the cap is what keeps the OpenAI key from
+being drained. The prompt template, the model, the strict JSON schema, and
+the genre / mood / artist fallbacks all live server-side; the app sends only
+the user's choices, so prompts iterate without an App Store release. This
+replaced a raw GPT proxy on Lyncil's own Supabase project that anyone with
+the anon key could drive with any model on our OpenAI key.
 
 ## Commands
 

@@ -9,11 +9,15 @@
 // model on our OpenAI key. Now prompts iterate without an App Store release
 // and the key is only ever spent by this route.
 //
-// Auth: the app key baked into the binary (x-lyncil-app-key). Lyncil has no
-// accounts, so callers are additionally capped per day by IP.
+// Auth: a signed-in Supabase user (the app signs every install in
+// anonymously on launch, so the token is always there) AND the app key baked
+// into the binary (x-lyncil-app-key). No user token → 401, whatever else the
+// request carries. The daily cap is per user, which a reinstall doesn't
+// reset: the anonymous session lives in the Keychain and comes back.
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
+import { createSupabaseClient } from "../_shared/supabase-client.ts";
 
 const MODEL = Deno.env.get("LYNCIL_OPENAI_MODEL") ?? "gpt-5.6-terra";
 const DAILY_CAP = 100;
@@ -115,6 +119,16 @@ async function isAppCall(req: Request): Promise<boolean> {
   return (await sha256(given)) === (await sha256(expected));
 }
 
+/// The user behind the bearer token, or null when there is none, it is the
+/// anon key rather than a user token, or the auth server rejects it.
+async function callerUserId(req: Request): Promise<string | null> {
+  const authorization = req.headers.get("Authorization") ?? "";
+  if (!authorization.toLowerCase().startsWith("bearer ")) return null;
+  const { data, error } = await createSupabaseClient(req).auth.getUser();
+  if (error || !data.user) return null;
+  return data.user.id;
+}
+
 /// Counts the call against the caller's daily budget; false means over cap.
 async function underDailyCap(caller: string): Promise<boolean> {
   const rows = await sql`
@@ -168,6 +182,8 @@ function parseOption(value: unknown): LyricsOption | null {
 
 export async function handleGenerateLyrics(req: Request): Promise<Response> {
   if (!await isAppCall(req)) return json({ error: "Unauthorized" }, 401);
+  const userId = await callerUserId(req);
+  if (!userId) return json({ error: "Sign-in required" }, 401);
 
   const body = await req.json().catch(() => null) as Record<string, unknown> | null;
   if (!body) return json({ error: "JSON body is required" }, 400);
@@ -175,8 +191,7 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
   const prompt = str(body.prompt, MAX_PROMPT);
   if (!prompt) return json({ error: "prompt is required" }, 400);
 
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  const caller = `anon:${(await sha256(ip)).slice(0, 16)}`;
+  const caller = `user:${userId}`;
   if (!await underDailyCap(caller)) {
     return json({ error: "Daily generation limit reached" }, 429);
   }
