@@ -87,6 +87,18 @@ supabase migration list                 # Check migration status
 supabase start                          # Local stack (API:54321, DB:54322, Studio:54323)
 ```
 
+## Local development
+
+Debug builds of every app (Futura, Pretzly, Lyncil) point at the local stack,
+not the shared project, so `supabase start` is the first step of any app
+session that touches the backend. Migrations apply on start; if the volume
+already existed, `supabase migration up` applies the new ones. Routes only
+run when served: `supabase functions serve <slug> --env-file
+supabase/functions/.env` (`.env` is gitignored; `supabase/functions/.env.example`
+lists the keys — Lyncil's `generate-lyrics` needs `LYNCIL_APP_KEY` equal to
+the app's baked key and an OpenAI key). Anonymous sign-ins are on in
+`config.toml`, so Lyncil's install signs in against the local auth on first use.
+
 ## Migration rules
 
 - One history for the whole project; never apply DDL outside `db push`.
