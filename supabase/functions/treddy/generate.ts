@@ -13,6 +13,8 @@ import {
   accountForBearer,
   type GenerationSettings,
   parseSettings,
+  templateFor,
+  type VoiceTemplate,
 } from "./settings.ts";
 
 const MODEL = Deno.env.get("TREDDY_OPENAI_MODEL") ?? "gpt-5.6-terra";
@@ -30,14 +32,76 @@ post containing an em dash is a failed post.
 assistant: plain words, contractions, varied sentence length, no marketing \
 gloss.`;
 
-function systemPrompt(settings: GenerationSettings): string {
-  const parts = [settings.ai_instructions, HARD_STYLE_RULES];
-  if (settings.writing_samples.length > 0) {
-    const samples = settings.writing_samples
-      .map((sample, index) => `${index + 1}. ${sample}`)
-      .join("\n");
+// Prompt fragments for the structured answers. English regardless of the
+// user's UI language: the model follows the brief; the user never reads it.
+const GOAL_TEXT: Record<string, string> = {
+  growAudience: "grow an engaged following",
+  authority: "become a recognized voice in the niche",
+  promoteProduct: "build trust that leads people to their product",
+  landClients: "attract clients and work opportunities",
+  buildInPublic: "share the journey openly and build in public",
+  community: "spark conversations and build community",
+  stayConsistent: "post consistently and develop their voice",
+  forFun: "have fun sharing what they love",
+};
+const FORMAT_TEXT: Record<string, string> = {
+  tips: "quick practical tips",
+  questions: "questions that invite replies",
+  hotTakes: "hot takes",
+  stories: "relatable personal stories",
+  challenges: "mini challenges",
+  behindTheScenes: "behind-the-scenes moments",
+};
+
+/// "a", "a and b", "a, b and c".
+function naturalJoin(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}
+
+function numbered(items: string[]): string {
+  return items.map((item, index) => `${index + 1}. ${item}`).join("\n");
+}
+
+/// The standing brief, composed from one voice template. Optional answers
+/// drop their sentence, so the text always reads complete.
+function brief(template: VoiceTemplate): string {
+  const sentences: string[] = [];
+  sentences.push(
+    `You write Threads posts for a creator building an audience around ${template.topic || "their niche"}.`,
+  );
+  if (template.audience) sentences.push(`The audience: ${template.audience}.`);
+  const goals = template.goals.map((goal) => GOAL_TEXT[goal]).filter(Boolean);
+  if (goals.length > 0) {
+    sentences.push(`${goals.length > 1 ? "The goals" : "The goal"}: ${naturalJoin(goals)}.`);
+  }
+  const voice = template.tones.length > 0 ? naturalJoin(template.tones) : "warm, encouraging";
+  sentences.push(
+    `Voice: ${voice}, concise. Posts are short (under 400 characters), practical, and invite replies.`,
+  );
+  const formats = template.formats.map((format) => FORMAT_TEXT[format]).filter(Boolean);
+  if (formats.length > 0) sentences.push(`Mix formats: ${naturalJoin(formats)}.`);
+  sentences.push(`Write in ${template.language || "English"}.`);
+  return sentences.join(" ");
+}
+
+function systemPrompt(template: VoiceTemplate): string {
+  const parts = [brief(template)];
+  if (template.notes) {
+    parts.push(`Additional instructions from the user:\n${template.notes}`);
+  }
+  parts.push(HARD_STYLE_RULES);
+  if (template.writing_samples.length > 0) {
     parts.push(
-      `Posts written by the user — match their voice, rhythm, and formatting:\n${samples}`,
+      `Posts written by the user — match their voice, rhythm, and formatting:\n${numbered(template.writing_samples)}`,
+    );
+  }
+  if (template.references.length > 0) {
+    parts.push(
+      `Posts by other people the user admires — study what makes them work (the hook, ` +
+        `the structure, the rhythm, the specificity) and bring that quality to the user's ` +
+        `own posts. Never copy, paraphrase, or reuse their wording or their topics:\n` +
+        numbered(template.references),
     );
   }
   return parts.join("\n\n");
@@ -215,7 +279,7 @@ export async function handleGenerate(req: Request): Promise<Response> {
   } else {
     if (!await isAppCall(req)) return json({ error: "Unauthorized" }, 401);
     settings = parseSettings(body.settings);
-    if (!settings) return json({ error: "settings.ai_instructions is required" }, 400);
+    if (!settings) return json({ error: "settings need a template with a topic or notes" }, 400);
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
     caller = `anon:${(await sha256(ip)).slice(0, 16)}`;
   }
@@ -237,7 +301,7 @@ export async function handleGenerate(req: Request): Promise<Response> {
   }
   if (completion === null) return json({ error: "Missing task input" }, 400);
 
-  const content = await complete(systemPrompt(settings), completion);
+  const content = await complete(systemPrompt(templateFor(settings, body.template_id)), completion);
 
   if (task === "plan") {
     let posts: { text: string }[];
