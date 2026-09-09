@@ -37,7 +37,7 @@ use the direct Postgres connection (`SUPABASE_DB_URL`, `_shared/db.ts`) and
 carry their own auth: `link` proves ownership with the Threads token,
 issues a sync secret, and returns the account's stored settings (null until
 onboarding was completed somewhere — how the app tells a returning user from
-a new one) and posts; `sync`/`settings`/`generate`/`account` (DELETE — full
+a new one) and posts; `sync` (a merge, not a mirror: one account may live on several devices — content/schedule are last-write-wins on the device's `edited_at`, publish outcomes are the server's, deletions are `status = 'deleted'` tombstones purged after 30 days; it returns the account's whole post list plus its `settings`, null meaning the device must run the setup questions again)/`settings`/`generate`/`account` (DELETE — full
 removal, cascades posts and devices) take the sync secret as bearer; `generate` pre-link (onboarding) takes the `x-treddy-app-key` header
 instead; `publish-due`/`refresh-tokens` take pg_cron's Vault secret;
 `threads-oauth` is Meta's OAuth redirect target. Generation prompts, model,

@@ -81,9 +81,14 @@ export async function saveSettings(
   threadsUserID: string,
   settings: GenerationSettings,
 ): Promise<void> {
+  // sql.json serializes once. A pre-stringified value with a ::jsonb cast
+  // got JSON-encoded a second time by the driver and landed as a JSON
+  // string, which parseSettings then rejected — /generate answered 409 and
+  // /link told a returning user they had no setup. (Spread: the driver's
+  // JSON type wants an indexable object, which an interface is not.)
   await sql`
     update treddy.accounts
-    set settings = ${JSON.stringify(settings)}::jsonb,
+    set settings = ${sql.json({ ...settings })},
         updated_at = now()
     where threads_user_id = ${threadsUserID}`;
 }
