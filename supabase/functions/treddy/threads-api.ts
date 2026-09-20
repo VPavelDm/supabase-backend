@@ -34,6 +34,32 @@ export async function fetchProfile(
   return { id: String(body.id), username: String(body.username ?? "") };
 }
 
+/// Meta needs a moment before something it just took from us is usable,
+/// and says so in two ways: the container isn't ready yet, or — while it is
+/// still propagating — that the resource doesn't exist at all. The second
+/// wording is what most failed autoposts turn out to be.
+const NOT_READY_YET = /not ready|not available|try again|does not exist|unknown error/i;
+
+function isTransient(error: unknown): boolean {
+  if (error instanceof ThreadsAPIError && error.isAuthError) return false;
+  const message = error instanceof Error ? error.message : String(error);
+  return NOT_READY_YET.test(message) ||
+    (error instanceof ThreadsAPIError && error.code === null);
+}
+
+/// Repeats one publish step while Meta says what it needs isn't there yet,
+/// pausing longer before each attempt.
+async function retryingWhileNotReady<T>(step: () => Promise<T>): Promise<T> {
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      return await step();
+    } catch (error) {
+      if (!isTransient(error) || attempt >= 4) throw error;
+      await new Promise((resolve) => setTimeout(resolve, attempt * 3000));
+    }
+  }
+}
+
 /// Two-step publish: create a TEXT container, then publish it.
 /// Returns the published media ID.
 export async function publishPost(token: string, text: string): Promise<string> {
@@ -41,28 +67,22 @@ export async function publishPost(token: string, text: string): Promise<string> 
   create.searchParams.set("media_type", "TEXT");
   create.searchParams.set("text", text);
   create.searchParams.set("access_token", token);
-  const container = await parseOrThrow(await fetch(create, { method: "POST" }));
+  // A container publishes nothing on its own, so this step may be retried
+  // freely; an abandoned container expires on Meta's side.
+  const container = await retryingWhileNotReady(async () =>
+    await parseOrThrow(await fetch(create, { method: "POST" }))
+  );
 
   const publish = new URL(`${GRAPH}/me/threads_publish`);
   publish.searchParams.set("creation_id", String(container.id));
   publish.searchParams.set("access_token", token);
 
-  // Meta sometimes needs a moment before a fresh container is publishable
-  // ("media not ready"). Retrying the publish step is safe: it targets the
-  // container we already created, so it can never produce a second post.
-  for (let attempt = 1; ; attempt += 1) {
-    try {
-      const published = await parseOrThrow(await fetch(publish, { method: "POST" }));
-      return String(published.id);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      const transient = /not ready|not available|try again|unknown error/i.test(message) ||
-        (error instanceof ThreadsAPIError && error.code === null);
-      if (error instanceof ThreadsAPIError && error.isAuthError) throw error;
-      if (!transient || attempt >= 4) throw error;
-      await new Promise((resolve) => setTimeout(resolve, attempt * 3000));
-    }
-  }
+  // Retrying the publish step is safe: it targets the container we already
+  // created, so it can never produce a second post.
+  const published = await retryingWhileNotReady(async () =>
+    await parseOrThrow(await fetch(publish, { method: "POST" }))
+  );
+  return String(published.id);
 }
 
 export async function refreshToken(

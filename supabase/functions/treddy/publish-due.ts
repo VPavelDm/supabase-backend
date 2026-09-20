@@ -59,7 +59,10 @@ export async function handlePublishDue(req: Request): Promise<Response> {
         });
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error("publish failed", post.id, message);
+        // The Graph code is the only thing that tells Meta's failures
+        // apart; the stored error keeps just the sentence the user sees.
+        const code = error instanceof ThreadsAPIError ? error.code : null;
+        console.error("publish failed", post.id, code, message);
         await sql`
           update treddy.posts
           set status = 'failed', error = ${message}, updated_at = now()
