@@ -9,3 +9,8 @@
 
 # macOS
 .DS_Store
+
+# Lyria try-out output (snippets/lyncil-try-lyria.ts)
+snippets/lyria-*.mp3
+snippets/lyria-*.wav
+snippets/my-lyrics*.txt
