@@ -42,9 +42,9 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 
 /// Every Lyncil subscription in App Store Connect before songs were sold
 /// (2026-09-30). They keep lyrics and lose nothing, but songs come with the
-/// new plans. The songs plans aren't listed yet, so any other id counts as a
-/// songs plan, its cadence read from the dates; add them here once they exist,
-/// since sandbox renewals run minutes rather than weeks.
+/// new plans. Any id in neither list counts as a songs plan, its cadence read
+/// from the dates, which sandbox renewals (minutes, not weeks) can fool; list
+/// every new product in SONG_PLANS.
 const LEGACY_PRODUCTS = new Set([
   "com.vaitsikhouskaya.ala.lyncil.subscription.plan.standard",
   "com.vaitsikhouskaya.ala.lyncil.subscription.plan.premium",
@@ -58,8 +58,12 @@ const LEGACY_PRODUCTS = new Set([
   "lyncil_yearly_no_trial_49_99",
 ]);
 
-/// The songs plans by product id, once they exist.
-const SONG_PLANS: Record<string, "weekly" | "monthly" | "annual"> = {};
+/// The songs plans (Pavel, 2026-09-30): weekly $5.99 and annual $59.99, in
+/// the same group as the legacy ones and ranked above them.
+const SONG_PLANS: Record<string, "weekly" | "monthly" | "annual"> = {
+  "lyncil_weekly_no_trial_5_99": "weekly",
+  "lyncil_yearly_no_trial_59_99": "annual",
+};
 
 export class PlanUnavailableError extends Error {}
 
