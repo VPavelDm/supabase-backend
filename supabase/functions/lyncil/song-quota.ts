@@ -3,6 +3,9 @@
 // unlimited and never come through here.
 //
 //   no plan   1 song in any 7 days
+//   legacy    1 song in any 7 days: a subscription bought before songs were
+//             sold (lyrics only). Upgrading to a songs plan, in the same
+//             App Store group, lifts it.
 //   weekly   20 songs per billing week
 //   monthly  30 songs per billing month
 //   annual   30 songs per month, months counted from the purchase
@@ -21,7 +24,7 @@ import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
 
-export type Plan = "free" | "weekly" | "monthly" | "annual";
+export type Plan = "free" | "legacy" | "weekly" | "monthly" | "annual";
 
 export interface SongQuota {
   plan: Plan;
@@ -33,26 +36,30 @@ export interface SongQuota {
   resetsAt: string | null;
 }
 
-const LIMITS: Record<Plan, number> = { free: 1, weekly: 20, monthly: 30, annual: 30 };
+const LIMITS: Record<Plan, number> = { free: 1, legacy: 1, weekly: 20, monthly: 30, annual: 30 };
 const FREE_WINDOW_DAYS = 7;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-/// Every Lyncil subscription in App Store Connect (2026-09-30). The ids don't
-/// name their cadence reliably (`...plan.pro` is weekly), and sandbox renewals
-/// run minutes rather than weeks, so neither the id nor the dates can be
-/// trusted to say it; unknown ids fall back to the dates.
-const PRODUCT_PLANS: Record<string, Exclude<Plan, "free">> = {
-  "com.vaitsikhouskaya.ala.lyncil.subscription.plan.standard": "weekly",
-  "com.vaitsikhouskaya.ala.lyncil.subscription.plan.premium": "weekly",
-  "com.vaitsikhouskaya.ala.lyncil.subscription.plan.pro": "weekly",
-  "com.lyncil.subscription.plan.pro.max": "weekly",
-  "lyncil_weekly_3_99": "weekly",
-  "lyncil_monthly_8_99": "monthly",
-  "lyncil_monthly_9_99": "monthly",
-  "lyncil_yearly_no_trial_29_99": "annual",
-  "lyncil_yearly_no_trial_39_99": "annual",
-  "lyncil_yearly_no_trial_49_99": "annual",
-};
+/// Every Lyncil subscription in App Store Connect before songs were sold
+/// (2026-09-30). They keep lyrics and lose nothing, but songs come with the
+/// new plans. The songs plans aren't listed yet, so any other id counts as a
+/// songs plan, its cadence read from the dates; add them here once they exist,
+/// since sandbox renewals run minutes rather than weeks.
+const LEGACY_PRODUCTS = new Set([
+  "com.vaitsikhouskaya.ala.lyncil.subscription.plan.standard",
+  "com.vaitsikhouskaya.ala.lyncil.subscription.plan.premium",
+  "com.vaitsikhouskaya.ala.lyncil.subscription.plan.pro",
+  "com.lyncil.subscription.plan.pro.max",
+  "lyncil_weekly_3_99",
+  "lyncil_monthly_8_99",
+  "lyncil_monthly_9_99",
+  "lyncil_yearly_no_trial_29_99",
+  "lyncil_yearly_no_trial_39_99",
+  "lyncil_yearly_no_trial_49_99",
+]);
+
+/// The songs plans by product id, once they exist.
+const SONG_PLANS: Record<string, "weekly" | "monthly" | "annual"> = {};
 
 export class PlanUnavailableError extends Error {}
 
@@ -100,7 +107,8 @@ async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | n
 }
 
 function planOf(level: AccessLevel): Exclude<Plan, "free"> {
-  const known = level.store_product_id ? PRODUCT_PLANS[level.store_product_id] : undefined;
+  if (level.store_product_id && LEGACY_PRODUCTS.has(level.store_product_id)) return "legacy";
+  const known = level.store_product_id ? SONG_PLANS[level.store_product_id] : undefined;
   if (known) return known;
   const start = Date.parse(level.purchased_at ?? level.starts_at ?? "");
   const end = Date.parse(level.expires_at ?? "");
@@ -122,7 +130,7 @@ function addMonths(date: Date, months: number): Date {
 }
 
 /// The window the plan's songs are counted in, and when it ends.
-function billingWindow(plan: Exclude<Plan, "free">, level: AccessLevel, now: Date): { start: Date; end: Date } {
+function billingWindow(plan: "weekly" | "monthly" | "annual", level: AccessLevel, now: Date): { start: Date; end: Date } {
   const purchased = new Date(level.purchased_at ?? level.starts_at ?? now);
   const expires = level.expires_at ? new Date(level.expires_at) : null;
   if (plan === "annual") {
@@ -159,16 +167,16 @@ export async function planAllowance(userId: string, now = new Date()): Promise<A
   const level = await premiumAccess(userId, now);
   // A free trial counts as no plan: Lyncil sells none today, and one started
   // anyway shouldn't be worth a week of free songs.
-  if (!level || level.offer?.type === "free_trial") {
+  const plan = !level || level.offer?.type === "free_trial" ? "free" : planOf(level);
+  if (plan === "free" || plan === "legacy") {
     return {
-      plan: "free",
-      limit: LIMITS.free,
+      plan,
+      limit: LIMITS[plan],
       since: new Date(now.getTime() - FREE_WINDOW_DAYS * DAY_MS),
       endsAt: null,
     };
   }
-  const plan = planOf(level);
-  const window = billingWindow(plan, level, now);
+  const window = billingWindow(plan, level!, now);
   return { plan, limit: LIMITS[plan], since: window.start, endsAt: window.end };
 }
 
