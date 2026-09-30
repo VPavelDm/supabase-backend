@@ -1,5 +1,7 @@
 // What generate-song and song-status need from a text-to-music provider, so
 // the routes (and the app) stay the same whichever one makes the track.
+// Whatever the provider hands back, song-status keeps the finished track in
+// the lyncil-tracks bucket and serves the app from there.
 
 export type Voice = "male" | "female" | "instrumental";
 export type Kind = "song" | "instrumental";
@@ -12,26 +14,27 @@ export interface SongInput {
   voice: Voice;
 }
 
+/// A finished track arrives one of two ways: a link the app downloads
+/// (Mureka's CDN) or the audio itself, base64 (Lyria returns it inline).
 export type SongStatus =
   | { status: "pending" }
   | { status: "failed" }
-  | { status: "succeeded"; audioUrl: string; duration: number | null };
+  | {
+    status: "succeeded";
+    audioUrl?: string;
+    audioData?: string;
+    mimeType?: string;
+    duration: number | null;
+  };
 
-/// A started task. `background` is work that must keep running after the
-/// response goes out (Lyria without background mode); the route hands it to
-/// EdgeRuntime.waitUntil once the job row exists.
 export interface StartedTask {
   taskId: string;
-  background?: () => Promise<void>;
 }
 
 /// The row song-status reads before asking the provider anything.
 export interface SongJob {
   taskId: string;
-  userId: string;
   kind: Kind;
-  status: "pending" | "succeeded" | "failed";
-  audioPath: string | null;
 }
 
 export class ProviderBusyError extends Error {}
