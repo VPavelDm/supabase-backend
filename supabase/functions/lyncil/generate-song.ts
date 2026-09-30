@@ -25,6 +25,7 @@
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
+import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
 import { queryLyria, startLyria } from "./lyria.ts";
@@ -68,6 +69,24 @@ function voice(value: unknown): Voice {
 
 function configuredProvider(): Provider {
   return Deno.env.get("LYNCIL_SONG_PROVIDER") === "google" ? "google" : "mureka";
+}
+
+/// Staging builds (simulator, Xcode, TestFlight: the app's AppMode, sent as
+/// x-lyncil-build) get one stored sample instead of a paid track, so building
+/// the app doesn't spend the provider budget. Claiming to be staging only
+/// ever buys the sample, never a free real song. LYNCIL_STAGING_SONGS=real
+/// sends staging to the provider too, for when the real thing needs hearing.
+/// The sample is uploaded once per project to lyncil-tracks/_staging/.
+const STAGING_SAMPLE = "_staging/sample.mp3";
+
+function serviceStorage() {
+  return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!)
+    .storage.from(TRACKS_BUCKET);
+}
+
+function wantsSample(req: Request): boolean {
+  return req.headers.get("x-lyncil-build") === "staging" &&
+    Deno.env.get("LYNCIL_STAGING_SONGS") !== "real";
 }
 
 /// Signed URLs are built from SUPABASE_URL, which under `supabase start` is
@@ -151,7 +170,7 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
   // a lock held for the transaction, so requests sent together can't all see
   // the last free slot. The reservation is a row that counts like any song
   // until the provider answers; the allowance is the only limit.
-  const provider = configuredProvider();
+  const provider = wantsSample(req) ? "staging" : configuredProvider();
   const reservation = `${RESERVED}${crypto.randomUUID()}`;
   type Outcome = { reused: string } | { exhausted: Record<string, unknown> } | { busy: true } | null;
   const outcome: Outcome = await sql.begin(async (tx) => {
@@ -180,6 +199,15 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
   if (outcome && "reused" in outcome) return json({ taskId: outcome.reused });
   if (outcome && "busy" in outcome) return json({ error: "Song generation unavailable" }, 503);
   if (outcome && "exhausted" in outcome) return json({ error: "quota_exhausted", ...outcome.exhausted }, 429);
+
+  if (provider === "staging") {
+    // Finished the moment it starts: the first poll finds the sample.
+    const taskId = `staging:${crypto.randomUUID()}`;
+    await sql`
+      update lyncil.song_jobs set task_id = ${taskId}, status = 'succeeded', audio_path = ${STAGING_SAMPLE}
+      where task_id = ${reservation}`;
+    return json({ taskId });
+  }
 
   let task: StartedTask;
   try {
@@ -227,11 +255,13 @@ export async function handleSongStatus(req: Request): Promise<Response> {
   if ((row.task_id as string).startsWith(RESERVED)) return json({ status: "pending" });
   const job: SongJob = { taskId: row.task_id as string, kind: row.kind as Kind };
   // The caller's own token writes and signs, so the bucket's RLS keeps each
-  // user inside their folder.
+  // user inside their folder. The staging sample sits outside every user's
+  // folder and is signed with the service role instead.
   const storage = createSupabaseClient(req).storage.from(TRACKS_BUCKET);
 
   async function signed(path: string, duration: number | null): Promise<Response> {
-    const { data, error } = await storage.createSignedUrl(path, SIGNED_URL_SECONDS);
+    const signer = path === STAGING_SAMPLE ? serviceStorage() : storage;
+    const { data, error } = await signer.createSignedUrl(path, SIGNED_URL_SECONDS);
     if (error || !data) {
       console.error("track signing failed", path, error);
       return json({ error: "Song status unavailable" }, 502);
