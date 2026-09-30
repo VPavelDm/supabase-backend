@@ -9,8 +9,8 @@
 // lyria.ts). Each task is written to lyncil.song_jobs with its user, its
 // provider and the Lyncil song it belongs to, so a caller only ever polls
 // their own tasks, a task is always polled with the provider that started it
-// (flipping the secret mid-song is safe), and the daily cap counts real
-// starts.
+// (flipping the secret mid-song is safe), and the song allowance per plan
+// (song-quota.ts) counts real starts.
 //
 // A song stays converted: every finished track, whichever provider made it,
 // is kept in the private lyncil-tracks bucket as <user id>/<song id>.<ext>
@@ -29,7 +29,7 @@ import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
 import { queryLyria, startLyria } from "./lyria.ts";
 import { queryMureka, startMureka } from "./mureka.ts";
-import { PlanUnavailableError, songQuota } from "./song-quota.ts";
+import { Allowance, planAllowance, PlanUnavailableError, quotaFor } from "./song-quota.ts";
 import {
   Kind,
   Provider,
@@ -41,9 +41,9 @@ import {
   Voice,
 } from "./song-provider.ts";
 
-// Songs cost real money per call, unlike a lyrics call, so the cap is far
-// tighter than generate-lyrics' 100.
-const DAILY_CAP = 10;
+/// A reservation's placeholder task id, swapped for the provider's once the
+/// provider accepts the song.
+const RESERVED = "reserved:";
 const MAX_LYRICS = 5000;
 const MAX_FIELD = 100;
 /// A song still being made after this long is treated as abandoned, so a new
@@ -117,15 +117,6 @@ async function trackBytes(status: Extract<SongStatus, { status: "succeeded" }>):
   };
 }
 
-/// Counts the tasks this user started in the last day. Read before a start,
-/// written after the provider accepts it, so a failed start doesn't spend the
-/// cap.
-async function underDailyCap(userId: string): Promise<boolean> {
-  const rows = await sql`
-    select count(*)::int as count from lyncil.song_jobs
-    where user_id = ${userId} and created_at > now() - interval '1 day'`;
-  return Number(rows[0].count) < DAILY_CAP;
-}
 
 export async function handleGenerateSong(req: Request): Promise<Response> {
   if (!await isAppCall(req)) return json({ error: "Unauthorized" }, 401);
@@ -145,45 +136,63 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
   if (kind === "song" && !input.lyrics) return json({ error: "lyrics are required" }, 400);
   const songId = uuid(body.songId);
 
-  // The same song is already being made (the user left and came back, or
-  // tapped again): hand back that task rather than paying for a second one.
-  if (songId) {
-    const running = await sql`
-      select task_id from lyncil.song_jobs
-      where user_id = ${userId} and song_id = ${songId} and status = 'pending'
-        and created_at > now() - make_interval(mins => ${PENDING_REUSE_MINUTES})
-      order by created_at desc limit 1`;
-    if (running.length > 0) return json({ taskId: running[0].task_id });
-  }
-
-  // The plan's allowance (song-quota.ts), then the flat daily cap on top as a
-  // guard against a runaway client. Both answer 429; `error` tells them apart.
+  // The plan (song-quota.ts) is a network call to Adapty, so it's made
+  // before the lock below, not while holding it.
+  let allowance: Allowance;
   try {
-    const quota = await songQuota(userId);
-    if (quota.used >= quota.limit) return json({ error: "quota_exhausted", ...quota }, 429);
+    allowance = await planAllowance(userId);
   } catch (error) {
     if (!(error instanceof PlanUnavailableError)) throw error;
     console.error("song plan lookup failed", error);
     return json({ error: "Plan unavailable" }, 503);
   }
-  if (!await underDailyCap(userId)) {
-    return json({ error: "Daily song limit reached" }, 429);
-  }
 
+  // One start at a time per user: the count and the reservation happen under
+  // a lock held for the transaction, so requests sent together can't all see
+  // the last free slot. The reservation is a row that counts like any song
+  // until the provider answers; the allowance is the only limit.
   const provider = configuredProvider();
+  const reservation = `${RESERVED}${crypto.randomUUID()}`;
+  type Outcome = { reused: string } | { exhausted: Record<string, unknown> } | { busy: true } | null;
+  const outcome: Outcome = await sql.begin(async (tx) => {
+    await tx`select pg_advisory_xact_lock(hashtext(${"lyncil-song:" + userId}))`;
+    // The same song is already being made (the user left and came back, or
+    // tapped again): hand back that task rather than paying for a second one.
+    if (songId) {
+      const running = await tx`
+        select task_id from lyncil.song_jobs
+        where user_id = ${userId} and song_id = ${songId} and status = 'pending'
+          and created_at > now() - make_interval(mins => ${PENDING_REUSE_MINUTES})
+        order by created_at desc limit 1`;
+      if (running.length > 0) {
+        const taskId = running[0].task_id as string;
+        // Still being reserved by a request a moment ago: nothing to poll yet.
+        return taskId.startsWith(RESERVED) ? { busy: true } : { reused: taskId };
+      }
+    }
+    const quota = await quotaFor(allowance, userId, tx);
+    if (quota.used >= quota.limit) return { exhausted: { ...quota } };
+    await tx`
+      insert into lyncil.song_jobs (task_id, user_id, kind, provider, song_id)
+      values (${reservation}, ${userId}, ${kind}, ${provider}, ${songId})`;
+    return null;
+  });
+  if (outcome && "reused" in outcome) return json({ taskId: outcome.reused });
+  if (outcome && "busy" in outcome) return json({ error: "Song generation unavailable" }, 503);
+  if (outcome && "exhausted" in outcome) return json({ error: "quota_exhausted", ...outcome.exhausted }, 429);
+
   let task: StartedTask;
   try {
     task = provider === "google" ? await startLyria(input) : await startMureka(input);
   } catch (error) {
     console.error("song start failed", provider, error);
+    // Nothing was made, so the slot goes back.
+    await sql`delete from lyncil.song_jobs where task_id = ${reservation}`;
     // The app shows 503 as its "busy, try again in a minute" popup.
     return json({ error: "Song generation unavailable" }, error instanceof ProviderBusyError ? 503 : 502);
   }
 
-  await sql`
-    insert into lyncil.song_jobs (task_id, user_id, kind, provider, song_id)
-    values (${task.taskId}, ${userId}, ${kind}, ${provider}, ${songId})`;
-
+  await sql`update lyncil.song_jobs set task_id = ${task.taskId} where task_id = ${reservation}`;
   return json({ taskId: task.taskId });
 }
 
@@ -214,6 +223,8 @@ export async function handleSongStatus(req: Request): Promise<Response> {
     return taskId ? json({ error: "Unknown task" }, 404) : json({ status: "none" });
   }
   const row = rows[0];
+  // A start still waiting on the provider: no task to ask about yet.
+  if ((row.task_id as string).startsWith(RESERVED)) return json({ status: "pending" });
   const job: SongJob = { taskId: row.task_id as string, kind: row.kind as Kind };
   // The caller's own token writes and signs, so the bucket's RLS keeps each
   // user inside their folder.

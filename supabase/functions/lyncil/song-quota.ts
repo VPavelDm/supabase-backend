@@ -141,41 +141,64 @@ function billingWindow(plan: Exclude<Plan, "free">, level: AccessLevel, now: Dat
   return { start, end };
 }
 
-async function countSince(userId: string, since: Date): Promise<number> {
-  const rows = await sql`
-    select count(*)::int as count from lyncil.song_jobs
-    where user_id = ${userId} and status <> 'failed' and created_at >= ${since}`;
-  return Number(rows[0].count);
+type Db = typeof sql;
+
+/// The plan and the window its songs are counted in, from Adapty. Kept apart
+/// from the count so generate-song can make the network call before it takes
+/// the per-user lock, then count and reserve inside it.
+export interface Allowance {
+  plan: Plan;
+  limit: number;
+  /// Songs started from here on count. With no plan, the last 7 days.
+  since: Date;
+  /// When a plan's window ends; null with no plan (the week slides).
+  endsAt: Date | null;
 }
 
-export async function songQuota(userId: string, now = new Date()): Promise<SongQuota> {
+export async function planAllowance(userId: string, now = new Date()): Promise<Allowance> {
   const level = await premiumAccess(userId, now);
   // A free trial counts as no plan: Lyncil sells none today, and one started
   // anyway shouldn't be worth a week of free songs.
   if (!level || level.offer?.type === "free_trial") {
-    const since = new Date(now.getTime() - FREE_WINDOW_DAYS * DAY_MS);
-    const used = await countSince(userId, since);
-    const limit = LIMITS.free;
-    let resetsAt: string | null = null;
-    if (used >= limit) {
-      // The window slides: room comes back when the oldest counted song is
-      // a week old.
-      const rows = await sql`
-        select min(created_at) as oldest from (
-          select created_at from lyncil.song_jobs
-          where user_id = ${userId} and status <> 'failed' and created_at >= ${since}
-          order by created_at desc limit ${limit}
-        ) recent`;
-      const oldest = rows[0]?.oldest ? new Date(rows[0].oldest) : now;
-      resetsAt = new Date(oldest.getTime() + FREE_WINDOW_DAYS * DAY_MS).toISOString();
-    }
-    return { plan: "free", limit, used, resetsAt };
+    return {
+      plan: "free",
+      limit: LIMITS.free,
+      since: new Date(now.getTime() - FREE_WINDOW_DAYS * DAY_MS),
+      endsAt: null,
+    };
   }
   const plan = planOf(level);
   const window = billingWindow(plan, level, now);
-  const used = await countSince(userId, window.start);
-  const limit = LIMITS[plan];
-  return { plan, limit, used, resetsAt: window.end.toISOString() };
+  return { plan, limit: LIMITS[plan], since: window.start, endsAt: window.end };
+}
+
+/// Counts what the allowance has spent. `db` is generate-song's transaction
+/// when it is about to reserve a song.
+export async function quotaFor(allowance: Allowance, userId: string, db: Db = sql): Promise<SongQuota> {
+  const rows = await db`
+    select count(*)::int as count from lyncil.song_jobs
+    where user_id = ${userId} and status <> 'failed' and created_at >= ${allowance.since}`;
+  const used = Number(rows[0].count);
+  const { plan, limit } = allowance;
+  if (allowance.endsAt) return { plan, limit, used, resetsAt: allowance.endsAt.toISOString() };
+  let resetsAt: string | null = null;
+  if (used >= limit) {
+    // The week slides: room comes back when the oldest of the last `limit`
+    // songs turns a week old.
+    const oldest = await db`
+      select min(created_at) as oldest from (
+        select created_at from lyncil.song_jobs
+        where user_id = ${userId} and status <> 'failed' and created_at >= ${allowance.since}
+        order by created_at desc limit ${limit}
+      ) recent`;
+    const from = oldest[0]?.oldest ? new Date(oldest[0].oldest) : new Date();
+    resetsAt = new Date(from.getTime() + FREE_WINDOW_DAYS * DAY_MS).toISOString();
+  }
+  return { plan, limit, used, resetsAt };
+}
+
+export async function songQuota(userId: string): Promise<SongQuota> {
+  return await quotaFor(await planAllowance(userId), userId);
 }
 
 /// POST song-quota: the caller's allowance, for the counter under "Convert
