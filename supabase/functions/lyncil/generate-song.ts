@@ -29,6 +29,7 @@ import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
 import { queryLyria, startLyria } from "./lyria.ts";
 import { queryMureka, startMureka } from "./mureka.ts";
+import { PlanUnavailableError, songQuota } from "./song-quota.ts";
 import {
   Kind,
   Provider,
@@ -155,6 +156,16 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
     if (running.length > 0) return json({ taskId: running[0].task_id });
   }
 
+  // The plan's allowance (song-quota.ts), then the flat daily cap on top as a
+  // guard against a runaway client. Both answer 429; `error` tells them apart.
+  try {
+    const quota = await songQuota(userId);
+    if (quota.used >= quota.limit) return json({ error: "quota_exhausted", ...quota }, 429);
+  } catch (error) {
+    if (!(error instanceof PlanUnavailableError)) throw error;
+    console.error("song plan lookup failed", error);
+    return json({ error: "Plan unavailable" }, 503);
+  }
   if (!await underDailyCap(userId)) {
     return json({ error: "Daily song limit reached" }, 429);
   }
