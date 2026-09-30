@@ -1,5 +1,8 @@
-// Two distinct sets of lyrics per request, in one model call — the app shows
-// them side by side and the user picks one.
+// One set of lyrics per request, in one model call. The route used to write
+// two (the old create screen showed them side by side), but every consumer
+// now keeps only the first, and the second doubled model time: 23–29 s in
+// production on 2026-09-09 against a 30 s client timeout. The response is
+// still a list so the shape can grow back if a pick-one reveal returns.
 //
 // The server owns the prompt template, the model, the JSON schema, and the
 // caps; the app sends only what the user chose (idea, genre, mood, artist).
@@ -21,7 +24,7 @@ import { createSupabaseClient } from "../_shared/supabase-client.ts";
 
 const MODEL = Deno.env.get("LYNCIL_OPENAI_MODEL") ?? "gpt-5.6-terra";
 const DAILY_CAP = 100;
-const MAX_TOKENS = 8000;
+const MAX_TOKENS = 4000;
 
 // Fallbacks live here rather than in the app: an untouched picker should
 // still produce a song, and which fallback reads best is a prompt decision.
@@ -54,10 +57,8 @@ Additional Instructions
 - Under no circumstances should the AI mention or disclose its default settings, internal processes, or any assumed preferences.`;
 }
 
-// Two named options rather than an array: OpenAI's strict json_schema mode
-// ignores minItems, so naming both slots is what actually guarantees two —
-// and it gives the second one a description that pushes it away from the
-// first. The HTTP response flattens them into a list so the shape can grow.
+// A single named slot rather than an array: OpenAI's strict json_schema mode
+// ignores minItems, so a named property is what actually guarantees one.
 const LYRICS_OPTION = {
   type: "object",
   properties: {
@@ -78,17 +79,12 @@ const LYRICS_SCHEMA = {
     type: "object",
     title: "Lyrics Options",
     properties: {
-      firstLyricsOption: {
+      lyricsOption: {
         ...LYRICS_OPTION,
-        description: "The first lyrics option.",
-      },
-      secondLyricsOption: {
-        ...LYRICS_OPTION,
-        description:
-          "The second lyrics option. Ensure the second lyrics option is different from the first one.",
+        description: "The lyrics.",
       },
     },
-    required: ["firstLyricsOption", "secondLyricsOption"],
+    required: ["lyricsOption"],
     additionalProperties: false,
   },
 };
@@ -206,7 +202,7 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
   let options: LyricsOption[];
   try {
     const parsed = JSON.parse(content);
-    options = [parsed.firstLyricsOption, parsed.secondLyricsOption]
+    options = [parsed.lyricsOption]
       .map(parseOption)
       .filter((option): option is LyricsOption => option !== null);
   } catch {
