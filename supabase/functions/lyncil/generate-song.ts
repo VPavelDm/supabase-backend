@@ -66,7 +66,7 @@ function trackStore(req: Request): TrackStore {
     async signedUrl(path) {
       const { data, error } = await storage.createSignedUrl(path, SIGNED_URL_SECONDS);
       if (error || !data) throw error ?? new Error("No signed URL");
-      return data.signedUrl;
+      return publicUrl(data.signedUrl);
     },
     async finish(taskId, audioPath) {
       await sql`
@@ -75,6 +75,20 @@ function trackStore(req: Request): TrackStore {
         where task_id = ${taskId}`;
     },
   };
+}
+
+/// Signed URLs are built from SUPABASE_URL, which under `supabase start` is
+/// the Docker-internal http://kong:8000 that a simulator can't reach. Local
+/// runs set LYNCIL_PUBLIC_SUPABASE_URL (http://127.0.0.1:54321) to swap the
+/// origin; production leaves it unset and the URL passes through untouched.
+function publicUrl(url: string): string {
+  const base = Deno.env.get("LYNCIL_PUBLIC_SUPABASE_URL");
+  if (!base) return url;
+  const signed = new URL(url);
+  const origin = new URL(base);
+  signed.protocol = origin.protocol;
+  signed.host = origin.host;
+  return signed.toString();
 }
 
 /// Counts the tasks this user started in the last day. Read before a start,
