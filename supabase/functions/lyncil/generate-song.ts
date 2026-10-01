@@ -191,6 +191,9 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
     }
     const quota = await quotaFor(allowance, userId, tx);
     if (quota.used >= quota.limit) return { exhausted: { ...quota } };
+    // A job belongs to a profile; onboarding can get here before anything
+    // else made one.
+    await tx`select lyncil.ensure_profile(${userId}::uuid)`;
     await tx`
       insert into lyncil.song_jobs (task_id, user_id, kind, provider, song_id)
       values (${reservation}, ${userId}, ${kind}, ${provider}, ${songId})`;
