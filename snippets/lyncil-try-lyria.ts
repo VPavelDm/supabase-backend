@@ -5,6 +5,10 @@
 //
 //   GEMINI_API_KEY=... deno run -A snippets/lyncil-try-lyria.ts [voice] [lyrics file] [style]
 //
+// LYRIA_SYNC=1 skips background mode and times the one blocking call that
+// lyncil/lyria.ts makes in sync mode (the default since background polling
+// broke for AQ. keys on 2026-10-03/04).
+//
 //   voice   male | female | instrumental (default female)
 //   lyrics  a text file with your lyrics, [Verse]/[Chorus] tags welcome
 //           (default: the Wildfire Season sample below)
@@ -65,7 +69,9 @@ const started = Date.now();
 const seconds = () => ((Date.now() - started) / 1000).toFixed(1);
 
 let interaction: any;
-const first = await call("/interactions", { model: MODEL, input, background: true });
+const first = Deno.env.get("LYRIA_SYNC")
+  ? { res: new Response(null, { status: 499 }), json: { error: "skipped (LYRIA_SYNC)" } as any }
+  : await call("/interactions", { model: MODEL, input, background: true });
 if (first.res.ok) {
   console.log(`background mode: accepted (id ${first.json.id}, status ${first.json.status})`);
   interaction = first.json;

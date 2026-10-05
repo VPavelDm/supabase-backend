@@ -4,6 +4,11 @@
 //   generate-song  starts a task with the provider and returns its id at once
 //   song-status    asks where that task is; the app polls it every few seconds
 //
+// Lyria in sync mode (lyria.ts) is the exception: generate-song answers the
+// app at once and makes the song itself after the response, in the
+// background, storing the track when Lyria hands it over. song-status then
+// only reads lyncil.song_jobs for it and never asks Google.
+//
 // Two providers sit behind the same routes, picked on the server by
 // LYNCIL_SONG_PROVIDER: "mureka" (default, mureka.ts) or "google" (Lyria,
 // lyria.ts). Each task is written to lyncil.song_jobs with its user, its
@@ -28,7 +33,7 @@ import { json } from "../_shared/router.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
-import { queryLyria, startLyria } from "./lyria.ts";
+import { lyriaPolls, queryLyria, renderLyria, startLyria } from "./lyria.ts";
 import { queryMureka, startMureka } from "./mureka.ts";
 import { Allowance, planAllowance, PlanUnavailableError, quotaFor } from "./song-quota.ts";
 import {
@@ -45,6 +50,15 @@ import {
 /// A reservation's placeholder task id, swapped for the provider's once the
 /// provider accepts the song.
 const RESERVED = "reserved:";
+/// Task ids of Lyria songs this function makes itself (sync mode).
+const LYRIA_SYNC = "lyria-sync:";
+/// How long a sync Lyria call may take before it's abandoned. Background work
+/// ends with the worker anyway (150 s wall clock on the free plan, 400 s on
+/// paid), so this only matters on paid.
+const LYRIA_SYNC_LIMIT_SECONDS = 300;
+/// A sync song pending longer than this is taken as lost (the worker was
+/// recycled mid-song) and reported failed, under the app's 6-minute timeout.
+const LYRIA_SYNC_GIVE_UP_MINUTES = 5;
 const MAX_LYRICS = 5000;
 const MAX_FIELD = 100;
 /// A song still being made after this long is treated as abandoned, so a new
@@ -54,6 +68,8 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const TRACKS_BUCKET = "lyncil-tracks";
 /// Long enough to download a few megabytes on a slow connection.
 const SIGNED_URL_SECONDS = 60 * 60;
+
+declare const EdgeRuntime: { waitUntil(promise: Promise<unknown>): void };
 
 function str(value: unknown, max: number): string {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -136,6 +152,50 @@ async function trackBytes(status: Extract<SongStatus, { status: "succeeded" }>):
   };
 }
 
+/// Stores a finished track as <user>/<song or task>.<ext> and records it on
+/// its job; returns the stored path. The caller's own storage client, so the
+/// bucket's RLS keeps each user inside their folder.
+async function keepTrack(
+  storage: ReturnType<typeof serviceStorage>,
+  status: Extract<SongStatus, { status: "succeeded" }>,
+  userId: string,
+  taskId: string,
+  songId: string | null,
+): Promise<string> {
+  const track = await trackBytes(status);
+  const path = `${userId}/${songId ?? taskId}.${track.extension}`;
+  const { error } = await storage.upload(path, track.bytes, { contentType: track.contentType, upsert: true });
+  if (error) throw error;
+  await sql`
+    update lyncil.song_jobs
+    set status = 'succeeded', audio_path = ${path}, audio_duration = ${status.duration}
+    where task_id = ${taskId}`;
+  return path;
+}
+
+/// A sync Lyria song, made after generate-song has answered: one long call,
+/// then the track goes to the bucket. A failure marks the job failed, which
+/// also gives the slot in the allowance back.
+async function makeLyriaSong(
+  req: Request,
+  input: SongInput,
+  userId: string,
+  taskId: string,
+  songId: string | null,
+): Promise<void> {
+  const started = Date.now();
+  try {
+    const status = await renderLyria(input, AbortSignal.timeout(LYRIA_SYNC_LIMIT_SECONDS * 1000));
+    if (status.status !== "succeeded") throw new Error(`Lyria answered ${status.status}`);
+    const storage = createSupabaseClient(req).storage.from(TRACKS_BUCKET);
+    await keepTrack(storage, status, userId, taskId, songId);
+    console.log("lyria song kept", taskId, `${((Date.now() - started) / 1000).toFixed(1)} s`);
+  } catch (error) {
+    console.error("lyria song failed", taskId, `${((Date.now() - started) / 1000).toFixed(1)} s`, error);
+    await sql`update lyncil.song_jobs set status = 'failed' where task_id = ${taskId}`;
+  }
+}
+
 
 export async function handleGenerateSong(req: Request): Promise<Response> {
   if (!await isAppCall(req)) return json({ error: "Unauthorized" }, 401);
@@ -182,6 +242,8 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
         select task_id from lyncil.song_jobs
         where user_id = ${userId} and song_id = ${songId} and status = 'pending'
           and created_at > now() - make_interval(mins => ${PENDING_REUSE_MINUTES})
+          and not (task_id like ${LYRIA_SYNC + "%"}
+            and created_at < now() - make_interval(mins => ${LYRIA_SYNC_GIVE_UP_MINUTES}))
         order by created_at desc limit 1`;
       if (running.length > 0) {
         const taskId = running[0].task_id as string;
@@ -209,6 +271,13 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
     await sql`
       update lyncil.song_jobs set task_id = ${taskId}, status = 'succeeded', audio_path = ${STAGING_SAMPLE}
       where task_id = ${reservation}`;
+    return json({ taskId });
+  }
+
+  if (provider === "google" && !lyriaPolls()) {
+    const taskId = `${LYRIA_SYNC}${crypto.randomUUID()}`;
+    await sql`update lyncil.song_jobs set task_id = ${taskId} where task_id = ${reservation}`;
+    EdgeRuntime.waitUntil(makeLyriaSong(req, input, userId, taskId, songId));
     return json({ taskId });
   }
 
@@ -244,10 +313,10 @@ export async function handleSongStatus(req: Request): Promise<Response> {
   // as a running one, since either ends with the track.
   const rows = taskId
     ? await sql`
-      select task_id, kind, provider, song_id, audio_path, audio_duration from lyncil.song_jobs
+      select task_id, kind, provider, song_id, audio_path, audio_duration, status, created_at from lyncil.song_jobs
       where task_id = ${taskId} and user_id = ${userId}`
     : await sql`
-      select task_id, kind, provider, song_id, audio_path, audio_duration from lyncil.song_jobs
+      select task_id, kind, provider, song_id, audio_path, audio_duration, status, created_at from lyncil.song_jobs
       where user_id = ${userId} and song_id = ${songId} and status <> 'failed'
       order by (audio_path is not null) desc, created_at desc limit 1`;
   if (rows.length === 0) {
@@ -274,6 +343,20 @@ export async function handleSongStatus(req: Request): Promise<Response> {
 
   if (row.audio_path) return await signed(row.audio_path as string, row.audio_duration as number | null);
 
+  // A song this function is making itself: the job row is all there is.
+  if (job.taskId.startsWith(LYRIA_SYNC)) {
+    const lost = row.status === "pending" &&
+      Date.now() - (row.created_at as Date).getTime() > LYRIA_SYNC_GIVE_UP_MINUTES * 60_000;
+    if (lost) {
+      console.error("lyria song lost", job.taskId);
+      await sql`update lyncil.song_jobs set status = 'failed' where task_id = ${job.taskId} and status = 'pending'`;
+    }
+    if (lost || row.status === "failed") {
+      return taskId ? json({ status: "failed", taskId: job.taskId }) : json({ status: "none" });
+    }
+    return json({ status: "pending", taskId: job.taskId });
+  }
+
   let status: SongStatus;
   try {
     status = row.provider === "google" ? await queryLyria(job) : await queryMureka(job);
@@ -291,18 +374,11 @@ export async function handleSongStatus(req: Request): Promise<Response> {
 
   let path: string;
   try {
-    const track = await trackBytes(status);
-    path = `${userId}/${(row.song_id as string | null) ?? job.taskId}.${track.extension}`;
-    const { error } = await storage.upload(path, track.bytes, { contentType: track.contentType, upsert: true });
-    if (error) throw error;
+    path = await keepTrack(storage, status, userId, job.taskId, row.song_id as string | null);
   } catch (error) {
     // The provider still has it; the next poll tries again.
     console.error("keeping the track failed", job.taskId, error);
     return json({ error: "Song status unavailable" }, 502);
   }
-  await sql`
-    update lyncil.song_jobs
-    set status = 'succeeded', audio_path = ${path}, audio_duration = ${status.duration}
-    where task_id = ${job.taskId}`;
   return await signed(path, status.duration);
 }
