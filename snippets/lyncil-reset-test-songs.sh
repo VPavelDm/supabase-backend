@@ -10,10 +10,10 @@
 #
 #   ./snippets/lyncil-reset-test-songs.sh
 #
-# Then delete the app from the device and install it again: the app also keeps
-# "onboarding done" in UserDefaults and would skip onboarding without asking
-# the backend. The Keychain survives the reinstall, so it signs in as the same
-# user.
+# Builds with app commit 122791f or later ask the backend on every launch, so
+# they onboard again on the next one. Older builds keep "onboarding done" in
+# UserDefaults: delete the app and install it again (the Keychain survives the
+# reinstall, so it signs in as the same user).
 #
 # Shows what is there, asks for "wipe", then deletes. Needs the supabase CLI
 # logged in and linked to the Lyncil project.
@@ -87,13 +87,23 @@ if [[ "$answer" != "wipe" ]]; then
 fi
 
 # Files first: if the SQL below failed, the songs would still point at what's left.
-for id in "${PROFILES[@]}"; do
-  count=$(query "select count(*) as n from storage.objects where bucket_id = 'lyncil-tracks' and name like '$id/%'" |
-    python3 -c 'import json, sys; print(json.load(sys.stdin)[0]["n"])')
-  if [[ "$count" -gt 0 ]]; then
-    supabase storage rm -r --linked --experimental "ss:///lyncil-tracks/$id"
-  fi
-done
+# By exact path: `storage rm -r` on the profile's folder answers with nothing
+# deleted and no error.
+track_files() {
+  query "select name from storage.objects where bucket_id = 'lyncil-tracks'
+         and (split_part(name, '/', 1))::text in ($ids)" |
+    python3 -c 'import json, sys; [print("ss:///lyncil-tracks/" + r["name"]) for r in json.load(sys.stdin)]'
+}
+files=()
+while IFS= read -r path; do files+=("$path"); done < <(track_files)
+if (( ${#files[@]} > 0 )); then
+  supabase storage rm --linked --experimental --yes "${files[@]}" >/dev/null
+fi
+left=$(track_files | wc -l | tr -d ' ')
+if [[ "$left" != "0" ]]; then
+  echo "$left track files are still there; profiles not deleted." >&2
+  exit 1
+fi
 
 query "delete from lyncil.profiles where id in ($ids)" >/dev/null
 
@@ -101,4 +111,5 @@ echo
 echo "After:"
 summary
 echo
-echo "Now delete the app from the device and install it again."
+echo "A build with 122791f or later onboards again on its next launch. Older"
+echo "builds keep a local flag: delete the app and install it again."
