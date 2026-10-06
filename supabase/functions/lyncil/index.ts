@@ -11,7 +11,9 @@
 //   LYNCIL_SONG_PROVIDER (mureka | google), LYNCIL_MUREKA_API_KEY,
 //   LYNCIL_MUREKA_MODEL, LYNCIL_GEMINI_API_KEY, LYNCIL_LYRIA_MODEL,
 //   LYNCIL_LYRIA_MODE (sync | background),
-//   LYNCIL_ADAPTY_SECRET_KEY, LYNCIL_ADAPTY_STAGING_SECRET_KEY (song-quota.ts)
+//   LYNCIL_ADAPTY_SECRET_KEY, LYNCIL_ADAPTY_STAGING_SECRET_KEY (song-quota.ts),
+//   LYNCIL_APNS_TEAM_ID, LYNCIL_APNS_KEY_ID + LYNCIL_APNS_PRIVATE_KEY,
+//   LYNCIL_APNS_SANDBOX_KEY_ID + LYNCIL_APNS_SANDBOX_PRIVATE_KEY (notify.ts)
 
 import { router } from "../_shared/router.ts";
 import { handleGenerateLyrics } from "./generate-lyrics.ts";

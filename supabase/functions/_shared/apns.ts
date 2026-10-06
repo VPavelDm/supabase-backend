@@ -15,12 +15,18 @@ export interface Device {
 
 export type PushResult = "ok" | "gone" | "failed" | "skipped";
 
+/// Either the text itself, or keys the app looks up in its own strings so
+/// the push arrives in the phone's language.
+export type Alert =
+  | { title: string; body: string }
+  | { "title-loc-key": string; "loc-key": string; "loc-args"?: string[] };
+
 export interface APNsClient {
   /// Sends one alert; "gone" means APNs no longer knows the token and the
   /// caller should delete the device row.
   push(
     device: Device,
-    alert: { title: string; body: string },
+    alert: Alert,
     extra?: Record<string, string>,
   ): Promise<PushResult>;
 }

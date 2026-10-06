@@ -27,12 +27,18 @@
 //
 // The artist the lyrics were "inspired by" never reaches the audio prompt: it
 // shaped the writing, and a voice likeness is not ours to ask for.
+//
+// Whoever flips a job to succeeded (song-status or the sync Lyria call)
+// pushes "Your song is ready" (notify.ts); the flip is conditional, so a song
+// pushes once. Mureka and background Lyria only finish when the app polls
+// song-status, so they push only while the app is still waiting.
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
+import { notifySongReady } from "./notify.ts";
 import { lyriaPolls, queryLyria, renderLyria, startLyria } from "./lyria.ts";
 import { queryMureka, startMureka } from "./mureka.ts";
 import { Allowance, planAllowance, PlanUnavailableError, quotaFor } from "./song-quota.ts";
@@ -152,9 +158,18 @@ async function trackBytes(status: Extract<SongStatus, { status: "succeeded" }>):
   };
 }
 
+/// Pushes in the background, so the push never holds up an answer and a
+/// failed one never fails it.
+function notifyInBackground(userId: string, songId: string | null): void {
+  EdgeRuntime.waitUntil(
+    notifySongReady(userId, songId).catch((error) => console.error("song ready push failed", error)),
+  );
+}
+
 /// Stores a finished track as <user>/<song or task>.<ext> and records it on
 /// its job; returns the stored path. The caller's own storage client, so the
-/// bucket's RLS keeps each user inside their folder.
+/// bucket's RLS keeps each user inside their folder. The first caller to
+/// record it sends the push.
 async function keepTrack(
   storage: ReturnType<typeof serviceStorage>,
   status: Extract<SongStatus, { status: "succeeded" }>,
@@ -166,10 +181,12 @@ async function keepTrack(
   const path = `${userId}/${songId ?? taskId}.${track.extension}`;
   const { error } = await storage.upload(path, track.bytes, { contentType: track.contentType, upsert: true });
   if (error) throw error;
-  await sql`
+  const flipped = await sql`
     update lyncil.song_jobs
     set status = 'succeeded', audio_path = ${path}, audio_duration = ${status.duration}
-    where task_id = ${taskId}`;
+    where task_id = ${taskId} and status <> 'succeeded'
+    returning task_id`;
+  if (flipped.length > 0) notifyInBackground(userId, songId);
   return path;
 }
 
@@ -271,6 +288,7 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
     await sql`
       update lyncil.song_jobs set task_id = ${taskId}, status = 'succeeded', audio_path = ${STAGING_SAMPLE}
       where task_id = ${reservation}`;
+    notifyInBackground(userId, songId);
     return json({ taskId });
   }
 
