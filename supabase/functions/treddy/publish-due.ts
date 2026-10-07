@@ -1,4 +1,4 @@
-// The autoposter. pg_cron calls this every minute (job `treddy-publish-due`);
+// The autoposter. pg_cron calls this every 5 minutes (job `treddy-publish-due`);
 // it claims due posts, publishes them to Threads, and notifies the account's
 // devices about the outcome. Every run leaves a row in treddy.job_runs.
 
