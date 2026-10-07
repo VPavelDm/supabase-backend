@@ -32,6 +32,14 @@
 // pushes "Your song is ready" (notify.ts); the flip is conditional, so a song
 // pushes once. Mureka and background Lyria only finish when the app polls
 // song-status, so they push only while the app is still waiting.
+//
+// Lyrics the provider refuses to sing (LyricsBlockedError) mark their job
+// failure = 'blocked' with a fingerprint of the words (lyrics_hash). Lyria's
+// filter isn't consistent (the same lyrics refused in production made a song
+// on the next try, 2026-10-07), so one refusal blocks nothing. Over a sliding
+// 24 hours, 3 refusals of the same lyrics, or 10 of anything for one user,
+// get 422 lyrics_blocked at once without another provider call; a try opens
+// up again as the oldest refusal ages out.
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
@@ -44,6 +52,7 @@ import { queryMureka, startMureka } from "./mureka.ts";
 import { Allowance, planAllowance, PlanUnavailableError, quotaFor } from "./song-quota.ts";
 import {
   Kind,
+  LyricsBlockedError,
   Provider,
   ProviderBusyError,
   SongInput,
@@ -70,6 +79,13 @@ const MAX_FIELD = 100;
 /// A song still being made after this long is treated as abandoned, so a new
 /// start for the same song makes a new track instead of waiting on it.
 const PENDING_REUSE_MINUTES = 15;
+/// Refusals over this many hours count towards the two limits below.
+const REFUSAL_WINDOW_HOURS = 24;
+/// Refusals of the same lyrics before they're turned away.
+const REFUSALS_PER_LYRICS = 3;
+/// Refusals of any lyrics before the user is turned away, so editing a word
+/// at a time can't keep sending refused prompts on our API key.
+const REFUSALS_PER_USER = 10;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const TRACKS_BUCKET = "lyncil-tracks";
 /// Long enough to download a few megabytes on a slow connection.
@@ -77,12 +93,35 @@ const SIGNED_URL_SECONDS = 60 * 60;
 
 declare const EdgeRuntime: { waitUntil(promise: Promise<unknown>): void };
 
+/// Sync Lyria songs this worker is making right now. When the runtime shuts
+/// the worker down (wall clock, CPU, memory) their work dies with it and
+/// nothing would ever finish their jobs, so they're marked failed on the way
+/// out instead of sitting pending until LYRIA_SYNC_GIVE_UP_MINUTES. Best
+/// effort: the worker may go before the update lands, and the give-up in
+/// song-status still covers that.
+const songsInWork = new Set<string>();
+
+addEventListener("beforeunload", (event) => {
+  if (songsInWork.size === 0) return;
+  const taskIds = [...songsInWork];
+  console.error("lyria songs cut off", (event as CustomEvent).detail?.reason, taskIds.join(", "));
+  sql`update lyncil.song_jobs set status = 'failed' where task_id in ${sql(taskIds)} and status = 'pending'`
+    .catch((error) => console.error("cut-off songs not marked failed", error));
+});
+
 function str(value: unknown, max: number): string {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
 function uuid(value: unknown): string | null {
   return typeof value === "string" && UUID.test(value) ? value.toLowerCase() : null;
+}
+
+/// The words a song is sung with, as a fingerprint: blocked lyrics are
+/// matched by it, and any edit makes a new one.
+async function lyricsHash(lyrics: string): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(lyrics));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
 function voice(value: unknown): Voice {
@@ -192,7 +231,8 @@ async function keepTrack(
 
 /// A sync Lyria song, made after generate-song has answered: one long call,
 /// then the track goes to the bucket. A failure marks the job failed, which
-/// also gives the slot in the allowance back.
+/// also gives the slot in the allowance back; refused lyrics also mark it
+/// blocked.
 async function makeLyriaSong(
   req: Request,
   input: SongInput,
@@ -201,6 +241,7 @@ async function makeLyriaSong(
   songId: string | null,
 ): Promise<void> {
   const started = Date.now();
+  songsInWork.add(taskId);
   try {
     const status = await renderLyria(input, AbortSignal.timeout(LYRIA_SYNC_LIMIT_SECONDS * 1000));
     if (status.status !== "succeeded") throw new Error(`Lyria answered ${status.status}`);
@@ -209,7 +250,10 @@ async function makeLyriaSong(
     console.log("lyria song kept", taskId, `${((Date.now() - started) / 1000).toFixed(1)} s`);
   } catch (error) {
     console.error("lyria song failed", taskId, `${((Date.now() - started) / 1000).toFixed(1)} s`, error);
-    await sql`update lyncil.song_jobs set status = 'failed' where task_id = ${taskId}`;
+    const failure = error instanceof LyricsBlockedError ? "blocked" : null;
+    await sql`update lyncil.song_jobs set status = 'failed', failure = ${failure} where task_id = ${taskId}`;
+  } finally {
+    songsInWork.delete(taskId);
   }
 }
 
@@ -248,6 +292,16 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
   // the last free slot. The reservation is a row that counts like any song
   // until the provider answers; the allowance is the only limit.
   const provider = wantsSample(req) ? "staging" : configuredProvider();
+  const hash = kind === "song" ? await lyricsHash(input.lyrics) : null;
+  const [refusals] = await sql`
+    select count(*)::int as by_user,
+      count(*) filter (where lyrics_hash = ${hash})::int as by_lyrics
+    from lyncil.song_jobs
+    where user_id = ${userId} and provider = ${provider} and failure = 'blocked'
+      and created_at > now() - make_interval(hours => ${REFUSAL_WINDOW_HOURS})`;
+  if (refusals.by_user >= REFUSALS_PER_USER || refusals.by_lyrics >= REFUSALS_PER_LYRICS) {
+    return json({ error: "lyrics_blocked" }, 422);
+  }
   const reservation = `${RESERVED}${crypto.randomUUID()}`;
   type Outcome = { reused: string } | { exhausted: Record<string, unknown> } | { busy: true } | null;
   const outcome: Outcome = await sql.begin(async (tx) => {
@@ -274,8 +328,8 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
     // else made one.
     await tx`select lyncil.ensure_profile(${userId}::uuid)`;
     await tx`
-      insert into lyncil.song_jobs (task_id, user_id, kind, provider, song_id)
-      values (${reservation}, ${userId}, ${kind}, ${provider}, ${songId})`;
+      insert into lyncil.song_jobs (task_id, user_id, kind, provider, song_id, lyrics_hash)
+      values (${reservation}, ${userId}, ${kind}, ${provider}, ${songId}, ${hash})`;
     return null;
   });
   if (outcome && "reused" in outcome) return json({ taskId: outcome.reused });
@@ -304,6 +358,11 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
     task = provider === "google" ? await startLyria(input) : await startMureka(input);
   } catch (error) {
     console.error("song start failed", provider, error);
+    if (error instanceof LyricsBlockedError) {
+      // Kept as a failed job (no slot taken) so the next try is turned away.
+      await sql`update lyncil.song_jobs set status = 'failed', failure = 'blocked' where task_id = ${reservation}`;
+      return json({ error: "lyrics_blocked" }, 422);
+    }
     // Nothing was made, so the slot goes back.
     await sql`delete from lyncil.song_jobs where task_id = ${reservation}`;
     // The app shows 503 as its "busy, try again in a minute" popup.
@@ -331,10 +390,10 @@ export async function handleSongStatus(req: Request): Promise<Response> {
   // as a running one, since either ends with the track.
   const rows = taskId
     ? await sql`
-      select task_id, kind, provider, song_id, audio_path, audio_duration, status, created_at from lyncil.song_jobs
+      select task_id, kind, provider, song_id, audio_path, audio_duration, status, failure, created_at from lyncil.song_jobs
       where task_id = ${taskId} and user_id = ${userId}`
     : await sql`
-      select task_id, kind, provider, song_id, audio_path, audio_duration, status, created_at from lyncil.song_jobs
+      select task_id, kind, provider, song_id, audio_path, audio_duration, status, failure, created_at from lyncil.song_jobs
       where user_id = ${userId} and song_id = ${songId} and status <> 'failed'
       order by (audio_path is not null) desc, created_at desc limit 1`;
   if (rows.length === 0) {
@@ -370,7 +429,10 @@ export async function handleSongStatus(req: Request): Promise<Response> {
       await sql`update lyncil.song_jobs set status = 'failed' where task_id = ${job.taskId} and status = 'pending'`;
     }
     if (lost || row.status === "failed") {
-      return taskId ? json({ status: "failed", taskId: job.taskId }) : json({ status: "none" });
+      // `reason: blocked` tells an app that knows it to ask for different
+      // words rather than another try; older apps ignore it.
+      const reason = row.failure ? { reason: row.failure as string } : {};
+      return taskId ? json({ status: "failed", taskId: job.taskId, ...reason }) : json({ status: "none" });
     }
     return json({ status: "pending", taskId: job.taskId });
   }

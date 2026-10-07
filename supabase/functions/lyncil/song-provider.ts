@@ -38,3 +38,7 @@ export interface SongJob {
 }
 
 export class ProviderBusyError extends Error {}
+
+/// The provider refused the words themselves (Lyria: prohibited_content).
+/// Asking again with the same lyrics gets the same answer.
+export class LyricsBlockedError extends Error {}

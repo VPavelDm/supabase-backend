@@ -26,7 +26,7 @@
 // Gemini API terms bar apps "likely to be accessed by individuals under the
 // age of 18"; clear that before this goes past testing.
 
-import { SongInput, SongJob, SongStatus, StartedTask } from "./song-provider.ts";
+import { LyricsBlockedError, SongInput, SongJob, SongStatus, StartedTask } from "./song-provider.ts";
 
 const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta";
 const MODEL = Deno.env.get("LYNCIL_LYRIA_MODEL") ?? "lyria-3.5";
@@ -41,7 +41,15 @@ interface Interaction {
   id?: string;
   status?: string;
   steps?: { type?: string; content?: AudioBlock[] }[];
-  error?: { message?: string };
+  error?: { message?: string; code?: string };
+}
+
+/// A refused request's error: the lyrics tripped Google's prohibited-use
+/// filter (seen 2026-10-07 on harmless love-song lyrics, 400
+/// prohibited_content, about 15 s, no audio made), or anything else.
+function requestError(status: number, interaction: Interaction): Error {
+  if (interaction.error?.code === "prohibited_content") return new LyricsBlockedError("Lyria blocked the lyrics");
+  return new Error(`Gemini returned ${status}`);
 }
 
 /// Lyria takes one prompt with the musical direction and the words kept
@@ -94,7 +102,7 @@ export async function renderLyria(input: SongInput, signal?: AbortSignal): Promi
   const interaction = await res.json().catch(() => ({})) as Interaction;
   if (!res.ok) {
     console.error("lyria render failed", res.status, JSON.stringify(interaction));
-    throw new Error(`Gemini returned ${res.status}`);
+    throw requestError(res.status, interaction);
   }
   return finished(interaction, interaction.id ?? "sync");
 }
@@ -107,7 +115,7 @@ export async function startLyria(input: SongInput): Promise<StartedTask> {
   const interaction = await res.json().catch(() => ({})) as Interaction;
   if (!res.ok || typeof interaction.id !== "string") {
     console.error("lyria start failed", res.status, JSON.stringify(interaction));
-    throw new Error(`Gemini returned ${res.status}`);
+    throw requestError(res.status, interaction);
   }
   return { taskId: interaction.id };
 }
