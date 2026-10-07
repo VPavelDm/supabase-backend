@@ -15,7 +15,8 @@
 // sign-in), and the id here is the one in the caller's token, so a caller
 // can't borrow someone else's plan. Simulator and TestFlight builds use the
 // staging Adapty app while App Store builds use production, and all of them
-// call this backend, so both apps are asked, production first.
+// call this backend: production is asked first, and staging only when
+// production has no profile for the caller (see `premiumAccess`).
 //
 // Every started song counts except the ones that failed, including songs
 // deleted since: deleting doesn't hand the allowance back.
@@ -83,8 +84,13 @@ function adaptyKeys(): string[] {
   ].filter((key): key is string => !!key);
 }
 
-/// The caller's active premium access, or null when they have none. A
-/// profile missing from one Adapty app is normal (it lives in the other).
+/// The caller's active premium access, or null when they have none. The
+/// first Adapty app that knows the caller decides: an App Store install is
+/// identified in production at launch, so staging is only asked about
+/// callers production has never seen (TestFlight, simulator). Until
+/// 2026-10-07 staging was also asked when production knew the caller but
+/// found no plan, so an App Store user with a sandbox purchase from an old
+/// TestFlight build made songs while the app showed them as free.
 async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | null> {
   const keys = adaptyKeys();
   if (keys.length === 0) console.error("No Adapty secret key set; every caller counts as free");
@@ -105,7 +111,7 @@ async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | n
       level.access_level_id === "premium" &&
       (!level.expires_at || new Date(level.expires_at) > now)
     );
-    if (level) return level;
+    return level ?? null;
   }
   return null;
 }
