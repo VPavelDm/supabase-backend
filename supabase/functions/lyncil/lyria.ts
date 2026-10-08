@@ -44,12 +44,18 @@ interface Interaction {
   error?: { message?: string; code?: string };
 }
 
+/// Codes Lyria refuses lyrics with. Both seen in production on 2026-10-07:
+/// prohibited_content ("sensitive words", about 15 s) and content_blocked
+/// ("an unspecified policy reason", about 28 s); neither makes audio.
+const REFUSAL_CODES = new Set(["prohibited_content", "content_blocked"]);
+
 /// A refused request's error: the lyrics tripped Google's prohibited-use
-/// filter (seen 2026-10-07 on harmless love-song lyrics, 400
-/// prohibited_content, about 15 s, no audio made), or anything else.
+/// filter (seen on harmless love-song lyrics), or anything else. The message
+/// ends up on the failed job (song_jobs.error).
 function requestError(status: number, interaction: Interaction): Error {
-  if (interaction.error?.code === "prohibited_content") return new LyricsBlockedError("Lyria blocked the lyrics");
-  return new Error(`Gemini returned ${status}`);
+  const code = interaction.error?.code ?? "";
+  if (REFUSAL_CODES.has(code)) return new LyricsBlockedError(`Lyria blocked the lyrics: ${code}`);
+  return new Error(`Gemini returned ${status}${code ? ` ${code}` : ""}`);
 }
 
 /// Lyria takes one prompt with the musical direction and the words kept
