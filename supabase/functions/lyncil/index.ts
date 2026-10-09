@@ -14,10 +14,13 @@
 //   LYNCIL_ADAPTY_SECRET_KEY, LYNCIL_ADAPTY_STAGING_SECRET_KEY (song-quota.ts),
 //   LYNCIL_APNS_TEAM_ID, LYNCIL_APNS_KEY_ID + LYNCIL_APNS_PRIVATE_KEY,
 //   LYNCIL_APNS_SANDBOX_KEY_ID + LYNCIL_APNS_SANDBOX_PRIVATE_KEY (notify.ts)
+//   LYNCIL_WEB_KEY (the music.lyncil.com Lambda), LYNCIL_SHARE_BASE_URL
+//   (optional, default https://music.lyncil.com) (share.ts)
 
 import { router } from "../_shared/router.ts";
 import { handleGenerateLyrics } from "./generate-lyrics.ts";
 import { handleGenerateSong, handleSongStatus } from "./generate-song.ts";
+import { handleSharedSong, handleShareSong, handleUnshareSong } from "./share.ts";
 import { handleSongQuota } from "./song-quota.ts";
 
 Deno.serve(router("lyncil", {
@@ -25,4 +28,7 @@ Deno.serve(router("lyncil", {
   "generate-song": { POST: handleGenerateSong },
   "song-status": { POST: handleSongStatus },
   "song-quota": { POST: handleSongQuota },
+  "share-song": { POST: handleShareSong },
+  "unshare-song": { POST: handleUnshareSong },
+  "shared-song": { GET: handleSharedSong },
 }));

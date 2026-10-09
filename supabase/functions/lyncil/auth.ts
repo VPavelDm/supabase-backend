@@ -16,8 +16,17 @@ async function sha256(text: string): Promise<string> {
 /// user credential — it keeps the provider keys from being spendable by
 /// anyone who reads the anon key out of the app.
 export async function isAppCall(req: Request): Promise<boolean> {
-  const expected = Deno.env.get("LYNCIL_APP_KEY");
-  const given = req.headers.get("x-lyncil-app-key");
+  return await keyMatches(req.headers.get("x-lyncil-app-key"), Deno.env.get("LYNCIL_APP_KEY"));
+}
+
+/// The music.lyncil.com Lambda, with a key only it holds (LYNCIL_WEB_KEY).
+/// Routes for the web page take this instead of the app key, which ships in
+/// the binary and so can be read out of it.
+export async function isWebCall(req: Request): Promise<boolean> {
+  return await keyMatches(req.headers.get("x-lyncil-web-key"), Deno.env.get("LYNCIL_WEB_KEY"));
+}
+
+async function keyMatches(given: string | null, expected: string | undefined): Promise<boolean> {
   if (!expected || !given) return false;
   return (await sha256(given)) === (await sha256(expected));
 }

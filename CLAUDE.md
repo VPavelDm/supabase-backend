@@ -75,6 +75,14 @@ the user's choices, so prompts iterate without an App Store release. This
 replaced a raw GPT proxy on Lyncil's own Supabase project that anyone with
 the anon key could drive with any model on our OpenAI key.
 
+Share links (`functions/lyncil/share.ts`, `lyncil.song_shares`):
+`share-song` gives a paid user's song one live link
+(music.lyncil.com/s/<slug>), `unshare-song` revokes it, and `shared-song`
+feeds the web page (VPavelDm/Lyncil-Web) the live song plus a 15-minute
+signed track URL. `shared-song` takes `x-lyncil-web-key` (`LYNCIL_WEB_KEY`,
+held by the page's Lambda), never the app key, and a deleted song, a revoked
+link and an unknown slug all answer the same 404.
+
 ## Commands
 
 Run from the repo root.

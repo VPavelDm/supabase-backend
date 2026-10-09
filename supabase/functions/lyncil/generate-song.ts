@@ -170,7 +170,7 @@ function configuredProvider(): Provider {
 /// The sample is uploaded once per project to lyncil-tracks/_staging/.
 const STAGING_SAMPLE = "_staging/sample.mp3";
 
-function serviceStorage() {
+export function serviceStorage() {
   return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!)
     .storage.from(TRACKS_BUCKET);
 }
@@ -184,7 +184,7 @@ function wantsSample(req: Request): boolean {
 /// the Docker-internal http://kong:8000 that a simulator can't reach. Local
 /// runs set LYNCIL_PUBLIC_SUPABASE_URL (http://127.0.0.1:54321) to swap the
 /// origin; production leaves it unset and the URL passes through untouched.
-function publicUrl(url: string): string {
+export function publicUrl(url: string): string {
   const base = Deno.env.get("LYNCIL_PUBLIC_SUPABASE_URL");
   if (!base) return url;
   const signed = new URL(url);
