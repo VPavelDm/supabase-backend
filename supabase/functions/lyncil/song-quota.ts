@@ -20,6 +20,10 @@
 //
 // Every started song counts except the ones that failed, including songs
 // deleted since: deleting doesn't hand the allowance back.
+//
+// Songs given by hand (lyncil.song_grants, an apology after an outage, say)
+// add to the limit for the window they were given in: until the plan renews,
+// or for 7 days with no plan.
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
@@ -197,7 +201,11 @@ export async function quotaFor(allowance: Allowance, userId: string, db: Db = sq
     select count(*)::int as count from lyncil.song_jobs
     where user_id = ${userId} and status <> 'failed' and created_at >= ${allowance.since}`;
   const used = Number(rows[0].count);
-  const { plan, limit } = allowance;
+  const grants = await db`
+    select coalesce(sum(songs), 0)::int as songs from lyncil.song_grants
+    where user_id = ${userId} and granted_at >= ${allowance.since}`;
+  const { plan } = allowance;
+  const limit = allowance.limit + Number(grants[0].songs);
   if (allowance.endsAt) return { plan, limit, used, resetsAt: allowance.endsAt.toISOString() };
   let resetsAt: string | null = null;
   if (used >= limit) {
