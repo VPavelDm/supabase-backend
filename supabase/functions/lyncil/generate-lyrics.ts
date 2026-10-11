@@ -28,26 +28,39 @@ const MAX_TOKENS = 4000;
 
 // Fallbacks live here rather than in the app: an untouched picker should
 // still produce a song, and which fallback reads best is a prompt decision.
+// There is no fallback artist: an untouched artist picker used to mean
+// "inspired by Taylor Swift", and lyrics written in a real artist's style
+// are what Lyria's filter refuses (2026-10-11).
 const DEFAULT_GENRE = "Pop";
 const DEFAULT_MOOD = "Emotional";
-const DEFAULT_ARTIST = "Taylor Swift";
 
 const MAX_PROMPT = 2000;
 const MAX_FIELD = 100;
 
-/// Ported verbatim in spirit from the app's systemMessage(genre:mood:artist:).
-function systemPrompt(genre: string, mood: string, artist: string): string {
+/// The lyrics are sung by Lyria, whose filter refuses some words, so the
+/// prompt keeps the lines the model writes itself clear of what it refuses.
+/// Lines the user wrote are theirs: they stay, and if Lyria refuses them the
+/// app tells the user which kinds of words to change.
+function systemPrompt(genre: string, mood: string, artist: string | null): string {
+  const inspiration = artist
+    ? `\nTake inspiration from the mood, themes and storytelling of ${artist}, but never reuse their lines, titles or hooks, and never name them in the lyrics.`
+    : "";
   return `Main Instruction:
 You are an expert songwriter capable of crafting lyrics in ${genre} genre.
-Use an ${mood} mood to sentiment the mood of the lyrics.
-Lyrics are inspired by ${artist}.
+Use an ${mood} mood to sentiment the mood of the lyrics.${inspiration}
 
 Detailed instructions:
 - Ensure the song structure aligns with common conventions of ${genre} genre.
 - Ensure that the mood of the song lyrics matches the concept of ${mood} mood.
-- Make sure the lyrics match the signature style of the ${artist} artist's lyrics.
 - Make sure that the lyrics description is used as the main idea to create the lyrics of the song.
+- If the description contains lines the user wrote as lyrics, keep those lines as they are (you may place them where they fit the structure) and write the rest of the song around them.
 - The output should be purely focused on generating high-quality song lyrics based on the given user inputs.
+
+Words to keep out of the lines you write (the song is sung by a music engine that refuses them):
+- names of celebrities, artists, politicians or other public figures, and brand or product names; first names of the people the song is for are fine
+- lines, titles or hooks from existing songs
+- sexual content, graphic violence, drugs, self-harm, slurs or hate
+Strong feelings are welcome; describe them without graphic detail.
 
 Additional Instructions
 - Lyrics should have a structured format with a title and text behind it, example: verse - verse lyrics, chorus - chorus lyrics, and so on.
@@ -195,7 +208,7 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
   const system = systemPrompt(
     str(body.genre, MAX_FIELD) || DEFAULT_GENRE,
     str(body.mood, MAX_FIELD) || DEFAULT_MOOD,
-    str(body.artist, MAX_FIELD) || DEFAULT_ARTIST,
+    str(body.artist, MAX_FIELD) || null,
   );
   const content = await complete(system, `User's prompt: ${prompt}`);
 

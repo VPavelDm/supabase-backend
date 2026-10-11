@@ -47,7 +47,13 @@ interface Interaction {
 /// Codes Lyria refuses lyrics with. Both seen in production on 2026-10-07:
 /// prohibited_content ("sensitive words", about 15 s) and content_blocked
 /// ("an unspecified policy reason", about 28 s); neither makes audio.
-const REFUSAL_CODES = new Set(["prohibited_content", "content_blocked"]);
+/// invalid_request ("Request contains an invalid argument", 2026-10-10) is
+/// treated the same: every song is sent the same way and 68 others went
+/// through, so it was about the words, and it should get the retry and the
+/// app's "change these parts" help rather than "give it another go". Should
+/// it ever hit every song (a request the API stopped accepting), Amplitude's
+/// backend_song_failed shows error_code invalid_request rising.
+const REFUSAL_CODES = new Set(["prohibited_content", "content_blocked", "invalid_request"]);
 
 /// A refused request's error: the lyrics tripped Google's prohibited-use
 /// filter (seen on harmless love-song lyrics), or anything else. The message
@@ -55,7 +61,10 @@ const REFUSAL_CODES = new Set(["prohibited_content", "content_blocked"]);
 function requestError(status: number, interaction: Interaction): Error {
   const code = interaction.error?.code ?? "";
   if (REFUSAL_CODES.has(code)) return new LyricsBlockedError(`Lyria blocked the lyrics: ${code}`);
-  return new Error(`Gemini returned ${status}${code ? ` ${code}` : ""}`);
+  // Google's own words come along (shortened), since the logs that also hold
+  // them are gone after a day.
+  const message = interaction.error?.message?.slice(0, 200);
+  return new Error(`Gemini returned ${status}${code ? ` ${code}` : ""}${message ? `: ${message}` : ""}`);
 }
 
 /// Lyria takes one prompt with the musical direction and the words kept

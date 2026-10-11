@@ -86,7 +86,8 @@ for (( back = HOURS; back > 0; back -= CHUNK_HOURS )); do
     [[ "$out" == *ThrottlerException* ]] || break
   done
   if ! echo "$out" | jq -e '.result' >/dev/null 2>&1; then
-    echo "  ${START[6,16]} → ${END[6,16]}: $(echo "$out" | jq -c '.error // .' 2>/dev/null | cut -c1-120)"
+    reason=$(echo "$out" | jq -c '.error // .' 2>/dev/null | cut -c1-120)
+    echo "  ${START[6,16]} → ${END[6,16]}: logs not read (${reason:-no answer from the logs API}); rerun for these hours"
     continue
   fi
   n=$(echo "$out" | jq '.result | length')

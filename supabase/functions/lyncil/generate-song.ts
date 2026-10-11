@@ -60,6 +60,7 @@ import { callerUserId, isAppCall } from "./auth.ts";
 import { notifySongReady } from "./notify.ts";
 import { lyriaPolls, queryLyria, renderLyria, startLyria } from "./lyria.ts";
 import { queryMureka, startMureka } from "./mureka.ts";
+import { reportSongOutcome } from "./song-events.ts";
 import { Allowance, planAllowance, PlanUnavailableError, quotaFor } from "./song-quota.ts";
 import {
   Kind,
@@ -133,6 +134,11 @@ addEventListener("beforeunload", (event) => {
 
 function str(value: unknown, max: number): string {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
+}
+
+/// Sends a finished or failed task to Amplitude (song-events.ts).
+function reportOutcome(taskId: string): Promise<void> {
+  return reportSongOutcome(taskId, RETRIED_FAILURES, LYRIA_SYNC_ATTEMPTS);
 }
 
 /// What a failed song's job records about why.
@@ -255,7 +261,10 @@ async function keepTrack(
     set status = 'succeeded', audio_path = ${path}, audio_duration = ${status.duration}, request = null
     where task_id = ${taskId} and status <> 'succeeded'
     returning task_id`;
-  if (flipped.length > 0) notifyInBackground(userId, songId);
+  if (flipped.length > 0) {
+    notifyInBackground(userId, songId);
+    reportOutcome(taskId);
+  }
   return path;
 }
 
@@ -288,6 +297,7 @@ async function makeLyriaSong(
       set status = 'failed', failure = ${failure}, error = ${message},
         request = case when ${retriable} and attempts < ${LYRIA_SYNC_ATTEMPTS} then request end
       where task_id = ${taskId}`;
+    reportOutcome(taskId);
   } finally {
     songsInWork.delete(taskId);
   }
@@ -429,6 +439,7 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
       set status = 'failed', failure = ${failure === "blocked" ? "blocked" : busy ? "busy" : "start_failed"},
         error = ${message}
       where task_id = ${reservation}`;
+    reportOutcome(reservation);
     if (failure === "blocked") return json({ error: "lyrics_blocked" }, 422);
     // The app shows 503 as its "busy, try again in a minute" popup.
     return json({ error: "Song generation unavailable" }, busy ? 503 : 502);
@@ -501,6 +512,9 @@ export async function handleSongStatus(req: Request): Promise<Response> {
         where task_id = ${job.taskId} and status = 'pending'`;
     }
     if (lost || row.status === "failed") {
+      // Reported before a retry puts the row back to pending; a cut-off or
+      // lost song is only noticed here.
+      await reportOutcome(job.taskId);
       // Only the app waiting on this very task sets off the retry: it keeps
       // polling, so it sees the song through.
       if (taskId && await retrySyncSong(req, userId, job.taskId)) {
@@ -529,6 +543,7 @@ export async function handleSongStatus(req: Request): Promise<Response> {
     await sql`
       update lyncil.song_jobs set status = 'failed', failure = 'error', error = 'the provider ended the task without a song'
       where task_id = ${job.taskId}`;
+    reportOutcome(job.taskId);
     // A recovery by song has nothing to give; the app turns it back into lyrics.
     return taskId ? json({ status: "failed", taskId: job.taskId }) : json({ status: "none" });
   }
