@@ -2,13 +2,17 @@
 // so the allowance follows the plan the caller pays for; lyrics stay
 // unlimited and never come through here.
 //
-//   no plan   1 song in any 7 days
-//   legacy    1 song in any 7 days: a subscription bought before songs were
-//             sold (lyrics only). Upgrading to a songs plan, in the same
-//             App Store group, lifts it.
+//   no plan   no songs (Pavel, 2026-10-18; it was 1 in any 7 days)
+//   legacy    1 song in any 7 days: a lyrics-only plan, on level 2 or below
+//             of the App Store group. Upgrading to a songs plan, in the same
+//             group, lifts it.
 //   weekly   20 songs per billing week
 //   monthly  30 songs per billing month
 //   annual   30 songs per month, months counted from the purchase
+//
+// Which plan a product is comes from its level in the App Store group
+// (store-products.ts): level 1 is a songs plan, its cadence the product's
+// billing period; anything below is legacy.
 //
 // The plan comes from Adapty's server-side API, looked up by customer user id:
 // the app identifies every install with its Supabase user id (anonymous
@@ -28,6 +32,7 @@
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { callerUserId, isAppCall } from "./auth.ts";
+import { SONGS_LEVEL, storeProduct } from "./store-products.ts";
 
 export type Plan = "free" | "legacy" | "weekly" | "monthly" | "annual";
 
@@ -41,15 +46,16 @@ export interface SongQuota {
   resetsAt: string | null;
 }
 
-const LIMITS: Record<Plan, number> = { free: 1, legacy: 1, weekly: 20, monthly: 30, annual: 30 };
+const LIMITS: Record<Plan, number> = { free: 0, legacy: 1, weekly: 20, monthly: 30, annual: 30 };
 const FREE_WINDOW_DAYS = 7;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 /// Every Lyncil subscription in App Store Connect before songs were sold
-/// (2026-09-30). They keep lyrics and lose nothing, but songs come with the
-/// new plans. Any id in neither list counts as a songs plan, its cadence read
-/// from the dates, which sandbox renewals (minutes, not weeks) can fool; list
-/// every new product in SONG_PLANS.
+/// (2026-09-30). Since the levels decide (2026-10-18), this list and
+/// SONG_PLANS only answer when App Store Connect can't be asked and the
+/// product isn't in lyncil.store_products yet. An id in neither list counts
+/// as a songs plan, its cadence read from the dates, which sandbox renewals
+/// (minutes, not weeks) can fool.
 const LEGACY_PRODUCTS = new Set([
   "com.vaitsikhouskaya.ala.lyncil.subscription.plan.standard",
   "com.vaitsikhouskaya.ala.lyncil.subscription.plan.premium",
@@ -64,7 +70,9 @@ const LEGACY_PRODUCTS = new Set([
 ]);
 
 /// The songs plans (Pavel, 2026-09-30): weekly $5.99 and annual $59.99, in
-/// the same group as the legacy ones and ranked above them.
+/// the same group as the legacy ones and ranked above them. These two keep
+/// their songs whatever level App Store Connect shows: a level moved by
+/// mistake must not take songs from people paying for them.
 const SONG_PLANS: Record<string, "weekly" | "monthly" | "annual"> = {
   "lyncil_weekly_no_trial_5_99": "weekly",
   "lyncil_yearly_no_trial_59_99": "annual",
@@ -120,15 +128,37 @@ async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | n
   return null;
 }
 
-function planOf(level: AccessLevel): Exclude<Plan, "free"> {
-  if (level.store_product_id && LEGACY_PRODUCTS.has(level.store_product_id)) return "legacy";
-  const known = level.store_product_id ? SONG_PLANS[level.store_product_id] : undefined;
-  if (known) return known;
+async function planOf(level: AccessLevel): Promise<Exclude<Plan, "free">> {
+  const productId = level.store_product_id;
+  const listed = productId ? SONG_PLANS[productId] : undefined;
+  const product = productId ? await storeProduct(productId) : null;
+  if (product) {
+    if (product.groupLevel !== SONGS_LEVEL) {
+      if (listed) {
+        console.error(`songs plan ${productId} is on level ${product.groupLevel}; kept as songs`);
+        return listed;
+      }
+      return "legacy";
+    }
+    const cadence = cadenceOf(product.period);
+    if (cadence) return cadence;
+  }
+  if (productId && LEGACY_PRODUCTS.has(productId)) return "legacy";
+  if (listed) return listed;
   const start = Date.parse(level.purchased_at ?? level.starts_at ?? "");
   const end = Date.parse(level.expires_at ?? "");
   const days = (end - start) / DAY_MS;
   if (!Number.isFinite(days)) return "weekly";
   return days <= 8 ? "weekly" : days <= 35 ? "monthly" : "annual";
+}
+
+function cadenceOf(period: string | null): "weekly" | "monthly" | "annual" | null {
+  switch (period) {
+    case "ONE_WEEK": return "weekly";
+    case "ONE_MONTH": return "monthly";
+    case "ONE_YEAR": return "annual";
+    default: return null;
+  }
 }
 
 /// Clamped to the month's last day, so a purchase on the 31st renews on
@@ -181,7 +211,7 @@ export async function planAllowance(userId: string, now = new Date()): Promise<A
   const level = await premiumAccess(userId, now);
   // A free trial counts as no plan: Lyncil sells none today, and one started
   // anyway shouldn't be worth a week of free songs.
-  const plan = !level || level.offer?.type === "free_trial" ? "free" : planOf(level);
+  const plan = !level || level.offer?.type === "free_trial" ? "free" : await planOf(level);
   if (plan === "free" || plan === "legacy") {
     return {
       plan,
@@ -208,7 +238,8 @@ export async function quotaFor(allowance: Allowance, userId: string, db: Db = sq
   const limit = allowance.limit + Number(grants[0].songs);
   if (allowance.endsAt) return { plan, limit, used, resetsAt: allowance.endsAt.toISOString() };
   let resetsAt: string | null = null;
-  if (used >= limit) {
+  // No plan and no grant: nothing comes back with time, so no date to promise.
+  if (used >= limit && limit > 0) {
     // The week slides: room comes back when the oldest of the last `limit`
     // songs turns a week old.
     const oldest = await db`
