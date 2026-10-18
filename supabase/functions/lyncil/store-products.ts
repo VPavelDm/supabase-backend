@@ -1,6 +1,7 @@
 // What each subscription in Lyncil's App Store group buys, by its level in
-// the group (Pavel, 2026-10-18): level 1 is the songs plans, level 2 and below
-// lyrics only. The levels and billing periods come from the App Store Connect
+// the group (Pavel, 2026-10-18): level 1 is the songs plans; every other
+// level is lyrics only: 2 for the lyrics plans on sale, 3 and beyond for
+// the ones no longer offered. The levels and billing periods come from the App Store Connect
 // API and are kept in lyncil.store_products, so a song check reads a table,
 // not Apple.
 //

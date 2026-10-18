@@ -1,8 +1,8 @@
 -- Every subscription in Lyncil's App Store group, with its level and billing
 -- period, read from the App Store Connect API (functions/lyncil/store-products.ts).
 -- The level decides what a plan buys (Pavel, 2026-10-18): level 1 is the
--- songs plans, level 2 and below lyrics only. The app splits its paywall by
--- the same rule, from StoreKit.
+-- songs plans, every other level (2 on sale, 3 and beyond retired) lyrics
+-- only. The app splits its paywall by the same rule, from StoreKit.
 --
 -- The function refreshes the whole table when it is a month old, or when a
 -- purchase names a product the table doesn't have (at most every 10 minutes),

@@ -3,16 +3,17 @@
 // unlimited and never come through here.
 //
 //   no plan   no songs (Pavel, 2026-10-18; it was 1 in any 7 days)
-//   legacy    1 song in any 7 days: a lyrics-only plan, on level 2 or below
-//             of the App Store group. Upgrading to a songs plan, in the same
-//             group, lifts it.
+//   legacy    no songs (Pavel, 2026-10-18; it was 1 in any 7 days): a
+//             lyrics-only plan, on any level of the App Store group from 2
+//             on. Upgrading to a songs plan, in the same group, lifts it.
 //   weekly   20 songs per billing week
 //   monthly  30 songs per billing month
 //   annual   30 songs per month, months counted from the purchase
 //
 // Which plan a product is comes from its level in the App Store group
 // (store-products.ts): level 1 is a songs plan, its cadence the product's
-// billing period; anything below is legacy.
+// billing period; any other level (2, or the unused plans parked on 3 and
+// beyond) is legacy.
 //
 // The plan comes from Adapty's server-side API, looked up by customer user id:
 // the app identifies every install with its Supabase user id (anonymous
@@ -46,7 +47,7 @@ export interface SongQuota {
   resetsAt: string | null;
 }
 
-const LIMITS: Record<Plan, number> = { free: 0, legacy: 1, weekly: 20, monthly: 30, annual: 30 };
+const LIMITS: Record<Plan, number> = { free: 0, legacy: 0, weekly: 20, monthly: 30, annual: 30 };
 const FREE_WINDOW_DAYS = 7;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
