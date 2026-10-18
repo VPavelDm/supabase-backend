@@ -7,6 +7,10 @@
 .env.*
 !.env.example
 
+# Local API keys (the App Store Connect .p8 for store-products.ts, …).
+# Their contents go into Supabase secrets; the files never get committed.
+secrets/
+
 # macOS
 .DS_Store
 
