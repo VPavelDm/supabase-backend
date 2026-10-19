@@ -130,6 +130,11 @@ async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | n
   return null;
 }
 
+/// Any active premium access, plan or trial: the caller never sees ads.
+export async function hasPremium(userId: string, now = new Date()): Promise<boolean> {
+  return (await premiumAccess(userId, now)) !== null;
+}
+
 async function planOf(level: AccessLevel): Promise<Exclude<Plan, "free">> {
   const productId = level.store_product_id;
   const listed = productId ? SONG_PLANS[productId] : undefined;

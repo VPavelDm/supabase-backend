@@ -19,6 +19,7 @@
 //   (optional, default https://music.lyncil.com) (share.ts)
 
 import { router } from "../_shared/router.ts";
+import { handleAdFreeLyrics } from "./ad-free-lyrics.ts";
 import { handleGenerateLyrics } from "./generate-lyrics.ts";
 import { handleGenerateSong, handleSongStatus } from "./generate-song.ts";
 import { handleSharedSong, handleShareSong, handleUnshareSong } from "./share.ts";
@@ -26,6 +27,7 @@ import { handleSongQuota } from "./song-quota.ts";
 
 Deno.serve(router("lyncil", {
   "generate-lyrics": { POST: handleGenerateLyrics },
+  "ad-free-lyrics": { POST: handleAdFreeLyrics },
   "generate-song": { POST: handleGenerateSong },
   "song-status": { POST: handleSongStatus },
   "song-quota": { POST: handleSongQuota },
