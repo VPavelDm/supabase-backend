@@ -24,7 +24,10 @@ import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { adFreeLimitResponse, refundAdFree, reserveAdFree } from "./ad-free-lyrics.ts";
 
 const MODEL = Deno.env.get("LYNCIL_OPENAI_MODEL") ?? "gpt-5.6-terra";
-const DAILY_CAP = 100;
+// Lyrics per user per day, subscribers included. 30, down from 100 (Pavel,
+// 2026-10-19): the top song plans allow 30 a month, and the server never
+// checks a free user watched the ad, so this is what a copied request gets.
+const DAILY_CAP = 30;
 const MAX_TOKENS = 4000;
 
 // Fallbacks live here rather than in the app: an untouched picker should
