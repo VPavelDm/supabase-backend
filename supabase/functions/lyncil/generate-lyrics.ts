@@ -21,9 +21,13 @@
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
+import { adFreeLimitResponse, refundAdFree, reserveAdFree } from "./ad-free-lyrics.ts";
 
 const MODEL = Deno.env.get("LYNCIL_OPENAI_MODEL") ?? "gpt-5.6-terra";
-const DAILY_CAP = 100;
+// Lyrics per user per day, subscribers included. 30, down from 100 (Pavel,
+// 2026-10-19): the top song plans allow 30 a month, and the server never
+// checks a free user watched the ad, so this is what a copied request gets.
+const DAILY_CAP = 30;
 const MAX_TOKENS = 4000;
 
 // Fallbacks live here rather than in the app: an untouched picker should
@@ -200,8 +204,21 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
   const prompt = str(body.prompt, MAX_PROMPT);
   if (!prompt) return json({ error: "prompt is required" }, 400);
 
+  // `ad_free`: the app couldn't show the rewarded ad twice; a free user gets
+  // AD_FREE_DAILY of these a day (ad-free-lyrics.ts).
+  let adFreeSlot = false;
+  if (body.ad_free === true) {
+    const reserved = await reserveAdFree(userId);
+    if (!reserved.allowed) return adFreeLimitResponse();
+    adFreeSlot = reserved.counted;
+  }
+  const refund = async () => {
+    if (adFreeSlot) await refundAdFree(userId);
+  };
+
   const caller = `user:${userId}`;
   if (!await underDailyCap(caller)) {
+    await refund();
     return json({ error: "Daily generation limit reached" }, 429);
   }
 
@@ -210,7 +227,13 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
     str(body.mood, MAX_FIELD) || DEFAULT_MOOD,
     str(body.artist, MAX_FIELD) || null,
   );
-  const content = await complete(system, `User's prompt: ${prompt}`);
+  let content: string;
+  try {
+    content = await complete(system, `User's prompt: ${prompt}`);
+  } catch (error) {
+    await refund();
+    throw error;
+  }
 
   let options: LyricsOption[];
   try {
@@ -223,6 +246,7 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
     options = [];
   }
   if (options.length === 0) {
+    await refund();
     return json({ error: "Generation returned unusable lyrics" }, 502);
   }
 
