@@ -56,7 +56,7 @@ import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
-import { callerUserId, isAppCall } from "./auth.ts";
+import { callerUserId, isAppCall, isStagingBuild } from "./auth.ts";
 import { notifySongReady } from "./notify.ts";
 import { lyriaPolls, queryLyria, renderLyria, startLyria } from "./lyria.ts";
 import { queryMureka, startMureka } from "./mureka.ts";
@@ -182,8 +182,7 @@ export function serviceStorage() {
 }
 
 function wantsSample(req: Request): boolean {
-  return req.headers.get("x-lyncil-build") === "staging" &&
-    Deno.env.get("LYNCIL_STAGING_SONGS") !== "real";
+  return isStagingBuild(req) && Deno.env.get("LYNCIL_STAGING_SONGS") !== "real";
 }
 
 /// Signed URLs are built from SUPABASE_URL, which under `supabase start` is
@@ -347,7 +346,7 @@ export async function handleGenerateSong(req: Request): Promise<Response> {
   // before the lock below, not while holding it.
   let allowance: Allowance;
   try {
-    allowance = await planAllowance(userId);
+    allowance = await planAllowance(userId, isStagingBuild(req));
   } catch (error) {
     if (!(error instanceof PlanUnavailableError)) throw error;
     console.error("song plan lookup failed", error);

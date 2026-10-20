@@ -22,6 +22,7 @@ import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
 import { adFreeLimitResponse, refundAdFree, reserveAdFree } from "./ad-free-lyrics.ts";
+import { isStagingBuild } from "./auth.ts";
 
 const MODEL = Deno.env.get("LYNCIL_OPENAI_MODEL") ?? "gpt-5.6-terra";
 // Lyrics per user per day, subscribers included. 30, down from 100 (Pavel,
@@ -208,7 +209,7 @@ export async function handleGenerateLyrics(req: Request): Promise<Response> {
   // AD_FREE_DAILY of these a day (ad-free-lyrics.ts).
   let adFreeSlot = false;
   if (body.ad_free === true) {
-    const reserved = await reserveAdFree(userId);
+    const reserved = await reserveAdFree(userId, isStagingBuild(req));
     if (!reserved.allowed) return adFreeLimitResponse();
     adFreeSlot = reserved.counted;
   }

@@ -40,3 +40,13 @@ export async function callerUserId(req: Request): Promise<string | null> {
   if (error || !data.user) return null;
   return data.user.id;
 }
+
+/// A build that talks to the staging Adapty app and gets the staging song
+/// sample: simulator, Xcode and TestFlight. The app sends its AppMode as
+/// x-lyncil-build; App Store builds send "production". The header is the
+/// app's word for it, so what it unlocks must be worth nothing to fake: a
+/// plan from the staging Adapty app (song-quota.ts) and the stored sample
+/// instead of a paid track (generate-song.ts).
+export function isStagingBuild(req: Request): boolean {
+  return req.headers.get("x-lyncil-build") === "staging";
+}

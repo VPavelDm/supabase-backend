@@ -20,8 +20,8 @@
 // sign-in), and the id here is the one in the caller's token, so a caller
 // can't borrow someone else's plan. Simulator and TestFlight builds use the
 // staging Adapty app while App Store builds use production, and all of them
-// call this backend: production is asked first, and staging only when
-// production has no profile for the caller (see `premiumAccess`).
+// call this backend: production is asked for everyone, staging only for a
+// build that says it is a staging one (see `premiumAccess`).
 //
 // Every started song counts except the ones that failed, including songs
 // deleted since: deleting doesn't hand the allowance back.
@@ -32,7 +32,7 @@
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
-import { callerUserId, isAppCall } from "./auth.ts";
+import { callerUserId, isAppCall, isStagingBuild } from "./auth.ts";
 import { SONGS_LEVEL, storeProduct } from "./store-products.ts";
 
 export type Plan = "free" | "legacy" | "weekly" | "monthly" | "annual";
@@ -91,22 +91,31 @@ interface AccessLevel {
   offer?: { type?: string | null } | null;
 }
 
-function adaptyKeys(): string[] {
+/// Production for everyone; staging as well for a staging build. The
+/// staging key never answers an App Store build, so a sandbox purchase
+/// can't buy real songs.
+function adaptyKeys(stagingBuild: boolean): string[] {
   return [
     Deno.env.get("LYNCIL_ADAPTY_SECRET_KEY"),
-    Deno.env.get("LYNCIL_ADAPTY_STAGING_SECRET_KEY"),
+    stagingBuild ? Deno.env.get("LYNCIL_ADAPTY_STAGING_SECRET_KEY") : undefined,
   ].filter((key): key is string => !!key);
 }
 
-/// The caller's active premium access, or null when they have none. The
-/// first Adapty app that knows the caller decides: an App Store install is
-/// identified in production at launch, so staging is only asked about
-/// callers production has never seen (TestFlight, simulator). Until
-/// 2026-10-07 staging was also asked when production knew the caller but
-/// found no plan, so an App Store user with a sandbox purchase from an old
-/// TestFlight build made songs while the app showed them as free.
-async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | null> {
-  const keys = adaptyKeys();
+/// The caller's active premium access, or null when they have none: the
+/// first Adapty app with one for the caller. Production is asked first, so
+/// a paying App Store user keeps their plan on a TestFlight build too.
+///
+/// Which apps are asked follows the build, not whether production knows the
+/// caller. Until 2026-10-07 staging was asked whenever production found no
+/// plan, so an App Store user with a sandbox purchase from an old TestFlight
+/// build made songs while the app showed them as free. From then until
+/// 2026-10-20 production's answer was final once it had any profile for the
+/// caller, so a TestFlight build on a user id production had seen (the same
+/// tester, b260fc15) bought the weekly songs plan in staging, was shown as
+/// subscribed by the app (which reads staging directly), and got the paywall
+/// on every song because staging was never asked.
+async function premiumAccess(userId: string, now: Date, stagingBuild: boolean): Promise<AccessLevel | null> {
+  const keys = adaptyKeys(stagingBuild);
   if (keys.length === 0) console.error("No Adapty secret key set; every caller counts as free");
   for (const key of keys) {
     let res: Response;
@@ -125,14 +134,14 @@ async function premiumAccess(userId: string, now: Date): Promise<AccessLevel | n
       level.access_level_id === "premium" &&
       (!level.expires_at || new Date(level.expires_at) > now)
     );
-    return level ?? null;
+    if (level) return level;
   }
   return null;
 }
 
 /// Any active premium access, plan or trial: the caller never sees ads.
-export async function hasPremium(userId: string, now = new Date()): Promise<boolean> {
-  return (await premiumAccess(userId, now)) !== null;
+export async function hasPremium(userId: string, stagingBuild: boolean, now = new Date()): Promise<boolean> {
+  return (await premiumAccess(userId, now, stagingBuild)) !== null;
 }
 
 async function planOf(level: AccessLevel): Promise<Exclude<Plan, "free">> {
@@ -214,8 +223,10 @@ export interface Allowance {
   endsAt: Date | null;
 }
 
-export async function planAllowance(userId: string, now = new Date()): Promise<Allowance> {
-  const level = await premiumAccess(userId, now);
+/// `stagingBuild`: the caller says it is a simulator or TestFlight build
+/// (`isStagingBuild`), so the staging Adapty app is asked too.
+export async function planAllowance(userId: string, stagingBuild: boolean, now = new Date()): Promise<Allowance> {
+  const level = await premiumAccess(userId, now, stagingBuild);
   // A free trial counts as no plan: Lyncil sells none today, and one started
   // anyway shouldn't be worth a week of free songs.
   const plan = !level || level.offer?.type === "free_trial" ? "free" : await planOf(level);
@@ -261,8 +272,8 @@ export async function quotaFor(allowance: Allowance, userId: string, db: Db = sq
   return { plan, limit, used, resetsAt };
 }
 
-export async function songQuota(userId: string): Promise<SongQuota> {
-  return await quotaFor(await planAllowance(userId), userId);
+export async function songQuota(userId: string, stagingBuild: boolean): Promise<SongQuota> {
+  return await quotaFor(await planAllowance(userId, stagingBuild), userId);
 }
 
 /// POST song-quota: the caller's allowance, for the counter under "Convert
@@ -272,7 +283,7 @@ export async function handleSongQuota(req: Request): Promise<Response> {
   const userId = await callerUserId(req);
   if (!userId) return json({ error: "Sign-in required" }, 401);
   try {
-    return json(await songQuota(userId));
+    return json(await songQuota(userId, isStagingBuild(req)));
   } catch (error) {
     console.error("song quota failed", error);
     return json({ error: "Plan unavailable" }, 503);

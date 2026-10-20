@@ -23,7 +23,7 @@
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
-import { callerUserId, isAppCall, isWebCall } from "./auth.ts";
+import { callerUserId, isAppCall, isStagingBuild, isWebCall } from "./auth.ts";
 import { publicUrl, serviceStorage } from "./generate-song.ts";
 import { planAllowance } from "./song-quota.ts";
 
@@ -148,7 +148,7 @@ export async function handleShareSong(req: Request): Promise<Response> {
 
   let plan: string;
   try {
-    plan = (await planAllowance(userId)).plan;
+    plan = (await planAllowance(userId, isStagingBuild(req))).plan;
   } catch (error) {
     console.error("share: plan unavailable", error);
     return json({ error: "Plan unavailable" }, 503);

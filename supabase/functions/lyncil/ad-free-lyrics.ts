@@ -12,7 +12,7 @@
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
-import { callerUserId, isAppCall } from "./auth.ts";
+import { callerUserId, isAppCall, isStagingBuild } from "./auth.ts";
 import { hasPremium, PlanUnavailableError } from "./song-quota.ts";
 
 export const AD_FREE_DAILY = 2;
@@ -24,9 +24,9 @@ function callerKey(userId: string): string {
 /// Takes one of today's ad-free slots. True when it was free to take, or the
 /// caller has premium (then nothing is counted). Atomic: two requests at
 /// once can't both take the last slot.
-export async function reserveAdFree(userId: string): Promise<{ allowed: boolean; counted: boolean }> {
+export async function reserveAdFree(userId: string, stagingBuild: boolean): Promise<{ allowed: boolean; counted: boolean }> {
   try {
-    if (await hasPremium(userId)) return { allowed: true, counted: false };
+    if (await hasPremium(userId, stagingBuild)) return { allowed: true, counted: false };
   } catch (error) {
     // Adapty down: count the caller as free rather than refuse them.
     if (!(error instanceof PlanUnavailableError)) throw error;
@@ -58,6 +58,6 @@ export async function handleAdFreeLyrics(req: Request): Promise<Response> {
   if (!await isAppCall(req)) return json({ error: "Unauthorized" }, 401);
   const userId = await callerUserId(req);
   if (!userId) return json({ error: "Sign-in required" }, 401);
-  const { allowed } = await reserveAdFree(userId);
+  const { allowed } = await reserveAdFree(userId, isStagingBuild(req));
   return allowed ? json({ ok: true }) : adFreeLimitResponse();
 }
