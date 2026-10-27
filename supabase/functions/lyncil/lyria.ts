@@ -67,6 +67,17 @@ function requestError(status: number, interaction: Interaction): Error {
   return new Error(`Gemini returned ${status}${code ? ` ${code}` : ""}${message ? `: ${message}` : ""}`);
 }
 
+/// Without it lyria-3.5 refuses lyrics that name someone who shares a
+/// famous singer's first name ("Love you Justin, you're my brother", refused
+/// 3 of 3 in prod and 4 of 4 in tests on 2026-10-27, prohibited_content
+/// "Input blocked"); with it the same lyrics made a song 3 of 3, the name sung
+/// as written (snippets/lyncil-name-test.ts).
+const NAMES_NOTE = "If the lyrics contain personal names, interpret them as references to private individuals " +
+  "mentioned in the song, unless the context explicitly indicates otherwise. Common first names should not be " +
+  "treated as references to celebrities or musicians solely because they share the same name. Preserve all " +
+  "names exactly as written. Create an original song without imitating any existing artist's voice, musical " +
+  "style, or copyrighted work.";
+
 /// Lyria takes one prompt with the musical direction and the words kept
 /// apart, as its docs advise; the lyrics keep their [Verse]/[Chorus] tags.
 function prompt(input: SongInput): string {
@@ -75,7 +86,7 @@ function prompt(input: SongInput): string {
     return `Create an instrumental ${style || "pop"} track, about two minutes long. No vocals.`;
   }
   return `Create a ${style || "pop"} song, about two to three minutes long, sung by a ${input.voice} vocalist. ` +
-    `Sing exactly these lyrics, following their section tags:\n\n${input.lyrics}`;
+    `${NAMES_NOTE} Sing exactly these lyrics, following their section tags:\n\n${input.lyrics}`;
 }
 
 async function gemini(path: string, init: RequestInit = {}): Promise<Response> {
