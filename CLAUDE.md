@@ -5,7 +5,7 @@ This repo (github: VPavelDm/supabase-backend, local:
 the single source of truth for the shared Supabase project
 `ttjzshiaatqvszckjlhw` (org name "Futura"), which hosts several apps on one
 plan. It owns the migration history, every edge function, and the shared
-utilities. App repos (Treddy, Futura iOS, Lyncil iOS) contain no backend
+utilities. App repos (Treddy, Futura iOS, Lyncil iOS, Affirmations iOS) contain no backend
 code — they point here.
 
 Layout: everything lives under `supabase/` — the CLI's canonical layout. It
@@ -14,14 +14,14 @@ commands from the repo root; files at the root itself are invisible to it.
 
 ## Conventions — everything an app owns is namespaced
 
-| Piece            | Convention                      | Treddy                          | Futura | Lyncil |
-|------------------|---------------------------------|---------------------------------|--------|--------|
-| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` |
-| Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` |
-| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` |
-| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) |
-| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — |
-| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) |
+| Piece            | Convention                      | Treddy                          | Futura | Lyncil | Affirmations |
+|------------------|---------------------------------|---------------------------------|--------|--------|--------------|
+| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` | `affirmations/<route>` |
+| Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` | `affirmations` |
+| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` | `*_affirmations_*.sql` |
+| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) | `affirmations-cleanup` (daily) |
+| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — | — |
+| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) | `AFFIRMATIONS_*` (see functions/affirmations/index.ts) |
 
 Cross-app pieces live under `shared`: the `shared` Postgres schema
 (`shared.set_updated_at`), the `shared-` cron prefix
@@ -83,6 +83,21 @@ signed track URL. `shared-song` takes `x-lyncil-web-key` (`LYNCIL_WEB_KEY`,
 held by the page's Lambda), never the app key, and a deleted song, a revoked
 link and an unknown slug all answer the same 404.
 
+**Affirmations** (Here: Daily Audio Affirmations; `affirmations` schema:
+ai_usage; storage bucket `affirmations-tts-cache`): set up like Lyncil. The
+app signs every install in anonymously on launch, and both routes need the
+caller's user token AND the app key baked into the binary
+(`x-affirmations-app-key`, secret `AFFIRMATIONS_APP_KEY`).
+`generate-affirmations` writes fifty affirmations on the user's topic; the
+prompt, model and JSON schema live server-side, capped at 30 calls per user
+per day. `text-to-speech` speaks one clip through ElevenLabs, accepts only
+the app's five voices and two models, caps text at 400 characters, and
+caches every clip in the bucket by a hash of text, voice, model and
+settings; a cache miss counts its characters against 20,000 per user per
+day. Both routes count through `affirmations.ai_usage` (per user, route and
+day). Before 1.8 the app called `generate-affirmations` and
+`text-to-speech` on Pretzly's project with the anon key alone.
+
 ## Commands
 
 Run from the repo root.
@@ -131,5 +146,6 @@ the app's baked key and an OpenAI key). Anonymous sign-ins are on in
   `select * from treddy.job_runs order by finished_at desc limit 20;`
 - `cron.job_run_details` shows the pg_cron side; `shared-purge-cron-history`
   keeps a week of it.
-- `treddy.ai_usage` and `lyncil.ai_usage` back the per-caller daily caps on
-  /generate and /generate-lyrics.
+- `treddy.ai_usage`, `lyncil.ai_usage` and `affirmations.ai_usage` back the
+  per-caller daily caps on /generate, /generate-lyrics and Affirmations'
+  two routes.
