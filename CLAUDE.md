@@ -29,6 +29,16 @@ Cross-app pieces live under `shared`: the `shared` Postgres schema
 client, cron auth, APNs client, CORS/response helpers, supabase-js client).
 `OPENAI_API_KEY` without a prefix is the project-wide fallback key.
 
+**Offer seasons for every app** (`20261101120000_shared_offer_seasons.sql`):
+`shared.offer_seasons` (one row per app and season: month-day `starts`/`ends`,
+`duration_minutes`, `enabled`) and `shared.offer_rules` (per-app rest days,
+refund quiet days, win-back hours), read by the apps' onboarding-ios
+`SharedBackendOfferConfig` through `public.shared_offer_config(p_app)`. That
+RPC is granted to `anon` as well as `authenticated` — the one exception to
+the rule below: apps like Calyo have no session in this project, and season
+dates are public. Nothing private goes in these tables. Each row names one
+app; an edit reaches every installed copy of that app at its next launch.
+
 ## Architecture per app
 
 **Treddy** (`treddy` schema: accounts, posts, devices, job_runs, ai_usage):
