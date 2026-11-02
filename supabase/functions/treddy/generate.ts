@@ -166,12 +166,16 @@ function rewriteCompletion(body: Record<string, unknown>): Completion | null {
   };
 }
 
+// With a `draft` the user already wrote something (their own text, notes, or
+// an earlier AI version) and `instruction` says how to edit it; without one
+// the reply is written fresh. A reply can go out as several posts in a row;
+// `earlier_posts` are the user's posts before this one, which it continues.
 function replyCompletion(body: Record<string, unknown>): Completion | null {
   const theirText = str(body.their_text, 1000);
   if (!theirText) return null;
   const username = str(body.their_username, 100);
-  const note = str(body.note, 500);
-  const noteLine = note ? `\nDirection from me: ${note}` : "";
+  const draft = str(body.draft, 1000).trim();
+  const instruction = str(body.instruction, 500).trim();
   const conversation = Array.isArray(body.conversation)
     ? body.conversation
       .filter((message): message is { username: unknown; text: unknown } =>
@@ -184,11 +188,38 @@ function replyCompletion(body: Record<string, unknown>): Completion | null {
 The conversation so far, oldest first — the first message is my own post:
 ${conversation.join("\n")}
 `;
+  const earlierPosts = Array.isArray(body.earlier_posts)
+    ? body.earlier_posts.slice(0, 10).map((post) => str(post, 1000)).filter((post) => post)
+    : [];
+  const earlierSection = earlierPosts.length === 0 ? "" : `\n
+My response goes out as several posts in a row. This is post ` +
+    `${earlierPosts.length + 1}; the ones before it say, in order:
+${earlierPosts.map((post, index) => `${index + 1}. ${post}`).join("\n")}
+It continues from them: don't repeat what they say or greet again.
+`;
+  const theirLine = `Their message (@${username}): ${theirText}`;
+  if (draft) {
+    return {
+      user: `I'm answering a message in a Threads conversation and already have ` +
+        `a draft of my response. Edit my draft, following my instruction ` +
+        `exactly. Keep my voice and the language of my draft unless the ` +
+        `instruction says otherwise. Change only what the instruction asks ` +
+        `for. Keep it under 500 characters. Return only the edited response ` +
+        `text, nothing else.\n` +
+        `${conversationSection}\n${theirLine}\n${earlierSection}\n` +
+        `My draft: ${draft}\n\n` +
+        `My instruction: ${instruction || "Improve it, keeping what I meant."}`,
+      maxTokens: 4000,
+    };
+  }
+  const instructionLine = instruction ? `\nDirection from me: ${instruction}` : "";
+  const lengthRule = earlierPosts.length === 0
+    ? "Keep it under 280 characters, friendly, and conversational."
+    : "Keep it under 500 characters, in the same tone as the posts before it.";
   return {
     user: `Write my response to this message in a Threads conversation. ` +
-      `Keep it under 280 characters, friendly, and conversational. ` +
-      `Return only the response text, nothing else.\n${conversationSection}\n` +
-      `Their message (@${username}): ${theirText}${noteLine}`,
+      `${lengthRule} Return only the response text, nothing else.\n` +
+      `${conversationSection}\n${theirLine}${earlierSection}${instructionLine}`,
     maxTokens: 4000,
   };
 }
