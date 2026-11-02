@@ -58,17 +58,15 @@ export async function handleThreadsOAuth(req: Request): Promise<Response> {
     }
     const short = await shortRes.json();
 
-    // The app secret and the token travel in the body, never the URL:
-    // URLs end up in logs, and the secret works for every account.
-    const longRes = await fetch("https://graph.threads.net/access_token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        grant_type: "th_exchange_token",
-        client_secret: clientSecret,
-        access_token: String(short.access_token),
-      }),
-    });
+    // A GET, as Meta documents it. Threads takes a POST to this path as a
+    // different request that needs threads_basic, and refuses every account
+    // with "must be in the list of Threads testers". The secret stays out
+    // of our own logs: this URL is never logged.
+    const longURL = new URL("https://graph.threads.net/access_token");
+    longURL.searchParams.set("grant_type", "th_exchange_token");
+    longURL.searchParams.set("client_secret", clientSecret);
+    longURL.searchParams.set("access_token", String(short.access_token));
+    const longRes = await fetch(longURL);
     if (!longRes.ok) {
       console.error("long-lived exchange failed", await longRes.text());
       return backToApp({ error: "Threads rejected the sign-in.", state });
