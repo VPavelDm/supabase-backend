@@ -63,7 +63,7 @@ export async function handleLink(req: Request): Promise<Response> {
   // Tombstones included: a device that still holds a post deleted
   // elsewhere must drop it rather than revive it on its first sync.
   const posts = await sql`
-    select id, text, scheduled_at, status, error, edited_at
+    select id, text, follow_ups, part_media_ids, scheduled_at, status, error, edited_at
     from treddy.posts
     where threads_user_id = ${profile.id}
     order by scheduled_at`;

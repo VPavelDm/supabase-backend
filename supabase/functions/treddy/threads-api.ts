@@ -62,10 +62,17 @@ async function retryingWhileNotReady<T>(step: () => Promise<T>): Promise<T> {
 
 /// Two-step publish: create a TEXT container, then publish it.
 /// Returns the published media ID.
-export async function publishPost(token: string, text: string): Promise<string> {
+/// Publishes one text post; with `replyToID` it answers that post, which is
+/// how a chain's posts hang one under the other.
+export async function publishPost(
+  token: string,
+  text: string,
+  replyToID: string | null = null,
+): Promise<string> {
   const create = new URL(`${GRAPH}/me/threads`);
   create.searchParams.set("media_type", "TEXT");
   create.searchParams.set("text", text);
+  if (replyToID) create.searchParams.set("reply_to_id", replyToID);
   create.searchParams.set("access_token", token);
   // A container publishes nothing on its own, so this step may be retried
   // freely; an abandoned container expires on Meta's side.

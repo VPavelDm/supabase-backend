@@ -8,8 +8,9 @@ import { notifyDevices } from "./notify.ts";
 import { recordJobRun } from "./jobs.ts";
 
 /// A row stuck in `publishing` means a previous run died mid-flight. The
-/// post may or may not have reached Threads, and publishing is not
-/// idempotent — surface it as failed instead of retrying blindly.
+/// post being sent at that moment may or may not have reached Threads, and
+/// publishing is not idempotent — surface it as failed instead of retrying
+/// blindly. The chain's posts that were recorded as sent stay recorded.
 async function failInterruptedRuns(): Promise<void> {
   await sql`
     update treddy.posts
@@ -40,15 +41,29 @@ export async function handlePublishDue(req: Request): Promise<Response> {
           select id from treddy.posts
           where status = 'scheduled' and scheduled_at <= now()
           for update skip locked)
-      returning p.id, p.text, p.threads_user_id, a.access_token`;
+      returning p.id, p.text, p.follow_ups, p.part_media_ids, p.threads_user_id, a.access_token`;
 
     for (const post of due) {
       try {
-        const mediaID = await publishPost(post.access_token, post.text);
+        // A chain goes out post by post, each answering the one before.
+        // One that stopped partway goes on after its last sent post, and
+        // every post is recorded the moment it lands, so a failure further
+        // on can't get it posted twice.
+        const parts: string[] = [post.text, ...(post.follow_ups ?? [])];
+        const sent: string[] = [...(post.part_media_ids ?? [])];
+        for (const part of parts.slice(sent.length)) {
+          const mediaID = await publishPost(post.access_token, part, sent.at(-1) ?? null);
+          sent.push(mediaID);
+          await sql`
+            update treddy.posts
+            set part_media_ids = ${sql.json(sent)},
+                published_media_id = coalesce(published_media_id, ${sent[0]}),
+                updated_at = now()
+            where id = ${post.id}`;
+        }
         await sql`
           update treddy.posts
           set status = 'published',
-              published_media_id = ${mediaID},
               published_at = now(),
               error = null,
               updated_at = now()

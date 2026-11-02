@@ -151,17 +151,46 @@ function planCompletion(body: Record<string, unknown>): Completion {
   };
 }
 
-function rewriteCompletion(body: Record<string, unknown>): Completion | null {
-  const text = str(body.text, 1000);
-  if (!text) return null;
-  const note = str(body.note, 500);
-  const noteLine = note
-    ? `Direction from me: ${note}`
-    : "Make it stronger and more engaging.";
+// One planned post: with `text`, edits it as `note` says (or makes it
+// stronger without one); with no text, writes it, steered by `note`. In a
+// chain, `earlier_posts` are the posts before this one, which it continues.
+function rewriteCompletion(body: Record<string, unknown>): Completion {
+  const text = str(body.text, 1000).trim();
+  const note = str(body.note, 500).trim();
+  const earlierPosts = Array.isArray(body.earlier_posts)
+    ? body.earlier_posts.slice(0, 10).map((post) => str(post, 1000)).filter((post) => post)
+    : [];
+  const earlierSection = earlierPosts.length === 0 ? "" : `\n
+This post goes out as post ${earlierPosts.length + 1} of a chain, each one ` +
+    `answering the one before. The ones before it say, in order:
+${earlierPosts.map((post, index) => `${index + 1}. ${post}`).join("\n")}
+It continues from them: don't repeat what they say.
+`;
+  if (!text) {
+    const direction = note ? `\nDirection from me: ${note}` : "";
+    return {
+      user: `Write one Threads post for me, in my voice. Keep it under 500 ` +
+        `characters. Return only the post text, nothing else.\n` +
+        `${earlierSection}${direction}`,
+      maxTokens: 4000,
+    };
+  }
+  if (note) {
+    return {
+      user: `Edit this planned Threads post of mine, following my instruction ` +
+        `exactly. Keep my voice and the language of the post unless the ` +
+        `instruction says otherwise. Change only what the instruction asks ` +
+        `for. Keep it under 500 characters. Return only the post text, ` +
+        `nothing else.\n${earlierSection}\n` +
+        `My post: ${text}\n\nMy instruction: ${note}`,
+      maxTokens: 4000,
+    };
+  }
   return {
     user: `Rewrite this planned Threads post of mine. Keep my voice and the ` +
-      `core idea. ${noteLine}\nReturn only the post text, nothing else.\n\n` +
-      `Current draft: ${text}`,
+      `core idea. Make it stronger and more engaging. Keep it under 500 ` +
+      `characters. Return only the post text, nothing else.\n` +
+      `${earlierSection}\nCurrent draft: ${text}`,
     maxTokens: 4000,
   };
 }

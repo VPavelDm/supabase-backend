@@ -6,13 +6,18 @@
 // device that still holds a deleted post drops it instead of reviving it.
 //
 // Request (bearer = sync secret from /link):
-//   { posts: [{id, text, scheduled_at, status, edited_at}],
+//   { posts: [{id, text, follow_ups?, part_media_ids?, scheduled_at, status,
+//              edited_at}],
 //                       — every draft the device holds except unapproved
 //                         proposals; status: scheduled | published | deleted
 //     device_token?, environment?, locale? }
 // Response:
-//   { posts: [{id, text, scheduled_at, status, error, edited_at}],
-//                       — every row the server holds, tombstones included
+//   { posts: [{id, text, follow_ups, part_media_ids, scheduled_at, status,
+//              error, edited_at}],
+//                       — every row the server holds, tombstones included.
+//                         follow_ups go out after text, each answering the
+//                         one before; part_media_ids are the Threads IDs of
+//                         the chain's posts that already went out.
 //     settings }        — the stored setup, null when the account has none:
 //                         the device must send the user through the setup
 //                         questions again.
@@ -21,12 +26,15 @@ import { json, sql } from "./db.ts";
 import { accountForBearer, parseSettings } from "./settings.ts";
 
 const MAX_POSTS = 500;
-const MAX_TEXT_LENGTH = 500; // Threads' own limit.
+const MAX_TEXT_LENGTH = 500; // Threads' own limit, per post of a chain.
+const MAX_FOLLOW_UPS = 10;
 const DEVICE_STATUSES = new Set(["scheduled", "published", "deleted"]);
 
 interface IncomingPost {
   id: string;
   text: string;
+  follow_ups?: string[];
+  part_media_ids?: string[];
   scheduled_at: string;
   status: "scheduled" | "published" | "deleted";
   edited_at: string;
@@ -41,11 +49,20 @@ function isTimestamp(value: unknown): value is string {
   return typeof value === "string" && !Number.isNaN(Date.parse(value));
 }
 
+function isPostText(value: unknown): value is string {
+  return typeof value === "string" && value.length > 0 && value.length <= MAX_TEXT_LENGTH;
+}
+
 function validPost(post: unknown): post is IncomingPost {
   const p = post as IncomingPost;
+  const followUps = p?.follow_ups ?? [];
+  const partMediaIDs = p?.part_media_ids ?? [];
   return isUUID(p?.id) &&
-    typeof p.text === "string" && p.text.length > 0 &&
-    p.text.length <= MAX_TEXT_LENGTH &&
+    isPostText(p.text) &&
+    Array.isArray(followUps) && followUps.length <= MAX_FOLLOW_UPS &&
+    followUps.every(isPostText) &&
+    Array.isArray(partMediaIDs) && partMediaIDs.length <= MAX_FOLLOW_UPS + 1 &&
+    partMediaIDs.every((id) => typeof id === "string" && id.length > 0) &&
     isTimestamp(p.scheduled_at) &&
     DEVICE_STATUSES.has(p.status) &&
     isTimestamp(p.edited_at);
@@ -85,17 +102,30 @@ export async function handleSync(req: Request): Promise<Response> {
       // A row the publisher has claimed or finished is its own: a device
       // may only mark it published (it posted by hand) or deleted; never
       // back to scheduled. Tombstones never come back to life. Between
-      // devices, the newer edit wins — a stale copy changes nothing.
+      // devices, the newer edit wins — a stale copy changes nothing. What
+      // went out of a chain only ever grows: the longer record wins, so
+      // neither the device nor the autoposter posts a part again.
       const publishedAt = post.status === "published" ? new Date() : null;
+      const followUps = post.follow_ups ?? [];
+      const partMediaIDs = post.part_media_ids ?? [];
       await tx`
         insert into treddy.posts
-          (id, threads_user_id, text, scheduled_at, status, edited_at, published_at)
+          (id, threads_user_id, text, follow_ups, part_media_ids, published_media_id,
+           scheduled_at, status, edited_at, published_at)
         values (
-          ${post.id}, ${userID}, ${post.text}, ${post.scheduled_at},
+          ${post.id}, ${userID}, ${post.text}, ${sql.json(followUps)}, ${sql.json(partMediaIDs)},
+          ${partMediaIDs[0] ?? null}, ${post.scheduled_at},
           ${post.status}, ${post.edited_at}, ${publishedAt}
         )
         on conflict (id) do update set
           text = excluded.text,
+          follow_ups = excluded.follow_ups,
+          part_media_ids = case
+            when jsonb_array_length(excluded.part_media_ids) > jsonb_array_length(treddy.posts.part_media_ids)
+            then excluded.part_media_ids
+            else treddy.posts.part_media_ids
+          end,
+          published_media_id = coalesce(treddy.posts.published_media_id, excluded.published_media_id),
           scheduled_at = excluded.scheduled_at,
           status = excluded.status,
           error = null,
@@ -110,7 +140,7 @@ export async function handleSync(req: Request): Promise<Response> {
     }
 
     return await tx`
-      select id, text, scheduled_at, status, error, edited_at
+      select id, text, follow_ups, part_media_ids, scheduled_at, status, error, edited_at
       from treddy.posts
       where threads_user_id = ${userID}
       order by scheduled_at`;
