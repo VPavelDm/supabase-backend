@@ -46,7 +46,10 @@ export const GOALS = new Set([
   "promoteProduct", "landClients", "stayConsistent", "community",
 ]);
 export const TONES = new Set(["warm", "witty", "bold", "casual", "educational", "inspiring"]);
-export const FORMATS = new Set(["tips", "questions", "hotTakes", "stories", "challenges", "behindTheScenes"]);
+export const FORMATS = new Set([
+  "tips", "questions", "hotTakes", "stories", "challenges", "behindTheScenes",
+  "howTo", "lists", "myths", "mistakes", "results", "series",
+]);
 export const MARKETS = new Set(["global", "us", "uk", "europe"]);
 
 const MAX_TEMPLATES = 10;

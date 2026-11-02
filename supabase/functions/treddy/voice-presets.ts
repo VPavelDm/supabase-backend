@@ -16,99 +16,128 @@ interface Preset {
   text: Record<string, { name: string; description: string; notes: string }>;
 }
 
+// The writing rules from the "Basic minimum for Threads" guide every voice
+// below carries in its notes, so they stay visible and editable in the copy
+// the user makes.
+const RULES = {
+  en: "Start with the point: no greeting, no intro. Open with intrigue, a benefit " +
+    "or a problem. One idea per post. Be concrete: numbers, details and my own " +
+    "examples instead of general advice. Show actions, not descriptions. Mix " +
+    "short and long sentences. Simple words. End with something the reader takes away.",
+  ru: "Сразу к сути: без приветствий и вступлений. Начинай с интриги, выгоды или " +
+    "проблемы. Одна мысль на пост. Конкретика: цифры, детали и примеры из моего " +
+    "опыта вместо общих советов. Показывай действия, а не описания. Чередуй " +
+    "короткие и длинные предложения. Простые слова. В конце дай читателю вывод.",
+};
+
 const PRESETS: Preset[] = [
   {
-    id: "teacher",
-    tones: ["warm", "educational"],
-    formats: ["tips", "questions"],
+    id: "mix",
+    tones: ["educational", "bold"],
+    formats: ["howTo", "lists", "myths", "mistakes", "results"],
     text: {
       en: {
-        name: "Teacher",
-        description: "Explains one idea at a time, simply, with an example.",
-        notes: "One idea per post, with a concrete example. Simple words, no jargon. " +
-          "Now and then, end with a question so people answer.",
+        name: "Mix",
+        description: "Mostly useful posts, some myth busting, now and then a sale.",
+        notes: "About 3 in 4 posts give practical value, 1 in 4 busts a myth or names a " +
+          "common mistake, and at most one a week shows my results or what I sell. " +
+          "What I sell: (write it here). Use only results and numbers I wrote here, " +
+          "never invent them. Now and then bring back an idea from my best posts with " +
+          "a new opening.\n\n" + RULES.en,
       },
       ru: {
-        name: "Учитель",
-        description: "Объясняет по одной идее, просто и с примером.",
-        notes: "Одна идея на пост и конкретный пример. Простые слова, без жаргона. " +
-          "Иногда заканчивай вопросом, чтобы люди отвечали.",
+        name: "Микс",
+        description: "В основном польза, иногда разбор мифов и изредка продажа.",
+        notes: "Примерно 3 из 4 постов дают практическую пользу, 1 из 4 разбирает миф или " +
+          "частую ошибку, и не больше одного в неделю показывает мои результаты или то, " +
+          "что я продаю. Что я продаю: (впиши сюда). Используй только результаты и " +
+          "цифры, которые я здесь написал, никогда их не выдумывай. Иногда возвращай " +
+          "идею из моих лучших постов с новым началом.\n\n" + RULES.ru,
       },
     },
   },
   {
-    id: "hot-takes",
-    tones: ["bold", "witty"],
-    formats: ["hotTakes"],
+    id: "useful",
+    tones: ["educational"],
+    formats: ["howTo", "lists", "tips"],
     text: {
       en: {
-        name: "Hot takes",
-        description: "Strong opinions that start a discussion.",
-        notes: "Open with a clear opinion in the first line, then give one reason for it. " +
-          "Disagree with ideas, never with people.",
+        name: "Useful",
+        description: "How-tos, lists and tips that help right away.",
+        notes: "Give practical value the reader can use today: a how-to, a list or a " +
+          "tip that solves one problem.\n\n" + RULES.en,
       },
       ru: {
-        name: "Смелые мнения",
-        description: "Сильные мнения, которые запускают обсуждение.",
-        notes: "Начинай с чёткого мнения в первой строке, затем дай одну причину. " +
-          "Спорь с идеями, а не с людьми.",
+        name: "Польза",
+        description: "Инструкции, списки и советы, которые помогают сразу.",
+        notes: "Давай практическую пользу, которую читатель применит сегодня: " +
+          "инструкцию, список или совет, решающий одну проблему.\n\n" + RULES.ru,
       },
     },
   },
   {
-    id: "storyteller",
-    tones: ["warm", "casual"],
-    formats: ["stories"],
+    id: "myth-buster",
+    tones: ["bold"],
+    formats: ["myths", "mistakes"],
     text: {
       en: {
-        name: "Storyteller",
-        description: "Short moments from your own life, and what they taught you.",
-        notes: "Tell one small moment from your own life: what happened, how it felt, " +
-          "what you took from it. Start in the middle of it.",
+        name: "Myth buster",
+        description: "Busts myths and common mistakes, and shows what works instead.",
+        notes: "Name a myth or a mistake people in my topic believe, explain the real " +
+          "cause and what to do instead. Lead the reader to the conclusion, don't " +
+          "lecture.\n\n" + RULES.en,
       },
       ru: {
-        name: "Рассказчик",
-        description: "Короткие истории из жизни и что они дали.",
-        notes: "Расскажи один небольшой момент из своей жизни: что случилось, что ты " +
-          "почувствовал, что из этого вынес. Начинай с середины событий.",
+        name: "Разрушитель мифов",
+        description: "Разбирает мифы и частые ошибки и показывает, что работает.",
+        notes: "Назови миф или ошибку, в которые верят люди в моей теме, объясни " +
+          "настоящую причину и что делать вместо этого. Подводи читателя к выводу, " +
+          "а не поучай.\n\n" + RULES.ru,
       },
     },
   },
   {
-    id: "build-in-public",
+    id: "sell",
+    tones: ["warm"],
+    formats: ["results", "behindTheScenes"],
+    text: {
+      en: {
+        name: "Sell",
+        description: "Shows why to choose you: results, cases and how you work.",
+        notes: "What I sell: (write it here). Show why to pick me: real results and " +
+          "cases, how my approach differs, my firm opinions, my own before and after. " +
+          "Use only results and numbers I wrote here, never invent them. No hard " +
+          "sell and no promises of quick money.\n\n" + RULES.en,
+      },
+      ru: {
+        name: "Продажи",
+        description: "Показывает, почему выбрать тебя: результаты, кейсы, подход.",
+        notes: "Что я продаю: (впиши сюда). Покажи, почему выбрать меня: реальные " +
+          "результаты и кейсы, чем отличается мой подход, мои твёрдые позиции, мои " +
+          "«до и после». Используй только результаты и цифры, которые я здесь " +
+          "написал, никогда их не выдумывай. Без давления и обещаний быстрых " +
+          "денег.\n\n" + RULES.ru,
+      },
+    },
+  },
+  {
+    id: "series",
     tones: ["casual"],
-    formats: ["behindTheScenes"],
+    formats: ["series"],
     text: {
       en: {
-        name: "Build in public",
-        description: "Progress, numbers and mistakes from what you're building.",
-        notes: "Share real progress from what you're building: numbers, decisions, " +
-          "mistakes. Be honest about what isn't working yet.",
+        name: "Series",
+        description: "One theme, numbered: Day 1, Day 2…",
+        notes: "Series: (write its name here, like \"What I eat every day\"). Each post " +
+          "opens with the series name and its number. Start from 1 unless I write " +
+          "another number here.\n\n" + RULES.en,
       },
       ru: {
-        name: "Строю публично",
-        description: "Прогресс, цифры и ошибки того, что ты создаёшь.",
-        notes: "Делись реальным прогрессом того, что строишь: цифры, решения, ошибки. " +
-          "Честно говори о том, что пока не работает.",
-      },
-    },
-  },
-  {
-    id: "coach",
-    tones: ["inspiring"],
-    formats: ["challenges"],
-    text: {
-      en: {
-        name: "Coach",
-        description: "One small action people can take today.",
-        notes: "Give one small action the reader can take today, and talk to them " +
-          "directly. Encouraging, never preachy.",
-      },
-      ru: {
-        name: "Коуч",
-        description: "Одно маленькое действие, которое можно сделать сегодня.",
-        notes: "Дай одно маленькое действие, которое читатель может сделать сегодня, и " +
-          "обращайся к нему напрямую. Поддерживай, но без нравоучений.",
+        name: "Серия",
+        description: "Одна тема с номерами: день 1, день 2…",
+        notes: "Серия: (впиши название, например «Что я ем каждый день»). Каждый пост " +
+          "начинается с названия серии и номера. Начинай с 1, если я не написал здесь " +
+          "другой номер.\n\n" + RULES.ru,
       },
     },
   },

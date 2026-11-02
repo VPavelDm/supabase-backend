@@ -50,6 +50,14 @@ const FORMAT_TEXT: Record<string, string> = {
   stories: "relatable personal stories",
   challenges: "mini challenges",
   behindTheScenes: "behind-the-scenes moments",
+  howTo: "step-by-step how-tos that get the reader to one result",
+  lists: "short lists and checklists",
+  myths: "myths people in the topic believe, busted",
+  mistakes: "common mistakes and what to do instead",
+  results: "real results and cases, with the numbers the user gave",
+  series: "a numbered series on one theme, each post opening with its number " +
+    "(\"Day 1.\", \"Day 2.\") and counting up in order, from 1 unless the " +
+    "user's instructions say where to start",
 };
 
 /// "a", "a and b", "a, b and c".
