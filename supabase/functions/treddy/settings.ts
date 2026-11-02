@@ -21,6 +21,8 @@ export interface VoiceTemplate {
   tones: string[];
   formats: string[];
   language: string;
+  /// Where the readers are — units, currency, spelling: global | us | uk | europe.
+  market: string;
   /// Anything the questions don't cover, in the user's own words.
   notes: string;
   /// The user's own posts — voice references every generation imitates.
@@ -45,12 +47,15 @@ export const GOALS = new Set([
 ]);
 export const TONES = new Set(["warm", "witty", "bold", "casual", "educational", "inspiring"]);
 export const FORMATS = new Set(["tips", "questions", "hotTakes", "stories", "challenges", "behindTheScenes"]);
+export const MARKETS = new Set(["global", "us", "uk", "europe"]);
 
 const MAX_TEMPLATES = 10;
 const MAX_NAME = 60;
 const MAX_SHORT = 300;
 const MAX_NOTES = 2000;
+/// Writing-sample posts in all, every post of a thread counted.
 const MAX_SAMPLES = 10;
+/// Per post.
 const MAX_SAMPLE_LENGTH = 1000;
 const MAX_REFERENCES = 10;
 const MAX_REFERENCE_LENGTH = 1500;
@@ -69,6 +74,28 @@ function texts(value: unknown, max: number, maxLength: number): string[] {
       .slice(0, max)
       .map((item) => item.trim().slice(0, maxLength))
     : [];
+}
+
+/// Between the posts of a thread the app keeps as one writing sample.
+export const THREAD_SEPARATOR = "\n\n↳ ";
+
+/// Writing samples, each one post or a thread of them. A thread that runs
+/// past MAX_SAMPLES keeps its first posts, so a voice costs the same in the
+/// prompt whatever shape its samples take.
+function samples(value: unknown): string[] {
+  const result: string[] = [];
+  let room = MAX_SAMPLES;
+  for (const sample of texts(value, MAX_SAMPLES, Infinity)) {
+    if (room <= 0) break;
+    const posts = sample.split(THREAD_SEPARATOR)
+      .map((post) => post.trim().slice(0, MAX_SAMPLE_LENGTH))
+      .filter((post) => post)
+      .slice(0, room);
+    if (posts.length === 0) continue;
+    result.push(posts.join(THREAD_SEPARATOR));
+    room -= posts.length;
+  }
+  return result;
 }
 
 function choices(value: unknown, allowed: Set<string>): string[] {
@@ -97,8 +124,9 @@ function parseTemplate(raw: unknown): VoiceTemplate | null {
     tones: choices(object.tones, TONES),
     formats: choices(object.formats, FORMATS),
     language: text(object.language, 40) || "English",
+    market: MARKETS.has(object.market as string) ? object.market as string : "global",
     notes,
-    writing_samples: texts(object.writing_samples, MAX_SAMPLES, MAX_SAMPLE_LENGTH),
+    writing_samples: samples(object.writing_samples),
     references: texts(object.references, MAX_REFERENCES, MAX_REFERENCE_LENGTH),
   };
 }

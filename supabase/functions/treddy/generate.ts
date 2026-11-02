@@ -14,6 +14,7 @@ import {
   type GenerationSettings,
   parseSettings,
   templateFor,
+  THREAD_SEPARATOR,
   type VoiceTemplate,
 } from "./settings.ts";
 
@@ -34,15 +35,13 @@ gloss.`;
 
 // Prompt fragments for the structured answers. English regardless of the
 // user's UI language: the model follows the brief; the user never reads it.
-const GOAL_TEXT: Record<string, string> = {
-  growAudience: "grow an engaged following",
-  authority: "become a recognized voice in the niche",
-  promoteProduct: "build trust that leads people to their product",
-  landClients: "attract clients and work opportunities",
-  buildInPublic: "share the journey openly and build in public",
-  community: "spark conversations and build community",
-  stayConsistent: "post consistently and develop their voice",
-  forFun: "have fun sharing what they love",
+const MARKET_TEXT: Record<string, string> = {
+  us: "The readers are in the United States: use pounds, feet and inches, " +
+    "Fahrenheit, dollars, US spelling and month-day dates.",
+  uk: "The readers are in the United Kingdom: use British spelling, pounds " +
+    "sterling and day-month dates; metric units, with stone for body weight.",
+  europe: "The readers are in Europe: use kilograms, centimetres, Celsius, " +
+    "euros and day-month dates.",
 };
 const FORMAT_TEXT: Record<string, string> = {
   tips: "quick practical tips",
@@ -63,26 +62,36 @@ function numbered(items: string[]): string {
   return items.map((item, index) => `${index + 1}. ${item}`).join("\n");
 }
 
-/// The standing brief, composed from one voice template. Optional answers
-/// drop their sentence, so the text always reads complete.
+/// The standing brief, composed from one voice template. An answer left
+/// empty is left out, never filled with a default, so it can't contradict
+/// what the user wrote in their notes ("always end with a question" next to
+/// a tone they never picked). Audience, goals and reference posts are still
+/// stored for older app builds but no longer shape the posts: the user's
+/// own posts say more than all three.
 function brief(template: VoiceTemplate): string {
   const sentences: string[] = [];
   sentences.push(
-    `You write Threads posts for a creator building an audience around ${template.topic || "their niche"}.`,
+    template.topic
+      ? `You write Threads posts for a creator building an audience around ${template.topic}.`
+      : "You write Threads posts for a creator building an audience.",
   );
-  if (template.audience) sentences.push(`The audience: ${template.audience}.`);
-  const goals = template.goals.map((goal) => GOAL_TEXT[goal]).filter(Boolean);
-  if (goals.length > 0) {
-    sentences.push(`${goals.length > 1 ? "The goals" : "The goal"}: ${naturalJoin(goals)}.`);
-  }
-  const voice = template.tones.length > 0 ? naturalJoin(template.tones) : "warm, encouraging";
-  sentences.push(
-    `Voice: ${voice}, concise. Posts are short (under 400 characters), practical, and invite replies.`,
-  );
+  sentences.push("Keep each post under 400 characters.");
+  if (template.tones.length > 0) sentences.push(`Tone: ${naturalJoin(template.tones)}.`);
   const formats = template.formats.map((format) => FORMAT_TEXT[format]).filter(Boolean);
   if (formats.length > 0) sentences.push(`Mix formats: ${naturalJoin(formats)}.`);
-  sentences.push(`Write in ${template.language || "English"}.`);
+  if (template.language) sentences.push(`Write in ${template.language}.`);
+  const market = MARKET_TEXT[template.market];
+  if (market) sentences.push(market);
   return sentences.join(" ");
+}
+
+/// A writing sample as the model reads it: a single post as is, a thread
+/// spelled out post by post so it isn't taken for one long post.
+function sampleText(sample: string): string {
+  const posts = sample.split(THREAD_SEPARATOR);
+  if (posts.length === 1) return sample;
+  return `A thread of ${posts.length} posts, each replying to the one before:\n` +
+    posts.map((post, index) => `   Post ${index + 1}: ${post}`).join("\n");
 }
 
 function systemPrompt(template: VoiceTemplate): string {
@@ -93,15 +102,7 @@ function systemPrompt(template: VoiceTemplate): string {
   parts.push(HARD_STYLE_RULES);
   if (template.writing_samples.length > 0) {
     parts.push(
-      `Posts written by the user — match their voice, rhythm, and formatting:\n${numbered(template.writing_samples)}`,
-    );
-  }
-  if (template.references.length > 0) {
-    parts.push(
-      `Posts by other people the user admires — study what makes them work (the hook, ` +
-        `the structure, the rhythm, the specificity) and bring that quality to the user's ` +
-        `own posts. Never copy, paraphrase, or reuse their wording or their topics:\n` +
-        numbered(template.references),
+      `Posts written by the user — match their voice, rhythm, and formatting:\n${numbered(template.writing_samples.map(sampleText))}`,
     );
   }
   return parts.join("\n\n");
@@ -124,7 +125,7 @@ function planCompletion(body: Record<string, unknown>): Completion {
   const lastWeek = str(body.last_week, 8000) || "(no posts last week)";
   return {
     user: `Plan the next week of Threads posts: exactly ${count} posts, ` +
-      `one per slot, varied in format, no numbering, no hashtags unless natural. ` +
+      `one per slot, no numbering, no hashtags unless natural. ` +
       `Use last week's performance to lean into what worked.\n${hintLine}\n` +
       `Last week's posts and stats:\n${lastWeek}\n\n` +
       `Return JSON: {"posts": [{"text": "..."}]}`,
