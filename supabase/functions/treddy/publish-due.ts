@@ -1,6 +1,8 @@
 // The autoposter. pg_cron calls this every 5 minutes (job `treddy-publish-due`);
 // it claims due posts, publishes them to Threads, and notifies the account's
-// devices about the outcome. Every run leaves a row in treddy.job_runs.
+// devices about the outcome. Posts the user posts themselves (`manual`) are
+// never published here: at their time the devices get a "time to post" push
+// instead, once. Every run leaves a row in treddy.job_runs.
 
 import { isCronCall, json, sql } from "./db.ts";
 import { publishPost, ThreadsAPIError } from "./threads-api.ts";
@@ -26,8 +28,24 @@ export async function handlePublishDue(req: Request): Promise<Response> {
 
   let published = 0;
   let failed = 0;
+  let reminded = 0;
   try {
     await failInterruptedRuns();
+
+    // Marked before the push goes out, so an overlapping run can't remind
+    // twice; a push that fails to send isn't retried.
+    const reminders = await sql`
+      update treddy.posts
+      set reminded_at = now()
+      where id in (
+        select id from treddy.posts
+        where status = 'scheduled' and manual and reminded_at is null and scheduled_at <= now()
+        for update skip locked)
+      returning id, text, threads_user_id`;
+    for (const post of reminders) {
+      await notifyDevices(post.threads_user_id, "reminder", post.text, { draftID: post.id });
+      reminded += 1;
+    }
 
     // Claiming flips the rows to `publishing` in one statement, so an
     // overlapping run (or a concurrent app sync) can't grab the same post.
@@ -39,7 +57,7 @@ export async function handlePublishDue(req: Request): Promise<Response> {
         and not a.needs_reauth
         and p.id in (
           select id from treddy.posts
-          where status = 'scheduled' and scheduled_at <= now()
+          where status = 'scheduled' and not manual and scheduled_at <= now()
           for update skip locked)
       returning p.id, p.text, p.follow_ups, p.part_media_ids, p.threads_user_id, a.access_token`;
 
@@ -107,5 +125,5 @@ export async function handlePublishDue(req: Request): Promise<Response> {
   if (published > 0 || failed > 0) {
     await recordJobRun("publish-due", startedAt, published, failed);
   }
-  return json({ published, failed });
+  return json({ published, failed, reminded });
 }

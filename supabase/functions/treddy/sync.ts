@@ -7,17 +7,18 @@
 //
 // Request (bearer = sync secret from /link):
 //   { posts: [{id, text, follow_ups?, part_media_ids?, scheduled_at, status,
-//              edited_at}],
+//              manual?, edited_at}],
 //                       — every draft the device holds except unapproved
 //                         proposals; status: scheduled | published | deleted
 //     device_token?, environment?, locale? }
 // Response:
 //   { posts: [{id, text, follow_ups, part_media_ids, scheduled_at, status,
-//              error, edited_at}],
+//              manual, error, edited_at}],
 //                       — every row the server holds, tombstones included.
 //                         follow_ups go out after text, each answering the
 //                         one before; part_media_ids are the Threads IDs of
-//                         the chain's posts that already went out.
+//                         the chain's posts that already went out; a
+//                         manual post is one the user posts themselves.
 //     settings }        — the stored setup, null when the account has none:
 //                         the device must send the user through the setup
 //                         questions again.
@@ -37,6 +38,8 @@ interface IncomingPost {
   part_media_ids?: string[];
   scheduled_at: string;
   status: "scheduled" | "published" | "deleted";
+  /// The user posts it themselves. Absent from app builds that predate it.
+  manual?: boolean;
   edited_at: string;
 }
 
@@ -65,6 +68,7 @@ function validPost(post: unknown): post is IncomingPost {
     partMediaIDs.every((id) => typeof id === "string" && id.length > 0) &&
     isTimestamp(p.scheduled_at) &&
     DEVICE_STATUSES.has(p.status) &&
+    (p.manual === undefined || typeof p.manual === "boolean") &&
     isTimestamp(p.edited_at);
 }
 
@@ -104,18 +108,21 @@ export async function handleSync(req: Request): Promise<Response> {
       // back to scheduled. Tombstones never come back to life. Between
       // devices, the newer edit wins — a stale copy changes nothing. What
       // went out of a chain only ever grows: the longer record wins, so
-      // neither the device nor the autoposter posts a part again.
+      // neither the device nor the autoposter posts a part again. A build
+      // that doesn't send `manual` leaves it as it is, so it can never
+      // hand a post the user meant to post themselves to the autoposter.
+      // Moving a post clears its reminder, so the new time gets one.
       const publishedAt = post.status === "published" ? new Date() : null;
       const followUps = post.follow_ups ?? [];
       const partMediaIDs = post.part_media_ids ?? [];
       await tx`
         insert into treddy.posts
           (id, threads_user_id, text, follow_ups, part_media_ids, published_media_id,
-           scheduled_at, status, edited_at, published_at)
+           scheduled_at, status, manual, edited_at, published_at)
         values (
           ${post.id}, ${userID}, ${post.text}, ${sql.json(followUps)}, ${sql.json(partMediaIDs)},
           ${partMediaIDs[0] ?? null}, ${post.scheduled_at},
-          ${post.status}, ${post.edited_at}, ${publishedAt}
+          ${post.status}, ${post.manual ?? false}, ${post.edited_at}, ${publishedAt}
         )
         on conflict (id) do update set
           text = excluded.text,
@@ -127,7 +134,12 @@ export async function handleSync(req: Request): Promise<Response> {
           end,
           published_media_id = coalesce(treddy.posts.published_media_id, excluded.published_media_id),
           scheduled_at = excluded.scheduled_at,
+          reminded_at = case
+            when excluded.scheduled_at is distinct from treddy.posts.scheduled_at then null
+            else treddy.posts.reminded_at
+          end,
           status = excluded.status,
+          manual = coalesce(${post.manual ?? null}::boolean, treddy.posts.manual),
           error = null,
           edited_at = excluded.edited_at,
           published_at = coalesce(treddy.posts.published_at, excluded.published_at),
@@ -140,7 +152,7 @@ export async function handleSync(req: Request): Promise<Response> {
     }
 
     return await tx`
-      select id, text, follow_ups, part_media_ids, scheduled_at, status, error, edited_at
+      select id, text, follow_ups, part_media_ids, scheduled_at, status, manual, error, edited_at
       from treddy.posts
       where threads_user_id = ${userID}
       order by scheduled_at`;
