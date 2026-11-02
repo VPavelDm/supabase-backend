@@ -15,7 +15,8 @@
 // link (which also hands back what the server knows about a returning
 // account), mirrors its drafts via sync, pushes its settings via settings,
 // removes everything via account, and pg_cron drives
-// publish-due/refresh-tokens.
+// publish-due/refresh-tokens. voice-presets serves the ready-made voices the
+// app offers for a new voice.
 
 import { router } from "../_shared/router.ts";
 import { handleThreadsOAuth } from "./threads-oauth.ts";
@@ -24,6 +25,7 @@ import { handleSync } from "./sync.ts";
 import { handleSettings } from "./settings.ts";
 import { handleDeleteAccount } from "./account.ts";
 import { handleGenerate } from "./generate.ts";
+import { handleVoicePresets } from "./voice-presets.ts";
 import { handlePublishDue } from "./publish-due.ts";
 import { handleRefreshTokens } from "./refresh-tokens.ts";
 
@@ -34,6 +36,7 @@ Deno.serve(router("treddy", {
   "settings": { POST: handleSettings },
   "account": { DELETE: handleDeleteAccount },
   "generate": { POST: handleGenerate },
+  "voice-presets": { GET: handleVoicePresets },
   "publish-due": { POST: handlePublishDue },
   "refresh-tokens": { POST: handleRefreshTokens },
 }));
