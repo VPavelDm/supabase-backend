@@ -3,6 +3,11 @@
 
 const GRAPH = "https://graph.threads.net/v1.0";
 
+/// The token goes in a header, never the URL: URLs end up in logs.
+function authorized(token: string, method = "GET"): RequestInit {
+  return { method, headers: { Authorization: `Bearer ${token}` } };
+}
+
 /// Threads wraps failures as {error: {message, code}}; code 190 means the
 /// token is dead and the account needs a fresh sign-in.
 export class ThreadsAPIError extends Error {
@@ -29,8 +34,7 @@ export async function fetchProfile(
 ): Promise<{ id: string; username: string }> {
   const url = new URL(`${GRAPH}/me`);
   url.searchParams.set("fields", "id,username");
-  url.searchParams.set("access_token", token);
-  const body = await parseOrThrow(await fetch(url));
+  const body = await parseOrThrow(await fetch(url, authorized(token)));
   return { id: String(body.id), username: String(body.username ?? "") };
 }
 
@@ -73,21 +77,19 @@ export async function publishPost(
   create.searchParams.set("media_type", "TEXT");
   create.searchParams.set("text", text);
   if (replyToID) create.searchParams.set("reply_to_id", replyToID);
-  create.searchParams.set("access_token", token);
   // A container publishes nothing on its own, so this step may be retried
   // freely; an abandoned container expires on Meta's side.
   const container = await retryingWhileNotReady(async () =>
-    await parseOrThrow(await fetch(create, { method: "POST" }))
+    await parseOrThrow(await fetch(create, authorized(token, "POST")))
   );
 
   const publish = new URL(`${GRAPH}/me/threads_publish`);
   publish.searchParams.set("creation_id", String(container.id));
-  publish.searchParams.set("access_token", token);
 
   // Retrying the publish step is safe: it targets the container we already
   // created, so it can never produce a second post.
   const published = await retryingWhileNotReady(async () =>
-    await parseOrThrow(await fetch(publish, { method: "POST" }))
+    await parseOrThrow(await fetch(publish, authorized(token, "POST")))
   );
   return String(published.id);
 }
@@ -97,8 +99,7 @@ export async function refreshToken(
 ): Promise<{ accessToken: string; expiresInSeconds: number }> {
   const url = new URL(`${GRAPH}/refresh_access_token`);
   url.searchParams.set("grant_type", "th_refresh_token");
-  url.searchParams.set("access_token", token);
-  const body = await parseOrThrow(await fetch(url));
+  const body = await parseOrThrow(await fetch(url, authorized(token)));
   return {
     accessToken: String(body.access_token),
     expiresInSeconds: Number(body.expires_in ?? 60 * 60 * 24 * 60),

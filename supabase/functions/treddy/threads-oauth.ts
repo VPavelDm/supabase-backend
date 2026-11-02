@@ -58,11 +58,17 @@ export async function handleThreadsOAuth(req: Request): Promise<Response> {
     }
     const short = await shortRes.json();
 
-    const longURL = new URL("https://graph.threads.net/access_token");
-    longURL.searchParams.set("grant_type", "th_exchange_token");
-    longURL.searchParams.set("client_secret", clientSecret);
-    longURL.searchParams.set("access_token", short.access_token);
-    const longRes = await fetch(longURL);
+    // The app secret and the token travel in the body, never the URL:
+    // URLs end up in logs, and the secret works for every account.
+    const longRes = await fetch("https://graph.threads.net/access_token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        grant_type: "th_exchange_token",
+        client_secret: clientSecret,
+        access_token: String(short.access_token),
+      }),
+    });
     if (!longRes.ok) {
       console.error("long-lived exchange failed", await longRes.text());
       return backToApp({ error: "Threads rejected the sign-in.", state });
