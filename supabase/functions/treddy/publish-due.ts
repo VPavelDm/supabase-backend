@@ -42,9 +42,18 @@ export async function handlePublishDue(req: Request): Promise<Response> {
         where status = 'scheduled' and manual and reminded_at is null and scheduled_at <= now()
         for update skip locked)
       returning id, text, threads_user_id`;
+    // A reminder is the only signal a manual post gets, so one that reached
+    // no device is recorded as a failure in job_runs.
+    let unreached = 0;
     for (const post of reminders) {
-      await notifyDevices(post.threads_user_id, "reminder", post.text, { draftID: post.id });
-      reminded += 1;
+      const delivered = await notifyDevices(post.threads_user_id, "reminder", post.text, {
+        draftID: post.id,
+      });
+      if (delivered > 0) reminded += 1;
+      else unreached += 1;
+    }
+    if (reminders.length > 0) {
+      await recordJobRun("remind-due", startedAt, reminded, unreached);
     }
 
     // Claiming flips the rows to `publishing` in one statement, so an

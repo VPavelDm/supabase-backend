@@ -40,10 +40,11 @@ export async function notifyDevices(
   kind: "posted" | "failed" | "reconnect" | "reminder",
   body: string | null,
   extra: Record<string, string> = {},
-): Promise<void> {
+): Promise<number> {
   const devices = await sql`
     select device_token, environment, locale
     from treddy.devices where threads_user_id = ${threadsUserID}`;
+  let delivered = 0;
   for (const device of devices) {
     const alert = localized(device.locale, kind);
     const result = await apns.push(
@@ -51,10 +52,13 @@ export async function notifyDevices(
       { title: alert.title, body: (body ?? alert.body ?? "").slice(0, 150) },
       extra,
     );
+    if (result === "ok") delivered += 1;
+    // A dead token is dead for every account the phone held.
     if (result === "gone") {
       await sql`
         delete from treddy.devices
         where device_token = ${device.device_token}`;
     }
   }
+  return delivered;
 }

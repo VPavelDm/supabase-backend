@@ -72,7 +72,9 @@ function validPost(post: unknown): post is IncomingPost {
     isTimestamp(p.edited_at);
 }
 
-/// Shared with /link: remembers where to send the posted/failed pushes.
+/// Shared with /link and /device: remembers where to send the account's
+/// pushes. A phone holding several accounts has a row for each — the token
+/// is never moved off the account that registered it before.
 export async function upsertDevice(
   threadsUserID: string,
   body: Record<string, unknown> | null,
@@ -84,8 +86,7 @@ export async function upsertDevice(
   await sql`
     insert into treddy.devices (device_token, threads_user_id, environment, locale)
     values (${token}, ${threadsUserID}, ${environment}, ${locale})
-    on conflict (device_token) do update set
-      threads_user_id = excluded.threads_user_id,
+    on conflict (device_token, threads_user_id) do update set
       environment = excluded.environment,
       locale = excluded.locale,
       updated_at = now()`;
