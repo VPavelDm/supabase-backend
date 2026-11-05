@@ -362,7 +362,8 @@ function chatCompletion(body: Record<string, unknown>): Completion | null {
   const intentLine = intent === "answer"
     ? "Answer only: leave \"reply\" empty."
     : intent === "write_reply"
-    ? "Write a new reply version from scratch."
+    ? "Write a new reply version, not an edit of an earlier draft. If my message above " +
+      "gives points, ideas or rough words for the reply, build it from them."
     : intent === "edit_reply"
     ? "Change the targeted reply draft as I ask and return the whole new version. " +
       "Keep everything I didn't ask you to change, including words I edited myself."
