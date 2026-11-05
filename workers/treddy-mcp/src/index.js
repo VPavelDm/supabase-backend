@@ -53,6 +53,20 @@ function authorizationServer(origin) {
   };
 }
 
+/// The function issues access tokens as `tmcp_` + 43 base64url characters.
+function hasAccessToken(request) {
+  const token = request.headers.get("authorization")?.match(/^Bearer\s+(\S+)$/i)?.[1];
+  return typeof token === "string" && /^tmcp_[A-Za-z0-9_-]{20,95}$/.test(token);
+}
+
+/// The same 401 the function sends, so clients start OAuth from it.
+function unauthorized(origin) {
+  return jsonResponse({ error: "invalid_token" }, 401, {
+    "WWW-Authenticate":
+      `Bearer resource_metadata="${origin}/.well-known/oauth-protected-resource", scope="${SCOPE}"`,
+  });
+}
+
 /// Forwards a request to a treddy route, keeping only the headers the
 /// function reads.
 async function proxy(request, env, route, extraHeaders = {}) {
@@ -177,7 +191,19 @@ async function authorize(env, url) {
     const poll = ${poll};
     const status = document.getElementById("status");
     const deadline = Date.now() + ${Number(start.expires_in) || 600} * 1000;
+    // Every poll is a function run: every 3 s, and none while the tab is in
+    // the background — coming back to it checks at once.
+    const INTERVAL = 3000;
+    let timer = null;
+    function schedule(delay) {
+      clearTimeout(timer);
+      timer = document.hidden ? null : setTimeout(tick, delay);
+    }
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) { clearTimeout(timer); timer = null; } else if (!timer) schedule(0);
+    });
     async function tick() {
+      timer = null;
       if (Date.now() > deadline) return expired();
       try {
         const r = await fetch("/authorize/status", { method: "POST",
@@ -189,13 +215,15 @@ async function authorize(env, url) {
         }
         if (s.status === "expired" || s.status === "done") return expired();
       } catch {}
-      setTimeout(tick, 2000);
+      schedule(INTERVAL);
     }
     function expired() {
+      clearTimeout(timer);
+      timer = -1;
       status.textContent = "This code expired. Start connecting again from Claude or ChatGPT.";
       document.getElementById("code").style.opacity = ".35";
     }
-    setTimeout(tick, 2000);`;
+    schedule(INTERVAL);`;
   return htmlResponse(page("Connect to Treddy", body, nonce, script), nonce);
 }
 
@@ -223,7 +251,11 @@ export default {
     }
 
     if (request.method === "POST") {
-      if (path === "/mcp") return proxy(request, env, "mcp");
+      if (path === "/mcp") {
+        // Only something shaped like an access token is worth a function
+        // run: scanners and clients before OAuth get their 401 here.
+        return hasAccessToken(request) ? proxy(request, env, "mcp") : unauthorized(origin);
+      }
       if (path === "/token") return proxy(request, env, "oauth/token");
       if (path === "/authorize/status") return proxy(request, env, "oauth/authorize-status");
       if (path === "/register") {
