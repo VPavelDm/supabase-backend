@@ -10,7 +10,7 @@ const apns = makeAPNs({ topic: "com.treddy.app", secretPrefix: "TREDDY" });
 /// the app's UI locale.
 export function localized(
   locale: string,
-  key: "posted" | "failed" | "reconnect" | "reminder",
+  key: "posted" | "failed" | "reconnect" | "reminder" | "suggested",
 ): { title: string; body?: string } {
   const russian = locale.toLowerCase().startsWith("ru");
   switch (key) {
@@ -25,6 +25,13 @@ export function localized(
       };
     case "reminder":
       return { title: russian ? "Пора публиковать" : "Time to post" };
+    case "suggested":
+      return {
+        title: russian ? "Новые предложенные посты" : "New suggested posts",
+        body: russian
+          ? "Проверьте их в Treddy — без вашего одобрения ничего не публикуется."
+          : "Review them in Treddy — nothing posts until you approve it.",
+      };
     case "reconnect":
       return {
         title: russian ? "Переподключите Threads" : "Reconnect Threads",
@@ -37,7 +44,7 @@ export function localized(
 
 export async function notifyDevices(
   threadsUserID: string,
-  kind: "posted" | "failed" | "reconnect" | "reminder",
+  kind: "posted" | "failed" | "reconnect" | "reminder" | "suggested",
   body: string | null,
   extra: Record<string, string> = {},
 ): Promise<number> {

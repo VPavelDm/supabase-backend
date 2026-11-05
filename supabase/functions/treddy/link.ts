@@ -15,7 +15,7 @@
 
 import { json, sql } from "./db.ts";
 import { fetchProfile, ThreadsAPIError } from "./threads-api.ts";
-import { upsertDevice } from "./sync.ts";
+import { saveTimeZone, upsertDevice, wantsSuggestions } from "./sync.ts";
 import { parseSettings, saveSettings } from "./settings.ts";
 
 const TOKEN_LIFETIME_DAYS = 59;
@@ -52,6 +52,7 @@ export async function handleLink(req: Request): Promise<Response> {
     returning sync_secret, settings`;
 
   await upsertDevice(profile.id, body);
+  await saveTimeZone(profile.id, body);
 
   let settings = parseSettings(rows[0].settings);
   const inline = parseSettings(body?.settings);
@@ -63,9 +64,11 @@ export async function handleLink(req: Request): Promise<Response> {
   // Tombstones included: a device that still holds a post deleted
   // elsewhere must drop it rather than revive it on its first sync.
   const posts = await sql`
-    select id, text, follow_ups, part_media_ids, scheduled_at, status, error, edited_at
+    select id, text, follow_ups, part_media_ids, scheduled_at, status, manual, error, edited_at,
+           source
     from treddy.posts
     where threads_user_id = ${profile.id}
+      and (status <> 'suggested' or ${wantsSuggestions(body)})
     order by scheduled_at`;
 
   return json({
