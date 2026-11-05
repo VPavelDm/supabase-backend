@@ -137,8 +137,13 @@ async function fetchMetadataDocument(clientID: string): Promise<Client | null> {
     ? doc.redirect_uris.filter((uri): uri is string => typeof uri === "string").slice(0, 10)
     : [];
   if (redirects.length === 0) return null;
+  // ChatGPT prefers private_key_jwt but lists "none" among the methods it
+  // supports; this server only offers "none", so that is what it will use.
   const method = doc.token_endpoint_auth_method;
-  if (method !== undefined && method !== "none") return null;
+  const supported = doc.token_endpoint_auth_methods_supported;
+  const canBePublic = method === undefined || method === "none" ||
+    (Array.isArray(supported) && supported.includes("none"));
+  if (!canBePublic) return null;
   const name = typeof doc.client_name === "string" && doc.client_name.trim().length > 0
     ? doc.client_name.trim().slice(0, 100)
     : host;
@@ -357,6 +362,18 @@ async function readParams(req: Request): Promise<URLSearchParams> {
 function clientIDFrom(req: Request, params: URLSearchParams): string | null {
   const given = params.get("client_id");
   if (given) return given;
+  // A private_key_jwt client may name itself only inside its assertion. The
+  // signature isn't checked: as for any public client, PKCE and the exact
+  // redirect_uri are what bind the code to it.
+  const assertion = params.get("client_assertion");
+  if (assertion) {
+    try {
+      const payload = JSON.parse(atob(assertion.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+      if (typeof payload?.sub === "string") return payload.sub;
+    } catch {
+      return null;
+    }
+  }
   const basic = req.headers.get("Authorization")?.match(/^Basic\s+(.+)$/i)?.[1];
   if (!basic) return null;
   try {
