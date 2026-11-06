@@ -17,6 +17,11 @@ CloudFront origin header, the Worker secret `RELAY_SECRET`, and the function sec
 `TREDDY_RELAY_SECRET`. Without it the Worker uses the address Cloudflare saw (CloudFront's, for
 requests through this distribution) and the function uses the last `x-forwarded-for` entry.
 
+Applied 2026-11-06: CloudFront Function `treddy-viewer-ip`, distribution `E2O8MJPFPKJ4DF`
+(`d2fdhobnn2aolw.cloudfront.net`), `A`/`AAAA` alias records, Worker version `cbc95909` (the one
+before, on workers.dev, was `78965c06`), function secrets `TREDDY_RELAY_SECRET` and
+`TREDDY_MCP_PUBLIC_URL=https://treddy.lyncil.com`.
+
 ## Apply
 
 Run every step in **one terminal**, so `$RELAY_SECRET` from step 1 stays set. The connector keeps
