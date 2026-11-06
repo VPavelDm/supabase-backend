@@ -56,6 +56,7 @@ import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { createSupabaseClient } from "../_shared/supabase-client.ts";
+import { secretKey } from "../_shared/keys.ts";
 import { callerUserId, isAppCall, isStagingBuild } from "./auth.ts";
 import { notifySongReady } from "./notify.ts";
 import { lyriaPolls, queryLyria, renderLyria, startLyria } from "./lyria.ts";
@@ -177,7 +178,7 @@ function configuredProvider(): Provider {
 const STAGING_SAMPLE = "_staging/sample.mp3";
 
 export function serviceStorage() {
-  return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!)
+  return createClient(Deno.env.get("SUPABASE_URL")!, secretKey())
     .storage.from(TRACKS_BUCKET);
 }
 

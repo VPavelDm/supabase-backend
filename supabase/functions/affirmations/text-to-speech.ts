@@ -6,6 +6,7 @@
 
 import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { corsHeaders } from "../_shared/cors.ts";
+import { secretKey } from "../_shared/keys.ts";
 import { json } from "../_shared/router.ts";
 import { callerUserId, isAppCall, recordUsage } from "./auth.ts";
 
@@ -66,7 +67,7 @@ export async function handleTextToSpeech(req: Request): Promise<Response> {
   const objectPath = `${cacheKey}.mp3`;
   const storage = createClient(
     Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    secretKey(),
   ).storage.from(CACHE_BUCKET);
 
   const cached = await storage.download(objectPath);

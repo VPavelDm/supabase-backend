@@ -29,6 +29,15 @@ Cross-app pieces live under `shared`: the `shared` Postgres schema
 client, cron auth, APNs client, CORS/response helpers, supabase-js client).
 `OPENAI_API_KEY` without a prefix is the project-wide fallback key.
 
+API keys come from `functions/_shared/keys.ts`: `publishableKey()` for calls
+made with the caller's token, `secretKey()` (bypasses RLS) only for
+server-side work. They read the new keys (`SUPABASE_PUBLISHABLE_KEYS` /
+`SUPABASE_SECRET_KEYS`) and fall back to the legacy ones with a logged
+warning ("… is not set; using the legacy …"); never read
+`SUPABASE_ANON_KEY` or `SUPABASE_SERVICE_ROLE_KEY` directly. Supabase retires
+legacy keys in early 2027; the apps' own keys are a separate matter (Lyncil
+and Calories iOS still ship legacy ones).
+
 **Offer seasons for every app** (`20261101120000_shared_offer_seasons.sql`):
 `shared.offer_seasons` (one row per app and season: month-day `starts`/`ends`,
 `duration_minutes`, `enabled`) and `shared.offer_rules` (per-app rest days,
