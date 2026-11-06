@@ -242,11 +242,11 @@ function notifyInBackground(userId: string, songId: string | null): void {
 }
 
 /// Stores a finished track as <user>/<song or task>.<ext> and records it on
-/// its job; returns the stored path. The caller's own storage client, so the
-/// bucket's RLS keeps each user inside their folder. The first caller to
-/// record it sends the push.
+/// its job; returns the stored path. Only this function writes the bucket
+/// (with the secret key; users have no insert or update policy), and the
+/// folder is the verified caller's id. The first caller to record it sends
+/// the push.
 async function keepTrack(
-  storage: ReturnType<typeof serviceStorage>,
   status: Extract<SongStatus, { status: "succeeded" }>,
   userId: string,
   taskId: string,
@@ -254,7 +254,7 @@ async function keepTrack(
 ): Promise<string> {
   const track = await trackBytes(status);
   const path = `${userId}/${songId ?? taskId}.${track.extension}`;
-  const { error } = await storage.upload(path, track.bytes, { contentType: track.contentType, upsert: true });
+  const { error } = await serviceStorage().upload(path, track.bytes, { contentType: track.contentType, upsert: true });
   if (error) throw error;
   const flipped = await sql`
     update lyncil.song_jobs
@@ -285,8 +285,7 @@ async function makeLyriaSong(
   try {
     const status = await renderLyria(input, AbortSignal.timeout(LYRIA_SYNC_LIMIT_SECONDS * 1000));
     if (status.status !== "succeeded") throw new Error(`Lyria answered ${status.status}`);
-    const storage = createSupabaseClient(req).storage.from(TRACKS_BUCKET);
-    await keepTrack(storage, status, userId, taskId, songId);
+    await keepTrack(status, userId, taskId, songId);
     console.log("lyria song kept", taskId, `${((Date.now() - started) / 1000).toFixed(1)} s`);
   } catch (error) {
     console.error("lyria song failed", taskId, `${((Date.now() - started) / 1000).toFixed(1)} s`, error);
@@ -481,9 +480,9 @@ export async function handleSongStatus(req: Request): Promise<Response> {
   // A start still waiting on the provider: no task to ask about yet.
   if ((row.task_id as string).startsWith(RESERVED)) return json({ status: "pending" });
   const job: SongJob = { taskId: row.task_id as string, kind: row.kind as Kind };
-  // The caller's own token writes and signs, so the bucket's RLS keeps each
-  // user inside their folder. The staging sample sits outside every user's
-  // folder and is signed with the service role instead.
+  // The caller's own token signs, so the bucket's read policy keeps each user
+  // inside their folder. The staging sample sits outside every user's folder
+  // and is signed with the secret key instead.
   const storage = createSupabaseClient(req).storage.from(TRACKS_BUCKET);
 
   async function signed(path: string, duration: number | null): Promise<Response> {
@@ -550,7 +549,7 @@ export async function handleSongStatus(req: Request): Promise<Response> {
 
   let path: string;
   try {
-    path = await keepTrack(storage, status, userId, job.taskId, row.song_id as string | null);
+    path = await keepTrack(status, userId, job.taskId, row.song_id as string | null);
   } catch (error) {
     // The provider still has it; the next poll tries again.
     console.error("keeping the track failed", job.taskId, error);

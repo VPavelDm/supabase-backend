@@ -202,7 +202,13 @@ the app's baked key and an OpenAI key). Anonymous sign-ins are on in
 
 - `SECURITY DEFINER` + `auth.uid()` for auth — never accept authID as a parameter
 - **Always `GRANT EXECUTE ON FUNCTION ... TO authenticated`** — without it
-  PostgREST won't expose the function (error PGRST202)
+  PostgREST won't expose the function (error PGRST202). Since
+  `20261107120000` a new function starts with no grant at all (not even for
+  `anon` or PUBLIC); grant only what the apps call, and only to
+  `authenticated` unless it must work before sign-in. Helpers called only
+  inside SECURITY DEFINER functions, and trigger functions, need no grant
+- `lyncil-tracks` has no user insert or update policy: only `generate-song`
+  writes tracks, with the secret key, into the verified caller's folder
 - `CREATE OR REPLACE FUNCTION` only replaces on an exact signature match;
   changed params/return types create an overload — drop the old one (error 42725)
 - Params `p_`, locals `v_`, return JSONB via `jsonb_build_object()`
