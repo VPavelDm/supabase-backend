@@ -60,6 +60,20 @@ the rule below: apps like Calyo have no session in this project, and season
 dates are public. Nothing private goes in these tables. Each row names one
 app; an edit reaches every installed copy of that app at its next launch.
 
+**Force-update floors** (`20261106130000_shared_app_config.sql`):
+`public.app_config` (`key`, `value`, `updated_at`), a key/value table that Futura iOS and Treddy
+iOS read at launch straight through PostgREST with the publishable key: rows
+`futura_ios_minimum_version` / `futura_ios_recommended_version` and
+`treddy_ios_minimum_version` / `treddy_ios_recommended_version`, compared with the app's
+`CFBundleShortVersionString`. It sits in `public` on purpose, against the rule below: the apps
+select the table itself, so it must stay exposed under this exact name. **Don't move or rename
+it**: the apps fail open, so a moved table quietly switches every force update off. `anon` and
+`authenticated` may only read it, and only `service_role` (dashboard, migrations) writes it, so
+nothing private goes in. No rows means no requirement. Raising a `*_minimum_version` locks out
+every installed build below it at its next launch, all at once: only ever set it to a version
+that is already live in the store and most users have. Lyncil keeps its floors in Firebase
+Remote Config (`app_version` on iOS, `android_app_version` on Android), not here.
+
 ## Architecture per app
 
 **Treddy** (`treddy` schema: accounts, posts, devices, job_runs, ai_usage):
