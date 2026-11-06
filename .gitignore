@@ -18,3 +18,6 @@ secrets/
 snippets/lyria-*.mp3
 snippets/lyria-*.wav
 snippets/my-lyrics*.txt
+
+# CloudFront configs generated with secrets in them (workers/treddy-mcp/cloudfront)
+workers/treddy-mcp/cloudfront/*.json

@@ -10,6 +10,13 @@
 //
 // All decisions (clients, redirects, PKCE, tokens, caps) are made by the
 // edge function; this Worker only routes, renders and adds headers.
+//
+// Users reach it at PUBLIC_ORIGIN (https://treddy.lyncil.com), a CloudFront
+// distribution whose origin is this Worker's workers.dev address. Every address
+// it hands out is built from PUBLIC_ORIGIN, since the request itself arrives on
+// workers.dev. CloudFront adds the viewer's IP (x-treddy-viewer-ip) and
+// RELAY_SECRET (x-treddy-relay-secret); the IP is believed only with the
+// secret, and passed on to the function with it.
 
 const SCOPE = "treddy.suggest";
 
@@ -69,6 +76,16 @@ function unauthorized(origin) {
 
 /// Forwards a request to a treddy route, keeping only the headers the
 /// function reads.
+/// The address the request came from: CloudFront's view of it when the request
+/// carries the relay secret, otherwise the address Cloudflare saw.
+function viewerIP(request, env) {
+  const relayed = request.headers.get("x-treddy-viewer-ip");
+  if (relayed && env.RELAY_SECRET && request.headers.get("x-treddy-relay-secret") === env.RELAY_SECRET) {
+    return relayed;
+  }
+  return request.headers.get("cf-connecting-ip") ?? "unknown";
+}
+
 async function proxy(request, env, route, extraHeaders = {}) {
   const headers = new Headers();
   for (const name of ["authorization", "content-type", "accept", "mcp-protocol-version"]) {
@@ -230,7 +247,7 @@ async function authorize(env, url) {
 export default {
   fetch(request, env) {
     const url = new URL(request.url);
-    const origin = url.origin;
+    const origin = (env.PUBLIC_ORIGIN || url.origin).replace(/\/+$/, "");
     const path = url.pathname.replace(/\/+$/, "") || "/";
 
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
@@ -260,7 +277,8 @@ export default {
       if (path === "/authorize/status") return proxy(request, env, "oauth/authorize-status");
       if (path === "/register") {
         return proxy(request, env, "oauth/register", {
-          "x-treddy-client-ip": request.headers.get("cf-connecting-ip") ?? "unknown",
+          "x-treddy-client-ip": viewerIP(request, env),
+          ...(env.RELAY_SECRET ? { "x-treddy-relay-secret": env.RELAY_SECRET } : {}),
         });
       }
     }

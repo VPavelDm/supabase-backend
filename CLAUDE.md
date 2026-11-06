@@ -64,8 +64,15 @@ older app builds read an unknown status as scheduled. Its OAuth server
 (`oauth/*`, public clients, PKCE S256, CIMD + DCR, token hashes only) and
 login are reached through the Cloudflare Worker in `workers/treddy-mcp`
 (root `/.well-known` docs and the HTML login page, which Supabase can't
-serve); the function's `TREDDY_MCP_PUBLIC_URL` secret is the Worker's
-origin, unset = connector off. Login is a pairing: the page shows a code,
+serve). Users paste `https://treddy.lyncil.com/mcp`: a CloudFront
+distribution in front of the Worker's workers.dev address
+(`workers/treddy-mcp/cloudfront/README.md`), whose origin is the Worker's
+`PUBLIC_ORIGIN` and the function's `TREDDY_MCP_PUBLIC_URL` (unset =
+connector off). Per-IP limits read the caller through `clientIP()`
+(`mcp-auth.ts`): the IP CloudFront saw, relayed by the Worker with
+`TREDDY_RELAY_SECRET`, else the last `x-forwarded-for` entry, never the
+first (the caller writes that one). Unlinked `generate` calls also share
+one daily cap (`UNLINKED_DAILY_CAP`). Login is a pairing: the page shows a code,
 the app confirms it via `mcp-pair/*`; `mcp-grants` lists/revokes
 assistants. Deploy order: migration, then function (it selects new
 columns), then Worker.

@@ -9,6 +9,7 @@
 // Every caller is capped per day via treddy.ai_usage.
 
 import { json, sql } from "./db.ts";
+import { clientIP, withinDailyCap } from "./mcp-auth.ts";
 import {
   accountForBearer,
   type GenerationSettings,
@@ -20,6 +21,9 @@ import {
 
 const MODEL = Deno.env.get("TREDDY_OPENAI_MODEL") ?? "gpt-5.6-terra";
 const DAILY_CAP = 300;
+/// Every call made with only the app key, all callers together: the per-IP cap
+/// alone can be multiplied by anyone with many addresses.
+const UNLINKED_DAILY_CAP = 500;
 const MAX_PLAN_POSTS = 28;
 
 // Ported from the app's Preferences.generationSystemPrompt: standing rules
@@ -490,8 +494,10 @@ export async function handleGenerate(req: Request): Promise<Response> {
     if (body.task === "chat" || !await isAppCall(req)) return json({ error: "Unauthorized" }, 401);
     settings = parseSettings(body.settings);
     if (!settings) return json({ error: "settings need a template with a topic or notes" }, 400);
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-    caller = `anon:${(await sha256(ip)).slice(0, 16)}`;
+    if (!await withinDailyCap("anon:all", UNLINKED_DAILY_CAP)) {
+      return json({ error: "Daily generation limit reached" }, 429);
+    }
+    caller = `anon:${(await sha256(await clientIP(req))).slice(0, 16)}`;
   }
 
   if (!await underDailyCap(caller)) {

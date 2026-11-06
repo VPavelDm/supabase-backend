@@ -3,9 +3,15 @@
 # this Worker does exactly that and proxies everything else to the treddy
 # edge function. It holds no secrets and stores nothing.
 #
-# Deploy: `wrangler deploy` from this folder (after `wrangler login`), then
-# set the function secret to the Worker's origin:
-#   supabase secrets set TREDDY_MCP_PUBLIC_URL=https://treddy-mcp.<account>.workers.dev
+# Users reach it at https://treddy.lyncil.com: a CloudFront distribution
+# (cloudfront/README.md) in front of this Worker's workers.dev address.
+#
+# Deploy: `wrangler deploy` from this folder (after `wrangler login`). The
+# function secret TREDDY_MCP_PUBLIC_URL must equal PUBLIC_ORIGIN below, and
+# RELAY_SECRET (a Worker secret: `wrangler secret put RELAY_SECRET`) must equal
+# CloudFront's x-treddy-relay-secret origin header and the function secret
+# TREDDY_RELAY_SECRET. Set PUBLIC_ORIGIN only once that address serves this
+# Worker: every address the connector hands out is built from it.
 name = "treddy-mcp"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
@@ -13,3 +19,4 @@ workers_dev = true
 
 [vars]
 FUNCTION_URL = "https://ttjzshiaatqvszckjlhw.supabase.co/functions/v1/treddy"
+PUBLIC_ORIGIN = "https://treddy.lyncil.com"

@@ -13,8 +13,9 @@ export const ACCESS_TOKEN_TTL_SECONDS = 60 * 60;
 export const REFRESH_TOKEN_TTL_DAYS = 60;
 export const SCOPE = "treddy.suggest";
 
-/// The Worker's origin, e.g. https://treddy-mcp.<account>.workers.dev —
-/// null when the secret isn't set, which turns the connector off.
+/// The connector's public origin, https://treddy.lyncil.com (CloudFront in
+/// front of the Worker) — null when the secret isn't set, which turns the
+/// connector off.
 export function publicURL(): string | null {
   const value = Deno.env.get("TREDDY_MCP_PUBLIC_URL")?.replace(/\/+$/, "");
   return value && value.startsWith("https://") ? value : null;
@@ -23,6 +24,29 @@ export function publicURL(): string | null {
 /// The protected resource: the MCP endpoint exactly as users paste it.
 export function resourceURL(base: string): string {
   return `${base}/mcp`;
+}
+
+/// The caller's address, for per-IP allowances.
+///
+/// Requests through the connector come from Cloudflare, so the Worker passes on
+/// the viewer's address as `x-treddy-client-ip`, together with
+/// TREDDY_RELAY_SECRET; without that secret the header is ignored, since anyone
+/// can send it. Anything else is read from `x-forwarded-for`, of which only the
+/// last entry is trustworthy: proxies append what they saw, so the earlier
+/// entries are whatever the caller wrote. The log line records how many entries
+/// the platform delivers (never the address), which says whether the last one
+/// is the caller or a proxy of Supabase's own.
+export async function clientIP(req: Request): Promise<string> {
+  const secret = Deno.env.get("TREDDY_RELAY_SECRET");
+  const given = req.headers.get("x-treddy-relay-secret");
+  const relayed = req.headers.get("x-treddy-client-ip");
+  if (secret && given && relayed && await sha256Hex(given) === await sha256Hex(secret)) {
+    return relayed;
+  }
+  const entries = (req.headers.get("x-forwarded-for") ?? "")
+    .split(",").map((entry) => entry.trim()).filter((entry) => entry.length > 0);
+  console.log(JSON.stringify({ event: "client_ip", source: "x-forwarded-for", entries: entries.length }));
+  return entries.at(-1) ?? "unknown";
 }
 
 export function base64url(bytes: Uint8Array): string {

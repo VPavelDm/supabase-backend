@@ -31,6 +31,7 @@ import {
   resourceURL,
   SCOPE,
   sha256Hex,
+  clientIP,
   withinDailyCap,
 } from "./mcp-auth.ts";
 
@@ -178,8 +179,7 @@ async function resolveClient(clientID: unknown): Promise<Client | null> {
 /// RFC 7591. Public clients only: no secrets are issued.
 export async function handleRegister(req: Request): Promise<Response> {
   if (!publicURL()) return oauthError("temporarily_unavailable", "Connector is off", 503);
-  const ip = req.headers.get("x-treddy-client-ip") ??
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = await clientIP(req);
   if (!(await withinDailyCap(`mcp-register:${ip}`, MAX_REGISTRATIONS_PER_IP_PER_DAY))) {
     return oauthError("invalid_client_metadata", "Too many registrations", 429);
   }
