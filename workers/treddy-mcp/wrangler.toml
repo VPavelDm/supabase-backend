@@ -1,0 +1,15 @@
+# Public front of Treddy's MCP connector. Supabase can't serve the root
+# /.well-known documents OAuth discovery needs, nor an HTML login page, so
+# this Worker does exactly that and proxies everything else to the treddy
+# edge function. It holds no secrets and stores nothing.
+#
+# Deploy: `wrangler deploy` from this folder (after `wrangler login`), then
+# set the function secret to the Worker's origin:
+#   supabase secrets set TREDDY_MCP_PUBLIC_URL=https://treddy-mcp.<account>.workers.dev
+name = "treddy-mcp"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+FUNCTION_URL = "https://ttjzshiaatqvszckjlhw.supabase.co/functions/v1/treddy"

@@ -10,10 +10,15 @@
 //              manual?, edited_at}],
 //                       — every draft the device holds except unapproved
 //                         proposals; status: scheduled | published | deleted
-//     device_token?, environment?, locale? }
+//     device_token?, environment?, locale?,
+//     suggestions?,     — true from builds that know status 'suggested'
+//                         (posts an assistant proposed over MCP); older
+//                         builds never get those rows: they would read an
+//                         unknown status as scheduled
+//     time_zone? }      — the device's IANA zone, for the MCP tools
 // Response:
 //   { posts: [{id, text, follow_ups, part_media_ids, scheduled_at, status,
-//              manual, error, edited_at}],
+//              manual, error, edited_at, source}],
 //                       — every row the server holds, tombstones included.
 //                         follow_ups go out after text, each answering the
 //                         one before; part_media_ids are the Threads IDs of
@@ -27,8 +32,8 @@ import { json, sql } from "./db.ts";
 import { accountForBearer, parseSettings } from "./settings.ts";
 
 const MAX_POSTS = 500;
-const MAX_TEXT_LENGTH = 500; // Threads' own limit, per post of a chain.
-const MAX_FOLLOW_UPS = 10;
+export const MAX_TEXT_LENGTH = 500; // Threads' own limit, per post of a chain.
+export const MAX_FOLLOW_UPS = 10;
 const DEVICE_STATUSES = new Set(["scheduled", "published", "deleted"]);
 
 interface IncomingPost {
@@ -48,12 +53,35 @@ function isUUID(value: unknown): value is string {
     /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
 }
 
-function isTimestamp(value: unknown): value is string {
+export function isTimestamp(value: unknown): value is string {
   return typeof value === "string" && !Number.isNaN(Date.parse(value));
 }
 
-function isPostText(value: unknown): value is string {
+export function isPostText(value: unknown): value is string {
   return typeof value === "string" && value.length > 0 && value.length <= MAX_TEXT_LENGTH;
+}
+
+/// Only builds that know the 'suggested' status get those rows back.
+export function wantsSuggestions(body: Record<string, unknown> | null): boolean {
+  return body?.suggestions === true;
+}
+
+/// Remembers the device's time zone, so the MCP tools can tell an assistant
+/// what the user's posting times mean. Anything Intl can't resolve is ignored.
+export async function saveTimeZone(
+  threadsUserID: string,
+  body: Record<string, unknown> | null,
+): Promise<void> {
+  const zone = body?.time_zone;
+  if (typeof zone !== "string" || zone.length === 0 || zone.length > 64) return;
+  try {
+    new Intl.DateTimeFormat("en", { timeZone: zone });
+  } catch {
+    return;
+  }
+  await sql`
+    update treddy.accounts set time_zone = ${zone}
+    where threads_user_id = ${threadsUserID} and time_zone is distinct from ${zone}`;
 }
 
 function validPost(post: unknown): post is IncomingPost {
@@ -149,17 +177,21 @@ export async function handleSync(req: Request): Promise<Response> {
           and treddy.posts.status not in ('publishing', 'deleted')
           and (treddy.posts.status <> 'published'
                or excluded.status in ('published', 'deleted'))
-          and excluded.edited_at > treddy.posts.edited_at`;
+          and (excluded.edited_at > treddy.posts.edited_at
+               or treddy.posts.status = 'suggested')`;
     }
 
     return await tx`
-      select id, text, follow_ups, part_media_ids, scheduled_at, status, manual, error, edited_at
+      select id, text, follow_ups, part_media_ids, scheduled_at, status, manual, error, edited_at,
+             source
       from treddy.posts
       where threads_user_id = ${userID}
+        and (status <> 'suggested' or ${wantsSuggestions(body)})
       order by scheduled_at`;
   });
 
   await upsertDevice(userID, body);
+  await saveTimeZone(userID, body);
 
   return json({ posts, settings: parseSettings(account.settings) });
 }

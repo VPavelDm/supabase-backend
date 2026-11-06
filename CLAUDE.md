@@ -55,6 +55,21 @@ and caps are server-side; the app sends only per-action input, and the user's
 brief + writing samples + planning defaults (posting times, plan days) live in
 `accounts.settings`.
 
+Treddy's **MCP connector** (Claude / ChatGPT custom connector) can only
+*suggest* posts: `mcp` inserts `status = 'suggested'` rows, which
+`publish-due` never claims; the user approves them in the app (a device
+moves them to `scheduled`) or dismisses them (`deleted`). `sync`/`link`
+return suggested rows only when the request sends `"suggestions": true` —
+older app builds read an unknown status as scheduled. Its OAuth server
+(`oauth/*`, public clients, PKCE S256, CIMD + DCR, token hashes only) and
+login are reached through the Cloudflare Worker in `workers/treddy-mcp`
+(root `/.well-known` docs and the HTML login page, which Supabase can't
+serve); the function's `TREDDY_MCP_PUBLIC_URL` secret is the Worker's
+origin, unset = connector off. Login is a pairing: the page shows a code,
+the app confirms it via `mcp-pair/*`; `mcp-grants` lists/revokes
+assistants. Deploy order: migration, then function (it selects new
+columns), then Worker.
+
 **Futura** (`futura` schema: capsules, capsule_photos, capsule_voice_notes,
 profiles): routes are thin pass-throughs to `public` RPCs whose bodies
 resolve tables via `SET search_path TO 'futura'`; auth is the caller's JWT
