@@ -5,6 +5,7 @@
 // stay deployed until old app versions are force-updated away.
 
 import { router } from "../_shared/router.ts";
+import { handleDeleteMyData } from "./handlers/account.ts";
 import {
   handleAddCapsuleMedia,
   handleCreateCapsule,
@@ -27,4 +28,5 @@ Deno.serve(router("futura", {
   "get-profile": { POST: handleGetProfile },
   "update-profile": { POST: handleUpdateProfile },
   "create-profile-if-needed": { POST: handleCreateProfileIfNeeded },
+  "delete-my-data": { POST: handleDeleteMyData },
 }));

@@ -26,7 +26,19 @@ commands from the repo root; files at the root itself are invisible to it.
 Cross-app pieces live under `shared`: the `shared` Postgres schema
 (`shared.set_updated_at`), the `shared-` cron prefix
 (`shared-purge-cron-history`), and `functions/_shared/` (router, direct-db
-client, cron auth, APNs client, CORS/response helpers, supabase-js client).
+client, cron auth, APNs client, CORS/response helpers, supabase-js client,
+`erase-user.ts`).
+
+**Deleting a user's data** (`delete-my-data`, one route per app: Futura,
+Lyncil, Affirmations). Each route checks the caller with the auth server (plus
+the app key where the app has one), deletes that app's rows and its
+`<user id>/` storage folders, erases the user at the services that know their
+id (Lyncil only: Adapty and Amplitude, under both id spellings), and then
+deletes the auth user only if `userHoldsAppData` in `_shared/erase-user.ts`
+finds nothing of any other app's. Auth users are shared by every app on the
+project, and rows that reference `auth.users` cascade, so **an app that starts
+keeping per-user rows or files here adds them to `userHoldsAppData`** —
+otherwise another app's deletion can take its data with the auth user.
 `OPENAI_API_KEY` without a prefix is the project-wide fallback key.
 
 API keys come from `functions/_shared/keys.ts`: `publishableKey()` for calls

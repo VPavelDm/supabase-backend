@@ -17,10 +17,13 @@
 //   LYNCIL_APNS_SANDBOX_KEY_ID + LYNCIL_APNS_SANDBOX_PRIVATE_KEY (notify.ts)
 //   LYNCIL_WEB_KEY (the music.lyncil.com Lambda), LYNCIL_SHARE_BASE_URL
 //   (optional, default https://music.lyncil.com) (share.ts),
-//   LYNCIL_ADAPTY_WEBHOOK_SECRET (winback.ts)
+//   LYNCIL_ADAPTY_WEBHOOK_SECRET (winback.ts),
+//   LYNCIL_AMPLITUDE_API_KEY, LYNCIL_AMPLITUDE_SECRET_KEY,
+//   LYNCIL_AMPLITUDE_HOST (optional) (delete-my-data.ts)
 
 import { router } from "../_shared/router.ts";
 import { handleAdFreeLyrics } from "./ad-free-lyrics.ts";
+import { handleDeleteMyData } from "./delete-my-data.ts";
 import { handleGenerateLyrics } from "./generate-lyrics.ts";
 import { handleGenerateSong, handleSongStatus } from "./generate-song.ts";
 import { handleSharedSong, handleShareSong, handleUnshareSong } from "./share.ts";
@@ -36,6 +39,7 @@ Deno.serve(router("lyncil", {
   "share-song": { POST: handleShareSong },
   "unshare-song": { POST: handleUnshareSong },
   "shared-song": { GET: handleSharedSong },
+  "delete-my-data": { POST: handleDeleteMyData },
   // Called by Adapty, not the app: checks its own secret (winback.ts).
   "adapty-webhook": { POST: handleAdaptyWebhook },
 }));
