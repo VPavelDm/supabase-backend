@@ -10,10 +10,12 @@
 //   AFFIRMATIONS_OPENAI_MODEL (optional), AFFIRMATIONS_ELEVENLABS_API_KEY
 
 import { router } from "../_shared/router.ts";
+import { handleDeleteMyData } from "./delete-my-data.ts";
 import { handleGenerateAffirmations } from "./generate-affirmations.ts";
 import { handleTextToSpeech } from "./text-to-speech.ts";
 
 Deno.serve(router("affirmations", {
   "generate-affirmations": { POST: handleGenerateAffirmations },
   "text-to-speech": { POST: handleTextToSpeech },
+  "delete-my-data": { POST: handleDeleteMyData },
 }));
