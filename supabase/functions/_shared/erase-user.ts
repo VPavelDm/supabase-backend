@@ -71,6 +71,7 @@ async function userHoldsAppData(userId: string): Promise<boolean> {
       or exists (select 1 from lyncil.ai_usage
                  where caller in (${`user:${id}`}, ${`adfree:user:${id}`}))
       or exists (select 1 from affirmations.ai_usage where caller = ${`user:${id}`})
+      or exists (select 1 from lingo.ai_usage where caller = ${`user:${id}`})
       or exists (select 1 from storage.objects
                  where bucket_id in ('capsule-photos', 'capsule-voice-notes', 'lyncil-tracks')
                    and (name like ${prefixes[0]} or name like ${prefixes.at(-1)!}))

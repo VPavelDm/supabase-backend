@@ -5,7 +5,7 @@ This repo (github: VPavelDm/supabase-backend, local:
 the single source of truth for the shared Supabase project
 `ttjzshiaatqvszckjlhw` (org name "Futura"), which hosts several apps on one
 plan. It owns the migration history, every edge function, and the shared
-utilities. App repos (Treddy, Futura iOS, Lyncil iOS, Affirmations iOS) contain no backend
+utilities. App repos (Treddy, Futura iOS, Lyncil iOS, Affirmations iOS, Hutarka iOS) contain no backend
 code — they point here.
 
 Layout: everything lives under `supabase/` — the CLI's canonical layout. It
@@ -14,14 +14,14 @@ commands from the repo root; files at the root itself are invisible to it.
 
 ## Conventions — everything an app owns is namespaced
 
-| Piece            | Convention                      | Treddy                          | Futura | Lyncil | Affirmations |
-|------------------|---------------------------------|---------------------------------|--------|--------|--------------|
-| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` | `affirmations/<route>` |
-| Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` | `affirmations` |
-| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` | `*_affirmations_*.sql` |
-| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) | `affirmations-cleanup` (daily) |
-| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — | — |
-| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) | `AFFIRMATIONS_*` (see functions/affirmations/index.ts) |
+| Piece            | Convention                      | Treddy                          | Futura | Lyncil | Affirmations | Lingo (Hutarka, Hejka, …) |
+|------------------|---------------------------------|---------------------------------|--------|--------|--------------|---------------------------|
+| Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` | `affirmations/<route>` | `lingo/<route>` — one slug for the app family; the app key says which app |
+| Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` | `affirmations` | `lingo` |
+| Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` | `*_affirmations_*.sql` | `*_lingo_*.sql` |
+| Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) | `affirmations-cleanup` (daily) | `lingo-cleanup` (daily) |
+| Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — | — | — |
+| Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) | `AFFIRMATIONS_*` (see functions/affirmations/index.ts) | `LINGO_*`, one `LINGO_<APP>_APP_KEY` per app (see functions/lingo/index.ts) |
 
 Cross-app pieces live under `shared`: the `shared` Postgres schema
 (`shared.set_updated_at`), the `shared-` cron prefix
@@ -30,7 +30,7 @@ client, cron auth, APNs client, CORS/response helpers, supabase-js client,
 `erase-user.ts`).
 
 **Deleting a user's data** (`delete-my-data`, one route per app: Futura,
-Lyncil, Affirmations). Each route checks the caller with the auth server (plus
+Lyncil, Affirmations, Lingo). Each route checks the caller with the auth server (plus
 the app key where the app has one), deletes that app's rows and its
 `<user id>/` storage folders, erases the user at the services that know their
 id (Lyncil only: Adapty and Amplitude, under both id spellings), and then
@@ -165,6 +165,27 @@ day. Both routes count through `affirmations.ai_usage` (per user, route and
 day). Before 1.8 the app called `generate-affirmations` and
 `text-to-speech` on Pretzly's project with the anon key alone.
 
+**Lingo** (the language-learning apps — Hutarka teaches English, Hejka
+Polish, the next one adds an entry to `functions/lingo/apps.ts`; `lingo`
+schema: ai_usage; storage bucket `lingo-tts-cache`): one function for the
+whole family, set up like Affirmations. Every install signs in anonymously,
+and each route needs the caller's user token AND an app key
+(`x-lingo-app-key`); the key is per app (`LINGO_HUTARKA_APP_KEY`,
+`LINGO_HEJKA_APP_KEY`) and is how the route knows which app is calling, so
+one app's key rotates without touching the others. `text-to-speech` takes
+only `text` (≤ 200 characters) and a voice role (`narrator` or `partner`);
+the language, ElevenLabs model, voice ids and speed come from `apps.ts`, so
+a voice swap is a redeploy, not an App Store release. Clips are cached at
+`<app>/<hash>.mp3`, the hash covering text, voice, model and settings, so a
+phrase is paid for once and then heard by every learner. A cache miss
+counts its characters in `lingo.ai_usage` twice: against the user (5,000 a
+day — all of Hutarka's first chapter is about that) and against the app as
+a whole (200,000 a day), the second being what stops a leaked key plus a
+loop of fresh anonymous users from draining the shared ElevenLabs account.
+Deploy order on first rollout: migration, then `_shared/erase-user.ts`
+selects from `lingo.ai_usage`, so every app's `delete-my-data` fails until
+the migration is in.
+
 ## Commands
 
 Run from the repo root.
@@ -219,6 +240,7 @@ the app's baked key and an OpenAI key). Anonymous sign-ins are on in
   `select * from treddy.job_runs order by finished_at desc limit 20;`
 - `cron.job_run_details` shows the pg_cron side; `shared-purge-cron-history`
   keeps a week of it.
-- `treddy.ai_usage`, `lyncil.ai_usage` and `affirmations.ai_usage` back the
-  per-caller daily caps on /generate, /generate-lyrics and Affirmations'
-  two routes.
+- `treddy.ai_usage`, `lyncil.ai_usage`, `affirmations.ai_usage` and
+  `lingo.ai_usage` back the per-caller daily caps on /generate,
+  /generate-lyrics, Affirmations' two routes and Lingo's text-to-speech
+  (per user and per app).
