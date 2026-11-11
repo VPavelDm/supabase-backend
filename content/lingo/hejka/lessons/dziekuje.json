@@ -1,0 +1,533 @@
+{
+  "id": "dziekuje",
+  "title": {
+    "pl": "Dziękuję",
+    "ru": "Спасибо",
+    "uk": "Дякую",
+    "en": "Thank you",
+    "es": "Gracias",
+    "fr": "Merci",
+    "de": "Danke",
+    "it": "Grazie",
+    "pt": "Obrigado",
+    "be": "Дзякуй",
+    "tr": "Teşekkür ederim",
+    "zh": "谢谢",
+    "zh-Hant": "謝謝",
+    "ja": "ありがとう",
+    "ar": "شكرًا",
+    "hi": "धन्यवाद",
+    "pt_f": "Obrigada"
+  },
+  "subtitle": {
+    "pl": "Podziękuj i odpowiedz na podziękowanie",
+    "ru": "Поблагодарить и ответить на «спасибо»",
+    "uk": "Подякувати й відповісти на «дякую»",
+    "en": "Say thanks and reply to thanks",
+    "es": "Da las gracias y responde a un agradecimiento",
+    "fr": "Remercie et réponds à un merci",
+    "de": "Bedank dich und antworte auf ein Danke",
+    "it": "Ringrazia e rispondi a un ringraziamento",
+    "pt": "Agradece e responde a um agradecimento",
+    "be": "Падзякаваць і адказаць на падзяку",
+    "tr": "Teşekkür et ve teşekküre karşılık ver",
+    "zh": "道谢，也学会回应别人的感谢",
+    "zh-Hant": "道謝，也學會回應別人的感謝",
+    "ja": "お礼を言って、お礼に答えよう",
+    "ar": "الشكر والرد على الشكر",
+    "hi": "शुक्रिया कहें और शुक्रिया का जवाब दें"
+  },
+  "with": "rabbit",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "Носовые: ą звучит примерно как «он», ę — как «эн». В конце слова ę почти не слышно: dziękuję ≈ «дженькуе».",
+      "uk": "Носові: ą звучить приблизно як «он», ę — як «ен». У кінці слова ę майже не чути: dziękuję ≈ «дженькує».",
+      "en": "Nasal vowels: ą sounds roughly like “on”, ę like “en”. At the end of a word ę is barely heard: dziękuję ≈ “jen-koo-yeh”.",
+      "es": "Vocales nasales: ą suena más o menos como «on», ę como «en». Al final de palabra la ę apenas se oye: dziękuję ≈ «dyen-kú-ye».",
+      "fr": "Voyelles nasales : ą se prononce à peu près « on », ę comme « in ». En fin de mot, ę s'entend à peine : dziękuję ≈ « djèn-kou-yé ».",
+      "de": "Nasalvokale: ą klingt ungefähr wie „on“, ę wie „en“. Am Wortende hört man ę kaum: dziękuję ≈ „dschen-ku-je“.",
+      "it": "Vocali nasali: ą si pronuncia più o meno «on», ę «en». A fine parola la ę quasi non si sente: dziękuję ≈ «gen-cu-ie».",
+      "pt": "Vogais nasais: ą soa mais ou menos como «om», ę como «em». No fim da palavra, o ę quase não se ouve: dziękuję ≈ «djen-cú-ie».",
+      "be": "Насавыя: ą гучыць прыкладна як «он», ę — як «эн». У канцы слова ę амаль не чуваць: dziękuję ≈ «джэнькуе».",
+      "tr": "Genizden gelen ünlüler: ą kabaca “on”, ę ise “en” gibi okunur. Kelime sonunda ę neredeyse duyulmaz: dziękuję ≈ “cenkuye”.",
+      "zh": "鼻化元音：ą 大致像“翁”，ę 像“恩”。ę 在词尾几乎听不出来：dziękuję ≈ “坚-酷-耶”。",
+      "zh-Hant": "鼻化母音：ą 大致像「翁」，ę 像「恩」。ę 在字尾幾乎聽不出來：dziękuję ≈「堅-酷-耶」。",
+      "ja": "鼻母音：ą はだいたい「オン」、ę は「エン」のように聞こえます。語末の ę はほとんど聞こえません：dziękuję ≈「ジェンクイェ」。",
+      "ar": "الحروف الأنفية: يُنطق ą تقريبًا مثل «أون»، و ę مثل «إن». وفي آخر الكلمة لا يكاد ę يُسمع: dziękuję ≈ «جين-كو-يه».",
+      "hi": "नासिक्य स्वर: ą लगभग “ओं” जैसा सुनाई देता है, ę “एं” जैसा। शब्द के आख़िर में ę मुश्किल से सुनाई देता है: dziękuję ≈ “जेन-कू-ये”।"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Pomóc ci z tą torbą?",
+        "ru": "Помочь тебе с этой сумкой?",
+        "uk": "Допомогти тобі з цією сумкою?",
+        "en": "Shall I help you with that bag?",
+        "es": "¿Te ayudo con esa bolsa?",
+        "fr": "Je t'aide avec ce sac ?",
+        "de": "Soll ich dir mit der Tasche helfen?",
+        "it": "Ti aiuto con quella borsa?",
+        "pt": "Ajudo-te com esse saco?",
+        "be": "Дапамагчы табе з гэтай сумкай?",
+        "tr": "Şu çantaya yardım edeyim mi?",
+        "zh": "要我帮你拿这个包吗？",
+        "zh-Hant": "要我幫你拿這個袋子嗎？",
+        "ja": "そのかばん、持つの手伝おうか？",
+        "ar": "هل أساعدكَ في حمل هذه الحقيبة؟",
+        "hi": "यह बैग उठाने में तुम्हारी मदद करूँ?",
+        "zh-Hant_f": "要我幫妳拿這個袋子嗎？",
+        "ar_f": "هل أساعدكِ في حمل هذه الحقيبة؟"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Tak, dzięki!",
+        "ru": "Да, спасибо!",
+        "uk": "Так, дякую!",
+        "en": "Yes, thanks!",
+        "es": "¡Sí, gracias!",
+        "fr": "Oui, merci !",
+        "de": "Ja, danke!",
+        "it": "Sì, grazie!",
+        "pt": "Sim, obrigado!",
+        "be": "Так, дзякуй!",
+        "tr": "Evet, sağ ol!",
+        "zh": "好啊，谢啦！",
+        "zh-Hant": "好啊，謝啦！",
+        "ja": "うん、ありがとう！",
+        "ar": "نعم، شكرًا!",
+        "hi": "हाँ, थैंक्स!",
+        "pt_f": "Sim, obrigada!"
+      },
+      "task": {
+        "build": [
+          "Nie,",
+          "proszę"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Proszę bardzo. Ale ciężka!",
+        "ru": "Пожалуйста. Ну и тяжёлая!",
+        "uk": "Будь ласка. Ото важка!",
+        "en": "There you go. Wow, it's heavy!",
+        "es": "Aquí tienes. ¡Uf, cómo pesa!",
+        "fr": "Avec plaisir. Qu'est-ce qu'il est lourd !",
+        "de": "Bitte schön. Ganz schön schwer!",
+        "it": "Figurati. Però, quanto pesa!",
+        "pt": "Aqui tens. Ui, que pesado!",
+        "be": "Калі ласка. Ого, якая цяжкая!",
+        "tr": "Rica ederim. Amma da ağırmış!",
+        "zh": "没问题。哇，好沉啊！",
+        "zh-Hant": "沒問題。哇，好重喔！",
+        "ja": "いいよ。うわ、重いね！",
+        "ar": "بكل سرور. ما أثقلها!",
+        "hi": "यह लो। अरे, यह तो भारी है!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dziękuję bardzo za pomoc!",
+        "ru": "Большое спасибо за помощь!",
+        "uk": "Дуже дякую за допомогу!",
+        "en": "Thank you so much for your help!",
+        "es": "¡Muchas gracias por tu ayuda!",
+        "fr": "Merci beaucoup pour ton aide !",
+        "de": "Vielen Dank für die Hilfe!",
+        "it": "Grazie mille per l'aiuto!",
+        "pt": "Muito obrigado pela ajuda!",
+        "be": "Вялікі дзякуй за дапамогу!",
+        "tr": "Yardım için çok teşekkür ederim!",
+        "zh": "非常感谢你的帮忙！",
+        "zh-Hant": "非常謝謝你的幫忙！",
+        "ja": "手伝ってくれて本当にありがとう！",
+        "ar": "شكرًا جزيلًا على المساعدة!",
+        "hi": "मदद के लिए बहुत-बहुत शुक्रिया!",
+        "pt_f": "Muito obrigada pela ajuda!"
+      },
+      "task": {
+        "choose": [
+          "Dziękuję bardzo na pomoc!",
+          "Proszę bardzo za pomoc!"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Nie ma za co!",
+        "ru": "Не за что!",
+        "uk": "Нема за що!",
+        "en": "No problem!",
+        "es": "¡No hay de qué!",
+        "fr": "De rien !",
+        "de": "Gern geschehen!",
+        "it": "Di niente!",
+        "pt": "Não tens de quê!",
+        "be": "Няма за што!",
+        "tr": "Bir şey değil!",
+        "zh": "不客气！",
+        "zh-Hant": "不客氣！",
+        "ja": "どういたしまして！",
+        "ar": "لا شكر على واجب!",
+        "hi": "शुक्रिया की कोई बात नहीं!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Jesteś super!",
+        "ru": "Ты супер!",
+        "uk": "Ти супер!",
+        "en": "You're the best!",
+        "es": "¡Eres genial!",
+        "fr": "Tu es super !",
+        "de": "Du bist super!",
+        "it": "Sei un mito!",
+        "pt": "És o máximo!",
+        "be": "Ты супер!",
+        "tr": "Sen bir harikasın!",
+        "zh": "你太棒了！",
+        "zh-Hant": "你最棒了！",
+        "ja": "最高だよ！",
+        "ar": "أنت الأفضل!",
+        "hi": "तुम कमाल हो!"
+      },
+      "task": {
+        "build": [
+          "Jestem",
+          "jest"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "torba",
+        "ru": "сумка",
+        "uk": "сумка",
+        "en": "bag",
+        "es": "bolsa",
+        "fr": "sac",
+        "de": "Tasche",
+        "it": "borsa",
+        "pt": "saco",
+        "be": "сумка",
+        "tr": "çanta",
+        "zh": "包，袋子",
+        "zh-Hant": "袋子，包包",
+        "ja": "かばん",
+        "ar": "حقيبة",
+        "hi": "बैग, थैला"
+      },
+      "example": "Pomóc ci z tą torbą?"
+    },
+    {
+      "text": {
+        "pl": "dzięki",
+        "ru": "спасибо (разг.)",
+        "uk": "дякую (розм.)",
+        "en": "thanks",
+        "es": "gracias",
+        "fr": "merci (familier)",
+        "de": "danke",
+        "it": "grazie (informale)",
+        "pt": "obrigado",
+        "be": "дзякуй (размоўнае)",
+        "tr": "sağ ol",
+        "zh": "谢啦",
+        "zh-Hant": "謝啦",
+        "ja": "ありがとう（くだけた言い方）",
+        "ar": "شكرًا (غير رسمية)",
+        "hi": "थैंक्स",
+        "pt_f": "obrigada"
+      },
+      "example": "Tak, dzięki!"
+    },
+    {
+      "text": {
+        "pl": "dziękuję",
+        "ru": "спасибо",
+        "uk": "дякую",
+        "en": "thank you",
+        "es": "gracias",
+        "fr": "merci",
+        "de": "danke schön",
+        "it": "grazie",
+        "pt": "obrigado",
+        "be": "дзякуй, дзякую",
+        "tr": "teşekkür ederim",
+        "zh": "谢谢",
+        "zh-Hant": "謝謝",
+        "ja": "ありがとう",
+        "ar": "شكرًا",
+        "hi": "शुक्रिया, धन्यवाद",
+        "pt_f": "obrigada"
+      },
+      "example": "Dziękuję bardzo za pomoc!"
+    },
+    {
+      "text": {
+        "pl": "pomoc",
+        "ru": "помощь",
+        "uk": "допомога",
+        "en": "help",
+        "es": "ayuda",
+        "fr": "aide",
+        "de": "Hilfe",
+        "it": "aiuto",
+        "pt": "ajuda",
+        "be": "дапамога",
+        "tr": "yardım",
+        "zh": "帮助",
+        "zh-Hant": "幫忙",
+        "ja": "手伝い、助け",
+        "ar": "مساعدة",
+        "hi": "मदद"
+      },
+      "example": "Dziękuję bardzo za pomoc!"
+    },
+    {
+      "text": {
+        "pl": "nie ma za co",
+        "ru": "не за что",
+        "uk": "нема за що",
+        "en": "you're welcome",
+        "es": "no hay de qué",
+        "fr": "de rien",
+        "de": "gern geschehen",
+        "it": "di niente, prego",
+        "pt": "de nada, não tem de quê",
+        "be": "няма за што",
+        "tr": "bir şey değil",
+        "zh": "不客气",
+        "zh-Hant": "不客氣",
+        "ja": "どういたしまして",
+        "ar": "لا شكر على واجب",
+        "hi": "शुक्रिया की कोई बात नहीं"
+      },
+      "example": "Nie ma za co!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Dziękuję bardzo za pomoc!",
+        "ru": "Большое спасибо за помощь!",
+        "uk": "Дуже дякую за допомогу!",
+        "en": "Thank you so much for your help!",
+        "es": "¡Muchas gracias por tu ayuda!",
+        "fr": "Merci beaucoup pour ton aide !",
+        "de": "Vielen Dank für die Hilfe!",
+        "it": "Grazie mille per l'aiuto!",
+        "pt": "Muito obrigado pela ajuda!",
+        "be": "Вялікі дзякуй за дапамогу!",
+        "tr": "Yardım için çok teşekkür ederim!",
+        "zh": "非常感谢你的帮忙！",
+        "zh-Hant": "非常謝謝你的幫忙！",
+        "ja": "手伝ってくれて本当にありがとう！",
+        "ar": "شكرًا جزيلًا على المساعدة!",
+        "hi": "मदद के लिए बहुत-बहुत शुक्रिया!",
+        "pt_f": "Muito obrigada pela ajuda!"
+      },
+      "distractors": [
+        "na",
+        "proszę"
+      ],
+      "gap": "pomoc",
+      "gapWrong": [
+        "pomocy",
+        "pomóc"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Nie ma za co!",
+        "ru": "Не за что!",
+        "uk": "Нема за що!",
+        "en": "You're welcome!",
+        "es": "¡No hay de qué!",
+        "fr": "De rien !",
+        "de": "Gern geschehen!",
+        "it": "Di niente!",
+        "pt": "Não tens de quê!",
+        "be": "Няма за што!",
+        "tr": "Bir şey değil!",
+        "zh": "不客气！",
+        "zh-Hant": "不客氣！",
+        "ja": "どういたしまして！",
+        "ar": "لا شكر على واجب!",
+        "hi": "शुक्रिया की कोई बात नहीं!"
+      },
+      "distractors": [
+        "jest",
+        "to"
+      ],
+      "gap": "ma",
+      "gapWrong": [
+        "jest",
+        "mam"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Tak, dzięki!",
+        "ru": "Да, спасибо!",
+        "uk": "Так, дякую!",
+        "en": "Yes, thanks!",
+        "es": "¡Sí, gracias!",
+        "fr": "Oui, merci !",
+        "de": "Ja, danke!",
+        "it": "Sì, grazie!",
+        "pt": "Sim, obrigado!",
+        "be": "Так, дзякуй!",
+        "tr": "Evet, sağ ol!",
+        "zh": "好啊，谢啦！",
+        "zh-Hant": "好啊，謝啦！",
+        "ja": "うん、ありがとう！",
+        "ar": "نعم، شكرًا!",
+        "hi": "हाँ, थैंक्स!",
+        "pt_f": "Sim, obrigada!"
+      },
+      "distractors": [
+        "Nie,",
+        "proszę"
+      ],
+      "gap": "dzięki",
+      "gapWrong": [
+        "dziękuje",
+        "dzięka"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Dzięki za {slot}!",
+    "items": [
+      {
+        "word": {
+          "pl": "prezent",
+          "ru": "подарок",
+          "uk": "подарунок",
+          "en": "present",
+          "es": "regalo",
+          "fr": "cadeau",
+          "de": "Geschenk",
+          "it": "regalo",
+          "pt": "presente",
+          "be": "падарунак",
+          "tr": "hediye",
+          "zh": "礼物",
+          "zh-Hant": "禮物",
+          "ja": "プレゼント",
+          "ar": "هدية",
+          "hi": "तोहफ़ा"
+        },
+        "sentence": {
+          "pl": "Dzięki za prezent!",
+          "ru": "Спасибо за подарок!",
+          "uk": "Дякую за подарунок!",
+          "en": "Thanks for the present!",
+          "es": "¡Gracias por el regalo!",
+          "fr": "Merci pour le cadeau !",
+          "de": "Danke für das Geschenk!",
+          "it": "Grazie per il regalo!",
+          "pt": "Obrigado pelo presente!",
+          "be": "Дзякуй за падарунак!",
+          "tr": "Hediye için sağ ol!",
+          "zh": "谢谢你的礼物！",
+          "zh-Hant": "謝謝你的禮物！",
+          "ja": "プレゼント、ありがとう！",
+          "ar": "شكرًا على الهدية!",
+          "hi": "तोहफ़े के लिए थैंक्स!",
+          "pt_f": "Obrigada pelo presente!"
+        }
+      },
+      {
+        "word": {
+          "pl": "obiad",
+          "ru": "обед",
+          "uk": "обід",
+          "en": "lunch",
+          "es": "comida",
+          "fr": "déjeuner",
+          "de": "Mittagessen",
+          "it": "pranzo",
+          "pt": "almoço",
+          "be": "абед",
+          "tr": "öğle yemeği",
+          "zh": "午饭",
+          "zh-Hant": "午餐",
+          "ja": "お昼ごはん",
+          "ar": "غداء",
+          "hi": "दोपहर का खाना"
+        },
+        "sentence": {
+          "pl": "Dzięki za obiad!",
+          "ru": "Спасибо за обед!",
+          "uk": "Дякую за обід!",
+          "en": "Thanks for lunch!",
+          "es": "¡Gracias por la comida!",
+          "fr": "Merci pour le déjeuner !",
+          "de": "Danke für das Mittagessen!",
+          "it": "Grazie per il pranzo!",
+          "pt": "Obrigado pelo almoço!",
+          "be": "Дзякуй за абед!",
+          "tr": "Öğle yemeği için sağ ol!",
+          "zh": "谢谢你的午饭！",
+          "zh-Hant": "謝謝你的午餐！",
+          "ja": "お昼ごはん、ありがとう！",
+          "ar": "شكرًا على الغداء!",
+          "hi": "दोपहर के खाने के लिए थैंक्स!",
+          "pt_f": "Obrigada pelo almoço!"
+        }
+      },
+      {
+        "word": {
+          "pl": "wszystko",
+          "ru": "всё",
+          "uk": "все",
+          "en": "everything",
+          "es": "todo",
+          "fr": "tout",
+          "de": "alles",
+          "it": "tutto",
+          "pt": "tudo",
+          "be": "усё",
+          "tr": "her şey",
+          "zh": "一切",
+          "zh-Hant": "一切",
+          "ja": "全部",
+          "ar": "كل شيء",
+          "hi": "सब कुछ"
+        },
+        "sentence": {
+          "pl": "Dzięki za wszystko!",
+          "ru": "Спасибо за всё!",
+          "uk": "Дякую за все!",
+          "en": "Thanks for everything!",
+          "es": "¡Gracias por todo!",
+          "fr": "Merci pour tout !",
+          "de": "Danke für alles!",
+          "it": "Grazie di tutto!",
+          "pt": "Obrigado por tudo!",
+          "be": "Дзякуй за ўсё!",
+          "tr": "Her şey için sağ ol!",
+          "zh": "谢谢你做的一切！",
+          "zh-Hant": "謝謝你做的一切！",
+          "ja": "全部、ありがとう！",
+          "ar": "شكرًا على كل شيء!",
+          "hi": "सब कुछ के लिए थैंक्स!",
+          "pt_f": "Obrigada por tudo!"
+        }
+      }
+    ]
+  }
+}

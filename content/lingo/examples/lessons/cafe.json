@@ -1,0 +1,79 @@
+{
+  "id": "cafe",
+  "title": { "en": "Café", "ru": "Кафе", "es": "Cafetería" },
+  "subtitle": { "en": "Order a coffee and a snack", "ru": "Закажите кофе и перекус", "es": "Pide un café y algo de comer" },
+  "with": "fox",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": { "en": "Hi! What can I get you?", "ru": "Привет! Что вам предложить?", "es": "¡Hola! ¿Qué le pongo?" }
+    },
+    {
+      "speaker": "boar",
+      "text": { "en": "Hi! Can I have a coffee, please?", "ru": "Привет! Можно мне кофе, пожалуйста?", "es": "¡Hola! ¿Me pone un café, por favor?" },
+      "task": { "build": ["has", "the"] }
+    },
+    {
+      "speaker": "other",
+      "text": { "en": "Sure. Anything else?", "ru": "Конечно. Что-нибудь ещё?", "es": "Claro. ¿Algo más?" }
+    },
+    {
+      "speaker": "boar",
+      "text": { "en": "Can I have a croissant too?", "ru": "Можно ещё круассан?", "es": "¿Me pone también un cruasán?" },
+      "task": { "choose": ["I have a croissant too.", "Can you have a croissant?"] }
+    },
+    {
+      "speaker": "other",
+      "text": { "en": "Of course. That's five euros.", "ru": "Конечно. С вас пять евро.", "es": "Por supuesto. Son cinco euros." }
+    },
+    {
+      "speaker": "boar",
+      "text": { "en": "Here you go. Thank you!", "ru": "Вот, пожалуйста. Спасибо!", "es": "Aquí tiene. ¡Gracias!" },
+      "task": { "build": ["come", "Thanks"] }
+    }
+  ],
+  "words": [
+    { "text": { "en": "coffee", "ru": "кофе", "es": "café" }, "example": "Hi! Can I have a coffee, please?" },
+    { "text": { "en": "croissant", "ru": "круассан", "es": "cruasán" }, "example": "Can I have a croissant too?" },
+    { "text": { "en": "please", "ru": "пожалуйста", "es": "por favor" }, "example": "Hi! Can I have a coffee, please?" },
+    { "text": { "en": "anything else", "ru": "что-нибудь ещё", "es": "algo más" }, "example": "Sure. Anything else?" },
+    { "text": { "en": "here you go", "ru": "вот, пожалуйста", "es": "aquí tiene" }, "example": "Here you go. Thank you!" }
+  ],
+  "phrases": [
+    {
+      "text": { "en": "Can I have a coffee, please?", "ru": "Можно мне кофе, пожалуйста?", "es": "¿Me pone un café, por favor?" },
+      "distractors": ["has", "the"],
+      "gap": "have",
+      "gapWrong": ["has", "am"]
+    },
+    {
+      "text": { "en": "Anything else?", "ru": "Что-нибудь ещё?", "es": "¿Algo más?" },
+      "distractors": ["Something", "other"],
+      "gap": "else",
+      "gapWrong": ["more", "other"]
+    },
+    {
+      "text": { "en": "Here you go.", "ru": "Вот, пожалуйста.", "es": "Aquí tiene." },
+      "distractors": ["are", "come"],
+      "gap": "go",
+      "gapWrong": ["come", "are"]
+    }
+  ],
+  "swap": {
+    "frame": "Can I have a {slot}, please?",
+    "items": [
+      {
+        "word": { "en": "tea", "ru": "чай", "es": "té" },
+        "sentence": { "en": "Can I have a tea, please?", "ru": "Можно мне чай, пожалуйста?", "es": "¿Me pone un té, por favor?" }
+      },
+      {
+        "word": { "en": "muffin", "ru": "маффин", "es": "magdalena" },
+        "sentence": { "en": "Can I have a muffin, please?", "ru": "Можно мне маффин, пожалуйста?", "es": "¿Me pone una magdalena, por favor?" }
+      },
+      {
+        "word": { "en": "sandwich", "ru": "сэндвич", "es": "sándwich" },
+        "sentence": { "en": "Can I have a sandwich, please?", "ru": "Можно мне сэндвич, пожалуйста?", "es": "¿Me pone un sándwich, por favor?" }
+      }
+    ]
+  }
+}

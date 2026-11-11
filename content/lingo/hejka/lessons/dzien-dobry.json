@@ -1,0 +1,517 @@
+{
+  "id": "dzien-dobry",
+  "title": {
+    "pl": "Dzień dobry!",
+    "ru": "Здравствуйте!",
+    "uk": "Добрий день!",
+    "en": "Good day!",
+    "es": "¡Buenos días!",
+    "fr": "Bonjour !",
+    "de": "Guten Tag!",
+    "it": "Buongiorno!",
+    "pt": "Bom dia!",
+    "be": "Добры дзень!",
+    "tr": "İyi günler!",
+    "zh": "您好！",
+    "zh-Hant": "您好！",
+    "ja": "こんにちは！",
+    "ar": "طاب يومك!",
+    "hi": "नमस्ते!"
+  },
+  "subtitle": {
+    "pl": "Przywitaj się i pożegnaj grzecznie",
+    "ru": "Вежливо поздороваться и попрощаться",
+    "uk": "Ввічливо привітатися й попрощатися",
+    "en": "Say hello and goodbye politely",
+    "es": "Saluda y despídete con educación",
+    "fr": "Dis bonjour et au revoir poliment",
+    "de": "Grüße höflich und verabschiede dich",
+    "it": "Saluta e congedati con gentilezza",
+    "pt": "Cumprimenta e despede-te com educação",
+    "be": "Ветліва павітацца і развітацца",
+    "tr": "Kibarca selamlaş ve vedalaş",
+    "zh": "礼貌地打招呼和道别",
+    "zh-Hant": "有禮貌地打招呼和道別",
+    "ja": "「こんにちは」と「さようなら」をていねいに言おう",
+    "ar": "التحية والوداع بأدب",
+    "hi": "शिष्टता से नमस्ते और अलविदा कहें"
+  },
+  "with": "owl",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "Ударение в польском почти всегда на предпоследний слог: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "uk": "Наголос у польській майже завжди на передостанньому складі: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "en": "Polish stress almost always falls on the second-to-last syllable: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "es": "En polaco el acento casi siempre cae en la penúltima sílaba: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "fr": "En polonais, l'accent tombe presque toujours sur l'avant-dernière syllabe : do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "de": "Im Polnischen liegt die Betonung fast immer auf der vorletzten Silbe: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "it": "In polacco l'accento cade quasi sempre sulla penultima sillaba: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "pt": "Em polaco, a sílaba tónica é quase sempre a penúltima: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "be": "Націск у польскай мове амаль заўсёды падае на перадапошні склад: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "tr": "Lehçede vurgu neredeyse her zaman sondan bir önceki hecededir: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "zh": "波兰语的重音几乎总在倒数第二个音节上：do wi-DZE-nia、dzię-KU-ję、War-SZA-wa。",
+      "zh-Hant": "波蘭語的重音幾乎都落在倒數第二個音節：do wi-DZE-nia、dzię-KU-ję、War-SZA-wa。",
+      "ja": "ポーランド語のアクセントは、ほぼいつも後ろから2番目の音節にあります：do wi-DZE-nia, dzię-KU-ję, War-SZA-wa。",
+      "ar": "يقع النبر في البولندية دائمًا تقريبًا على المقطع قبل الأخير: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa.",
+      "hi": "पोलिश में ज़ोर लगभग हमेशा आख़िरी से पहले वाले सिलेबल पर पड़ता है: do wi-DZE-nia, dzię-KU-ję, War-SZA-wa."
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Dzień dobry! Do pracy?",
+        "ru": "Здравствуйте! На работу?",
+        "uk": "Добрий день! На роботу?",
+        "en": "Good morning! Off to work?",
+        "es": "¡Buenos días! ¿Al trabajo?",
+        "fr": "Bonjour ! Vous allez au travail ?",
+        "de": "Guten Morgen! Zur Arbeit?",
+        "it": "Buongiorno! Va al lavoro?",
+        "pt": "Bom dia! Para o trabalho?",
+        "be": "Добры дзень! На працу?",
+        "tr": "Günaydın! İşe mi gidiyorsunuz?",
+        "zh": "早上好！您去上班啊？",
+        "zh-Hant": "早安！您要去上班嗎？",
+        "ja": "おはようございます！お仕事ですか？",
+        "ar": "صباح الخير! إلى العمل؟",
+        "hi": "नमस्ते! काम पर जा रहे हैं?",
+        "hi_f": "नमस्ते! काम पर जा रही हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dzień dobry! Tak, do pracy.",
+        "ru": "Здравствуйте! Да, на работу.",
+        "uk": "Добрий день! Так, на роботу.",
+        "en": "Good morning! Yes, off to work.",
+        "es": "¡Buenos días! Sí, al trabajo.",
+        "fr": "Bonjour ! Oui, je vais au travail.",
+        "de": "Guten Morgen! Ja, zur Arbeit.",
+        "it": "Buongiorno! Sì, vado al lavoro.",
+        "pt": "Bom dia! Sim, para o trabalho.",
+        "be": "Добры дзень! Так, на працу.",
+        "tr": "Günaydın! Evet, işe gidiyorum.",
+        "zh": "早上好！对，去上班。",
+        "zh-Hant": "早安！對，去上班。",
+        "ja": "おはようございます！はい、仕事です。",
+        "ar": "صباح الخير! نعم، إلى العمل.",
+        "hi": "नमस्ते! जी हाँ, काम पर।"
+      },
+      "task": {
+        "build": [
+          "Nie,",
+          "dobra"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "To miłego dnia!",
+        "ru": "Тогда хорошего дня!",
+        "uk": "Тоді гарного дня!",
+        "en": "Have a nice day, then!",
+        "es": "¡Pues que tenga un buen día!",
+        "fr": "Alors, bonne journée !",
+        "de": "Dann einen schönen Tag!",
+        "it": "Allora buona giornata!",
+        "pt": "Então tenha um bom dia!",
+        "be": "Тады прыемнага дня!",
+        "tr": "O zaman iyi günler!",
+        "zh": "那祝您今天愉快！",
+        "zh-Hant": "那祝您今天愉快！",
+        "ja": "では、よい一日を！",
+        "ar": "إذن، يومًا سعيدًا!",
+        "hi": "तो आपका दिन अच्छा रहे!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dziękuję, nawzajem! Do widzenia!",
+        "ru": "Спасибо, и вам! До свидания!",
+        "uk": "Дякую, навзаєм! До побачення!",
+        "en": "Thank you, you too! Goodbye!",
+        "es": "¡Gracias, igualmente! ¡Adiós!",
+        "fr": "Merci, vous aussi ! Au revoir !",
+        "de": "Danke, gleichfalls! Auf Wiedersehen!",
+        "it": "Grazie, altrettanto! Arrivederci!",
+        "pt": "Obrigado, igualmente! Adeus!",
+        "be": "Дзякуй, і вам таксама! Да пабачэння!",
+        "tr": "Teşekkür ederim, size de! Hoşça kalın!",
+        "zh": "谢谢，您也是！再见！",
+        "zh-Hant": "謝謝，您也是！再見！",
+        "ja": "ありがとうございます、そちらも！さようなら！",
+        "ar": "شكرًا، ولحضرتكِ أيضًا! مع السلامة!",
+        "hi": "शुक्रिया, आपका भी! अलविदा!",
+        "pt_f": "Obrigada, igualmente! Adeus!"
+      },
+      "task": {
+        "choose": [
+          "Dziękuję, nawzajem! Dzień dobry!",
+          "Proszę, nawzajem! Do widzenia!"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Do widzenia!",
+        "ru": "До свидания!",
+        "uk": "До побачення!",
+        "en": "Goodbye!",
+        "es": "¡Adiós!",
+        "fr": "Au revoir !",
+        "de": "Auf Wiedersehen!",
+        "it": "Arrivederci!",
+        "pt": "Adeus!",
+        "be": "Да пабачэння!",
+        "tr": "Hoşça kalın!",
+        "zh": "再见！",
+        "zh-Hant": "再見！",
+        "ja": "さようなら！",
+        "ar": "مع السلامة!",
+        "hi": "अलविदा!"
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "dzień dobry",
+        "ru": "здравствуйте, добрый день",
+        "uk": "добрий день",
+        "en": "hello, good morning",
+        "es": "buenos días, hola",
+        "fr": "bonjour",
+        "de": "guten Tag, guten Morgen",
+        "it": "buongiorno",
+        "pt": "bom dia, olá",
+        "be": "добры дзень, вітаю",
+        "tr": "günaydın, merhaba",
+        "zh": "您好，早上好",
+        "zh-Hant": "您好，早安",
+        "ja": "こんにちは、おはようございます",
+        "ar": "صباح الخير، مرحبًا",
+        "hi": "नमस्ते, शुभ दिन"
+      },
+      "example": "Dzień dobry! Do pracy?"
+    },
+    {
+      "text": {
+        "pl": "do pracy",
+        "ru": "на работу",
+        "uk": "на роботу",
+        "en": "to work",
+        "es": "al trabajo",
+        "fr": "au travail",
+        "de": "zur Arbeit",
+        "it": "al lavoro",
+        "pt": "para o trabalho",
+        "be": "на працу",
+        "tr": "işe",
+        "zh": "去上班",
+        "zh-Hant": "去上班",
+        "ja": "仕事へ",
+        "ar": "إلى العمل",
+        "hi": "काम पर"
+      },
+      "example": "Dzień dobry! Do pracy?"
+    },
+    {
+      "text": {
+        "pl": "miłego dnia",
+        "ru": "хорошего дня",
+        "uk": "гарного дня",
+        "en": "have a nice day",
+        "es": "que tenga un buen día",
+        "fr": "bonne journée",
+        "de": "schönen Tag",
+        "it": "buona giornata",
+        "pt": "tenha um bom dia",
+        "be": "прыемнага дня",
+        "tr": "iyi günler",
+        "zh": "祝今天愉快",
+        "zh-Hant": "祝今天愉快",
+        "ja": "よい一日を",
+        "ar": "يومًا سعيدًا",
+        "hi": "दिन अच्छा रहे"
+      },
+      "example": "To miłego dnia!"
+    },
+    {
+      "text": {
+        "pl": "nawzajem",
+        "ru": "и вам тоже, взаимно",
+        "uk": "навзаєм",
+        "en": "you too",
+        "es": "igualmente",
+        "fr": "vous aussi, pareillement",
+        "de": "gleichfalls",
+        "it": "altrettanto",
+        "pt": "igualmente",
+        "be": "і вам таксама, узаемна",
+        "tr": "size de, sana da",
+        "zh": "你也是，彼此彼此",
+        "zh-Hant": "你也是，彼此彼此",
+        "ja": "そちらも、お互いに",
+        "ar": "ولك أيضًا، بالمثل",
+        "hi": "आपको भी, आपका भी"
+      },
+      "example": "Dziękuję, nawzajem! Do widzenia!"
+    },
+    {
+      "text": {
+        "pl": "do widzenia",
+        "ru": "до свидания",
+        "uk": "до побачення",
+        "en": "goodbye",
+        "es": "adiós",
+        "fr": "au revoir",
+        "de": "auf Wiedersehen",
+        "it": "arrivederci",
+        "pt": "adeus",
+        "be": "да пабачэння",
+        "tr": "hoşça kalın",
+        "zh": "再见",
+        "zh-Hant": "再見",
+        "ja": "さようなら",
+        "ar": "مع السلامة",
+        "hi": "अलविदा"
+      },
+      "example": "Do widzenia!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Miłego dnia!",
+        "ru": "Хорошего дня!",
+        "uk": "Гарного дня!",
+        "en": "Have a nice day!",
+        "es": "¡Que tenga un buen día!",
+        "fr": "Bonne journée !",
+        "de": "Einen schönen Tag!",
+        "it": "Buona giornata!",
+        "pt": "Tenha um bom dia!",
+        "be": "Прыемнага дня!",
+        "tr": "İyi günler!",
+        "zh": "祝您今天愉快！",
+        "zh-Hant": "祝您今天愉快！",
+        "ja": "よい一日を！",
+        "ar": "يومًا سعيدًا!",
+        "hi": "आपका दिन अच्छा रहे!"
+      },
+      "distractors": [
+        "Dobry",
+        "dzień"
+      ],
+      "gap": "dnia",
+      "gapWrong": [
+        "dzień",
+        "dniu"
+      ],
+      "tip": {
+        "show": "tap",
+        "text": {
+          "ru": "После «miłego» слово меняет окончание: dzień → dnia. Запоминай фразу целиком.",
+          "uk": "Після «miłego» слово змінює закінчення: dzień → dnia. Запам'ятовуй фразу цілком.",
+          "en": "After “miłego” the word changes its ending: dzień → dnia. Learn the phrase as a whole.",
+          "es": "Después de «miłego», la palabra cambia de terminación: dzień → dnia. Apréndete la frase entera.",
+          "fr": "Après « miłego », le mot change de terminaison : dzień → dnia. Apprends l'expression en entier.",
+          "de": "Nach „miłego“ ändert das Wort seine Endung: dzień → dnia. Lern den Ausdruck als Ganzes.",
+          "it": "Dopo «miłego» la parola cambia desinenza: dzień → dnia. Impara l'espressione intera.",
+          "pt": "Depois de «miłego», a palavra muda de terminação: dzień → dnia. Aprende a frase inteira.",
+          "be": "Пасля «miłego» слова мяняе канчатак: dzień → dnia. Запамінай фразу цалкам.",
+          "tr": "“miłego” kelimesinden sonra gelen kelimenin sonu değişir: dzień → dnia. İfadeyi bir bütün olarak öğren.",
+          "zh": "在“miłego”后面，这个词的词尾会变：dzień → dnia。把整句话一起记住。",
+          "zh-Hant": "在「miłego」後面，這個字的字尾會變：dzień → dnia。整句一起記住就好。",
+          "ja": "「miłego」のあとでは語尾が変わります：dzień → dnia。フレーズごと覚えましょう。",
+          "ar": "بعد «miłego» تتغير نهاية الكلمة: dzień → dnia. الأفضل حفظ العبارة كاملة.",
+          "hi": "“miłego” के बाद शब्द का अंत बदल जाता है: dzień → dnia। पूरा वाक्यांश एक साथ याद करें।"
+        }
+      }
+    },
+    {
+      "text": {
+        "pl": "Dziękuję, nawzajem!",
+        "ru": "Спасибо, и вам!",
+        "uk": "Дякую, навзаєм!",
+        "en": "Thank you, you too!",
+        "es": "¡Gracias, igualmente!",
+        "fr": "Merci, vous aussi !",
+        "de": "Danke, gleichfalls!",
+        "it": "Grazie, altrettanto!",
+        "pt": "Obrigado, igualmente!",
+        "be": "Дзякуй, і вам таксама!",
+        "tr": "Teşekkür ederim, size de!",
+        "zh": "谢谢，您也是！",
+        "zh-Hant": "謝謝，您也是！",
+        "ja": "ありがとうございます、そちらも！",
+        "ar": "شكرًا، ولحضرتك أيضًا!",
+        "hi": "शुक्रिया, आपका भी!",
+        "pt_f": "Obrigada, igualmente!"
+      },
+      "distractors": [
+        "Proszę,",
+        "razem"
+      ],
+      "gap": "nawzajem",
+      "gapWrong": [
+        "razem",
+        "naprawdę"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Do widzenia!",
+        "ru": "До свидания!",
+        "uk": "До побачення!",
+        "en": "Goodbye!",
+        "es": "¡Adiós!",
+        "fr": "Au revoir !",
+        "de": "Auf Wiedersehen!",
+        "it": "Arrivederci!",
+        "pt": "Adeus!",
+        "be": "Да пабачэння!",
+        "tr": "Hoşça kalın!",
+        "zh": "再见！",
+        "zh-Hant": "再見！",
+        "ja": "さようなら！",
+        "ar": "مع السلامة!",
+        "hi": "अलविदा!"
+      },
+      "distractors": [
+        "Dzień",
+        "Na"
+      ],
+      "gap": "widzenia",
+      "gapWrong": [
+        "widzenie",
+        "widzieć"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Miłego {slot}!",
+    "items": [
+      {
+        "word": {
+          "pl": "wieczoru",
+          "ru": "вечера",
+          "uk": "вечора",
+          "en": "evening",
+          "es": "noche",
+          "fr": "soirée",
+          "de": "Abend",
+          "it": "serata",
+          "pt": "noite",
+          "be": "вечара",
+          "tr": "akşam",
+          "zh": "晚上",
+          "zh-Hant": "晚上",
+          "ja": "夜",
+          "ar": "مساء",
+          "hi": "शाम"
+        },
+        "sentence": {
+          "pl": "Miłego wieczoru!",
+          "ru": "Хорошего вечера!",
+          "uk": "Гарного вечора!",
+          "en": "Have a nice evening!",
+          "es": "¡Que tenga una buena noche!",
+          "fr": "Bonne soirée !",
+          "de": "Einen schönen Abend!",
+          "it": "Buona serata!",
+          "pt": "Tenha uma boa noite!",
+          "be": "Прыемнага вечара!",
+          "tr": "İyi akşamlar!",
+          "zh": "祝您晚上愉快！",
+          "zh-Hant": "祝您晚上愉快！",
+          "ja": "よい夜を！",
+          "ar": "مساءً سعيدًا!",
+          "hi": "आपकी शाम अच्छी रहे!"
+        }
+      },
+      {
+        "word": {
+          "pl": "weekendu",
+          "ru": "выходных",
+          "uk": "вихідних",
+          "en": "weekend",
+          "es": "fin de semana",
+          "fr": "week-end",
+          "de": "Wochenende",
+          "it": "weekend",
+          "pt": "fim de semana",
+          "be": "выхадных",
+          "tr": "hafta sonu",
+          "zh": "周末",
+          "zh-Hant": "週末",
+          "ja": "週末",
+          "ar": "عطلة نهاية الأسبوع",
+          "hi": "वीकेंड"
+        },
+        "sentence": {
+          "pl": "Miłego weekendu!",
+          "ru": "Хороших выходных!",
+          "uk": "Гарних вихідних!",
+          "en": "Have a nice weekend!",
+          "es": "¡Que tenga un buen fin de semana!",
+          "fr": "Bon week-end !",
+          "de": "Ein schönes Wochenende!",
+          "it": "Buon weekend!",
+          "pt": "Tenha um bom fim de semana!",
+          "be": "Прыемных выхадных!",
+          "tr": "İyi hafta sonları!",
+          "zh": "祝您周末愉快！",
+          "zh-Hant": "祝您週末愉快！",
+          "ja": "よい週末を！",
+          "ar": "عطلة نهاية أسبوع سعيدة!",
+          "hi": "आपका वीकेंड अच्छा रहे!"
+        }
+      },
+      {
+        "word": {
+          "pl": "tygodnia",
+          "ru": "недели",
+          "uk": "тижня",
+          "en": "week",
+          "es": "semana",
+          "fr": "semaine",
+          "de": "Woche",
+          "it": "settimana",
+          "pt": "semana",
+          "be": "тыдня",
+          "tr": "hafta",
+          "zh": "一周",
+          "zh-Hant": "一週",
+          "ja": "一週間",
+          "ar": "أسبوع",
+          "hi": "हफ़्ता"
+        },
+        "sentence": {
+          "pl": "Miłego tygodnia!",
+          "ru": "Хорошей недели!",
+          "uk": "Гарного тижня!",
+          "en": "Have a nice week!",
+          "es": "¡Que tenga una buena semana!",
+          "fr": "Bonne semaine !",
+          "de": "Eine schöne Woche!",
+          "it": "Buona settimana!",
+          "pt": "Tenha uma boa semana!",
+          "be": "Прыемнага тыдня!",
+          "tr": "İyi haftalar!",
+          "zh": "祝您一周愉快！",
+          "zh-Hant": "祝您這週愉快！",
+          "ja": "よい一週間を！",
+          "ar": "أسبوعًا سعيدًا!",
+          "hi": "आपका हफ़्ता अच्छा रहे!"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,578 @@
+{
+  "id": "pan-i-pani",
+  "title": {
+    "pl": "Pan i pani",
+    "ru": "Вежливое «вы»",
+    "uk": "Ввічливе «ви»",
+    "en": "Sir and madam",
+    "es": "Señor y señora",
+    "fr": "Monsieur et madame",
+    "de": "Höflich per Sie",
+    "it": "Signore e signora",
+    "pt": "O senhor e a senhora",
+    "be": "Ветлівае «вы»",
+    "tr": "Beyefendi ve hanımefendi",
+    "zh": "先生和女士",
+    "zh-Hant": "先生與女士",
+    "ja": "ていねいな呼びかけ",
+    "ar": "سيدي وسيدتي",
+    "hi": "आदर से “आप”"
+  },
+  "subtitle": {
+    "pl": "Rozmawiaj grzecznie z nieznajomym",
+    "ru": "Вежливо говорить с незнакомыми",
+    "uk": "Ввічливо говорити з незнайомими",
+    "en": "Talk politely to strangers",
+    "es": "Habla con educación a un desconocido",
+    "fr": "Parle poliment à un inconnu",
+    "de": "Sprich höflich mit Fremden",
+    "it": "Parla con gentilezza a uno sconosciuto",
+    "pt": "Fala com educação com um desconhecido",
+    "be": "Ветліва размаўляць з незнаёмымі",
+    "tr": "Yabancılarla kibarca konuş",
+    "zh": "礼貌地和陌生人说话",
+    "zh-Hant": "有禮貌地跟陌生人說話",
+    "ja": "知らない人とていねいに話そう",
+    "ar": "التحدث بأدب مع الغرباء",
+    "hi": "अजनबियों से शिष्टता से बात करें"
+  },
+  "with": "fox",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "К незнакомым обращаются pan (к мужчине), pani (к женщине), państwo (к группе). Глагол — как с «он/она»: Czy ma pan…? С большой буквы Pan пишут только в письмах.",
+      "uk": "До незнайомих звертаються pan (до чоловіка), pani (до жінки), państwo (до групи). Дієслово — як з «він/вона»: Czy ma pan…? З великої літери Pan пишуть лише в листах.",
+      "en": "Strangers are addressed as pan (a man), pani (a woman), państwo (a group). The verb is the “he/she” form: Czy ma pan…? Capital “Pan” is only for letters.",
+      "es": "A los desconocidos se les habla de pan (a un hombre), pani (a una mujer) o państwo (a un grupo). El verbo va en tercera persona, como con usted: Czy ma pan…? Pan con mayúscula solo se escribe en cartas.",
+      "fr": "On s'adresse à un inconnu avec pan (à un homme), pani (à une femme), państwo (à un groupe). Le verbe se met à la forme « il/elle » : Czy ma pan…? Pan avec une majuscule, c'est seulement dans les lettres.",
+      "de": "Fremde spricht man mit pan (einen Mann), pani (eine Frau) und państwo (eine Gruppe) an. Das Verb steht in der „er/sie“-Form: Czy ma pan…? Großes „Pan“ schreibt man nur in Briefen.",
+      "it": "Agli sconosciuti ci si rivolge con pan (a un uomo), pani (a una donna), państwo (a un gruppo). Il verbo va alla terza persona, come con il Lei: Czy ma pan…? Pan con la maiuscola si scrive solo nelle lettere.",
+      "pt": "Aos desconhecidos trata-se por pan (a um homem), pani (a uma mulher) ou państwo (a um grupo). O verbo vai na terceira pessoa, como com «o senhor»: Czy ma pan…? Pan com maiúscula só se escreve em cartas.",
+      "be": "Да незнаёмых звяртаюцца pan (да мужчыны), pani (да жанчыны), państwo (да групы). Дзеяслоў — як з «ён/яна»: Czy ma pan…? З вялікай літары Pan пішуць толькі ў лістах.",
+      "tr": "Yabancılara pan (erkeğe), pani (kadına), państwo (gruba) diye hitap edilir. Fiil “o” biçiminde olur: Czy ma pan…? Büyük harfli “Pan” yalnızca mektuplarda yazılır.",
+      "zh": "称呼陌生人用 pan（男士）、pani（女士）、państwo（一群人）。动词用“他/她”的形式：Czy ma pan…? 大写的“Pan”只用在书信里。",
+      "zh-Hant": "稱呼陌生人用 pan（男士）、pani（女士）、państwo（一群人）。動詞要用「他／她」的形式：Czy ma pan…? 大寫的「Pan」只用在書信裡。",
+      "ja": "知らない人には pan（男性）、pani（女性）、państwo（グループ）と呼びかけます。動詞は「彼・彼女」の形を使います：Czy ma pan…? 大文字の Pan は手紙の中だけです。",
+      "ar": "يُخاطَب الغرباء بـ pan (للرجل)، و pani (للمرأة)، و państwo (لمجموعة). ويأتي الفعل بصيغة «هو/هي»: Czy ma pan…? أما Pan بالحرف الكبير فلا يُكتب إلا في الرسائل.",
+      "hi": "अजनबियों को pan (पुरुष), pani (महिला), państwo (समूह) कहकर संबोधित करते हैं। क्रिया “वह” वाले रूप में होती है: Czy ma pan…? बड़े अक्षर वाला Pan सिर्फ़ चिट्ठियों में लिखा जाता है।"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Dzień dobry! Co dla pana?",
+        "ru": "Здравствуйте! Что для вас?",
+        "uk": "Добрий день! Що для вас?",
+        "en": "Hello! What can I get you?",
+        "es": "¡Buenos días! ¿Qué desea?",
+        "fr": "Bonjour monsieur ! Que désirez-vous ?",
+        "de": "Guten Tag! Was darf es sein?",
+        "it": "Buongiorno! Cosa desidera il signore?",
+        "pt": "Bom dia! O que deseja o senhor?",
+        "be": "Добры дзень! Што вам прапанаваць?",
+        "tr": "Merhaba! Size ne verelim?",
+        "zh": "您好！先生，您需要点什么？",
+        "zh-Hant": "您好！先生，您需要什麼？",
+        "ja": "こんにちは！何にいたしましょうか？",
+        "ar": "مرحبًا! ماذا أقدّم لحضرتكَ؟",
+        "hi": "नमस्ते! आपको क्या चाहिए?",
+        "pl_f": "Dzień dobry! Co dla pani?",
+        "fr_f": "Bonjour madame ! Que désirez-vous ?",
+        "it_f": "Buongiorno! Cosa desidera la signora?",
+        "pt_f": "Bom dia! O que deseja a senhora?",
+        "zh_f": "您好！女士，您需要点什么？",
+        "zh-Hant_f": "您好！小姐，您需要什麼？",
+        "ar_f": "مرحبًا! ماذا أقدّم لحضرتكِ؟"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dzień dobry! Czy ma pan mapę miasta?",
+        "ru": "Здравствуйте! У вас есть карта города?",
+        "uk": "Добрий день! У вас є мапа міста?",
+        "en": "Hello! Do you have a city map?",
+        "es": "¡Buenos días! ¿Tiene usted un mapa de la ciudad?",
+        "fr": "Bonjour ! Vous avez un plan de la ville ?",
+        "de": "Guten Tag! Haben Sie einen Stadtplan?",
+        "it": "Buongiorno! Ha una mappa della città?",
+        "pt": "Bom dia! O senhor tem um mapa da cidade?",
+        "be": "Добры дзень! У вас ёсць карта горада?",
+        "tr": "Merhaba! Şehir haritanız var mı?",
+        "zh": "您好！您这儿有城市地图吗？",
+        "zh-Hant": "您好！請問您這裡有城市地圖嗎？",
+        "ja": "こんにちは！街の地図はありますか？",
+        "ar": "مرحبًا! هل لدى حضرتك خريطة للمدينة؟",
+        "hi": "नमस्ते! क्या आपके पास शहर का नक़्शा है?"
+      },
+      "task": {
+        "build": [
+          "pani",
+          "masz"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Tak, proszę. Czy pan jest turystą?",
+        "ru": "Да, пожалуйста. Вы турист?",
+        "uk": "Так, прошу. Ви турист?",
+        "en": "Yes, here you go. Are you a tourist?",
+        "es": "Sí, aquí tiene. ¿Es usted turista?",
+        "fr": "Oui, tenez. Vous êtes touriste ?",
+        "de": "Ja, bitte schön. Sind Sie Tourist?",
+        "it": "Sì, ecco. Lei è un turista?",
+        "pt": "Sim, aqui tem. O senhor é turista?",
+        "be": "Так, калі ласка. Вы турыст?",
+        "tr": "Evet, buyurun. Turist misiniz?",
+        "zh": "有，给您。您是来旅游的吗？",
+        "zh-Hant": "有的，給您。您是來觀光的嗎？",
+        "ja": "はい、どうぞ。観光の方ですか？",
+        "ar": "نعم، تفضّل. هل حضرتكَ سائح؟",
+        "hi": "जी हाँ, यह लीजिए। क्या आप टूरिस्ट हैं?",
+        "pl_f": "Tak, proszę. Czy pani jest turystką?",
+        "ru_f": "Да, пожалуйста. Вы туристка?",
+        "uk_f": "Так, прошу. Ви туристка?",
+        "de_f": "Ja, bitte schön. Sind Sie Touristin?",
+        "it_f": "Sì, ecco. Lei è una turista?",
+        "pt_f": "Sim, aqui tem. A senhora é turista?",
+        "be_f": "Так, калі ласка. Вы турыстка?",
+        "ar_f": "نعم، تفضّلي. هل حضرتكِ سائحة؟"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Nie, mieszkam tutaj.",
+        "ru": "Нет, я живу здесь.",
+        "uk": "Ні, я живу тут.",
+        "en": "No, I live here.",
+        "es": "No, vivo aquí.",
+        "fr": "Non, j'habite ici.",
+        "de": "Nein, ich wohne hier.",
+        "it": "No, abito qui.",
+        "pt": "Não, moro aqui.",
+        "be": "Не, я жыву тут.",
+        "tr": "Hayır, burada yaşıyorum.",
+        "zh": "不是，我住在这儿。",
+        "zh-Hant": "不是，我住在這裡。",
+        "ja": "いいえ、ここに住んでいます。",
+        "ar": "لا، أسكن هنا.",
+        "hi": "नहीं, मैं यहीं रहता हूँ।",
+        "hi_f": "नहीं, मैं यहीं रहती हूँ।"
+      },
+      "task": {
+        "choose": [
+          "Nie, mieszkasz tutaj.",
+          "Nie, mieszka pan tutaj."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "To witamy w Warszawie!",
+        "ru": "Тогда добро пожаловать в Варшаву!",
+        "uk": "Тоді ласкаво просимо до Варшави!",
+        "en": "Then welcome to Warsaw!",
+        "es": "¡Pues bienvenido a Varsovia!",
+        "fr": "Alors, bienvenue à Varsovie !",
+        "de": "Dann willkommen in Warschau!",
+        "it": "Allora benvenuto a Varsavia!",
+        "pt": "Então bem-vindo a Varsóvia!",
+        "be": "Тады вітаем у Варшаве!",
+        "tr": "O zaman Varşova'ya hoş geldiniz!",
+        "zh": "那欢迎来到华沙！",
+        "zh-Hant": "那歡迎來到華沙！",
+        "ja": "では、ワルシャワへようこそ！",
+        "ar": "إذن، أهلًا وسهلًا في وارسو!",
+        "hi": "तो वारसॉ में आपका स्वागत है!",
+        "es_f": "¡Pues bienvenida a Varsovia!",
+        "it_f": "Allora benvenuta a Varsavia!",
+        "pt_f": "Então bem-vinda a Varsóvia!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dziękuję! Do widzenia!",
+        "ru": "Спасибо! До свидания!",
+        "uk": "Дякую! До побачення!",
+        "en": "Thank you! Goodbye!",
+        "es": "¡Gracias! ¡Adiós!",
+        "fr": "Merci ! Au revoir !",
+        "de": "Danke! Auf Wiedersehen!",
+        "it": "Grazie! Arrivederci!",
+        "pt": "Obrigado! Adeus!",
+        "be": "Дзякуй! Да пабачэння!",
+        "tr": "Teşekkür ederim! Hoşça kalın!",
+        "zh": "谢谢！再见！",
+        "zh-Hant": "謝謝！再見！",
+        "ja": "ありがとうございます！さようなら！",
+        "ar": "شكرًا! مع السلامة!",
+        "hi": "शुक्रिया! अलविदा!",
+        "pt_f": "Obrigada! Adeus!"
+      },
+      "task": {
+        "build": [
+          "Proszę!",
+          "widzenie"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "pan",
+        "ru": "вы (к мужчине)",
+        "uk": "ви (до чоловіка)",
+        "en": "you (to a man), sir",
+        "es": "usted (a un hombre), señor",
+        "fr": "vous (à un homme), monsieur",
+        "de": "Sie (zu einem Mann), Herr",
+        "it": "Lei (a un uomo), signore",
+        "pt": "o senhor (a um homem)",
+        "be": "вы (да мужчыны), пан",
+        "tr": "siz (erkeğe), beyefendi",
+        "zh": "您（对男士），先生",
+        "zh-Hant": "您（對男士），先生",
+        "ja": "（男性に）あなた、〜さん",
+        "ar": "حضرتك (لرجل)، سيدي",
+        "hi": "आप (पुरुष के लिए), श्रीमान"
+      },
+      "example": "Dzień dobry! Czy ma pan mapę miasta?"
+    },
+    {
+      "text": {
+        "pl": "mapa",
+        "ru": "карта",
+        "uk": "мапа",
+        "en": "map",
+        "es": "mapa",
+        "fr": "carte, plan",
+        "de": "Karte",
+        "it": "mappa, cartina",
+        "pt": "mapa",
+        "be": "карта",
+        "tr": "harita",
+        "zh": "地图",
+        "zh-Hant": "地圖",
+        "ja": "地図",
+        "ar": "خريطة",
+        "hi": "नक़्शा"
+      },
+      "example": "Dzień dobry! Czy ma pan mapę miasta?"
+    },
+    {
+      "text": {
+        "pl": "turysta",
+        "ru": "турист",
+        "uk": "турист",
+        "en": "tourist",
+        "es": "turista",
+        "fr": "touriste",
+        "de": "Tourist",
+        "it": "turista",
+        "pt": "turista",
+        "be": "турыст",
+        "tr": "turist",
+        "zh": "游客",
+        "zh-Hant": "觀光客，遊客",
+        "ja": "観光客",
+        "ar": "سائح",
+        "hi": "टूरिस्ट, पर्यटक",
+        "pl_f": "turystka",
+        "ru_f": "туристка",
+        "uk_f": "туристка",
+        "de_f": "Touristin",
+        "be_f": "турыстка",
+        "ar_f": "سائحة"
+      },
+      "example": "Tak, proszę. Czy pan jest turystą?",
+      "example_f": "Tak, proszę. Czy pani jest turystką?"
+    },
+    {
+      "text": {
+        "pl": "tutaj",
+        "ru": "здесь",
+        "uk": "тут",
+        "en": "here",
+        "es": "aquí",
+        "fr": "ici",
+        "de": "hier",
+        "it": "qui",
+        "pt": "aqui",
+        "be": "тут",
+        "tr": "burada",
+        "zh": "这里",
+        "zh-Hant": "這裡",
+        "ja": "ここ",
+        "ar": "هنا",
+        "hi": "यहाँ"
+      },
+      "example": "Nie, mieszkam tutaj."
+    },
+    {
+      "text": {
+        "pl": "witamy",
+        "ru": "добро пожаловать",
+        "uk": "ласкаво просимо",
+        "en": "welcome",
+        "es": "bienvenido",
+        "fr": "bienvenue",
+        "de": "willkommen",
+        "it": "benvenuti",
+        "pt": "bem-vindo",
+        "be": "вітаем",
+        "tr": "hoş geldiniz",
+        "zh": "欢迎",
+        "zh-Hant": "歡迎",
+        "ja": "ようこそ",
+        "ar": "أهلًا وسهلًا",
+        "hi": "स्वागत है",
+        "es_f": "bienvenida",
+        "pt_f": "bem-vinda"
+      },
+      "example": "To witamy w Warszawie!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Co dla pana?",
+        "ru": "Что для вас?",
+        "uk": "Що для вас?",
+        "en": "What can I get you?",
+        "es": "¿Qué desea?",
+        "fr": "Que désirez-vous, monsieur ?",
+        "de": "Was darf es sein?",
+        "it": "Cosa desidera il signore?",
+        "pt": "O que deseja o senhor?",
+        "be": "Што вам прапанаваць?",
+        "tr": "Size ne verelim?",
+        "zh": "先生，您需要点什么？",
+        "zh-Hant": "先生，您需要什麼？",
+        "ja": "何にいたしましょうか？",
+        "ar": "ماذا أقدّم لحضرتكَ؟",
+        "hi": "आपको क्या चाहिए?",
+        "pl_f": "Co dla pani?",
+        "fr_f": "Que désirez-vous, madame ?",
+        "it_f": "Cosa desidera la signora?",
+        "pt_f": "O que deseja a senhora?",
+        "zh_f": "女士，您需要点什么？",
+        "zh-Hant_f": "小姐，您需要什麼？",
+        "ar_f": "ماذا أقدّم لحضرتكِ؟"
+      },
+      "distractors": [
+        "ty",
+        "masz"
+      ],
+      "gap": "dla",
+      "gapWrong": [
+        "do",
+        "na"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Czy ma pan mapę miasta?",
+        "ru": "У вас есть карта города?",
+        "uk": "У вас є мапа міста?",
+        "en": "Do you have a city map?",
+        "es": "¿Tiene usted un mapa de la ciudad?",
+        "fr": "Vous avez un plan de la ville ?",
+        "de": "Haben Sie einen Stadtplan?",
+        "it": "Ha una mappa della città?",
+        "pt": "O senhor tem um mapa da cidade?",
+        "be": "У вас ёсць карта горада?",
+        "tr": "Şehir haritanız var mı?",
+        "zh": "您这儿有城市地图吗？",
+        "zh-Hant": "請問您這裡有城市地圖嗎？",
+        "ja": "街の地図はありますか？",
+        "ar": "هل لدى حضرتك خريطة للمدينة؟",
+        "hi": "क्या आपके पास शहर का नक़्शा है?"
+      },
+      "distractors": [
+        "masz",
+        "jest"
+      ],
+      "gap": "pan",
+      "gapWrong": [
+        "pani",
+        "ty"
+      ],
+      "tip": {
+        "show": "tap",
+        "text": {
+          "ru": "С pan / pani глагол как с «он»: ma, a не masz.",
+          "uk": "З pan / pani дієслово як з «він»: ma, а не masz.",
+          "en": "With pan / pani use the “he” form: ma, not masz.",
+          "es": "Con pan / pani se usa la forma de «él»: ma, no masz.",
+          "fr": "Avec pan / pani, on utilise la forme « il » : ma, et non masz.",
+          "de": "Mit pan / pani steht das Verb in der „er“-Form: ma, nicht masz.",
+          "it": "Con pan / pani si usa la forma «lui»: ma, non masz.",
+          "pt": "Com pan / pani usa-se a forma de «ele»: ma, e não masz.",
+          "be": "З pan / pani дзеяслоў як з «ён»: ma, а не masz.",
+          "tr": "pan / pani ile fiil “o” biçiminde kullanılır: ma, masz değil.",
+          "zh": "和 pan / pani 搭配时用“他”的形式：ma，而不是 masz。",
+          "zh-Hant": "搭配 pan / pani 時要用「他」的形式：說 ma，不說 masz。",
+          "ja": "pan / pani には「彼」の形を使います：masz ではなく ma。",
+          "ar": "مع pan / pani يأتي الفعل بصيغة «هو»: ma، وليس masz.",
+          "hi": "pan / pani के साथ “वह” वाला रूप लगाएँ: ma, न कि masz।"
+        }
+      }
+    },
+    {
+      "text": {
+        "pl": "Mieszkam tutaj.",
+        "ru": "Я живу здесь.",
+        "uk": "Я живу тут.",
+        "en": "I live here.",
+        "es": "Vivo aquí.",
+        "fr": "J'habite ici.",
+        "de": "Ich wohne hier.",
+        "it": "Abito qui.",
+        "pt": "Moro aqui.",
+        "be": "Я жыву тут.",
+        "tr": "Burada yaşıyorum.",
+        "zh": "我住在这儿。",
+        "zh-Hant": "我住在這裡。",
+        "ja": "ここに住んでいます。",
+        "ar": "أسكن هنا.",
+        "hi": "मैं यहीं रहता हूँ।",
+        "hi_f": "मैं यहीं रहती हूँ।"
+      },
+      "distractors": [
+        "jestem",
+        "tam"
+      ],
+      "gap": "Mieszkam",
+      "gapWrong": [
+        "Mieszkasz",
+        "Mieszka"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Czy ma pan {slot}?",
+    "items": [
+      {
+        "word": {
+          "pl": "długopis",
+          "ru": "ручка",
+          "uk": "ручка",
+          "en": "pen",
+          "es": "bolígrafo",
+          "fr": "stylo",
+          "de": "Kugelschreiber",
+          "it": "penna",
+          "pt": "esferográfica",
+          "be": "ручка",
+          "tr": "tükenmez kalem",
+          "zh": "圆珠笔",
+          "zh-Hant": "原子筆",
+          "ja": "ボールペン",
+          "ar": "قلم حبر",
+          "hi": "पेन"
+        },
+        "sentence": {
+          "pl": "Czy ma pan długopis?",
+          "ru": "У вас есть ручка?",
+          "uk": "У вас є ручка?",
+          "en": "Do you have a pen?",
+          "es": "¿Tiene usted un bolígrafo?",
+          "fr": "Vous avez un stylo ?",
+          "de": "Haben Sie einen Kugelschreiber?",
+          "it": "Ha una penna?",
+          "pt": "O senhor tem uma esferográfica?",
+          "be": "У вас ёсць ручка?",
+          "tr": "Tükenmez kaleminiz var mı?",
+          "zh": "您这儿有圆珠笔吗？",
+          "zh-Hant": "請問您這裡有原子筆嗎？",
+          "ja": "ボールペンはありますか？",
+          "ar": "هل لدى حضرتك قلم حبر؟",
+          "hi": "क्या आपके पास पेन है?"
+        }
+      },
+      {
+        "word": {
+          "pl": "parasol",
+          "ru": "зонт",
+          "uk": "парасолька",
+          "en": "umbrella",
+          "es": "paraguas",
+          "fr": "parapluie",
+          "de": "Regenschirm",
+          "it": "ombrello",
+          "pt": "guarda-chuva",
+          "be": "парасон",
+          "tr": "şemsiye",
+          "zh": "雨伞",
+          "zh-Hant": "雨傘",
+          "ja": "傘",
+          "ar": "مظلة",
+          "hi": "छाता"
+        },
+        "sentence": {
+          "pl": "Czy ma pan parasol?",
+          "ru": "У вас есть зонт?",
+          "uk": "У вас є парасолька?",
+          "en": "Do you have an umbrella?",
+          "es": "¿Tiene usted un paraguas?",
+          "fr": "Vous avez un parapluie ?",
+          "de": "Haben Sie einen Regenschirm?",
+          "it": "Ha un ombrello?",
+          "pt": "O senhor tem um guarda-chuva?",
+          "be": "У вас ёсць парасон?",
+          "tr": "Şemsiyeniz var mı?",
+          "zh": "您这儿有雨伞吗？",
+          "zh-Hant": "請問您這裡有雨傘嗎？",
+          "ja": "傘はありますか？",
+          "ar": "هل لدى حضرتك مظلة؟",
+          "hi": "क्या आपके पास छाता है?"
+        }
+      },
+      {
+        "word": {
+          "pl": "plaster",
+          "ru": "пластырь",
+          "uk": "пластир",
+          "en": "plaster",
+          "es": "tirita",
+          "fr": "pansement",
+          "de": "Pflaster",
+          "it": "cerotto",
+          "pt": "penso",
+          "be": "пластыр",
+          "tr": "yara bandı",
+          "zh": "创可贴",
+          "zh-Hant": "OK繃",
+          "ja": "絆創膏",
+          "ar": "لصقة جروح",
+          "hi": "बैंड-एड"
+        },
+        "sentence": {
+          "pl": "Czy ma pan plaster?",
+          "ru": "У вас есть пластырь?",
+          "uk": "У вас є пластир?",
+          "en": "Do you have a plaster?",
+          "es": "¿Tiene usted una tirita?",
+          "fr": "Vous avez un pansement ?",
+          "de": "Haben Sie ein Pflaster?",
+          "it": "Ha un cerotto?",
+          "pt": "O senhor tem um penso?",
+          "be": "У вас ёсць пластыр?",
+          "tr": "Yara bandınız var mı?",
+          "zh": "您这儿有创可贴吗？",
+          "zh-Hant": "請問您這裡有OK繃嗎？",
+          "ja": "絆創膏はありますか？",
+          "ar": "هل لدى حضرتك لصقة جروح؟",
+          "hi": "क्या आपके पास बैंड-एड है?"
+        }
+      }
+    ]
+  }
+}

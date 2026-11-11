@@ -1,0 +1,541 @@
+{
+  "id": "ktora-godzina",
+  "title": {
+    "pl": "Która godzina?",
+    "ru": "Который час?",
+    "uk": "Котра година?",
+    "en": "What time is it?",
+    "es": "¿Qué hora es?",
+    "fr": "Quelle heure est-il ?",
+    "de": "Wie spät ist es?",
+    "it": "Che ore sono?",
+    "pt": "Que horas são?",
+    "be": "Каторая гадзіна?",
+    "tr": "Saat kaç?",
+    "zh": "现在几点？",
+    "zh-Hant": "現在幾點？",
+    "ja": "今何時？",
+    "ar": "كم الساعة؟",
+    "hi": "कितने बजे हैं?"
+  },
+  "subtitle": {
+    "pl": "Zapytaj o godzinę i umów się",
+    "ru": "Спросить время и договориться",
+    "uk": "Запитати час і домовитися",
+    "en": "Ask the time and make plans",
+    "es": "Pregunta la hora y queda con alguien",
+    "fr": "Demande l'heure et fixe un rendez-vous",
+    "de": "Frag nach der Uhrzeit und verabrede dich",
+    "it": "Chiedi l'ora e fissa un appuntamento",
+    "pt": "Pergunta as horas e marca um encontro",
+    "be": "Спытаць, каторая гадзіна, і дамовіцца",
+    "tr": "Saati sor ve buluşma ayarla",
+    "zh": "问问时间，约好见面",
+    "zh-Hant": "問問時間，約好見面",
+    "ja": "時間を聞いて、約束しよう",
+    "ar": "السؤال عن الوقت وتحديد موعد",
+    "hi": "समय पूछें और मिलने का प्लान बनाएँ"
+  },
+  "with": "rabbit",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "Ложный друг: godzina — это «час», а «время» — czas. Часы называют порядковыми числами: piąta — «пятая», то есть 5 часов.",
+      "uk": "Godzina — це «година», а «час» — czas, як і українською. Години називають порядковими числівниками: piąta — «п'ята», тобто п'ята година (5:00).",
+      "en": "Careful: godzina means “hour”, and “time” is czas. Hours use ordinal numbers: piąta — “the fifth”, i.e. 5 o'clock.",
+      "es": "Ojo: godzina significa «hora», y «tiempo» es czas. Las horas se dicen con ordinales: piąta, «la quinta», es decir, las cinco.",
+      "fr": "Attention : godzina, c'est « l'heure », et le « temps », c'est czas. Pour dire l'heure, on utilise les ordinaux : piąta — « la cinquième », c'est-à-dire 5 heures.",
+      "de": "Vorsicht: godzina heißt „Stunde“, und „Zeit“ ist czas. Uhrzeiten sagt man mit Ordnungszahlen: piąta – „die fünfte“, also 5 Uhr.",
+      "it": "Attenzione: godzina vuol dire «ora», mentre «tempo» si dice czas. Per le ore si usano gli ordinali: piąta — «la quinta», cioè le 5.",
+      "pt": "Atenção: godzina quer dizer «hora», e «tempo» é czas. As horas dizem-se com ordinais: piąta — «a quinta», ou seja, as cinco.",
+      "be": "godzina — гэта «гадзіна», а czas — «час», як і па-беларуску. Гадзіны называюць парадкавымі лікамі: piąta — «пятая», гэта значыць роўна 5 гадзін (не блытай з беларускім «пятая гадзіна», калі яшчэ няма пяці).",
+      "tr": "Dikkat: godzina “saat” (60 dakika) demektir, “zaman” ise czas. Saatler sıra sayılarıyla söylenir: piąta — “beşinci”, yani saat 5.",
+      "zh": "注意：godzina 是“小时”，“时间”是 czas。说几点要用序数词：piąta 是“第五”，也就是 5 点。",
+      "zh-Hant": "注意：godzina 是「小時」，「時間」是 czas。說幾點要用序數：piąta 是「第五」，也就是 5 點。",
+      "ja": "注意：godzina は「1時間」のことで、「時間（とき）」そのものは czas です。時刻は序数で言います：piąta は「5番目」、つまり5時です。",
+      "ar": "تنبيه: godzina تعني «ساعة» (60 دقيقة)، أما «الوقت» فهو czas. وتُقال الساعات بالأعداد الترتيبية: piąta تعني «الخامسة»، أي الساعة 5.",
+      "hi": "ध्यान दें: godzina का मतलब “घंटा” है, और “समय” होता है czas। घंटे क्रमसूचक संख्याओं से बताए जाते हैं: piąta — “पाँचवाँ (घंटा)”, यानी 5 बजे।"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Idziemy wieczorem do kina?",
+        "ru": "Идём вечером в кино?",
+        "uk": "Ідемо ввечері в кіно?",
+        "en": "Shall we go to the cinema tonight?",
+        "es": "¿Vamos al cine esta noche?",
+        "fr": "On va au cinéma ce soir ?",
+        "de": "Gehen wir heute Abend ins Kino?",
+        "it": "Andiamo al cinema stasera?",
+        "pt": "Vamos ao cinema logo à noite?",
+        "be": "Пойдзем увечары ў кіно?",
+        "tr": "Bu akşam sinemaya gidelim mi?",
+        "zh": "晚上我们去看电影吧？",
+        "zh-Hant": "晚上我們去看電影好不好？",
+        "ja": "今夜、映画に行かない？",
+        "ar": "هل نذهب إلى السينما هذا المساء؟",
+        "hi": "आज शाम सिनेमा चलें?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Tak! O której?",
+        "ru": "Да! Во сколько?",
+        "uk": "Так! О котрій?",
+        "en": "Yes! What time?",
+        "es": "¡Sí! ¿A qué hora?",
+        "fr": "Oui ! À quelle heure ?",
+        "de": "Ja! Um wie viel Uhr?",
+        "it": "Sì! A che ora?",
+        "pt": "Sim! A que horas?",
+        "be": "Так! А якой гадзіне?",
+        "tr": "Evet! Saat kaçta?",
+        "zh": "好啊！几点？",
+        "zh-Hant": "好啊！幾點？",
+        "ja": "うん！何時に？",
+        "ar": "نعم! في أي ساعة؟",
+        "hi": "हाँ! कितने बजे?"
+      },
+      "task": {
+        "build": [
+          "Nie!",
+          "godzina"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "O siódmej. A która jest teraz?",
+        "ru": "В семь. А сейчас который час?",
+        "uk": "О сьомій. А котра зараз?",
+        "en": "At seven. What time is it now?",
+        "es": "A las siete. ¿Y qué hora es ahora?",
+        "fr": "À sept heures. Et là, il est quelle heure ?",
+        "de": "Um sieben. Und wie spät ist es jetzt?",
+        "it": "Alle sette. E adesso che ore sono?",
+        "pt": "Às sete. E que horas são agora?",
+        "be": "А сёмай. А колькі цяпер?",
+        "tr": "Yedide. Peki şimdi saat kaç?",
+        "zh": "七点。那现在几点了？",
+        "zh-Hant": "七點。那現在幾點？",
+        "ja": "7時。で、今何時？",
+        "ar": "في السابعة. وكم الساعة الآن؟",
+        "hi": "सात बजे। और अभी कितने बजे हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Jest piąta.",
+        "ru": "Пять часов.",
+        "uk": "П'ята година.",
+        "en": "It's five o'clock.",
+        "es": "Son las cinco.",
+        "fr": "Il est cinq heures.",
+        "de": "Es ist fünf Uhr.",
+        "it": "Sono le cinque.",
+        "pt": "São cinco horas.",
+        "be": "Пяць гадзін.",
+        "tr": "Saat beş.",
+        "zh": "现在五点。",
+        "zh-Hant": "現在五點。",
+        "ja": "5時だよ。",
+        "ar": "الساعة الخامسة.",
+        "hi": "पाँच बजे हैं।"
+      },
+      "task": {
+        "choose": [
+          "Jest pięć.",
+          "Są piąta."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "To mamy jeszcze dwie godziny!",
+        "ru": "Значит, у нас ещё два часа!",
+        "uk": "Значить, у нас ще дві години!",
+        "en": "So we've still got two hours!",
+        "es": "¡Pues aún tenemos dos horas!",
+        "fr": "Alors on a encore deux heures !",
+        "de": "Dann haben wir noch zwei Stunden!",
+        "it": "Allora abbiamo ancora due ore!",
+        "pt": "Então ainda temos duas horas!",
+        "be": "Значыць, у нас яшчэ дзве гадзіны!",
+        "tr": "O zaman daha iki saatimiz var!",
+        "zh": "那我们还有两个小时！",
+        "zh-Hant": "那我們還有兩個小時！",
+        "ja": "じゃあ、まだ2時間あるね！",
+        "ar": "إذن ما زالت أمامنا ساعتان!",
+        "hi": "तो हमारे पास अभी दो घंटे और हैं!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Super, do zobaczenia o siódmej!",
+        "ru": "Супер, до встречи в семь!",
+        "uk": "Супер, до зустрічі о сьомій!",
+        "en": "Great, see you at seven!",
+        "es": "¡Genial, nos vemos a las siete!",
+        "fr": "Super, on se voit à sept heures !",
+        "de": "Super, bis um sieben!",
+        "it": "Perfetto, ci vediamo alle sette!",
+        "pt": "Ótimo, até às sete!",
+        "be": "Супер, да сустрэчы а сёмай!",
+        "tr": "Süper, yedide görüşürüz!",
+        "zh": "太好了，七点见！",
+        "zh-Hant": "太好了，七點見！",
+        "ja": "いいね、じゃあ7時にね！",
+        "ar": "رائع، إلى اللقاء في السابعة!",
+        "hi": "बढ़िया, सात बजे मिलते हैं!"
+      },
+      "task": {
+        "build": [
+          "siedem",
+          "godzina"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "wieczorem",
+        "ru": "вечером",
+        "uk": "ввечері",
+        "en": "in the evening",
+        "es": "por la noche",
+        "fr": "le soir",
+        "de": "abends",
+        "it": "di sera",
+        "pt": "à noite",
+        "be": "увечары",
+        "tr": "akşamleyin",
+        "zh": "晚上",
+        "zh-Hant": "晚上",
+        "ja": "夜に、夕方に",
+        "ar": "مساءً",
+        "hi": "शाम को"
+      },
+      "example": "Idziemy wieczorem do kina?"
+    },
+    {
+      "text": {
+        "pl": "o której",
+        "ru": "во сколько",
+        "uk": "о котрій",
+        "en": "what time",
+        "es": "a qué hora",
+        "fr": "à quelle heure",
+        "de": "um wie viel Uhr",
+        "it": "a che ora",
+        "pt": "a que horas",
+        "be": "а якой гадзіне",
+        "tr": "saat kaçta",
+        "zh": "几点",
+        "zh-Hant": "幾點",
+        "ja": "何時に",
+        "ar": "في أي ساعة",
+        "hi": "कितने बजे"
+      },
+      "example": "Tak! O której?"
+    },
+    {
+      "text": {
+        "pl": "o siódmej",
+        "ru": "в семь",
+        "uk": "о сьомій",
+        "en": "at seven",
+        "es": "a las siete",
+        "fr": "à sept heures",
+        "de": "um sieben",
+        "it": "alle sette",
+        "pt": "às sete",
+        "be": "а сёмай",
+        "tr": "yedide",
+        "zh": "七点",
+        "zh-Hant": "七點",
+        "ja": "7時に",
+        "ar": "في السابعة",
+        "hi": "सात बजे"
+      },
+      "example": "O siódmej. A która jest teraz?"
+    },
+    {
+      "text": {
+        "pl": "teraz",
+        "ru": "сейчас",
+        "uk": "зараз",
+        "en": "now",
+        "es": "ahora",
+        "fr": "maintenant",
+        "de": "jetzt",
+        "it": "adesso",
+        "pt": "agora",
+        "be": "цяпер",
+        "tr": "şimdi",
+        "zh": "现在",
+        "zh-Hant": "現在",
+        "ja": "今",
+        "ar": "الآن",
+        "hi": "अभी"
+      },
+      "example": "O siódmej. A która jest teraz?"
+    },
+    {
+      "text": {
+        "pl": "godzina",
+        "ru": "час",
+        "uk": "година",
+        "en": "hour",
+        "es": "hora",
+        "fr": "heure",
+        "de": "Stunde",
+        "it": "ora",
+        "pt": "hora",
+        "be": "гадзіна",
+        "tr": "saat",
+        "zh": "小时，钟点",
+        "zh-Hant": "小時，鐘頭",
+        "ja": "時間（1時間）",
+        "ar": "ساعة",
+        "hi": "घंटा"
+      },
+      "example": "To mamy jeszcze dwie godziny!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "O której?",
+        "ru": "Во сколько?",
+        "uk": "О котрій?",
+        "en": "What time?",
+        "es": "¿A qué hora?",
+        "fr": "À quelle heure ?",
+        "de": "Um wie viel Uhr?",
+        "it": "A che ora?",
+        "pt": "A que horas?",
+        "be": "А якой гадзіне?",
+        "tr": "Saat kaçta?",
+        "zh": "几点？",
+        "zh-Hant": "幾點？",
+        "ja": "何時に？",
+        "ar": "في أي ساعة؟",
+        "hi": "कितने बजे?"
+      },
+      "distractors": [
+        "Jest",
+        "godzina"
+      ],
+      "gap": "której",
+      "gapWrong": [
+        "który",
+        "która"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Jest piąta.",
+        "ru": "Пять часов.",
+        "uk": "П'ята година.",
+        "en": "It's five o'clock.",
+        "es": "Son las cinco.",
+        "fr": "Il est cinq heures.",
+        "de": "Es ist fünf Uhr.",
+        "it": "Sono le cinque.",
+        "pt": "São cinco horas.",
+        "be": "Пяць гадзін.",
+        "tr": "Saat beş.",
+        "zh": "现在五点。",
+        "zh-Hant": "現在五點。",
+        "ja": "5時だよ。",
+        "ar": "الساعة الخامسة.",
+        "hi": "पाँच बजे हैं।"
+      },
+      "distractors": [
+        "godzina",
+        "siódma"
+      ],
+      "gap": "piąta",
+      "gapWrong": [
+        "pięć",
+        "piąty"
+      ],
+      "tip": {
+        "show": "tap",
+        "text": {
+          "ru": "Не «pięć», а «piąta»: часы называют порядковым числом — «пятая» (godzina).",
+          "uk": "Не «pięć», а «piąta»: години називають як «п'ята (година)».",
+          "en": "Not “pięć” but “piąta”: hours are said as “the fifth (hour)”.",
+          "es": "No «pięć», sino «piąta»: las horas se dicen como «la quinta (hora)».",
+          "fr": "Pas « pięć », mais « piąta » : on dit l'heure comme « la cinquième (heure) ».",
+          "de": "Nicht „pięć“, sondern „piąta“: Uhrzeiten sagt man als „die fünfte (Stunde)“.",
+          "it": "Non «pięć» ma «piąta»: le ore si dicono come «la quinta (ora)».",
+          "pt": "Não «pięć», mas «piąta»: as horas dizem-se como «a quinta (hora)».",
+          "be": "Не «pięć», а «piąta»: гадзіны называюць як «пятая (гадзіна)».",
+          "tr": "“pięć” değil, “piąta”: saatler “beşinci (saat)” diye söylenir.",
+          "zh": "不是“pięć”，而是“piąta”：几点要说成“第五（个钟点）”。",
+          "zh-Hant": "不是「pięć」，而是「piąta」：幾點要說成「第五（個鐘頭）」。",
+          "ja": "「pięć」ではなく「piąta」：時刻は「5番目（の時間）」のように言います。",
+          "ar": "ليس «pięć» بل «piąta»: تُقال الساعات بصيغة «الخامسة» تمامًا كما في العربية.",
+          "hi": "“pięć” नहीं, बल्कि “piąta”: घंटे “पाँचवाँ (घंटा)” की तरह बताए जाते हैं।"
+        }
+      }
+    },
+    {
+      "text": {
+        "pl": "Do zobaczenia o siódmej!",
+        "ru": "До встречи в семь!",
+        "uk": "До зустрічі о сьомій!",
+        "en": "See you at seven!",
+        "es": "¡Nos vemos a las siete!",
+        "fr": "On se voit à sept heures !",
+        "de": "Bis um sieben!",
+        "it": "Ci vediamo alle sette!",
+        "pt": "Até às sete!",
+        "be": "Да сустрэчы а сёмай!",
+        "tr": "Yedide görüşürüz!",
+        "zh": "七点见！",
+        "zh-Hant": "七點見！",
+        "ja": "じゃあ7時にね！",
+        "ar": "إلى اللقاء في السابعة!",
+        "hi": "सात बजे मिलते हैं!"
+      },
+      "distractors": [
+        "Na",
+        "jest"
+      ],
+      "gap": "siódmej",
+      "gapWrong": [
+        "siedem",
+        "siódma"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Jest {slot}.",
+    "items": [
+      {
+        "word": {
+          "pl": "trzecia",
+          "ru": "три часа",
+          "uk": "третя",
+          "en": "three o'clock",
+          "es": "las tres",
+          "fr": "trois heures",
+          "de": "drei Uhr",
+          "it": "le tre",
+          "pt": "três horas",
+          "be": "тры гадзіны",
+          "tr": "saat üç",
+          "zh": "三点",
+          "zh-Hant": "三點",
+          "ja": "3時",
+          "ar": "الثالثة",
+          "hi": "तीन बजे"
+        },
+        "sentence": {
+          "pl": "Jest trzecia.",
+          "ru": "Три часа.",
+          "uk": "Третя година.",
+          "en": "It's three o'clock.",
+          "es": "Son las tres.",
+          "fr": "Il est trois heures.",
+          "de": "Es ist drei Uhr.",
+          "it": "Sono le tre.",
+          "pt": "São três horas.",
+          "be": "Тры гадзіны.",
+          "tr": "Saat üç.",
+          "zh": "现在三点。",
+          "zh-Hant": "現在三點。",
+          "ja": "3時だよ。",
+          "ar": "الساعة الثالثة.",
+          "hi": "तीन बजे हैं।"
+        }
+      },
+      {
+        "word": {
+          "pl": "dziewiąta",
+          "ru": "девять часов",
+          "uk": "дев'ята",
+          "en": "nine o'clock",
+          "es": "las nueve",
+          "fr": "neuf heures",
+          "de": "neun Uhr",
+          "it": "le nove",
+          "pt": "nove horas",
+          "be": "дзевяць гадзін",
+          "tr": "saat dokuz",
+          "zh": "九点",
+          "zh-Hant": "九點",
+          "ja": "9時",
+          "ar": "التاسعة",
+          "hi": "नौ बजे"
+        },
+        "sentence": {
+          "pl": "Jest dziewiąta.",
+          "ru": "Девять часов.",
+          "uk": "Дев'ята година.",
+          "en": "It's nine o'clock.",
+          "es": "Son las nueve.",
+          "fr": "Il est neuf heures.",
+          "de": "Es ist neun Uhr.",
+          "it": "Sono le nove.",
+          "pt": "São nove horas.",
+          "be": "Дзевяць гадзін.",
+          "tr": "Saat dokuz.",
+          "zh": "现在九点。",
+          "zh-Hant": "現在九點。",
+          "ja": "9時だよ。",
+          "ar": "الساعة التاسعة.",
+          "hi": "नौ बजे हैं।"
+        }
+      },
+      {
+        "word": {
+          "pl": "dwunasta",
+          "ru": "двенадцать часов",
+          "uk": "дванадцята",
+          "en": "twelve o'clock",
+          "es": "las doce",
+          "fr": "douze heures",
+          "de": "zwölf Uhr",
+          "it": "le dodici",
+          "pt": "doze horas",
+          "be": "дванаццаць гадзін",
+          "tr": "saat on iki",
+          "zh": "十二点",
+          "zh-Hant": "十二點",
+          "ja": "12時",
+          "ar": "الثانية عشرة",
+          "hi": "बारह बजे"
+        },
+        "sentence": {
+          "pl": "Jest dwunasta.",
+          "ru": "Двенадцать часов.",
+          "uk": "Дванадцята година.",
+          "en": "It's twelve o'clock.",
+          "es": "Son las doce.",
+          "fr": "Il est douze heures.",
+          "de": "Es ist zwölf Uhr.",
+          "it": "Sono le dodici.",
+          "pt": "São doze horas.",
+          "be": "Дванаццаць гадзін.",
+          "tr": "Saat on iki.",
+          "zh": "现在十二点。",
+          "zh-Hant": "現在十二點。",
+          "ja": "12時だよ。",
+          "ar": "الساعة الثانية عشرة.",
+          "hi": "बारह बजे हैं।"
+        }
+      }
+    ]
+  }
+}

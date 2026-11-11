@@ -1,0 +1,157 @@
+{
+  "chapters": [
+    {
+      "id": "first-steps",
+      "title": {
+        "en": "First steps",
+        "es": "Primeros pasos",
+        "fr": "Premiers pas",
+        "de": "Erste Schritte",
+        "it": "Primi passi",
+        "pt": "Primeiros passos",
+        "ru": "Первые шаги",
+        "uk": "Перші кроки",
+        "be": "Першыя крокі",
+        "pl": "Pierwsze kroki",
+        "tr": "İlk adımlar",
+        "zh": "第一步",
+        "zh-Hant": "第一步",
+        "ja": "はじめの一歩",
+        "ar": "الخطوات الأولى",
+        "hi": "पहले कदम"
+      },
+      "units": [
+        {
+          "title": {
+            "en": "Saying hello",
+            "es": "Saludos",
+            "fr": "Dire bonjour",
+            "de": "Begrüßung",
+            "it": "Saluti",
+            "pt": "Cumprimentos",
+            "ru": "Приветствие",
+            "uk": "Привітання",
+            "be": "Прывітанне",
+            "pl": "Powitania",
+            "tr": "Selamlaşma",
+            "zh": "打招呼",
+            "zh-Hant": "打招呼",
+            "ja": "あいさつ",
+            "ar": "التحية",
+            "hi": "नमस्ते कहना"
+          },
+          "map": "meadow",
+          "lessons": [
+            "hello",
+            "hi",
+            "nice-to-meet-you"
+          ]
+        },
+        {
+          "title": {
+            "en": "Being polite",
+            "es": "Buenos modales",
+            "fr": "La politesse",
+            "de": "Höflich sein",
+            "it": "Buone maniere",
+            "pt": "Boas maneiras",
+            "ru": "Вежливость",
+            "uk": "Ввічливість",
+            "be": "Ветлівасць",
+            "pl": "Grzecznie",
+            "tr": "Nezaket",
+            "zh": "讲礼貌",
+            "zh-Hant": "有禮貌",
+            "ja": "礼儀正しく",
+            "ar": "اللباقة",
+            "hi": "शिष्टाचार"
+          },
+          "map": "forest",
+          "lessons": [
+            "do-you-have",
+            "call-me",
+            "excuse-me"
+          ]
+        },
+        {
+          "title": {
+            "en": "Magic words",
+            "es": "Palabras mágicas",
+            "fr": "Les mots magiques",
+            "de": "Zauberwörter",
+            "it": "Parole magiche",
+            "pt": "Palavras mágicas",
+            "ru": "Волшебные слова",
+            "uk": "Чарівні слова",
+            "be": "Чароўныя словы",
+            "pl": "Magiczne słowa",
+            "tr": "Sihirli sözcükler",
+            "zh": "魔法词语",
+            "zh-Hant": "魔法詞語",
+            "ja": "魔法の言葉",
+            "ar": "كلمات سحرية",
+            "hi": "जादुई शब्द"
+          },
+          "map": "farm",
+          "lessons": [
+            "please",
+            "id-like",
+            "thank-you"
+          ]
+        },
+        {
+          "title": {
+            "en": "Say it again",
+            "es": "¿Puede repetir?",
+            "fr": "Répétez, s'il vous plaît",
+            "de": "Bitte noch einmal",
+            "it": "Può ripetere?",
+            "pt": "Pode repetir?",
+            "ru": "Повторите, пожалуйста",
+            "uk": "Повторіть, будь ласка",
+            "be": "Паўтарыце, калі ласка",
+            "pl": "Proszę powtórzyć",
+            "tr": "Tekrar, lütfen",
+            "zh": "请再说一遍",
+            "zh-Hant": "請再說一次",
+            "ja": "もう一度お願いします",
+            "ar": "أعِد من فضلك",
+            "hi": "फिर से कहिए"
+          },
+          "map": "meadow",
+          "lessons": [
+            "dont-understand",
+            "a-little-english",
+            "what-does-it-mean"
+          ]
+        },
+        {
+          "title": {
+            "en": "Numbers and time",
+            "es": "Números y horas",
+            "fr": "Les nombres et l'heure",
+            "de": "Zahlen und Uhrzeit",
+            "it": "Numeri e ore",
+            "pt": "Números e horas",
+            "ru": "Числа и время",
+            "uk": "Числа і час",
+            "be": "Лікі і час",
+            "pl": "Liczby i czas",
+            "tr": "Sayılar ve saat",
+            "zh": "数字和时间",
+            "zh-Hant": "數字和時間",
+            "ja": "数字と時間",
+            "ar": "الأرقام والوقت",
+            "hi": "संख्याएँ और समय"
+          },
+          "map": "forest",
+          "lessons": [
+            "numbers",
+            "what-time",
+            "checkpoint"
+          ]
+        }
+      ]
+    }
+  ]
+}

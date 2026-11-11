@@ -1,0 +1,616 @@
+{
+  "id": "po-polsku",
+  "title": {
+    "pl": "Po polsku",
+    "ru": "По-польски",
+    "uk": "Польською",
+    "en": "In Polish",
+    "es": "En polaco",
+    "fr": "En polonais",
+    "de": "Auf Polnisch",
+    "it": "In polacco",
+    "pt": "Em polaco",
+    "be": "Па-польску",
+    "tr": "Lehçe",
+    "zh": "用波兰语",
+    "zh-Hant": "用波蘭語",
+    "ja": "ポーランド語で",
+    "ar": "بالبولندية",
+    "hi": "पोलिश में"
+  },
+  "subtitle": {
+    "pl": "Powiedz, w jakim języku mówisz",
+    "ru": "Сказать, на каком языке говоришь",
+    "uk": "Сказати, якою мовою говориш",
+    "en": "Say which language you speak",
+    "es": "Di en qué idioma hablas",
+    "fr": "Dis quelle langue tu parles",
+    "de": "Sag, welche Sprache du sprichst",
+    "it": "Di' che lingua parli",
+    "pt": "Diz que língua falas",
+    "be": "Сказаць, на якой мове ты гаворыш",
+    "tr": "Hangi dili konuştuğunu söyle",
+    "zh": "说出你会讲哪种语言",
+    "zh-Hant": "說出你會說哪種語言",
+    "ja": "話せる言語を伝えよう",
+    "ar": "الإخبار باللغة التي أتحدثها",
+    "hi": "बताएँ कि आपको कौन-सी भाषा आती है"
+  },
+  "with": "fox",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "Вопрос, на который отвечают «да» или «нет», часто начинается с czy: Czy mówi pan po angielsku?",
+      "uk": "Питання, на яке відповідають «так» або «ні», часто починається з czy: Czy mówi pan po angielsku?",
+      "en": "Yes/no questions often start with czy: Czy mówi pan po angielsku?",
+      "es": "Las preguntas de sí o no suelen empezar con czy: Czy mówi pan po angielsku?",
+      "fr": "Les questions auxquelles on répond par « oui » ou « non » commencent souvent par czy : Czy mówi pan po angielsku?",
+      "de": "Ja-Nein-Fragen beginnen oft mit czy: Czy mówi pan po angielsku?",
+      "it": "Le domande a cui si risponde «sì» o «no» iniziano spesso con czy: Czy mówi pan po angielsku?",
+      "pt": "As perguntas de sim ou não começam muitas vezes com czy: Czy mówi pan po angielsku?",
+      "be": "Пытанне, на якое адказваюць «так» ці «не», часта пачынаецца з czy: Czy mówi pan po angielsku?",
+      "tr": "Evet/hayır soruları genellikle czy ile başlar: Czy mówi pan po angielsku?",
+      "zh": "一般疑问句（用“是”或“不是”回答的问题）常以 czy 开头：Czy mówi pan po angielsku?",
+      "zh-Hant": "是非問句（用「是」或「不是」回答的問題）常用 czy 開頭：Czy mówi pan po angielsku?",
+      "ja": "「はい／いいえ」で答える質問は、よく czy で始まります：Czy mówi pan po angielsku?",
+      "ar": "كثيرًا ما تبدأ الأسئلة التي جوابها «نعم» أو «لا» بـ czy: Czy mówi pan po angielsku?",
+      "hi": "जिन सवालों का जवाब “हाँ” या “नहीं” में होता है, वे अक्सर czy से शुरू होते हैं: Czy mówi pan po angielsku?"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Dzień dobry! Szuka pan czegoś?",
+        "ru": "Здравствуйте! Вы что-то ищете?",
+        "uk": "Добрий день! Ви щось шукаєте?",
+        "en": "Hello! Looking for something?",
+        "es": "¡Buenos días! ¿Busca algo?",
+        "fr": "Bonjour ! Vous cherchez quelque chose ?",
+        "de": "Guten Tag! Suchen Sie etwas?",
+        "it": "Buongiorno! Cerca qualcosa?",
+        "pt": "Bom dia! O senhor procura alguma coisa?",
+        "be": "Добры дзень! Вы нешта шукаеце?",
+        "tr": "Merhaba! Bir şey mi arıyorsunuz?",
+        "zh": "您好！您在找什么吗？",
+        "zh-Hant": "您好！您在找什麼嗎？",
+        "ja": "こんにちは！何かお探しですか？",
+        "ar": "مرحبًا! هل حضرتكَ تبحث عن شيء؟",
+        "hi": "नमस्ते! कुछ ढूँढ रहे हैं?",
+        "pl_f": "Dzień dobry! Szuka pani czegoś?",
+        "pt_f": "Bom dia! A senhora procura alguma coisa?",
+        "ar_f": "مرحبًا! هل حضرتكِ تبحثين عن شيء؟",
+        "hi_f": "नमस्ते! कुछ ढूँढ रही हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Przepraszam, czy mówi pan po angielsku?",
+        "ru": "Извините, вы говорите по-английски?",
+        "uk": "Перепрошую, ви говорите англійською?",
+        "en": "Excuse me, do you speak English?",
+        "es": "Perdone, ¿habla usted inglés?",
+        "fr": "Excusez-moi, vous parlez anglais ?",
+        "de": "Entschuldigung, sprechen Sie Englisch?",
+        "it": "Mi scusi, parla inglese?",
+        "pt": "Desculpe, o senhor fala inglês?",
+        "be": "Прабачце, вы гаворыце па-англійску?",
+        "tr": "Affedersiniz, İngilizce konuşuyor musunuz?",
+        "zh": "打扰一下，您会说英语吗？",
+        "zh-Hant": "不好意思，請問您會說英文嗎？",
+        "ja": "すみません、英語は話せますか？",
+        "ar": "عذرًا، هل حضرتك تتكلم الإنجليزية؟",
+        "hi": "माफ़ कीजिए, क्या आप अंग्रेज़ी बोलते हैं?"
+      },
+      "task": {
+        "build": [
+          "mówisz",
+          "polsku"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Niestety nie, tylko po polsku.",
+        "ru": "К сожалению, нет, только по-польски.",
+        "uk": "На жаль, ні, тільки польською.",
+        "en": "Sorry, no, only Polish.",
+        "es": "Por desgracia no, solo polaco.",
+        "fr": "Malheureusement non, seulement polonais.",
+        "de": "Leider nicht, nur Polnisch.",
+        "it": "Purtroppo no, solo polacco.",
+        "pt": "Infelizmente não, só polaco.",
+        "be": "На жаль, не, толькі па-польску.",
+        "tr": "Maalesef hayır, sadece Lehçe.",
+        "zh": "可惜不会，我只会说波兰语。",
+        "zh-Hant": "可惜不會，我只會說波蘭語。",
+        "ja": "残念ながら話せません。ポーランド語だけです。",
+        "ar": "للأسف لا، البولندية فقط.",
+        "hi": "अफ़सोस, नहीं, सिर्फ़ पोलिश।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Mówię trochę po polsku.",
+        "ru": "Я немного говорю по-польски.",
+        "uk": "Я трохи говорю польською.",
+        "en": "I speak a little Polish.",
+        "es": "Hablo un poco de polaco.",
+        "fr": "Je parle un peu polonais.",
+        "de": "Ich spreche ein bisschen Polnisch.",
+        "it": "Parlo un po' di polacco.",
+        "pt": "Falo um pouco de polaco.",
+        "be": "Я трохі гавару па-польску.",
+        "tr": "Biraz Lehçe konuşuyorum.",
+        "zh": "我会说一点波兰语。",
+        "zh-Hant": "我會說一點波蘭語。",
+        "ja": "ポーランド語が少し話せます。",
+        "ar": "أتكلم البولندية قليلًا.",
+        "hi": "मैं थोड़ी-सी पोलिश बोलता हूँ।",
+        "hi_f": "मैं थोड़ी-सी पोलिश बोलती हूँ।"
+      },
+      "task": {
+        "choose": [
+          "Mówisz trochę po polsku.",
+          "Mówię trochę po polski."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Bardzo dobrze pan mówi! A czego pan szuka?",
+        "ru": "Вы очень хорошо говорите! А что вы ищете?",
+        "uk": "Ви дуже добре говорите! А що ви шукаєте?",
+        "en": "You speak very well! So what are you looking for?",
+        "es": "¡Habla usted muy bien! ¿Y qué busca?",
+        "fr": "Vous parlez très bien ! Alors, que cherchez-vous ?",
+        "de": "Sie sprechen sehr gut! Und was suchen Sie?",
+        "it": "Parla molto bene! E cosa cerca?",
+        "pt": "O senhor fala muito bem! E o que procura?",
+        "be": "Вы вельмі добра гаворыце! А што вы шукаеце?",
+        "tr": "Çok iyi konuşuyorsunuz! Peki ne arıyorsunuz?",
+        "zh": "您说得很好！那您在找什么？",
+        "zh-Hant": "您說得很好！那您在找什麼呢？",
+        "ja": "とてもお上手ですね！それで、何をお探しですか？",
+        "ar": "حضرتكَ تتكلم جيدًا جدًا! وعمّ تبحث؟",
+        "hi": "आप तो बहुत अच्छा बोलते हैं! तो आप क्या ढूँढ रहे हैं?",
+        "pl_f": "Bardzo dobrze pani mówi! A czego pani szuka?",
+        "pt_f": "A senhora fala muito bem! E o que procura?",
+        "ar_f": "حضرتكِ تتكلمين جيدًا جدًا! وعمّ تبحثين؟",
+        "hi_f": "आप तो बहुत अच्छा बोलती हैं! तो आप क्या ढूँढ रही हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Czy może pan mówić wolniej?",
+        "ru": "Вы можете говорить медленнее?",
+        "uk": "Ви можете говорити повільніше?",
+        "en": "Could you speak more slowly?",
+        "es": "¿Puede hablar más despacio?",
+        "fr": "Vous pouvez parler plus lentement ?",
+        "de": "Können Sie langsamer sprechen?",
+        "it": "Può parlare più lentamente?",
+        "pt": "O senhor pode falar mais devagar?",
+        "be": "Вы можаце гаварыць павольней?",
+        "tr": "Daha yavaş konuşabilir misiniz?",
+        "zh": "您能说慢一点吗？",
+        "zh-Hant": "您可以說慢一點嗎？",
+        "ja": "もう少しゆっくり話していただけますか？",
+        "ar": "هل يمكن لحضرتك أن تتكلم ببطء أكثر؟",
+        "hi": "क्या आप थोड़ा धीरे बोल सकते हैं?"
+      },
+      "task": {
+        "choose": [
+          "Czy może pan mówić szybciej?",
+          "Czy możesz pan mówić wolniej?"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Oczywiście. Czego pan szuka?",
+        "ru": "Конечно. Что вы ищете?",
+        "uk": "Звісно. Що ви шукаєте?",
+        "en": "Of course. What are you looking for?",
+        "es": "Claro. ¿Qué busca?",
+        "fr": "Bien sûr. Que cherchez-vous ?",
+        "de": "Natürlich. Was suchen Sie?",
+        "it": "Certo. Cosa cerca?",
+        "pt": "Com certeza. O que procura o senhor?",
+        "be": "Вядома. Што вы шукаеце?",
+        "tr": "Tabii. Ne arıyorsunuz?",
+        "zh": "当然。您在找什么？",
+        "zh-Hant": "當然。您在找什麼？",
+        "ja": "もちろんです。何をお探しですか？",
+        "ar": "بالطبع. عمّ تبحث حضرتكَ؟",
+        "hi": "बिल्कुल। आप क्या ढूँढ रहे हैं?",
+        "pl_f": "Oczywiście. Czego pani szuka?",
+        "pt_f": "Com certeza. O que procura a senhora?",
+        "ar_f": "بالطبع. عمّ تبحثين حضرتكِ؟",
+        "hi_f": "बिल्कुल। आप क्या ढूँढ रही हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dziękuję! Uczę się polskiego.",
+        "ru": "Спасибо! Я учу польский.",
+        "uk": "Дякую! Я вчу польську.",
+        "en": "Thank you! I'm learning Polish.",
+        "es": "¡Gracias! Estoy aprendiendo polaco.",
+        "fr": "Merci ! J'apprends le polonais.",
+        "de": "Danke! Ich lerne Polnisch.",
+        "it": "Grazie! Sto imparando il polacco.",
+        "pt": "Obrigado! Estou a aprender polaco.",
+        "be": "Дзякуй! Я вучу польскую.",
+        "tr": "Teşekkür ederim! Lehçe öğreniyorum.",
+        "zh": "谢谢！我在学波兰语。",
+        "zh-Hant": "謝謝！我正在學波蘭語。",
+        "ja": "ありがとうございます！ポーランド語を勉強しているんです。",
+        "ar": "شكرًا! أنا أتعلم البولندية.",
+        "hi": "शुक्रिया! मैं पोलिश सीख रहा हूँ।",
+        "pt_f": "Obrigada! Estou a aprender polaco.",
+        "hi_f": "शुक्रिया! मैं पोलिश सीख रही हूँ।"
+      },
+      "task": {
+        "build": [
+          "polski",
+          "uczysz"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "po angielsku",
+        "ru": "по-английски",
+        "uk": "англійською",
+        "en": "in English",
+        "es": "en inglés",
+        "fr": "en anglais",
+        "de": "auf Englisch",
+        "it": "in inglese",
+        "pt": "em inglês",
+        "be": "па-англійску",
+        "tr": "İngilizce",
+        "zh": "用英语",
+        "zh-Hant": "用英文",
+        "ja": "英語で",
+        "ar": "بالإنجليزية",
+        "hi": "अंग्रेज़ी में"
+      },
+      "example": "Przepraszam, czy mówi pan po angielsku?"
+    },
+    {
+      "text": {
+        "pl": "niestety",
+        "ru": "к сожалению",
+        "uk": "на жаль",
+        "en": "unfortunately",
+        "es": "por desgracia",
+        "fr": "malheureusement",
+        "de": "leider",
+        "it": "purtroppo",
+        "pt": "infelizmente",
+        "be": "на жаль",
+        "tr": "maalesef",
+        "zh": "可惜，很遗憾",
+        "zh-Hant": "可惜，很遺憾",
+        "ja": "残念ながら",
+        "ar": "للأسف",
+        "hi": "अफ़सोस, दुर्भाग्य से"
+      },
+      "example": "Niestety nie, tylko po polsku."
+    },
+    {
+      "text": {
+        "pl": "po polsku",
+        "ru": "по-польски",
+        "uk": "польською",
+        "en": "in Polish",
+        "es": "en polaco",
+        "fr": "en polonais",
+        "de": "auf Polnisch",
+        "it": "in polacco",
+        "pt": "em polaco",
+        "be": "па-польску",
+        "tr": "Lehçe",
+        "zh": "用波兰语",
+        "zh-Hant": "用波蘭語",
+        "ja": "ポーランド語で",
+        "ar": "بالبولندية",
+        "hi": "पोलिश में"
+      },
+      "example": "Mówię trochę po polsku."
+    },
+    {
+      "text": {
+        "pl": "trochę",
+        "ru": "немного",
+        "uk": "трохи",
+        "en": "a little",
+        "es": "un poco",
+        "fr": "un peu",
+        "de": "ein bisschen",
+        "it": "un po'",
+        "pt": "um pouco",
+        "be": "трохі",
+        "tr": "biraz",
+        "zh": "一点",
+        "zh-Hant": "一點",
+        "ja": "少し",
+        "ar": "قليلًا",
+        "hi": "थोड़ा"
+      },
+      "example": "Mówię trochę po polsku."
+    },
+    {
+      "text": {
+        "pl": "uczę się",
+        "ru": "я учу, я учусь",
+        "uk": "я вчу, я вчуся",
+        "en": "I'm learning",
+        "es": "estoy aprendiendo",
+        "fr": "j'apprends",
+        "de": "ich lerne",
+        "it": "sto imparando",
+        "pt": "estou a aprender",
+        "be": "я вучу, я вучуся",
+        "tr": "öğreniyorum",
+        "zh": "我在学",
+        "zh-Hant": "我在學",
+        "ja": "勉強している、学んでいる",
+        "ar": "أتعلّم",
+        "hi": "मैं सीख रहा हूँ",
+        "hi_f": "मैं सीख रही हूँ"
+      },
+      "example": "Dziękuję! Uczę się polskiego."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Czy mówi pan po angielsku?",
+        "ru": "Вы говорите по-английски?",
+        "uk": "Ви говорите англійською?",
+        "en": "Do you speak English?",
+        "es": "¿Habla usted inglés?",
+        "fr": "Vous parlez anglais ?",
+        "de": "Sprechen Sie Englisch?",
+        "it": "Parla inglese?",
+        "pt": "O senhor fala inglês?",
+        "be": "Вы гаворыце па-англійску?",
+        "tr": "İngilizce konuşuyor musunuz?",
+        "zh": "您会说英语吗？",
+        "zh-Hant": "請問您會說英文嗎？",
+        "ja": "英語は話せますか？",
+        "ar": "هل حضرتك تتكلم الإنجليزية؟",
+        "hi": "क्या आप अंग्रेज़ी बोलते हैं?"
+      },
+      "distractors": [
+        "ty",
+        "polsku"
+      ],
+      "gap": "mówi",
+      "gapWrong": [
+        "mówisz",
+        "mówię"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Mówię trochę po polsku.",
+        "ru": "Я немного говорю по-польски.",
+        "uk": "Я трохи говорю польською.",
+        "en": "I speak a little Polish.",
+        "es": "Hablo un poco de polaco.",
+        "fr": "Je parle un peu polonais.",
+        "de": "Ich spreche ein bisschen Polnisch.",
+        "it": "Parlo un po' di polacco.",
+        "pt": "Falo um pouco de polaco.",
+        "be": "Я трохі гавару па-польску.",
+        "tr": "Biraz Lehçe konuşuyorum.",
+        "zh": "我会说一点波兰语。",
+        "zh-Hant": "我會說一點波蘭語。",
+        "ja": "ポーランド語が少し話せます。",
+        "ar": "أتكلم البولندية قليلًا.",
+        "hi": "मैं थोड़ी-सी पोलिश बोलता हूँ।",
+        "hi_f": "मैं थोड़ी-सी पोलिश बोलती हूँ।"
+      },
+      "distractors": [
+        "angielsku",
+        "jest"
+      ],
+      "gap": "trochę",
+      "gapWrong": [
+        "dużo",
+        "mało"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Czy może pan mówić wolniej?",
+        "ru": "Вы можете говорить медленнее?",
+        "uk": "Ви можете говорити повільніше?",
+        "en": "Could you speak more slowly?",
+        "es": "¿Puede hablar más despacio?",
+        "fr": "Vous pouvez parler plus lentement ?",
+        "de": "Können Sie langsamer sprechen?",
+        "it": "Può parlare più lentamente?",
+        "pt": "O senhor pode falar mais devagar?",
+        "be": "Вы можаце гаварыць павольней?",
+        "tr": "Daha yavaş konuşabilir misiniz?",
+        "zh": "您能说慢一点吗？",
+        "zh-Hant": "您可以說慢一點嗎？",
+        "ja": "もう少しゆっくり話していただけますか？",
+        "ar": "هل يمكن لحضرتك أن تتكلم ببطء أكثر؟",
+        "hi": "क्या आप थोड़ा धीरे बोल सकते हैं?"
+      },
+      "distractors": [
+        "możesz",
+        "proszę"
+      ],
+      "gap": "wolniej",
+      "gapWrong": [
+        "wolno",
+        "wolny"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Uczę się polskiego.",
+        "ru": "Я учу польский.",
+        "uk": "Я вчу польську.",
+        "en": "I'm learning Polish.",
+        "es": "Estoy aprendiendo polaco.",
+        "fr": "J'apprends le polonais.",
+        "de": "Ich lerne Polnisch.",
+        "it": "Sto imparando il polacco.",
+        "pt": "Estou a aprender polaco.",
+        "be": "Я вучу польскую.",
+        "tr": "Lehçe öğreniyorum.",
+        "zh": "我在学波兰语。",
+        "zh-Hant": "我正在學波蘭語。",
+        "ja": "ポーランド語を勉強しています。",
+        "ar": "أتعلم البولندية.",
+        "hi": "मैं पोलिश सीख रहा हूँ।",
+        "hi_f": "मैं पोलिश सीख रही हूँ।"
+      },
+      "distractors": [
+        "po",
+        "jest"
+      ],
+      "gap": "polskiego",
+      "gapWrong": [
+        "polski",
+        "polsku"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Czy mówi pan po {slot}?",
+    "items": [
+      {
+        "word": {
+          "pl": "ukraińsku",
+          "ru": "по-украински",
+          "uk": "українською",
+          "en": "Ukrainian",
+          "es": "ucraniano",
+          "fr": "ukrainien",
+          "de": "Ukrainisch",
+          "it": "ucraino",
+          "pt": "ucraniano",
+          "be": "па-ўкраінску",
+          "tr": "Ukraynaca",
+          "zh": "乌克兰语",
+          "zh-Hant": "烏克蘭語",
+          "ja": "ウクライナ語",
+          "ar": "الأوكرانية",
+          "hi": "यूक्रेनी"
+        },
+        "sentence": {
+          "pl": "Czy mówi pan po ukraińsku?",
+          "ru": "Вы говорите по-украински?",
+          "uk": "Ви говорите українською?",
+          "en": "Do you speak Ukrainian?",
+          "es": "¿Habla usted ucraniano?",
+          "fr": "Vous parlez ukrainien ?",
+          "de": "Sprechen Sie Ukrainisch?",
+          "it": "Parla ucraino?",
+          "pt": "O senhor fala ucraniano?",
+          "be": "Вы гаворыце па-ўкраінску?",
+          "tr": "Ukraynaca konuşuyor musunuz?",
+          "zh": "您会说乌克兰语吗？",
+          "zh-Hant": "請問您會說烏克蘭語嗎？",
+          "ja": "ウクライナ語は話せますか？",
+          "ar": "هل حضرتك تتكلم الأوكرانية؟",
+          "hi": "क्या आप यूक्रेनी बोलते हैं?"
+        }
+      },
+      {
+        "word": {
+          "pl": "niemiecku",
+          "ru": "по-немецки",
+          "uk": "німецькою",
+          "en": "German",
+          "es": "alemán",
+          "fr": "allemand",
+          "de": "Deutsch",
+          "it": "tedesco",
+          "pt": "alemão",
+          "be": "па-нямецку",
+          "tr": "Almanca",
+          "zh": "德语",
+          "zh-Hant": "德語",
+          "ja": "ドイツ語",
+          "ar": "الألمانية",
+          "hi": "जर्मन"
+        },
+        "sentence": {
+          "pl": "Czy mówi pan po niemiecku?",
+          "ru": "Вы говорите по-немецки?",
+          "uk": "Ви говорите німецькою?",
+          "en": "Do you speak German?",
+          "es": "¿Habla usted alemán?",
+          "fr": "Vous parlez allemand ?",
+          "de": "Sprechen Sie Deutsch?",
+          "it": "Parla tedesco?",
+          "pt": "O senhor fala alemão?",
+          "be": "Вы гаворыце па-нямецку?",
+          "tr": "Almanca konuşuyor musunuz?",
+          "zh": "您会说德语吗？",
+          "zh-Hant": "請問您會說德語嗎？",
+          "ja": "ドイツ語は話せますか？",
+          "ar": "هل حضرتك تتكلم الألمانية؟",
+          "hi": "क्या आप जर्मन बोलते हैं?"
+        }
+      },
+      {
+        "word": {
+          "pl": "hiszpańsku",
+          "ru": "по-испански",
+          "uk": "іспанською",
+          "en": "Spanish",
+          "es": "español",
+          "fr": "espagnol",
+          "de": "Spanisch",
+          "it": "spagnolo",
+          "pt": "espanhol",
+          "be": "па-іспанску",
+          "tr": "İspanyolca",
+          "zh": "西班牙语",
+          "zh-Hant": "西班牙語",
+          "ja": "スペイン語",
+          "ar": "الإسبانية",
+          "hi": "स्पेनिश"
+        },
+        "sentence": {
+          "pl": "Czy mówi pan po hiszpańsku?",
+          "ru": "Вы говорите по-испански?",
+          "uk": "Ви говорите іспанською?",
+          "en": "Do you speak Spanish?",
+          "es": "¿Habla usted español?",
+          "fr": "Vous parlez espagnol ?",
+          "de": "Sprechen Sie Spanisch?",
+          "it": "Parla spagnolo?",
+          "pt": "O senhor fala espanhol?",
+          "be": "Вы гаворыце па-іспанску?",
+          "tr": "İspanyolca konuşuyor musunuz?",
+          "zh": "您会说西班牙语吗？",
+          "zh-Hant": "請問您會說西班牙語嗎？",
+          "ja": "スペイン語は話せますか？",
+          "ar": "هل حضرتك تتكلم الإسبانية؟",
+          "hi": "क्या आप स्पेनिश बोलते हैं?"
+        }
+      }
+    ]
+  }
+}

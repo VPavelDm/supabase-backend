@@ -1,0 +1,522 @@
+{
+  "id": "please",
+  "title": {
+    "en": "Please",
+    "es": "Por favor",
+    "fr": "S'il vous plaît",
+    "de": "Bitte",
+    "it": "Per favore",
+    "pt": "Por favor",
+    "ru": "Пожалуйста",
+    "uk": "Будь ласка",
+    "be": "Калі ласка",
+    "pl": "Proszę",
+    "tr": "Lütfen",
+    "zh": "请",
+    "zh-Hant": "請",
+    "ja": "お願いします",
+    "ar": "من فضلك",
+    "hi": "कृपया"
+  },
+  "subtitle": {
+    "en": "Buy a ticket and pay",
+    "es": "Compra un billete y paga",
+    "fr": "Achète un billet et paie",
+    "de": "Kauf ein Ticket und bezahle",
+    "it": "Compra un biglietto e paga",
+    "pt": "Compra um bilhete e paga",
+    "ru": "Купить билет и заплатить",
+    "uk": "Купити квиток і заплатити",
+    "be": "Купіць білет і заплаціць",
+    "pl": "Kup bilet i zapłać",
+    "tr": "Bilet al ve öde",
+    "zh": "买票并付款",
+    "zh-Hant": "買票並付錢",
+    "ja": "チケットを買って支払おう",
+    "ar": "اشترِ تذكرة وادفع",
+    "hi": "टिकट खरीदें और पैसे दें"
+  },
+  "with": "fox",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Hello, what can I get you?",
+        "es": "Hola, ¿qué le pongo?",
+        "fr": "Bonjour, qu'est-ce que je vous sers ?",
+        "de": "Hallo, was darf es sein?",
+        "it": "Buongiorno, cosa le do?",
+        "pt": "Olá, o que vai ser?",
+        "ru": "Здравствуйте, что вам?",
+        "uk": "Добрий день, що вам?",
+        "be": "Добры дзень, што вам?",
+        "pl": "Dzień dobry, słucham?",
+        "tr": "Merhaba, size ne vereyim?",
+        "zh": "您好，您要点什么？",
+        "zh-Hant": "您好，請問要什麼？",
+        "ja": "いらっしゃいませ、ご注文は？",
+        "ar": "مرحبًا، ماذا أُحضر لك؟",
+        "hi": "नमस्ते, बताइए क्या दूँ?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "A ticket, please.",
+        "es": "Un billete, por favor.",
+        "fr": "Un billet, s'il vous plaît.",
+        "de": "Ein Ticket, bitte.",
+        "it": "Un biglietto, per favore.",
+        "pt": "Um bilhete, por favor.",
+        "ru": "Билет, пожалуйста.",
+        "uk": "Квиток, будь ласка.",
+        "be": "Білет, калі ласка.",
+        "pl": "Bilet, proszę.",
+        "tr": "Bir bilet, lütfen.",
+        "zh": "请给我一张票。",
+        "zh-Hant": "請給我一張票。",
+        "ja": "チケットを1枚ください。",
+        "ar": "تذكرة، من فضلك.",
+        "hi": "एक टिकट, कृपया।"
+      },
+      "task": {
+        "build": [
+          "tickets",
+          "thanks"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Here you go. That's four pounds.",
+        "es": "Aquí tiene. Son cuatro libras.",
+        "fr": "Voilà. Ça fait quatre livres.",
+        "de": "Bitte schön. Das macht vier Pfund.",
+        "it": "Ecco a lei. Sono quattro sterline.",
+        "pt": "Aqui tem. São quatro libras.",
+        "ru": "Пожалуйста. С вас четыре фунта.",
+        "uk": "Прошу. З вас чотири фунти.",
+        "be": "Калі ласка. З вас чатыры фунты.",
+        "pl": "Proszę. Cztery funty.",
+        "tr": "Buyurun. Dört sterlin.",
+        "zh": "给您。一共四英镑。",
+        "zh-Hant": "給您。這樣四英鎊。",
+        "ja": "はい、どうぞ。4ポンドです。",
+        "ar": "تفضل. أربعة جنيهات.",
+        "hi": "यह लीजिए। चार पाउंड हुए।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Here's five pounds.",
+        "es": "Aquí tiene cinco libras.",
+        "fr": "Voici cinq livres.",
+        "de": "Hier sind fünf Pfund.",
+        "it": "Ecco cinque sterline.",
+        "pt": "Aqui tem cinco libras.",
+        "ru": "Вот пять фунтов.",
+        "uk": "Ось п'ять фунтів.",
+        "be": "Вось пяць фунтаў.",
+        "pl": "Proszę, pięć funtów.",
+        "tr": "Buyurun, beş sterlin.",
+        "zh": "这是五英镑。",
+        "zh-Hant": "這是五英鎊。",
+        "ja": "5ポンドでお願いします。",
+        "ar": "هذه خمسة جنيهات.",
+        "hi": "ये रहे पाँच पाउंड।"
+      },
+      "task": {
+        "build": [
+          "pound",
+          "are"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Thanks. And one pound change.",
+        "es": "Gracias. Y una libra de cambio.",
+        "fr": "Merci. Et une livre de monnaie.",
+        "de": "Danke. Und ein Pfund zurück.",
+        "it": "Grazie. Ed ecco una sterlina di resto.",
+        "pt": "Obrigado. E uma libra de troco.",
+        "ru": "Спасибо. И фунт сдачи.",
+        "uk": "Дякую. І фунт решти.",
+        "be": "Дзякуй. І фунт рэшты.",
+        "pl": "Dziękuję. I funt reszty.",
+        "tr": "Teşekkürler. Bir sterlin de para üstünüz.",
+        "zh": "谢谢。找您一英镑。",
+        "zh-Hant": "謝謝。找您一英鎊。",
+        "ja": "ありがとうございます。1ポンドのおつりです。",
+        "ar": "شكرًا. وهذا الباقي، جنيه واحد.",
+        "hi": "धन्यवाद। और यह एक पाउंड वापस।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Thank you! Have a nice day!",
+        "es": "¡Gracias! ¡Que tenga un buen día!",
+        "fr": "Merci ! Bonne journée !",
+        "de": "Danke! Einen schönen Tag noch!",
+        "it": "Grazie! Buona giornata!",
+        "pt": "Obrigado! Tenha um bom dia!",
+        "ru": "Спасибо! Хорошего дня!",
+        "uk": "Дякую! Гарного дня!",
+        "be": "Дзякуй! Добрага дня!",
+        "pl": "Dziękuję! Miłego dnia!",
+        "tr": "Teşekkürler! İyi günler!",
+        "zh": "谢谢！祝您今天愉快！",
+        "zh-Hant": "謝謝！祝您今天愉快！",
+        "ja": "ありがとうございます！よい一日を！",
+        "ar": "شكرًا! يومًا سعيدًا!",
+        "hi": "धन्यवाद! आपका दिन अच्छा रहे!"
+      },
+      "task": {
+        "choose": [
+          "Please! Have a nice day!",
+          "Thank you! Have a nice days!"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "You're welcome!",
+        "es": "¡De nada!",
+        "fr": "De rien !",
+        "de": "Gern geschehen!",
+        "it": "Prego!",
+        "pt": "De nada!",
+        "ru": "Не за что!",
+        "uk": "Нема за що!",
+        "be": "Няма за што!",
+        "pl": "Proszę bardzo!",
+        "tr": "Rica ederim!",
+        "zh": "不客气！",
+        "zh-Hant": "不客氣！",
+        "ja": "どういたしまして！",
+        "ar": "العفو!",
+        "hi": "कोई बात नहीं!"
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "ticket",
+        "es": "billete, entrada",
+        "fr": "billet, ticket",
+        "de": "Ticket, Fahrkarte",
+        "it": "biglietto",
+        "pt": "bilhete",
+        "ru": "билет",
+        "uk": "квиток",
+        "be": "білет",
+        "pl": "bilet",
+        "tr": "bilet",
+        "zh": "票",
+        "zh-Hant": "票",
+        "ja": "チケット、切符",
+        "ar": "تذكرة",
+        "hi": "टिकट"
+      },
+      "example": "A ticket, please."
+    },
+    {
+      "text": {
+        "en": "please",
+        "es": "por favor",
+        "fr": "s'il vous plaît, s'il te plaît",
+        "de": "bitte",
+        "it": "per favore",
+        "pt": "por favor",
+        "ru": "пожалуйста",
+        "uk": "будь ласка",
+        "be": "калі ласка",
+        "pl": "proszę",
+        "tr": "lütfen",
+        "zh": "请",
+        "zh-Hant": "請",
+        "ja": "お願いします、ください",
+        "ar": "من فضلك، لو سمحت",
+        "hi": "कृपया"
+      },
+      "example": "A ticket, please."
+    },
+    {
+      "text": {
+        "en": "here you go",
+        "es": "aquí tiene",
+        "fr": "voilà",
+        "de": "bitte schön",
+        "it": "ecco a lei, ecco",
+        "pt": "aqui tem",
+        "ru": "вот, пожалуйста",
+        "uk": "ось, прошу",
+        "be": "вось, калі ласка",
+        "pl": "proszę bardzo, oto",
+        "tr": "buyurun",
+        "zh": "给你，给您",
+        "zh-Hant": "給你，給您",
+        "ja": "はい、どうぞ",
+        "ar": "تفضل",
+        "hi": "यह लीजिए"
+      },
+      "example": "Here you go. That's four pounds."
+    },
+    {
+      "text": {
+        "en": "change",
+        "es": "cambio, vuelta",
+        "fr": "monnaie",
+        "de": "Wechselgeld",
+        "it": "resto",
+        "pt": "troco",
+        "ru": "сдача",
+        "uk": "решта",
+        "be": "рэшта",
+        "pl": "reszta",
+        "tr": "para üstü",
+        "zh": "找零，零钱",
+        "zh-Hant": "找零，零錢",
+        "ja": "おつり",
+        "ar": "الباقي",
+        "hi": "बाक़ी पैसे, छुट्टा"
+      },
+      "example": "Thanks. And one pound change."
+    },
+    {
+      "text": {
+        "en": "you're welcome",
+        "es": "de nada",
+        "fr": "de rien",
+        "de": "gern geschehen",
+        "it": "prego",
+        "pt": "de nada",
+        "ru": "не за что",
+        "uk": "нема за що",
+        "be": "няма за што",
+        "pl": "proszę bardzo",
+        "tr": "rica ederim",
+        "zh": "不客气",
+        "zh-Hant": "不客氣，不會",
+        "ja": "どういたしまして",
+        "ar": "العفو، على الرحب والسعة",
+        "hi": "कोई बात नहीं"
+      },
+      "example": "You're welcome!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "What can I get you?",
+        "es": "¿Qué le pongo?",
+        "fr": "Qu'est-ce que je vous sers ?",
+        "de": "Was darf es sein?",
+        "it": "Cosa le do?",
+        "pt": "O que vai ser?",
+        "ru": "Что вам?",
+        "uk": "Що вам?",
+        "be": "Што вам?",
+        "pl": "Co podać?",
+        "tr": "Size ne vereyim?",
+        "zh": "您要点什么？",
+        "zh-Hant": "請問要什麼？",
+        "ja": "ご注文は？",
+        "ar": "ماذا أُحضر لك؟",
+        "hi": "बताइए, क्या दूँ?"
+      },
+      "distractors": [
+        "How",
+        "me"
+      ],
+      "gap": "get",
+      "gapWrong": [
+        "got",
+        "gets"
+      ]
+    },
+    {
+      "text": {
+        "en": "You're welcome!",
+        "es": "¡De nada!",
+        "fr": "De rien !",
+        "de": "Gern geschehen!",
+        "it": "Prego!",
+        "pt": "De nada!",
+        "ru": "Не за что!",
+        "uk": "Нема за що!",
+        "be": "Няма за што!",
+        "pl": "Proszę bardzo!",
+        "tr": "Rica ederim!",
+        "zh": "不客气！",
+        "zh-Hant": "不客氣！",
+        "ja": "どういたしまして！",
+        "ar": "العفو!",
+        "hi": "कोई बात नहीं!"
+      },
+      "distractors": [
+        "Your",
+        "come"
+      ],
+      "gap": "welcome",
+      "gapWrong": [
+        "welcomed",
+        "welcomes"
+      ]
+    },
+    {
+      "text": {
+        "en": "Here's five pounds.",
+        "es": "Aquí tiene cinco libras.",
+        "fr": "Voici cinq livres.",
+        "de": "Hier sind fünf Pfund.",
+        "it": "Ecco cinque sterline.",
+        "pt": "Aqui tem cinco libras.",
+        "ru": "Вот пять фунтов.",
+        "uk": "Ось п'ять фунтів.",
+        "be": "Вось пяць фунтаў.",
+        "pl": "Proszę, pięć funtów.",
+        "tr": "Buyurun, beş sterlin.",
+        "zh": "这是五英镑。",
+        "zh-Hant": "這是五英鎊。",
+        "ja": "5ポンドでお願いします。",
+        "ar": "هذه خمسة جنيهات.",
+        "hi": "ये रहे पाँच पाउंड।"
+      },
+      "distractors": [
+        "pound",
+        "are"
+      ],
+      "gap": "pounds",
+      "gapWrong": [
+        "pound",
+        "pond"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "{slot}, please.",
+    "items": [
+      {
+        "word": {
+          "en": "The receipt",
+          "es": "el tique, el recibo",
+          "fr": "le reçu, le ticket de caisse",
+          "de": "Kassenbon, Quittung",
+          "it": "lo scontrino",
+          "pt": "o talão, o recibo",
+          "ru": "чек",
+          "uk": "чек",
+          "be": "чэк",
+          "pl": "paragon",
+          "tr": "fiş",
+          "zh": "小票，收据",
+          "zh-Hant": "收據，發票",
+          "ja": "レシート",
+          "ar": "الإيصال",
+          "hi": "रसीद"
+        },
+        "sentence": {
+          "en": "The receipt, please.",
+          "es": "El tique, por favor.",
+          "fr": "Le reçu, s'il vous plaît.",
+          "de": "Den Kassenbon, bitte.",
+          "it": "Lo scontrino, per favore.",
+          "pt": "O talão, por favor.",
+          "ru": "Чек, пожалуйста.",
+          "uk": "Чек, будь ласка.",
+          "be": "Чэк, калі ласка.",
+          "pl": "Paragon, proszę.",
+          "tr": "Fiş, lütfen.",
+          "zh": "请给我小票。",
+          "zh-Hant": "請給我收據。",
+          "ja": "レシートをください。",
+          "ar": "الإيصال، من فضلك.",
+          "hi": "कृपया रसीद दीजिए।"
+        }
+      },
+      {
+        "word": {
+          "en": "A juice",
+          "es": "un zumo",
+          "fr": "un jus",
+          "de": "ein Saft",
+          "it": "un succo",
+          "pt": "um sumo",
+          "ru": "сок",
+          "uk": "сік",
+          "be": "сок",
+          "pl": "sok",
+          "tr": "meyve suyu",
+          "zh": "一杯果汁",
+          "zh-Hant": "一杯果汁",
+          "ja": "ジュース",
+          "ar": "عصير",
+          "hi": "एक जूस"
+        },
+        "sentence": {
+          "en": "A juice, please.",
+          "es": "Un zumo, por favor.",
+          "fr": "Un jus, s'il vous plaît.",
+          "de": "Einen Saft, bitte.",
+          "it": "Un succo, per favore.",
+          "pt": "Um sumo, por favor.",
+          "ru": "Сок, пожалуйста.",
+          "uk": "Сік, будь ласка.",
+          "be": "Сок, калі ласка.",
+          "pl": "Sok, proszę.",
+          "tr": "Bir meyve suyu, lütfen.",
+          "zh": "请给我一杯果汁。",
+          "zh-Hant": "請給我一杯果汁。",
+          "ja": "ジュースをください。",
+          "ar": "عصير، من فضلك.",
+          "hi": "कृपया एक जूस दीजिए।"
+        }
+      },
+      {
+        "word": {
+          "en": "Some bread",
+          "es": "pan",
+          "fr": "du pain",
+          "de": "Brot",
+          "it": "del pane",
+          "pt": "pão",
+          "ru": "хлеб",
+          "uk": "хліб",
+          "be": "хлеб",
+          "pl": "chleb",
+          "tr": "ekmek",
+          "zh": "一些面包",
+          "zh-Hant": "一些麵包",
+          "ja": "パン",
+          "ar": "خبز",
+          "hi": "थोड़ी ब्रेड"
+        },
+        "sentence": {
+          "en": "Some bread, please.",
+          "es": "Pan, por favor.",
+          "fr": "Du pain, s'il vous plaît.",
+          "de": "Brot, bitte.",
+          "it": "Del pane, per favore.",
+          "pt": "Pão, por favor.",
+          "ru": "Хлеб, пожалуйста.",
+          "uk": "Хліб, будь ласка.",
+          "be": "Хлеб, калі ласка.",
+          "pl": "Chleb, proszę.",
+          "tr": "Ekmek, lütfen.",
+          "zh": "请给我一些面包。",
+          "zh-Hant": "請給我一些麵包。",
+          "ja": "パンをください。",
+          "ar": "خبز، من فضلك.",
+          "hi": "कृपया थोड़ी ब्रेड दीजिए।"
+        }
+      }
+    ]
+  }
+}

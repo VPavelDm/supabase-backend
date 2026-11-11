@@ -10,10 +10,12 @@
 //   LINGO_HUTARKA_APP_KEY, LINGO_HEJKA_APP_KEY, LINGO_ELEVENLABS_API_KEY
 
 import { router } from "../_shared/router.ts";
+import { handleContent } from "./content.ts";
 import { handleDeleteMyData } from "./delete-my-data.ts";
 import { handleTextToSpeech } from "./text-to-speech.ts";
 
 Deno.serve(router("lingo", {
+  "content": { POST: handleContent },
   "text-to-speech": { POST: handleTextToSpeech },
   "delete-my-data": { POST: handleDeleteMyData },
 }));

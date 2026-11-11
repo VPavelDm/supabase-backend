@@ -1,0 +1,976 @@
+{
+  "chapters": [
+    {
+      "id": "pierwsze-kroki",
+      "title": {
+        "pl": "Pierwsze kroki",
+        "ru": "Первые шаги",
+        "uk": "Перші кроки",
+        "en": "First steps"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Powitania i poznawanie się",
+            "ru": "Приветствие и знакомство",
+            "uk": "Привітання і знайомство",
+            "en": "Hello and nice to meet you"
+          },
+          "map": "meadow",
+          "lessons": [
+            "dzien-dobry",
+            "czesc",
+            "poznajmy-sie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Grzecznie, per pan i pani",
+            "ru": "Вежливое «вы»",
+            "uk": "Ввічливе «ви»",
+            "en": "Being polite"
+          },
+          "map": "forest",
+          "lessons": [
+            "pan-i-pani",
+            "na-ty",
+            "przepraszam"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Magiczne słowa",
+            "ru": "Волшебные слова",
+            "uk": "Чарівні слова",
+            "en": "Magic words"
+          },
+          "map": "farm",
+          "lessons": [
+            "prosze",
+            "poprosze",
+            "dziekuje"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Kiedy nie rozumiem",
+            "ru": "Когда не понимаю",
+            "uk": "Коли не розумію",
+            "en": "When I don't understand"
+          },
+          "map": "meadow",
+          "lessons": [
+            "nie-rozumiem",
+            "po-polsku",
+            "co-to-znaczy"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Liczby i czas",
+            "ru": "Числа и время",
+            "uk": "Числа і час",
+            "en": "Numbers and time"
+          },
+          "map": "forest",
+          "lessons": [
+            "liczby",
+            "ktora-godzina",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zakupy",
+      "title": {
+        "pl": "Zakupy",
+        "ru": "Покупки",
+        "uk": "Покупки",
+        "en": "Shopping"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Liczby i ceny",
+            "ru": "Числа и цены",
+            "uk": "Числа і ціни",
+            "en": "Numbers and prices"
+          },
+          "map": "meadow",
+          "lessons": [
+            "liczby-do-stu",
+            "ile-kosztuje",
+            "zlote-i-grosze"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W Żabce",
+            "ru": "В Żabce",
+            "uk": "У Żabce",
+            "en": "At Żabka"
+          },
+          "map": "forest",
+          "lessons": [
+            "przy-kasie",
+            "karta-czy-gotowka",
+            "reklamowka-i-paragon"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W piekarni",
+            "ru": "В пекарне",
+            "uk": "У пекарні",
+            "en": "At the bakery"
+          },
+          "map": "farm",
+          "lessons": [
+            "chleb-i-bulki",
+            "pokroic",
+            "slodkie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W warzywniaku",
+            "ru": "В овощном",
+            "uk": "В овочевому",
+            "en": "At the greengrocer's"
+          },
+          "map": "meadow",
+          "lessons": [
+            "owoce-i-warzywa",
+            "kilo-i-deko",
+            "na-sztuki"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W supermarkecie",
+            "ru": "В супермаркете",
+            "uk": "У супермаркеті",
+            "en": "At the supermarket"
+          },
+          "map": "forest",
+          "lessons": [
+            "gdzie-jest-mleko",
+            "promocja",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jedzenie-na-miescie",
+      "title": {
+        "pl": "Jedzenie na mieście",
+        "ru": "Еда вне дома",
+        "uk": "Їжа поза домом",
+        "en": "Eating out"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "W kawiarni",
+            "ru": "В кафе",
+            "uk": "У кав'ярні",
+            "en": "At the café"
+          },
+          "map": "meadow",
+          "lessons": [
+            "kawa",
+            "mleko-roslinne",
+            "na-wynos"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Kebab i fast food",
+            "ru": "Кебаб и фастфуд",
+            "uk": "Кебаб і фастфуд",
+            "en": "Kebab and fast food"
+          },
+          "map": "forest",
+          "lessons": [
+            "kebab",
+            "jaki-sos",
+            "zapiekanka"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W restauracji",
+            "ru": "В ресторане",
+            "uk": "У ресторані",
+            "en": "At the restaurant"
+          },
+          "map": "farm",
+          "lessons": [
+            "stolik",
+            "w-srodku",
+            "co-pan-poleca"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W barze mlecznym",
+            "ru": "В молочном баре",
+            "uk": "У молочному барі",
+            "en": "At the milk bar"
+          },
+          "map": "meadow",
+          "lessons": [
+            "co-na-obiad",
+            "pierogi",
+            "zestaw-dnia"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Rachunek, proszę",
+            "ru": "Счёт, пожалуйста",
+            "uk": "Рахунок, будь ласка",
+            "en": "The bill, please"
+          },
+          "map": "forest",
+          "lessons": [
+            "rachunek",
+            "napiwek",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "miasto-i-transport",
+      "title": {
+        "pl": "Miasto i transport",
+        "ru": "Город и транспорт",
+        "uk": "Місто і транспорт",
+        "en": "City and transport"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Kupuję bilet",
+            "ru": "Покупаю билет",
+            "uk": "Купую квиток",
+            "en": "Buying a ticket"
+          },
+          "map": "meadow",
+          "lessons": [
+            "biletomat",
+            "normalny-czy-ulgowy",
+            "bilet-w-aplikacji"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W autobusie i tramwaju",
+            "ru": "В автобусе и трамвае",
+            "uk": "В автобусі й трамваї",
+            "en": "On the bus and tram"
+          },
+          "map": "forest",
+          "lessons": [
+            "ten-autobus",
+            "wysiada-pan",
+            "kontrola-biletow"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Jak dojść do…?",
+            "ru": "Как пройти к…?",
+            "uk": "Як пройти до…?",
+            "en": "How do I get to…?"
+          },
+          "map": "farm",
+          "lessons": [
+            "kierunki",
+            "jak-dojsc",
+            "daleko-blisko"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Taksówka",
+            "ru": "Такси",
+            "uk": "Таксі",
+            "en": "Taxi"
+          },
+          "map": "meadow",
+          "lessons": [
+            "adres-taksowka",
+            "w-taksowce",
+            "zatrzymac"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Na dworcu",
+            "ru": "На вокзале",
+            "uk": "На вокзалі",
+            "en": "At the station"
+          },
+          "map": "forest",
+          "lessons": [
+            "bilet-do-krakowa",
+            "peron-i-tor",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "na-lotnisku",
+      "title": {
+        "pl": "Na lotnisku",
+        "ru": "В аэропорту",
+        "uk": "В аеропорту",
+        "en": "At the airport"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Odprawa",
+            "ru": "Регистрация",
+            "uk": "Реєстрація",
+            "en": "Check-in"
+          },
+          "map": "meadow",
+          "lessons": [
+            "gdzie-odprawa",
+            "paszport",
+            "bagaz-podreczny"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Kontrola bezpieczeństwa",
+            "ru": "Досмотр",
+            "uk": "Огляд",
+            "en": "Security"
+          },
+          "map": "forest",
+          "lessons": [
+            "laptop-i-plyny",
+            "pasek-i-kieszenie",
+            "prosze-przejsc"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Bramka i lot",
+            "ru": "Гейт и рейс",
+            "uk": "Гейт і рейс",
+            "en": "Gate and flight"
+          },
+          "map": "farm",
+          "lessons": [
+            "ktora-bramka",
+            "wejscie-na-poklad",
+            "opozniony"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Przylot i bagaż",
+            "ru": "Прилёт и багаж",
+            "uk": "Приліт і багаж",
+            "en": "Arrival and luggage"
+          },
+          "map": "meadow",
+          "lessons": [
+            "odbior-bagazu",
+            "nie-ma-walizki",
+            "wyjscie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Z lotniska do miasta",
+            "ru": "Из аэропорта в город",
+            "uk": "З аеропорту в місто",
+            "en": "From the airport to the city"
+          },
+          "map": "forest",
+          "lessons": [
+            "do-centrum",
+            "postoj-taksowek",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w-hotelu",
+      "title": {
+        "pl": "W hotelu",
+        "ru": "В отеле",
+        "uk": "У готелі",
+        "en": "At the hotel"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Rezerwacja",
+            "ru": "Бронь",
+            "uk": "Бронювання",
+            "en": "Booking"
+          },
+          "map": "meadow",
+          "lessons": [
+            "mam-rezerwacje",
+            "wolne-pokoje",
+            "sniadanie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Zameldowanie",
+            "ru": "Заселение",
+            "uk": "Заселення",
+            "en": "Check-in"
+          },
+          "map": "forest",
+          "lessons": [
+            "zameldowanie",
+            "dowod",
+            "karta-do-pokoju"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W pokoju",
+            "ru": "В номере",
+            "uk": "У номері",
+            "en": "In the room"
+          },
+          "map": "farm",
+          "lessons": [
+            "haslo-wifi",
+            "recznik",
+            "ogrzewanie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Problem w pokoju",
+            "ru": "Проблема в номере",
+            "uk": "Проблема в номері",
+            "en": "A problem in the room"
+          },
+          "map": "meadow",
+          "lessons": [
+            "nie-dziala",
+            "za-glosno",
+            "zmiana-pokoju"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Wymeldowanie",
+            "ru": "Выселение",
+            "uk": "Виселення",
+            "en": "Check-out"
+          },
+          "map": "forest",
+          "lessons": [
+            "wymeldowanie",
+            "przechowalnia",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dom-i-codziennosc",
+      "title": {
+        "pl": "Dom i codzienność",
+        "ru": "Дом и быт",
+        "uk": "Дім і побут",
+        "en": "Home and everyday life"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Dni tygodnia",
+            "ru": "Дни недели",
+            "uk": "Дні тижня",
+            "en": "Days of the week"
+          },
+          "map": "meadow",
+          "lessons": [
+            "dni-tygodnia",
+            "dzis-jutro",
+            "umawiamy-sie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Paczkomat i poczta",
+            "ru": "Посылки и почта",
+            "uk": "Посилки й пошта",
+            "en": "Parcels and post"
+          },
+          "map": "forest",
+          "lessons": [
+            "paczkomat",
+            "odbior-paczki",
+            "nadanie-paczki"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Sąsiedzi",
+            "ru": "Соседи",
+            "uk": "Сусіди",
+            "en": "Neighbours"
+          },
+          "map": "farm",
+          "lessons": [
+            "nowy-sasiad",
+            "w-windzie",
+            "halas"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Mieszkanie",
+            "ru": "Квартира",
+            "uk": "Квартира",
+            "en": "Flat"
+          },
+          "map": "meadow",
+          "lessons": [
+            "ogloszenie",
+            "ogladanie-mieszkania",
+            "czynsz"
+          ]
+        },
+        {
+          "title": {
+            "pl": "U fryzjera",
+            "ru": "У парикмахера",
+            "uk": "У перукаря",
+            "en": "At the hairdresser's"
+          },
+          "map": "forest",
+          "lessons": [
+            "fryzjer",
+            "krotko",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wazne-sprawy",
+      "title": {
+        "pl": "Ważne sprawy",
+        "ru": "Важные дела",
+        "uk": "Важливі справи",
+        "en": "Important errands"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "W aptece",
+            "ru": "В аптеке",
+            "uk": "В аптеці",
+            "en": "At the pharmacy"
+          },
+          "map": "meadow",
+          "lessons": [
+            "bol-glowy",
+            "e-recepta",
+            "jak-brac"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Rejestracja do lekarza",
+            "ru": "Запись к врачу",
+            "uk": "Запис до лікаря",
+            "en": "Booking a doctor"
+          },
+          "map": "forest",
+          "lessons": [
+            "zapis-do-lekarza",
+            "termin",
+            "nfz"
+          ]
+        },
+        {
+          "title": {
+            "pl": "U lekarza",
+            "ru": "У врача",
+            "uk": "У лікаря",
+            "en": "At the doctor's"
+          },
+          "map": "farm",
+          "lessons": [
+            "co-dolega",
+            "boli-mnie",
+            "goraczka"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W urzędzie",
+            "ru": "В ужонде",
+            "uk": "В уженді",
+            "en": "At the office"
+          },
+          "map": "meadow",
+          "lessons": [
+            "numerek",
+            "okienko",
+            "dokumenty"
+          ]
+        },
+        {
+          "title": {
+            "pl": "W banku",
+            "ru": "В банке",
+            "uk": "У банку",
+            "en": "At the bank"
+          },
+          "map": "forest",
+          "lessons": [
+            "zalozyc-konto",
+            "karta-nie-dziala",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pomoc-i-bezpieczenstwo",
+      "title": {
+        "pl": "Pomoc i bezpieczeństwo",
+        "ru": "Помощь и безопасность",
+        "uk": "Допомога і безпека",
+        "en": "Help and safety"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Pomocy!",
+            "ru": "Помогите!",
+            "uk": "Допоможіть!",
+            "en": "Help!"
+          },
+          "map": "meadow",
+          "lessons": [
+            "pomocy",
+            "prosze-mi-pomoc",
+            "numer-112"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Policja",
+            "ru": "Полиция",
+            "uk": "Поліція",
+            "en": "Police"
+          },
+          "map": "forest",
+          "lessons": [
+            "wezwac-policje",
+            "kradziez",
+            "zgloszenie"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Karetka i szpital",
+            "ru": "Скорая и больница",
+            "uk": "Швидка й лікарня",
+            "en": "Ambulance and hospital"
+          },
+          "map": "farm",
+          "lessons": [
+            "karetka",
+            "wypadek",
+            "szpital"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Pożar",
+            "ru": "Пожар",
+            "uk": "Пожежа",
+            "en": "Fire"
+          },
+          "map": "meadow",
+          "lessons": [
+            "pali-sie",
+            "straz-pozarna",
+            "ewakuacja"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Zgubiłem się",
+            "ru": "Я потерялся",
+            "uk": "Я загубився",
+            "en": "I'm lost"
+          },
+          "map": "forest",
+          "lessons": [
+            "zgubilem-sie",
+            "zgubiony-paszport",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "extra-szkola",
+      "title": {
+        "pl": "Szkoła i przedszkole",
+        "ru": "Школа и детский сад",
+        "uk": "Школа і садочок",
+        "en": "School and kindergarten"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Zapisy",
+            "ru": "Запись",
+            "uk": "Запис",
+            "en": "Enrolment"
+          },
+          "map": "meadow",
+          "lessons": [
+            "zapisy-przedszkole",
+            "wolne-miejsca",
+            "dokumenty-szkola"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Odbiór dziecka",
+            "ru": "Забрать ребёнка",
+            "uk": "Забрати дитину",
+            "en": "Picking up your child"
+          },
+          "map": "forest",
+          "lessons": [
+            "odbior-dziecka",
+            "upowaznienie",
+            "wczesniejszy-odbior"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Nieobecność",
+            "ru": "Пропуск",
+            "uk": "Відсутність",
+            "en": "Absence"
+          },
+          "map": "farm",
+          "lessons": [
+            "dziecko-chore",
+            "usprawiedliwienie",
+            "dziennik"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Rozmowa z nauczycielem",
+            "ru": "Разговор с учителем",
+            "uk": "Розмова з учителем",
+            "en": "Talking to the teacher"
+          },
+          "map": "meadow",
+          "lessons": [
+            "jak-sobie-radzi",
+            "zadanie-domowe",
+            "oceny"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Zebranie",
+            "ru": "Собрание",
+            "uk": "Збори",
+            "en": "Parents' meeting"
+          },
+          "map": "forest",
+          "lessons": [
+            "zebranie",
+            "wycieczka",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "extra-small-talk",
+      "title": {
+        "pl": "Small talk i telefon",
+        "ru": "Лёгкий разговор и звонки",
+        "uk": "Легка розмова і дзвінки",
+        "en": "Small talk and phone calls"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Pogoda",
+            "ru": "Погода",
+            "uk": "Погода",
+            "en": "Weather"
+          },
+          "map": "meadow",
+          "lessons": [
+            "ale-zimno",
+            "znowu-pada",
+            "piekna-pogoda"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Weekend i plany",
+            "ru": "Выходные и планы",
+            "uk": "Вихідні й плани",
+            "en": "Weekend and plans"
+          },
+          "map": "forest",
+          "lessons": [
+            "jak-minal-weekend",
+            "plany",
+            "nic-specjalnego"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Rozmowa z sąsiadem",
+            "ru": "Разговор с соседом",
+            "uk": "Розмова із сусідом",
+            "en": "Chatting with a neighbour"
+          },
+          "map": "farm",
+          "lessons": [
+            "od-dawna",
+            "jak-sie-nazywa-pies",
+            "od-roku"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Dzwonię w sprawie…",
+            "ru": "Звоню по поводу…",
+            "uk": "Дзвоню щодо…",
+            "en": "I'm calling about…"
+          },
+          "map": "meadow",
+          "lessons": [
+            "halo",
+            "w-sprawie",
+            "oddzwonic"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Umawianie przez telefon",
+            "ru": "Запись по телефону",
+            "uk": "Запис телефоном",
+            "en": "Booking by phone"
+          },
+          "map": "forest",
+          "lessons": [
+            "umowic-sie",
+            "przesunac",
+            "checkpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "extra-zwroty",
+      "title": {
+        "pl": "Zwroty i reklamacje",
+        "ru": "Возвраты и жалобы",
+        "uk": "Повернення і скарги",
+        "en": "Returns and complaints"
+      },
+      "units": [
+        {
+          "title": {
+            "pl": "Zwrot w sklepie",
+            "ru": "Возврат в магазине",
+            "uk": "Повернення в магазині",
+            "en": "Returning an item"
+          },
+          "map": "meadow",
+          "lessons": [
+            "zwrot",
+            "inny-rozmiar",
+            "mam-paragon"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Reklamacja",
+            "ru": "Рекламация",
+            "uk": "Рекламація",
+            "en": "Faulty goods"
+          },
+          "map": "forest",
+          "lessons": [
+            "reklamacja",
+            "zepsulo-sie",
+            "gwarancja"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Coś nie tak w restauracji",
+            "ru": "Что-то не так в ресторане",
+            "uk": "Щось не так у ресторані",
+            "en": "Something's wrong at the restaurant"
+          },
+          "map": "farm",
+          "lessons": [
+            "nie-to-zamowilem",
+            "zimna-zupa",
+            "dlugo-czekamy"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Paczka i zamówienie online",
+            "ru": "Посылка и онлайн-заказ",
+            "uk": "Посилка й онлайн-замовлення",
+            "en": "Parcels and online orders"
+          },
+          "map": "meadow",
+          "lessons": [
+            "uszkodzona-paczka",
+            "brakuje",
+            "zwrot-pieniedzy"
+          ]
+        },
+        {
+          "title": {
+            "pl": "Rozmowa z kierownikiem",
+            "ru": "Разговор с управляющим",
+            "uk": "Розмова з керівником",
+            "en": "Talking to the manager"
+          },
+          "map": "forest",
+          "lessons": [
+            "kierownik",
+            "skarga",
+            "checkpoint"
+          ]
+        }
+      ]
+    }
+  ]
+}

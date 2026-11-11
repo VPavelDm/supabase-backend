@@ -1,0 +1,522 @@
+{
+  "id": "excuse-me",
+  "title": {
+    "en": "Excuse me",
+    "es": "Perdone",
+    "fr": "Excusez-moi",
+    "de": "Entschuldigung",
+    "it": "Mi scusi",
+    "pt": "Com licença",
+    "ru": "Извините",
+    "uk": "Перепрошую",
+    "be": "Прабачце",
+    "pl": "Przepraszam",
+    "tr": "Affedersiniz",
+    "zh": "不好意思",
+    "zh-Hant": "不好意思",
+    "ja": "すみません",
+    "ar": "لو سمحت",
+    "hi": "माफ़ कीजिए"
+  },
+  "subtitle": {
+    "en": "Get someone's attention and say sorry",
+    "es": "Llama la atención de alguien y pide perdón",
+    "fr": "Interpelle quelqu'un et excuse-toi",
+    "de": "Sprich jemanden an und entschuldige dich",
+    "it": "Attira l'attenzione di qualcuno e chiedi scusa",
+    "pt": "Chama a atenção de alguém e pede desculpa",
+    "ru": "Обратиться к кому-то и извиниться",
+    "uk": "Звернутися до когось і вибачитися",
+    "be": "Звярнуцца да каго-небудзь і папрасіць прабачэння",
+    "pl": "Zagadaj do kogoś i przeproś",
+    "tr": "Birine seslen ve özür dile",
+    "zh": "引起别人注意并道歉",
+    "zh-Hant": "引起別人注意並道歉",
+    "ja": "声をかけて、謝ろう",
+    "ar": "اِلفت انتباه أحدهم واعتذر",
+    "hi": "किसी का ध्यान खींचें और माफ़ी माँगें"
+  },
+  "with": "owl",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Excuse me, can I get past?",
+        "es": "Perdone, ¿puedo pasar?",
+        "fr": "Excusez-moi, je peux passer ?",
+        "de": "Entschuldigung, darf ich mal vorbei?",
+        "it": "Mi scusi, posso passare?",
+        "pt": "Com licença, posso passar?",
+        "ru": "Извините, можно пройти?",
+        "uk": "Перепрошую, можна пройти?",
+        "be": "Прабачце, можна прайсці?",
+        "pl": "Przepraszam, mogę przejść?",
+        "tr": "Affedersiniz, geçebilir miyim?",
+        "zh": "不好意思，能让我过一下吗？",
+        "zh-Hant": "不好意思，可以借過一下嗎？",
+        "ja": "すみません、通していただけますか？",
+        "ar": "لو سمحت، هل يمكنني المرور؟",
+        "hi": "माफ़ कीजिए, ज़रा रास्ता देंगे?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Yes, of course. Sorry!",
+        "es": "Sí, claro. ¡Perdone!",
+        "fr": "Oui, bien sûr. Pardon !",
+        "de": "Ja, natürlich. Entschuldigung!",
+        "it": "Sì, certo. Mi scusi!",
+        "pt": "Sim, claro. Desculpe!",
+        "ru": "Да, конечно. Извините!",
+        "uk": "Так, звісно. Вибачте!",
+        "be": "Так, вядома. Прабачце!",
+        "pl": "Tak, oczywiście. Przepraszam!",
+        "tr": "Evet, tabii. Pardon!",
+        "zh": "好，当然可以。抱歉！",
+        "zh-Hant": "好，當然可以。抱歉！",
+        "ja": "はい、もちろん。すみません！",
+        "ar": "نعم، طبعًا. آسف!",
+        "hi": "हाँ, ज़रूर। माफ़ कीजिए!"
+      },
+      "task": {
+        "build": [
+          "No,",
+          "Please!"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "No problem.",
+        "es": "No pasa nada.",
+        "fr": "Ce n'est pas grave.",
+        "de": "Kein Problem.",
+        "it": "Non fa niente.",
+        "pt": "Não faz mal.",
+        "ru": "Ничего страшного.",
+        "uk": "Нічого страшного.",
+        "be": "Нічога страшнага.",
+        "pl": "Nic nie szkodzi.",
+        "tr": "Önemli değil.",
+        "zh": "没关系。",
+        "zh-Hant": "沒關係。",
+        "ja": "大丈夫ですよ。",
+        "ar": "لا مشكلة.",
+        "hi": "कोई बात नहीं।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Excuse me, where's the toilet?",
+        "es": "Perdone, ¿dónde está el baño?",
+        "fr": "Excusez-moi, où sont les toilettes ?",
+        "de": "Entschuldigung, wo ist die Toilette?",
+        "it": "Mi scusi, dov'è il bagno?",
+        "pt": "Desculpe, onde é a casa de banho?",
+        "ru": "Извините, где туалет?",
+        "uk": "Перепрошую, де туалет?",
+        "be": "Прабачце, дзе туалет?",
+        "pl": "Przepraszam, gdzie jest toaleta?",
+        "tr": "Affedersiniz, tuvalet nerede?",
+        "zh": "请问，洗手间在哪儿？",
+        "zh-Hant": "請問，洗手間在哪裡？",
+        "ja": "すみません、トイレはどこですか？",
+        "ar": "لو سمحت، أين الحمّام؟",
+        "hi": "माफ़ कीजिए, टॉयलेट कहाँ है?"
+      },
+      "task": {
+        "choose": [
+          "Excuse me, when's the toilet?",
+          "Excuse me, where are the toilet?"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Over there, on the right.",
+        "es": "Por allí, a la derecha.",
+        "fr": "Là-bas, à droite.",
+        "de": "Da drüben, rechts.",
+        "it": "Laggiù, a destra.",
+        "pt": "Ali, à direita.",
+        "ru": "Вон там, справа.",
+        "uk": "Он там, праворуч.",
+        "be": "Вунь там, справа.",
+        "pl": "Tam, na prawo.",
+        "tr": "Şurada, sağda.",
+        "zh": "就在那边，右手边。",
+        "zh-Hant": "就在那邊，右手邊。",
+        "ja": "あそこの右側です。",
+        "ar": "هناك، على اليمين.",
+        "hi": "वहाँ, दाईं ओर।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Thank you very much!",
+        "es": "¡Muchas gracias!",
+        "fr": "Merci beaucoup !",
+        "de": "Vielen Dank!",
+        "it": "Grazie mille!",
+        "pt": "Muito obrigado!",
+        "ru": "Большое спасибо!",
+        "uk": "Щиро дякую!",
+        "be": "Вялікі дзякуй!",
+        "pl": "Dziękuję bardzo!",
+        "tr": "Çok teşekkür ederim!",
+        "zh": "非常感谢！",
+        "zh-Hant": "非常感謝！",
+        "ja": "どうもありがとうございます！",
+        "ar": "شكرًا جزيلًا!",
+        "hi": "बहुत-बहुत धन्यवाद!"
+      },
+      "task": {
+        "build": [
+          "Please",
+          "many"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "You're welcome.",
+        "es": "De nada.",
+        "fr": "De rien.",
+        "de": "Gern geschehen.",
+        "it": "Prego.",
+        "pt": "De nada.",
+        "ru": "Не за что.",
+        "uk": "Нема за що.",
+        "be": "Няма за што.",
+        "pl": "Nie ma za co.",
+        "tr": "Rica ederim.",
+        "zh": "不客气。",
+        "zh-Hant": "不客氣。",
+        "ja": "どういたしまして。",
+        "ar": "العفو.",
+        "hi": "कोई बात नहीं।"
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "excuse me",
+        "es": "perdone, disculpe",
+        "fr": "excusez-moi, pardon",
+        "de": "Entschuldigung",
+        "it": "mi scusi, scusi",
+        "pt": "com licença, desculpe",
+        "ru": "извините",
+        "uk": "перепрошую",
+        "be": "прабачце",
+        "pl": "przepraszam",
+        "tr": "affedersiniz",
+        "zh": "不好意思，请问",
+        "zh-Hant": "不好意思，請問",
+        "ja": "すみません",
+        "ar": "لو سمحت، عفوًا",
+        "hi": "माफ़ कीजिए, सुनिए"
+      },
+      "example": "Excuse me, can I get past?"
+    },
+    {
+      "text": {
+        "en": "of course",
+        "es": "claro, por supuesto",
+        "fr": "bien sûr",
+        "de": "natürlich",
+        "it": "certo, certamente",
+        "pt": "claro, com certeza",
+        "ru": "конечно",
+        "uk": "звісно",
+        "be": "вядома",
+        "pl": "oczywiście",
+        "tr": "tabii, elbette",
+        "zh": "当然",
+        "zh-Hant": "當然",
+        "ja": "もちろん",
+        "ar": "طبعًا، بالتأكيد",
+        "hi": "ज़रूर, बिल्कुल"
+      },
+      "example": "Yes, of course. Sorry!"
+    },
+    {
+      "text": {
+        "en": "sorry",
+        "es": "perdón, lo siento",
+        "fr": "pardon, désolé",
+        "de": "Entschuldigung, Verzeihung",
+        "it": "scusi, mi dispiace",
+        "pt": "desculpe, peço desculpa",
+        "ru": "извините, простите",
+        "uk": "вибачте",
+        "be": "прабачце, выбачайце",
+        "pl": "przepraszam",
+        "tr": "pardon, özür dilerim",
+        "zh": "对不起，抱歉",
+        "zh-Hant": "對不起，抱歉",
+        "ja": "ごめんなさい、すみません",
+        "ar": "آسف، عذرًا",
+        "hi": "माफ़ कीजिए, सॉरी"
+      },
+      "example": "Yes, of course. Sorry!"
+    },
+    {
+      "text": {
+        "en": "toilet",
+        "es": "baño, servicio",
+        "fr": "toilettes",
+        "de": "Toilette",
+        "it": "bagno",
+        "pt": "casa de banho",
+        "ru": "туалет",
+        "uk": "туалет",
+        "be": "туалет",
+        "pl": "toaleta",
+        "tr": "tuvalet",
+        "zh": "洗手间，厕所",
+        "zh-Hant": "洗手間，廁所",
+        "ja": "トイレ",
+        "ar": "حمّام، دورة مياه",
+        "hi": "टॉयलेट, शौचालय"
+      },
+      "example": "Excuse me, where's the toilet?"
+    },
+    {
+      "text": {
+        "en": "on the right",
+        "es": "a la derecha",
+        "fr": "à droite",
+        "de": "rechts",
+        "it": "a destra",
+        "pt": "à direita",
+        "ru": "справа",
+        "uk": "праворуч",
+        "be": "справа",
+        "pl": "na prawo",
+        "tr": "sağda",
+        "zh": "在右边",
+        "zh-Hant": "在右邊",
+        "ja": "右側に、右に",
+        "ar": "على اليمين",
+        "hi": "दाईं ओर"
+      },
+      "example": "Over there, on the right."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "Excuse me, where's the toilet?",
+        "es": "Perdone, ¿dónde está el baño?",
+        "fr": "Excusez-moi, où sont les toilettes ?",
+        "de": "Entschuldigung, wo ist die Toilette?",
+        "it": "Mi scusi, dov'è il bagno?",
+        "pt": "Desculpe, onde é a casa de banho?",
+        "ru": "Извините, где туалет?",
+        "uk": "Перепрошую, де туалет?",
+        "be": "Прабачце, дзе туалет?",
+        "pl": "Przepraszam, gdzie jest toaleta?",
+        "tr": "Affedersiniz, tuvalet nerede?",
+        "zh": "请问，洗手间在哪儿？",
+        "zh-Hant": "請問，洗手間在哪裡？",
+        "ja": "すみません、トイレはどこですか？",
+        "ar": "لو سمحت، أين الحمّام؟",
+        "hi": "माफ़ कीजिए, टॉयलेट कहाँ है?"
+      },
+      "distractors": [
+        "when's",
+        "a"
+      ],
+      "gap": "where's",
+      "gapWrong": [
+        "when's",
+        "what's"
+      ]
+    },
+    {
+      "text": {
+        "en": "No problem.",
+        "es": "No pasa nada.",
+        "fr": "Ce n'est pas grave.",
+        "de": "Kein Problem.",
+        "it": "Non fa niente.",
+        "pt": "Não faz mal.",
+        "ru": "Ничего страшного.",
+        "uk": "Нічого страшного.",
+        "be": "Нічога страшнага.",
+        "pl": "Nic nie szkodzi.",
+        "tr": "Önemli değil.",
+        "zh": "没关系。",
+        "zh-Hant": "沒關係。",
+        "ja": "大丈夫ですよ。",
+        "ar": "لا مشكلة.",
+        "hi": "कोई बात नहीं।"
+      },
+      "distractors": [
+        "Not",
+        "any"
+      ],
+      "gap": "No",
+      "gapWrong": [
+        "Not",
+        "Any"
+      ]
+    },
+    {
+      "text": {
+        "en": "Yes, of course.",
+        "es": "Sí, claro.",
+        "fr": "Oui, bien sûr.",
+        "de": "Ja, natürlich.",
+        "it": "Sì, certo.",
+        "pt": "Sim, claro.",
+        "ru": "Да, конечно.",
+        "uk": "Так, звісно.",
+        "be": "Так, вядома.",
+        "pl": "Tak, oczywiście.",
+        "tr": "Evet, tabii.",
+        "zh": "好，当然可以。",
+        "zh-Hant": "好，當然可以。",
+        "ja": "はい、もちろんです。",
+        "ar": "نعم، طبعًا.",
+        "hi": "हाँ, ज़रूर।"
+      },
+      "distractors": [
+        "No,",
+        "off"
+      ],
+      "gap": "course",
+      "gapWrong": [
+        "coarse",
+        "curse"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Excuse me, where's the {slot}?",
+    "items": [
+      {
+        "word": {
+          "en": "pharmacy",
+          "es": "farmacia",
+          "fr": "pharmacie",
+          "de": "Apotheke",
+          "it": "farmacia",
+          "pt": "farmácia",
+          "ru": "аптека",
+          "uk": "аптека",
+          "be": "аптэка",
+          "pl": "apteka",
+          "tr": "eczane",
+          "zh": "药店",
+          "zh-Hant": "藥局",
+          "ja": "薬局",
+          "ar": "صيدلية",
+          "hi": "दवा की दुकान, फ़ार्मेसी"
+        },
+        "sentence": {
+          "en": "Excuse me, where's the pharmacy?",
+          "es": "Perdone, ¿dónde está la farmacia?",
+          "fr": "Excusez-moi, où est la pharmacie ?",
+          "de": "Entschuldigung, wo ist die Apotheke?",
+          "it": "Mi scusi, dov'è la farmacia?",
+          "pt": "Desculpe, onde é a farmácia?",
+          "ru": "Извините, где аптека?",
+          "uk": "Перепрошую, де аптека?",
+          "be": "Прабачце, дзе аптэка?",
+          "pl": "Przepraszam, gdzie jest apteka?",
+          "tr": "Affedersiniz, eczane nerede?",
+          "zh": "请问，药店在哪儿？",
+          "zh-Hant": "請問，藥局在哪裡？",
+          "ja": "すみません、薬局はどこですか？",
+          "ar": "لو سمحت، أين الصيدلية؟",
+          "hi": "माफ़ कीजिए, दवा की दुकान कहाँ है?"
+        }
+      },
+      {
+        "word": {
+          "en": "bus stop",
+          "es": "parada de autobús",
+          "fr": "arrêt de bus",
+          "de": "Bushaltestelle",
+          "it": "fermata dell'autobus",
+          "pt": "paragem de autocarro",
+          "ru": "остановка",
+          "uk": "зупинка",
+          "be": "прыпынак",
+          "pl": "przystanek",
+          "tr": "otobüs durağı",
+          "zh": "公交车站",
+          "zh-Hant": "公車站",
+          "ja": "バス停",
+          "ar": "موقف الحافلات",
+          "hi": "बस स्टॉप"
+        },
+        "sentence": {
+          "en": "Excuse me, where's the bus stop?",
+          "es": "Perdone, ¿dónde está la parada de autobús?",
+          "fr": "Excusez-moi, où est l'arrêt de bus ?",
+          "de": "Entschuldigung, wo ist die Bushaltestelle?",
+          "it": "Mi scusi, dov'è la fermata dell'autobus?",
+          "pt": "Desculpe, onde é a paragem do autocarro?",
+          "ru": "Извините, где остановка?",
+          "uk": "Перепрошую, де зупинка?",
+          "be": "Прабачце, дзе прыпынак?",
+          "pl": "Przepraszam, gdzie jest przystanek?",
+          "tr": "Affedersiniz, otobüs durağı nerede?",
+          "zh": "请问，公交车站在哪儿？",
+          "zh-Hant": "請問，公車站在哪裡？",
+          "ja": "すみません、バス停はどこですか？",
+          "ar": "لو سمحت، أين موقف الحافلات؟",
+          "hi": "माफ़ कीजिए, बस स्टॉप कहाँ है?"
+        }
+      },
+      {
+        "word": {
+          "en": "exit",
+          "es": "salida",
+          "fr": "sortie",
+          "de": "Ausgang",
+          "it": "uscita",
+          "pt": "saída",
+          "ru": "выход",
+          "uk": "вихід",
+          "be": "выхад",
+          "pl": "wyjście",
+          "tr": "çıkış",
+          "zh": "出口",
+          "zh-Hant": "出口",
+          "ja": "出口",
+          "ar": "مخرج",
+          "hi": "निकास, बाहर का रास्ता"
+        },
+        "sentence": {
+          "en": "Excuse me, where's the exit?",
+          "es": "Perdone, ¿dónde está la salida?",
+          "fr": "Excusez-moi, où est la sortie ?",
+          "de": "Entschuldigung, wo ist der Ausgang?",
+          "it": "Mi scusi, dov'è l'uscita?",
+          "pt": "Desculpe, onde é a saída?",
+          "ru": "Извините, где выход?",
+          "uk": "Перепрошую, де вихід?",
+          "be": "Прабачце, дзе выхад?",
+          "pl": "Przepraszam, gdzie jest wyjście?",
+          "tr": "Affedersiniz, çıkış nerede?",
+          "zh": "请问，出口在哪儿？",
+          "zh-Hant": "請問，出口在哪裡？",
+          "ja": "すみません、出口はどこですか？",
+          "ar": "لو سمحت، أين المخرج؟",
+          "hi": "माफ़ कीजिए, बाहर निकलने का रास्ता कहाँ है?"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "id": "what-does-it-mean",
+  "title": {
+    "en": "What does it mean?",
+    "es": "¿Qué significa?",
+    "fr": "Ça veut dire quoi ?",
+    "de": "Was bedeutet das?",
+    "it": "Cosa significa?",
+    "pt": "O que quer dizer?",
+    "ru": "Что это значит?",
+    "uk": "Що це означає?",
+    "be": "Што гэта значыць?",
+    "pl": "Co to znaczy?",
+    "tr": "Bu ne demek?",
+    "zh": "这是什么意思？",
+    "zh-Hant": "這是什麼意思？",
+    "ja": "どういう意味？",
+    "ar": "ماذا يعني هذا؟",
+    "hi": "इसका क्या मतलब है?"
+  },
+  "subtitle": {
+    "en": "Ask what a word means and how to spell it",
+    "es": "Pregunta qué significa una palabra y cómo se escribe",
+    "fr": "Demande ce que veut dire un mot et comment il s'écrit",
+    "de": "Frag, was ein Wort bedeutet und wie man es schreibt",
+    "it": "Chiedi cosa significa una parola e come si scrive",
+    "pt": "Pergunta o que quer dizer uma palavra e como se escreve",
+    "ru": "Спросить, что значит слово и как оно пишется",
+    "uk": "Запитати, що означає слово і як воно пишеться",
+    "be": "Спытаць, што значыць слова і як яно пішацца",
+    "pl": "Zapytaj o znaczenie i pisownię słowa",
+    "tr": "Bir kelimenin anlamını ve nasıl yazıldığını sor",
+    "zh": "问一个词的意思和拼法",
+    "zh-Hant": "問單字的意思和怎麼拼",
+    "ja": "単語の意味とつづりを聞こう",
+    "ar": "اسأل عن معنى كلمة وكيف تُتهجّى",
+    "hi": "पूछें कि किसी शब्द का क्या मतलब है और उसकी स्पेलिंग क्या है"
+  },
+  "with": "rabbit",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Look, that sign says “SALE”.",
+        "es": "Mira, ese cartel pone «SALE».",
+        "fr": "Regarde, sur ce panneau, c'est écrit « SALE ».",
+        "de": "Schau, auf dem Schild steht „SALE“.",
+        "it": "Guarda, quel cartello dice «SALE».",
+        "pt": "Olha, aquele cartaz diz «SALE».",
+        "ru": "Смотри, на той вывеске написано «SALE».",
+        "uk": "Дивись, на тій вивісці написано «SALE».",
+        "be": "Глядзі, на той шыльдзе напісана «SALE».",
+        "pl": "Patrz, tam jest napis „SALE”.",
+        "tr": "Bak, şu tabelada “SALE” yazıyor.",
+        "zh": "你看，那个牌子上写着“SALE”。",
+        "zh-Hant": "你看，那個招牌上寫著「SALE」。",
+        "ja": "見て、あの看板に「SALE」って書いてあるよ。",
+        "ar": "انظر، تلك اللافتة مكتوب عليها «SALE».",
+        "hi": "देखो, उस बोर्ड पर “SALE” लिखा है।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "What does it mean?",
+        "es": "¿Qué significa?",
+        "fr": "Ça veut dire quoi ?",
+        "de": "Was bedeutet das?",
+        "it": "Cosa significa?",
+        "pt": "O que quer dizer?",
+        "ru": "Что это значит?",
+        "uk": "Що це означає?",
+        "be": "Што гэта значыць?",
+        "pl": "Co to znaczy?",
+        "tr": "Bu ne demek?",
+        "zh": "这是什么意思？",
+        "zh-Hant": "這是什麼意思？",
+        "ja": "どういう意味？",
+        "ar": "ماذا يعني هذا؟",
+        "hi": "इसका क्या मतलब है?"
+      },
+      "task": {
+        "build": [
+          "do",
+          "means"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "It means everything is cheaper.",
+        "es": "Significa que todo está más barato.",
+        "fr": "Ça veut dire que tout est moins cher.",
+        "de": "Das heißt, alles ist billiger.",
+        "it": "Significa che è tutto più economico.",
+        "pt": "Quer dizer que está tudo mais barato.",
+        "ru": "Это значит, что всё дешевле.",
+        "uk": "Це означає, що все дешевше.",
+        "be": "Гэта значыць, што ўсё танней.",
+        "pl": "To znaczy, że wszystko jest taniej.",
+        "tr": "Her şey daha ucuz demek.",
+        "zh": "意思是所有东西都便宜了。",
+        "zh-Hant": "意思是全部東西都變便宜了。",
+        "ja": "全部安くなってるって意味だよ。",
+        "ar": "يعني أن كل شيء أرخص.",
+        "hi": "इसका मतलब है कि सब कुछ सस्ता है।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Oh! And how do you spell it?",
+        "es": "¡Ah! ¿Y cómo se escribe?",
+        "fr": "Ah ! Et ça s'écrit comment ?",
+        "de": "Ah! Und wie schreibt man das?",
+        "it": "Ah! E come si scrive?",
+        "pt": "Ah! E como se escreve?",
+        "ru": "А! А как это пишется?",
+        "uk": "А! А як це пишеться?",
+        "be": "А! А як гэта пішацца?",
+        "pl": "Aha! A jak to się pisze?",
+        "tr": "Aa! Peki nasıl yazılıyor?",
+        "zh": "哦！那这个词怎么拼？",
+        "zh-Hant": "喔！那要怎麼拼？",
+        "ja": "へえ！で、どうつづるの？",
+        "ar": "آه! وكيف تتهجّاها؟",
+        "hi": "अच्छा! और इसकी स्पेलिंग क्या है?"
+      },
+      "task": {
+        "choose": [
+          "Oh! And how do you spells it?",
+          "Oh! And where do you spell it?"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "S-A-L-E. It's easy!",
+        "es": "S-A-L-E. ¡Es fácil!",
+        "fr": "S-A-L-E. C'est facile !",
+        "de": "S-A-L-E. Ganz einfach!",
+        "it": "S-A-L-E. È facile!",
+        "pt": "S-A-L-E. É fácil!",
+        "ru": "S-A-L-E. Это просто!",
+        "uk": "S-A-L-E. Це просто!",
+        "be": "S-A-L-E. Гэта проста!",
+        "pl": "S-A-L-E. To proste!",
+        "tr": "S-A-L-E. Çok kolay!",
+        "zh": "S-A-L-E。很简单！",
+        "zh-Hant": "S-A-L-E。很簡單！",
+        "ja": "S-A-L-E。簡単でしょ！",
+        "ar": "S-A-L-E. إنها سهلة!",
+        "hi": "S-A-L-E। बहुत आसान है!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Thanks! Now I get it.",
+        "es": "¡Gracias! Ahora lo entiendo.",
+        "fr": "Merci ! Là, j'ai compris.",
+        "de": "Danke! Jetzt hab ich's kapiert.",
+        "it": "Grazie! Ora ho capito.",
+        "pt": "Obrigado! Agora percebi.",
+        "ru": "Спасибо! Теперь понятно.",
+        "uk": "Дякую! Тепер зрозуміло.",
+        "be": "Дзякуй! Цяпер зразумела.",
+        "pl": "Dzięki! Teraz rozumiem.",
+        "tr": "Sağ ol! Şimdi anladım.",
+        "zh": "谢谢！这下我懂了。",
+        "zh-Hant": "謝謝！這下我懂了。",
+        "ja": "ありがとう！やっとわかった。",
+        "ar": "شكرًا! الآن فهمت.",
+        "hi": "शुक्रिया! अब समझ आया।"
+      },
+      "task": {
+        "build": [
+          "got",
+          "don't"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "sign",
+        "es": "cartel, letrero",
+        "fr": "panneau, enseigne",
+        "de": "Schild",
+        "it": "cartello, insegna",
+        "pt": "cartaz, letreiro",
+        "ru": "вывеска, надпись",
+        "uk": "вивіска, напис",
+        "be": "шыльда, надпіс",
+        "pl": "napis",
+        "tr": "tabela, levha",
+        "zh": "牌子，标志",
+        "zh-Hant": "招牌，標示",
+        "ja": "看板、表示",
+        "ar": "لافتة",
+        "hi": "बोर्ड, साइनबोर्ड"
+      },
+      "example": "Look, that sign says “SALE”."
+    },
+    {
+      "text": {
+        "en": "sale",
+        "es": "rebajas",
+        "fr": "soldes",
+        "de": "Ausverkauf, Rabattaktion",
+        "it": "saldi",
+        "pt": "saldos",
+        "ru": "распродажа",
+        "uk": "розпродаж",
+        "be": "распродаж",
+        "pl": "wyprzedaż",
+        "tr": "indirim",
+        "zh": "打折，促销",
+        "zh-Hant": "特價，拍賣",
+        "ja": "セール、特売",
+        "ar": "تخفيضات",
+        "hi": "सेल, छूट"
+      },
+      "example": "Look, that sign says “SALE”."
+    },
+    {
+      "text": {
+        "en": "mean",
+        "es": "significar",
+        "fr": "vouloir dire, signifier",
+        "de": "bedeuten",
+        "it": "significare, voler dire",
+        "pt": "querer dizer, significar",
+        "ru": "значить",
+        "uk": "означати",
+        "be": "значыць",
+        "pl": "znaczyć",
+        "tr": "anlamına gelmek, demek",
+        "zh": "意思是，表示",
+        "zh-Hant": "意思是，表示",
+        "ja": "意味する",
+        "ar": "يعني",
+        "hi": "मतलब होना"
+      },
+      "example": "What does it mean?"
+    },
+    {
+      "text": {
+        "en": "cheaper",
+        "es": "más barato",
+        "fr": "moins cher",
+        "de": "billiger",
+        "it": "più economico",
+        "pt": "mais barato",
+        "ru": "дешевле",
+        "uk": "дешевше",
+        "be": "танней",
+        "pl": "taniej",
+        "tr": "daha ucuz",
+        "zh": "更便宜",
+        "zh-Hant": "比較便宜",
+        "ja": "もっと安い",
+        "ar": "أرخص",
+        "hi": "ज़्यादा सस्ता"
+      },
+      "example": "It means everything is cheaper."
+    },
+    {
+      "text": {
+        "en": "spell",
+        "es": "deletrear, escribir",
+        "fr": "épeler, écrire",
+        "de": "buchstabieren",
+        "it": "scrivere, fare lo spelling",
+        "pt": "soletrar, escrever",
+        "ru": "писать по буквам",
+        "uk": "писати по літерах",
+        "be": "пісаць па літарах",
+        "pl": "przeliterować",
+        "tr": "harf harf söylemek, yazmak",
+        "zh": "拼写",
+        "zh-Hant": "拼字，拼寫",
+        "ja": "つづる、つづりを言う",
+        "ar": "يتهجّى",
+        "hi": "स्पेलिंग बताना"
+      },
+      "example": "Oh! And how do you spell it?"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "What does it mean?",
+        "es": "¿Qué significa?",
+        "fr": "Ça veut dire quoi ?",
+        "de": "Was bedeutet das?",
+        "it": "Cosa significa?",
+        "pt": "O que quer dizer?",
+        "ru": "Что это значит?",
+        "uk": "Що це означає?",
+        "be": "Што гэта значыць?",
+        "pl": "Co to znaczy?",
+        "tr": "Bu ne demek?",
+        "zh": "这是什么意思？",
+        "zh-Hant": "這是什麼意思？",
+        "ja": "どういう意味？",
+        "ar": "ماذا يعني هذا؟",
+        "hi": "इसका क्या मतलब है?"
+      },
+      "distractors": [
+        "do",
+        "means"
+      ],
+      "gap": "does",
+      "gapWrong": [
+        "do",
+        "is"
+      ]
+    },
+    {
+      "text": {
+        "en": "How do you spell it?",
+        "es": "¿Cómo se escribe?",
+        "fr": "Ça s'écrit comment ?",
+        "de": "Wie schreibt man das?",
+        "it": "Come si scrive?",
+        "pt": "Como se escreve?",
+        "ru": "Как это пишется?",
+        "uk": "Як це пишеться?",
+        "be": "Як гэта пішацца?",
+        "pl": "Jak to się pisze?",
+        "tr": "Nasıl yazılıyor?",
+        "zh": "这个词怎么拼？",
+        "zh-Hant": "這個要怎麼拼？",
+        "ja": "どうつづるの？",
+        "ar": "كيف تتهجّاها؟",
+        "hi": "इसकी स्पेलिंग क्या है?"
+      },
+      "distractors": [
+        "does",
+        "say"
+      ],
+      "gap": "spell",
+      "gapWrong": [
+        "spells",
+        "spelling"
+      ]
+    },
+    {
+      "text": {
+        "en": "Now I get it.",
+        "es": "Ahora lo entiendo.",
+        "fr": "Là, j'ai compris.",
+        "de": "Jetzt hab ich's kapiert.",
+        "it": "Ora ho capito.",
+        "pt": "Agora percebi.",
+        "ru": "Теперь понятно.",
+        "uk": "Тепер зрозуміло.",
+        "be": "Цяпер зразумела.",
+        "pl": "Teraz rozumiem.",
+        "tr": "Tamam, şimdi anladım.",
+        "zh": "这下我懂了。",
+        "zh-Hant": "這下我懂了。",
+        "ja": "やっとわかった。",
+        "ar": "الآن فهمت.",
+        "hi": "अब समझ आया।"
+      },
+      "distractors": [
+        "got",
+        "don't"
+      ],
+      "gap": "get",
+      "gapWrong": [
+        "gets",
+        "getting"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "What does “{slot}” mean?",
+    "items": [
+      {
+        "word": {
+          "en": "exit",
+          "es": "salida",
+          "fr": "sortie",
+          "de": "Ausgang",
+          "it": "uscita",
+          "pt": "saída",
+          "ru": "выход",
+          "uk": "вихід",
+          "be": "выхад",
+          "pl": "wyjście",
+          "tr": "çıkış",
+          "zh": "出口",
+          "zh-Hant": "出口",
+          "ja": "出口",
+          "ar": "مخرج",
+          "hi": "निकास, बाहर का रास्ता"
+        },
+        "sentence": {
+          "en": "What does “exit” mean?",
+          "es": "¿Qué significa «exit»?",
+          "fr": "Ça veut dire quoi, « exit » ?",
+          "de": "Was bedeutet „exit“?",
+          "it": "Cosa significa «exit»?",
+          "pt": "O que quer dizer «exit»?",
+          "ru": "Что значит «exit»?",
+          "uk": "Що означає «exit»?",
+          "be": "Што значыць «exit»?",
+          "pl": "Co znaczy „exit”?",
+          "tr": "“exit” ne demek?",
+          "zh": "“exit”是什么意思？",
+          "zh-Hant": "「exit」是什麼意思？",
+          "ja": "「exit」ってどういう意味？",
+          "ar": "ماذا تعني «exit»؟",
+          "hi": "“exit” का क्या मतलब है?"
+        }
+      },
+      {
+        "word": {
+          "en": "entrance",
+          "es": "entrada",
+          "fr": "entrée",
+          "de": "Eingang",
+          "it": "ingresso, entrata",
+          "pt": "entrada",
+          "ru": "вход",
+          "uk": "вхід",
+          "be": "уваход",
+          "pl": "wejście",
+          "tr": "giriş",
+          "zh": "入口",
+          "zh-Hant": "入口",
+          "ja": "入口",
+          "ar": "مدخل",
+          "hi": "प्रवेश, अंदर जाने का रास्ता"
+        },
+        "sentence": {
+          "en": "What does “entrance” mean?",
+          "es": "¿Qué significa «entrance»?",
+          "fr": "Ça veut dire quoi, « entrance » ?",
+          "de": "Was bedeutet „entrance“?",
+          "it": "Cosa significa «entrance»?",
+          "pt": "O que quer dizer «entrance»?",
+          "ru": "Что значит «entrance»?",
+          "uk": "Що означає «entrance»?",
+          "be": "Што значыць «entrance»?",
+          "pl": "Co znaczy „entrance”?",
+          "tr": "“entrance” ne demek?",
+          "zh": "“entrance”是什么意思？",
+          "zh-Hant": "「entrance」是什麼意思？",
+          "ja": "「entrance」ってどういう意味？",
+          "ar": "ماذا تعني «entrance»؟",
+          "hi": "“entrance” का क्या मतलब है?"
+        }
+      },
+      {
+        "word": {
+          "en": "closed",
+          "es": "cerrado",
+          "fr": "fermé",
+          "de": "geschlossen",
+          "it": "chiuso",
+          "pt": "fechado",
+          "ru": "закрыто",
+          "uk": "зачинено",
+          "be": "зачынена",
+          "pl": "zamknięte",
+          "tr": "kapalı",
+          "zh": "关门，关闭",
+          "zh-Hant": "關門，休息中",
+          "ja": "閉まっている、閉店",
+          "ar": "مغلق",
+          "hi": "बंद"
+        },
+        "sentence": {
+          "en": "What does “closed” mean?",
+          "es": "¿Qué significa «closed»?",
+          "fr": "Ça veut dire quoi, « closed » ?",
+          "de": "Was bedeutet „closed“?",
+          "it": "Cosa significa «closed»?",
+          "pt": "O que quer dizer «closed»?",
+          "ru": "Что значит «closed»?",
+          "uk": "Що означає «closed»?",
+          "be": "Што значыць «closed»?",
+          "pl": "Co znaczy „closed”?",
+          "tr": "“closed” ne demek?",
+          "zh": "“closed”是什么意思？",
+          "zh-Hant": "「closed」是什麼意思？",
+          "ja": "「closed」ってどういう意味？",
+          "ar": "ماذا تعني «closed»؟",
+          "hi": "“closed” का क्या मतलब है?"
+        }
+      }
+    ]
+  }
+}

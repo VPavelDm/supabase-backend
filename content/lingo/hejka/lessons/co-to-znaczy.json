@@ -1,0 +1,524 @@
+{
+  "id": "co-to-znaczy",
+  "title": {
+    "pl": "Co to znaczy?",
+    "ru": "Что это значит?",
+    "uk": "Що це означає?",
+    "en": "What does it mean?",
+    "es": "¿Qué significa?",
+    "fr": "Qu'est-ce que ça veut dire ?",
+    "de": "Was bedeutet das?",
+    "it": "Cosa vuol dire?",
+    "pt": "O que significa?",
+    "be": "Што гэта значыць?",
+    "tr": "Bu ne demek?",
+    "zh": "这是什么意思？",
+    "zh-Hant": "這是什麼意思？",
+    "ja": "どういう意味？",
+    "ar": "ماذا يعني هذا؟",
+    "hi": "इसका क्या मतलब है?"
+  },
+  "subtitle": {
+    "pl": "Zapytaj o znaczenie i pisownię słowa",
+    "ru": "Спросить значение и написание слова",
+    "uk": "Запитати значення й написання слова",
+    "en": "Ask what a word means and how it's spelled",
+    "es": "Pregunta qué significa una palabra y cómo se escribe",
+    "fr": "Demande le sens d'un mot et comment il s'écrit",
+    "de": "Frag, was ein Wort bedeutet und wie man es schreibt",
+    "it": "Chiedi cosa significa una parola e come si scrive",
+    "pt": "Pergunta o que significa uma palavra e como se escreve",
+    "be": "Спытаць значэнне і напісанне слова",
+    "tr": "Bir kelimenin anlamını ve nasıl yazıldığını sor",
+    "zh": "问问一个词的意思和写法",
+    "zh-Hant": "問問一個字的意思和寫法",
+    "ja": "単語の意味とつづりを聞いてみよう",
+    "ar": "السؤال عن معنى الكلمة وطريقة كتابتها",
+    "hi": "किसी शब्द का मतलब और स्पेलिंग पूछें"
+  },
+  "with": "rabbit",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "ł читается как английское w, ó — как «у», rz и ż звучат одинаково. Поэтому даже поляки спрашивают, как пишется слово.",
+      "uk": "ł читається як англійське w, ó — як «у», rz і ż звучать однаково. Тому навіть поляки питають, як пишеться слово.",
+      "en": "ł sounds like English w, ó like “oo”, and rz and ż sound the same — even Poles ask how a word is spelled.",
+      "es": "ł suena como la w inglesa, ó como «u», y rz y ż suenan igual: hasta los polacos preguntan cómo se escribe una palabra.",
+      "fr": "ł se prononce comme « ou » dans « oui », ó comme « ou », et rz et ż se prononcent pareil — même les Polonais demandent comment un mot s'écrit.",
+      "de": "ł klingt wie das englische w, ó wie „u“, und rz und ż klingen gleich – deshalb fragen sogar Polen, wie man ein Wort schreibt.",
+      "it": "ł si pronuncia come la «u» di «uomo», ó come «u», e rz e ż suonano uguali: perfino i polacchi chiedono come si scrive una parola.",
+      "pt": "ł soa como o w inglês, ó como «u», e rz e ż soam igual — até os polacos perguntam como se escreve uma palavra.",
+      "be": "ł чытаецца як беларускае «ў», ó — як «у», а rz і ż гучаць аднолькава, як «ж». Таму нават палякі пытаюцца, як пішацца слова.",
+      "tr": "ł İngilizcedeki w gibi, ó “u” gibi okunur; rz ile ż ise aynı ses, Türkçedeki “j” gibi. Bu yüzden Polonyalılar bile bir kelimenin nasıl yazıldığını sorar.",
+      "zh": "ł 读起来像英语的 w，ó 像“乌”，rz 和 ż 发音相同——所以连波兰人也常问一个词怎么写。",
+      "zh-Hant": "ł 讀起來像英文的 w，ó 像「烏」，rz 和 ż 發音相同——所以連波蘭人也常問一個字怎麼寫。",
+      "ja": "ł は英語の w、ó は「ウ」のように読み、rz と ż は同じ音です。だからポーランド人でも、単語のつづりを聞き合います。",
+      "ar": "يُنطق ł مثل w الإنجليزية (و)، و ó مثل الواو الممدودة في «نور»، أما rz و ż فيُنطقان بالطريقة نفسها، ولهذا يسأل حتى البولنديون عن كيفية كتابة الكلمة.",
+      "hi": "ł अंग्रेज़ी के w जैसा सुनाई देता है, ó “उ” जैसा, और rz और ż एक जैसे (लगभग “झ़”) सुनाई देते हैं — इसलिए पोलिश लोग भी पूछते हैं कि शब्द कैसे लिखा जाता है।"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Patrz, tam jest napis „Wyprzedaż”.",
+        "ru": "Смотри, там написано «Wyprzedaż».",
+        "uk": "Дивись, там напис «Wyprzedaż».",
+        "en": "Look, the sign says “Wyprzedaż”.",
+        "es": "Mira, ese cartel dice «Wyprzedaż».",
+        "fr": "Regarde, là-bas, c'est écrit « Wyprzedaż ».",
+        "de": "Schau, da steht „Wyprzedaż“.",
+        "it": "Guarda, lì c'è scritto «Wyprzedaż».",
+        "pt": "Olha, aquele letreiro diz «Wyprzedaż».",
+        "be": "Глядзі, там напісана «Wyprzedaż».",
+        "tr": "Bak, orada “Wyprzedaż” yazıyor.",
+        "zh": "你看，那边的牌子上写着“Wyprzedaż”。",
+        "zh-Hant": "你看，那邊的招牌上寫著「Wyprzedaż」。",
+        "ja": "見て、あそこに「Wyprzedaż」って書いてあるよ。",
+        "ar": "انظرْ، هناك لافتة مكتوب عليها «Wyprzedaż».",
+        "hi": "देखो, वहाँ लिखा है “Wyprzedaż”।",
+        "zh-Hant_f": "妳看，那邊的招牌上寫著「Wyprzedaż」。",
+        "ar_f": "انظري، هناك لافتة مكتوب عليها «Wyprzedaż»."
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Co to znaczy?",
+        "ru": "Что это значит?",
+        "uk": "Що це означає?",
+        "en": "What does it mean?",
+        "es": "¿Qué significa?",
+        "fr": "Qu'est-ce que ça veut dire ?",
+        "de": "Was bedeutet das?",
+        "it": "Cosa vuol dire?",
+        "pt": "O que significa?",
+        "be": "Што гэта значыць?",
+        "tr": "Bu ne demek?",
+        "zh": "这是什么意思？",
+        "zh-Hant": "這是什麼意思？",
+        "ja": "どういう意味？",
+        "ar": "ماذا يعني هذا؟",
+        "hi": "इसका क्या मतलब है?"
+      },
+      "task": {
+        "build": [
+          "znaczę",
+          "jest"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "To znaczy, że wszystko jest taniej.",
+        "ru": "Это значит, что всё дешевле.",
+        "uk": "Це означає, що все дешевше.",
+        "en": "It means everything is cheaper.",
+        "es": "Significa que todo está más barato.",
+        "fr": "Ça veut dire que tout est moins cher.",
+        "de": "Das heißt, dass alles billiger ist.",
+        "it": "Vuol dire che tutto costa meno.",
+        "pt": "Significa que está tudo mais barato.",
+        "be": "Гэта значыць, што ўсё таннейшае.",
+        "tr": "Her şey daha ucuz demek.",
+        "zh": "意思是所有东西都变便宜了。",
+        "zh-Hant": "意思是所有東西都變便宜了。",
+        "ja": "全部安くなってるってことだよ。",
+        "ar": "يعني أن كل شيء أصبح أرخص.",
+        "hi": "इसका मतलब है कि सब कुछ सस्ता हो गया है।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Aha! A jak to się pisze?",
+        "ru": "А! А как это пишется?",
+        "uk": "А! А як це пишеться?",
+        "en": "Oh! And how is it spelled?",
+        "es": "¡Ah! ¿Y cómo se escribe?",
+        "fr": "Ah ! Et ça s'écrit comment ?",
+        "de": "Aha! Und wie schreibt man das?",
+        "it": "Ah! E come si scrive?",
+        "pt": "Ah! E como se escreve?",
+        "be": "А! А як гэта пішацца?",
+        "tr": "Haa! Peki nasıl yazılıyor?",
+        "zh": "哦！那这个词怎么写？",
+        "zh-Hant": "喔！那這個字怎麼寫？",
+        "ja": "なるほど！で、どうつづるの？",
+        "ar": "آه! وكيف يُكتب هذا؟",
+        "hi": "अच्छा! और इसे लिखते कैसे हैं?"
+      },
+      "task": {
+        "choose": [
+          "Aha! A jak to się piszesz?",
+          "Aha! A gdzie to się pisze?"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Z „rz” i z kropką nad „z” na końcu.",
+        "ru": "С «rz» и с точкой над «z» в конце.",
+        "uk": "З «rz» і з крапкою над «z» у кінці.",
+        "en": "With “rz”, and a dot over the “z” at the end.",
+        "es": "Con «rz» y con un punto sobre la «z» al final.",
+        "fr": "Avec « rz », et un point sur le « z » à la fin.",
+        "de": "Mit „rz“ und mit einem Punkt über dem „z“ am Ende.",
+        "it": "Con «rz» e con un puntino sulla «z» alla fine.",
+        "pt": "Com «rz» e com um ponto em cima do «z» no fim.",
+        "be": "З «rz» і з кропкай над «z» у канцы.",
+        "tr": "“rz” ile, sondaki “z”nin üstünde de bir nokta var.",
+        "zh": "有“rz”，最后的“z”上面还有一个点。",
+        "zh-Hant": "有「rz」，最後的「z」上面還有一個點。",
+        "ja": "「rz」で、最後の「z」の上に点がつくよ。",
+        "ar": "بـ«rz»، وبنقطة فوق «z» في آخرها.",
+        "hi": "“rz” के साथ, और आख़िर में “z” के ऊपर एक बिंदु।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Dzięki! Teraz rozumiem.",
+        "ru": "Спасибо! Теперь понимаю.",
+        "uk": "Дякую! Тепер розумію.",
+        "en": "Thanks! Now I get it.",
+        "es": "¡Gracias! Ahora lo entiendo.",
+        "fr": "Merci ! Maintenant, je comprends.",
+        "de": "Danke! Jetzt verstehe ich’s.",
+        "it": "Grazie! Adesso ho capito.",
+        "pt": "Obrigado! Agora percebo.",
+        "be": "Дзякуй! Цяпер разумею.",
+        "tr": "Sağ ol! Şimdi anladım.",
+        "zh": "谢啦！现在我明白了。",
+        "zh-Hant": "謝啦！現在我懂了。",
+        "ja": "ありがとう！これでわかった。",
+        "ar": "شكرًا! الآن فهمت.",
+        "hi": "थैंक्स! अब समझ आया।",
+        "pt_f": "Obrigada! Agora percebo."
+      },
+      "task": {
+        "build": [
+          "rozumiesz",
+          "jutro"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "napis",
+        "ru": "надпись",
+        "uk": "напис",
+        "en": "sign",
+        "es": "cartel",
+        "fr": "inscription, panneau",
+        "de": "Aufschrift",
+        "it": "scritta, cartello",
+        "pt": "letreiro",
+        "be": "надпіс",
+        "tr": "yazı, tabela",
+        "zh": "标牌，字样",
+        "zh-Hant": "招牌，字樣",
+        "ja": "表示、書かれた文字",
+        "ar": "لافتة، عبارة مكتوبة",
+        "hi": "साइन, लिखा हुआ बोर्ड"
+      },
+      "example": "Patrz, tam jest napis „Wyprzedaż”."
+    },
+    {
+      "text": {
+        "pl": "wyprzedaż",
+        "ru": "распродажа",
+        "uk": "розпродаж",
+        "en": "sale",
+        "es": "rebajas",
+        "fr": "soldes",
+        "de": "Ausverkauf",
+        "it": "saldi",
+        "pt": "saldos",
+        "be": "распродаж",
+        "tr": "indirim",
+        "zh": "大减价",
+        "zh-Hant": "大拍賣",
+        "ja": "セール",
+        "ar": "تخفيضات",
+        "hi": "सेल"
+      },
+      "example": "Patrz, tam jest napis „Wyprzedaż”."
+    },
+    {
+      "text": {
+        "pl": "co to znaczy",
+        "ru": "что это значит",
+        "uk": "що це означає",
+        "en": "what does it mean",
+        "es": "qué significa",
+        "fr": "qu'est-ce que ça veut dire",
+        "de": "was bedeutet das",
+        "it": "cosa vuol dire",
+        "pt": "o que significa",
+        "be": "што гэта значыць",
+        "tr": "bu ne demek",
+        "zh": "这是什么意思",
+        "zh-Hant": "這是什麼意思",
+        "ja": "どういう意味",
+        "ar": "ماذا يعني هذا",
+        "hi": "इसका क्या मतलब है"
+      },
+      "example": "Co to znaczy?"
+    },
+    {
+      "text": {
+        "pl": "taniej",
+        "ru": "дешевле",
+        "uk": "дешевше",
+        "en": "cheaper",
+        "es": "más barato",
+        "fr": "moins cher",
+        "de": "billiger",
+        "it": "più economico",
+        "pt": "mais barato",
+        "be": "танней",
+        "tr": "daha ucuz",
+        "zh": "更便宜",
+        "zh-Hant": "更便宜",
+        "ja": "より安く",
+        "ar": "أرخص",
+        "hi": "और सस्ता"
+      },
+      "example": "To znaczy, że wszystko jest taniej."
+    },
+    {
+      "text": {
+        "pl": "jak to się pisze",
+        "ru": "как это пишется",
+        "uk": "як це пишеться",
+        "en": "how is it spelled",
+        "es": "cómo se escribe",
+        "fr": "comment ça s'écrit",
+        "de": "wie schreibt man das",
+        "it": "come si scrive",
+        "pt": "como se escreve",
+        "be": "як гэта пішацца",
+        "tr": "nasıl yazılıyor",
+        "zh": "这个怎么写",
+        "zh-Hant": "這個怎麼寫",
+        "ja": "どうつづるか",
+        "ar": "كيف يُكتب هذا",
+        "hi": "इसे कैसे लिखते हैं"
+      },
+      "example": "Aha! A jak to się pisze?"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Co to znaczy?",
+        "ru": "Что это значит?",
+        "uk": "Що це означає?",
+        "en": "What does it mean?",
+        "es": "¿Qué significa?",
+        "fr": "Qu'est-ce que ça veut dire ?",
+        "de": "Was bedeutet das?",
+        "it": "Cosa vuol dire?",
+        "pt": "O que significa?",
+        "be": "Што гэта значыць?",
+        "tr": "Bu ne demek?",
+        "zh": "这是什么意思？",
+        "zh-Hant": "這是什麼意思？",
+        "ja": "どういう意味？",
+        "ar": "ماذا يعني هذا؟",
+        "hi": "इसका क्या मतलब है?"
+      },
+      "distractors": [
+        "jest",
+        "się"
+      ],
+      "gap": "znaczy",
+      "gapWrong": [
+        "znaczę",
+        "znaczyć"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Jak to się pisze?",
+        "ru": "Как это пишется?",
+        "uk": "Як це пишеться?",
+        "en": "How is it spelled?",
+        "es": "¿Cómo se escribe?",
+        "fr": "Ça s'écrit comment ?",
+        "de": "Wie schreibt man das?",
+        "it": "Come si scrive?",
+        "pt": "Como se escreve?",
+        "be": "Як гэта пішацца?",
+        "tr": "Nasıl yazılıyor?",
+        "zh": "这个怎么写？",
+        "zh-Hant": "這個怎麼寫？",
+        "ja": "どうつづるの？",
+        "ar": "كيف يُكتب هذا؟",
+        "hi": "इसे कैसे लिखते हैं?"
+      },
+      "distractors": [
+        "mówi",
+        "jest"
+      ],
+      "gap": "pisze",
+      "gapWrong": [
+        "piszę",
+        "pisać"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Teraz rozumiem.",
+        "ru": "Теперь понимаю.",
+        "uk": "Тепер розумію.",
+        "en": "Now I get it.",
+        "es": "Ahora lo entiendo.",
+        "fr": "Maintenant, je comprends.",
+        "de": "Jetzt verstehe ich’s.",
+        "it": "Adesso ho capito.",
+        "pt": "Agora percebo.",
+        "be": "Цяпер разумею.",
+        "tr": "Şimdi anladım.",
+        "zh": "现在我明白了。",
+        "zh-Hant": "現在我懂了。",
+        "ja": "これでわかった。",
+        "ar": "الآن فهمت.",
+        "hi": "अब समझ आया।"
+      },
+      "distractors": [
+        "nie",
+        "jest"
+      ],
+      "gap": "rozumiem",
+      "gapWrong": [
+        "rozumiesz",
+        "rozumie"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Co znaczy „{slot}”?",
+    "items": [
+      {
+        "word": {
+          "pl": "wyjście",
+          "ru": "выход",
+          "uk": "вихід",
+          "en": "exit",
+          "es": "salida",
+          "fr": "sortie",
+          "de": "Ausgang",
+          "it": "uscita",
+          "pt": "saída",
+          "be": "выхад",
+          "tr": "çıkış",
+          "zh": "出口",
+          "zh-Hant": "出口",
+          "ja": "出口",
+          "ar": "مخرج",
+          "hi": "निकास"
+        },
+        "sentence": {
+          "pl": "Co znaczy „wyjście”?",
+          "ru": "Что значит «wyjście»?",
+          "uk": "Що означає «wyjście»?",
+          "en": "What does “wyjście” mean?",
+          "es": "¿Qué significa «wyjście»?",
+          "fr": "Que veut dire « wyjście » ?",
+          "de": "Was bedeutet „wyjście“?",
+          "it": "Cosa vuol dire «wyjście»?",
+          "pt": "O que significa «wyjście»?",
+          "be": "Што значыць «wyjście»?",
+          "tr": "“Wyjście” ne demek?",
+          "zh": "“wyjście”是什么意思？",
+          "zh-Hant": "「wyjście」是什麼意思？",
+          "ja": "「wyjście」ってどういう意味？",
+          "ar": "ما معنى «wyjście»؟",
+          "hi": "“wyjście” का क्या मतलब है?"
+        }
+      },
+      {
+        "word": {
+          "pl": "wejście",
+          "ru": "вход",
+          "uk": "вхід",
+          "en": "entrance",
+          "es": "entrada",
+          "fr": "entrée",
+          "de": "Eingang",
+          "it": "ingresso",
+          "pt": "entrada",
+          "be": "уваход",
+          "tr": "giriş",
+          "zh": "入口",
+          "zh-Hant": "入口",
+          "ja": "入口",
+          "ar": "مدخل",
+          "hi": "प्रवेश"
+        },
+        "sentence": {
+          "pl": "Co znaczy „wejście”?",
+          "ru": "Что значит «wejście»?",
+          "uk": "Що означає «wejście»?",
+          "en": "What does “wejście” mean?",
+          "es": "¿Qué significa «wejście»?",
+          "fr": "Que veut dire « wejście » ?",
+          "de": "Was bedeutet „wejście“?",
+          "it": "Cosa vuol dire «wejście»?",
+          "pt": "O que significa «wejście»?",
+          "be": "Што значыць «wejście»?",
+          "tr": "“Wejście” ne demek?",
+          "zh": "“wejście”是什么意思？",
+          "zh-Hant": "「wejście」是什麼意思？",
+          "ja": "「wejście」ってどういう意味？",
+          "ar": "ما معنى «wejście»؟",
+          "hi": "“wejście” का क्या मतलब है?"
+        }
+      },
+      {
+        "word": {
+          "pl": "kasa",
+          "ru": "касса",
+          "uk": "каса",
+          "en": "checkout",
+          "es": "caja",
+          "fr": "caisse",
+          "de": "Kasse",
+          "it": "cassa",
+          "pt": "caixa",
+          "be": "каса",
+          "tr": "kasa",
+          "zh": "收银台",
+          "zh-Hant": "收銀台",
+          "ja": "レジ",
+          "ar": "صندوق الدفع",
+          "hi": "कैश काउंटर"
+        },
+        "sentence": {
+          "pl": "Co znaczy „kasa”?",
+          "ru": "Что значит «kasa»?",
+          "uk": "Що означає «kasa»?",
+          "en": "What does “kasa” mean?",
+          "es": "¿Qué significa «kasa»?",
+          "fr": "Que veut dire « kasa » ?",
+          "de": "Was bedeutet „kasa“?",
+          "it": "Cosa vuol dire «kasa»?",
+          "pt": "O que significa «kasa»?",
+          "be": "Што значыць «kasa»?",
+          "tr": "“Kasa” ne demek?",
+          "zh": "“kasa”是什么意思？",
+          "zh-Hant": "「kasa」是什麼意思？",
+          "ja": "「kasa」ってどういう意味？",
+          "ar": "ما معنى «kasa»؟",
+          "hi": "“kasa” का क्या मतलब है?"
+        }
+      }
+    ]
+  }
+}

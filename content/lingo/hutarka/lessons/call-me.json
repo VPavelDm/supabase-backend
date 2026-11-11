@@ -1,0 +1,501 @@
+{
+  "id": "call-me",
+  "title": {
+    "en": "Call me Tom",
+    "es": "Llámame Tom",
+    "fr": "Appelle-moi Tom",
+    "de": "Nenn mich Tom",
+    "it": "Chiamami Tom",
+    "pt": "Trata-me por Tom",
+    "ru": "Зови меня Том",
+    "uk": "Клич мене Том",
+    "be": "Кліч мяне Том",
+    "pl": "Mów mi Tom",
+    "tr": "Bana Tom de",
+    "zh": "叫我汤姆就行",
+    "zh-Hant": "叫我湯姆就好",
+    "ja": "トムって呼んで",
+    "ar": "نادِني توم",
+    "hi": "मुझे टॉम बुलाओ"
+  },
+  "subtitle": {
+    "en": "Meet your new neighbour",
+    "es": "Conoce a tu nuevo vecino",
+    "fr": "Fais connaissance avec ton nouveau voisin",
+    "de": "Lerne deinen neuen Nachbarn kennen",
+    "it": "Conosci il tuo nuovo vicino",
+    "pt": "Conhece o teu novo vizinho",
+    "ru": "Познакомиться с новым соседом",
+    "uk": "Познайомитися з новим сусідом",
+    "be": "Пазнаёміцца з новым суседам",
+    "pl": "Poznaj nowego sąsiada",
+    "tr": "Yeni komşunla tanış",
+    "zh": "认识新邻居",
+    "zh-Hant": "認識新鄰居",
+    "ja": "新しいご近所さんと知り合おう",
+    "ar": "تعرّف على جارك الجديد",
+    "hi": "अपने नए पड़ोसी से मिलें"
+  },
+  "with": "dog",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Hello! Are you our new neighbour?",
+        "es": "¡Hola! ¿Es usted nuestro nuevo vecino?",
+        "fr": "Bonjour ! Vous êtes notre nouveau voisin ?",
+        "de": "Hallo! Sind Sie unser neuer Nachbar?",
+        "it": "Buongiorno! È lei il nostro nuovo vicino?",
+        "pt": "Olá! É o nosso novo vizinho?",
+        "ru": "Здравствуйте! Вы наш новый сосед?",
+        "uk": "Добрий день! Ви наш новий сусід?",
+        "be": "Добры дзень! Вы наш новы сусед?",
+        "pl": "Dzień dobry! Pan jest nowym sąsiadem?",
+        "tr": "Merhaba! Yeni komşumuz siz misiniz?",
+        "zh": "你好！你是我们的新邻居吗？",
+        "zh-Hant": "你好！你是我們的新鄰居嗎？",
+        "ja": "こんにちは！新しく引っ越してきた方ですか？",
+        "ar": "مرحبًا! هل أنت جارنا الجديد؟",
+        "hi": "नमस्ते! क्या आप हमारे नए पड़ोसी हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Hello! Yes, I'm new.",
+        "es": "¡Hola! Sí, soy nuevo.",
+        "fr": "Bonjour ! Oui, je viens d'arriver.",
+        "de": "Hallo! Ja, ich bin neu hier.",
+        "it": "Buongiorno! Sì, sono nuovo.",
+        "pt": "Olá! Sim, sou novo aqui.",
+        "ru": "Здравствуйте! Да, я новенький.",
+        "uk": "Добрий день! Так, я новенький.",
+        "be": "Добры дзень! Так, я тут новы.",
+        "pl": "Dzień dobry! Tak, jestem nowy.",
+        "tr": "Merhaba! Evet, yeni taşındım.",
+        "zh": "你好！对，我刚搬来。",
+        "zh-Hant": "你好！對，我剛搬來。",
+        "ja": "こんにちは！はい、引っ越してきたばかりです。",
+        "ar": "مرحبًا! نعم، أنا جديد هنا.",
+        "hi": "नमस्ते! हाँ, मैं नया हूँ।"
+      },
+      "task": {
+        "build": [
+          "No,",
+          "old"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "I'm Thomas, but call me Tom.",
+        "es": "Soy Thomas, pero llámame Tom.",
+        "fr": "Je suis Thomas, mais appelle-moi Tom.",
+        "de": "Ich bin Thomas, aber nenn mich einfach Tom.",
+        "it": "Sono Thomas, ma chiamami Tom.",
+        "pt": "Sou o Thomas, mas trata-me por Tom.",
+        "ru": "Я Томас, но зови меня просто Том.",
+        "uk": "Я Томас, але клич мене просто Том.",
+        "be": "Я Томас, але кліч мяне проста Том.",
+        "pl": "Jestem Thomas, ale mów mi Tom.",
+        "tr": "Ben Thomas, ama bana Tom de.",
+        "zh": "我叫托马斯，不过叫我汤姆就行。",
+        "zh-Hant": "我叫湯瑪斯，不過叫我湯姆就好。",
+        "ja": "トーマスです。でも、トムって呼んで。",
+        "ar": "أنا توماس، لكن نادِني توم.",
+        "hi": "मैं थॉमस हूँ, पर मुझे टॉम बुलाओ।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Sure! Nice to meet you, Tom.",
+        "es": "¡Claro! Encantado, Tom.",
+        "fr": "Bien sûr ! Enchanté, Tom.",
+        "de": "Klar! Freut mich, Tom.",
+        "it": "Certo! Piacere, Tom.",
+        "pt": "Claro! Muito prazer, Tom.",
+        "ru": "Конечно! Приятно познакомиться, Том.",
+        "uk": "Звісно! Приємно познайомитися, Томе.",
+        "be": "Вядома! Прыемна пазнаёміцца, Том.",
+        "pl": "Jasne! Miło mi, Tom.",
+        "tr": "Tabii! Memnun oldum, Tom.",
+        "zh": "好的！很高兴认识你，汤姆。",
+        "zh-Hant": "好啊！很高興認識你，湯姆。",
+        "ja": "もちろん！よろしくね、トム。",
+        "ar": "بالتأكيد! تشرفت بمعرفتك يا توم.",
+        "hi": "ज़रूर! तुमसे मिलकर अच्छा लगा, टॉम।"
+      },
+      "task": {
+        "choose": [
+          "Sure! Nice to meet me, Tom.",
+          "Sure! Nice to meeting you, Tom."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "You too! If you need anything, I live next door.",
+        "es": "¡Igualmente! Si necesitas algo, vivo al lado.",
+        "fr": "Moi aussi ! Si tu as besoin de quelque chose, j'habite à côté.",
+        "de": "Mich auch! Wenn du etwas brauchst: Ich wohne nebenan.",
+        "it": "Piacere mio! Se ti serve qualcosa, abito qui accanto.",
+        "pt": "Igualmente! Se precisares de alguma coisa, moro aqui ao lado.",
+        "ru": "Мне тоже! Если что, я живу по соседству.",
+        "uk": "Мені теж! Якщо що, я живу по сусідству.",
+        "be": "Мне таксама! Калі што, я жыву па суседстве.",
+        "pl": "Mnie też! Jakby co, mieszkam obok.",
+        "tr": "Ben de! Bir şeye ihtiyacın olursa, hemen yanda oturuyorum.",
+        "zh": "我也是！有什么需要的话，我就住隔壁。",
+        "zh-Hant": "我也是！有需要什麼的話，我就住隔壁。",
+        "ja": "こちらこそ！何かあったら言ってね、隣に住んでるから。",
+        "ar": "وأنا أيضًا! إذا احتجت أي شيء، فأنا أسكن في البيت المجاور.",
+        "hi": "मुझे भी! कुछ भी चाहिए हो, तो मैं बगल में ही रहता हूँ।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Thanks, Tom! See you!",
+        "es": "¡Gracias, Tom! ¡Hasta luego!",
+        "fr": "Merci, Tom ! À plus !",
+        "de": "Danke, Tom! Bis dann!",
+        "it": "Grazie, Tom! Ci vediamo!",
+        "pt": "Obrigado, Tom! Até logo!",
+        "ru": "Спасибо, Том! Пока!",
+        "uk": "Дякую, Томе! Бувай!",
+        "be": "Дзякуй, Том! Пакуль!",
+        "pl": "Dzięki, Tom! Na razie!",
+        "tr": "Sağ ol, Tom! Görüşürüz!",
+        "zh": "谢谢你，汤姆！回头见！",
+        "zh-Hant": "謝謝你，湯姆！再見！",
+        "ja": "ありがとう、トム！またね！",
+        "ar": "شكرًا يا توم! إلى اللقاء!",
+        "hi": "शुक्रिया, टॉम! फिर मिलेंगे!"
+      },
+      "task": {
+        "build": [
+          "Mr",
+          "Thank"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "neighbour",
+        "es": "vecino",
+        "fr": "voisin",
+        "de": "Nachbar",
+        "it": "vicino",
+        "pt": "vizinho",
+        "ru": "сосед",
+        "uk": "сусід",
+        "be": "сусед",
+        "pl": "sąsiad",
+        "tr": "komşu",
+        "zh": "邻居",
+        "zh-Hant": "鄰居",
+        "ja": "隣人、ご近所さん",
+        "ar": "جار",
+        "hi": "पड़ोसी"
+      },
+      "example": "Hello! Are you our new neighbour?"
+    },
+    {
+      "text": {
+        "en": "call me",
+        "es": "llámame",
+        "fr": "appelle-moi",
+        "de": "nenn mich",
+        "it": "chiamami",
+        "pt": "trata-me por, chama-me",
+        "ru": "зови меня",
+        "uk": "клич мене",
+        "be": "кліч мяне",
+        "pl": "mów mi",
+        "tr": "bana … de",
+        "zh": "叫我",
+        "zh-Hant": "叫我",
+        "ja": "～と呼んで",
+        "ar": "نادِني",
+        "hi": "मुझे … बुलाओ"
+      },
+      "example": "I'm Thomas, but call me Tom."
+    },
+    {
+      "text": {
+        "en": "sure",
+        "es": "claro",
+        "fr": "bien sûr",
+        "de": "klar, sicher",
+        "it": "certo",
+        "pt": "claro",
+        "ru": "конечно",
+        "uk": "звісно",
+        "be": "вядома, канечне",
+        "pl": "jasne",
+        "tr": "tabii, elbette",
+        "zh": "当然，好的",
+        "zh-Hant": "當然，好啊",
+        "ja": "もちろん、いいよ",
+        "ar": "بالتأكيد، طبعًا",
+        "hi": "ज़रूर, बिल्कुल"
+      },
+      "example": "Sure! Nice to meet you, Tom."
+    },
+    {
+      "text": {
+        "en": "anything",
+        "es": "algo",
+        "fr": "quelque chose",
+        "de": "etwas",
+        "it": "qualcosa",
+        "pt": "alguma coisa, qualquer coisa",
+        "ru": "что-нибудь",
+        "uk": "щось",
+        "be": "што-небудзь",
+        "pl": "coś",
+        "tr": "bir şey",
+        "zh": "任何东西，什么",
+        "zh-Hant": "任何東西，什麼",
+        "ja": "何か",
+        "ar": "أي شيء",
+        "hi": "कुछ भी"
+      },
+      "example": "You too! If you need anything, I live next door."
+    },
+    {
+      "text": {
+        "en": "next door",
+        "es": "al lado",
+        "fr": "à côté",
+        "de": "nebenan",
+        "it": "qui accanto, accanto",
+        "pt": "aqui ao lado, ao lado",
+        "ru": "по соседству",
+        "uk": "по сусідству",
+        "be": "па суседстве, побач",
+        "pl": "obok",
+        "tr": "hemen yanda, yan dairede",
+        "zh": "隔壁",
+        "zh-Hant": "隔壁",
+        "ja": "隣に",
+        "ar": "في البيت المجاور",
+        "hi": "बगल में, पड़ोस में"
+      },
+      "example": "You too! If you need anything, I live next door."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "Call me Tom.",
+        "es": "Llámame Tom.",
+        "fr": "Appelle-moi Tom.",
+        "de": "Nenn mich Tom.",
+        "it": "Chiamami Tom.",
+        "pt": "Trata-me por Tom.",
+        "ru": "Зови меня Том.",
+        "uk": "Клич мене Том.",
+        "be": "Кліч мяне Том.",
+        "pl": "Mów mi Tom.",
+        "tr": "Bana Tom de.",
+        "zh": "叫我汤姆吧。",
+        "zh-Hant": "叫我湯姆吧。",
+        "ja": "トムって呼んで。",
+        "ar": "نادِني توم.",
+        "hi": "मुझे टॉम बुलाओ।"
+      },
+      "distractors": [
+        "Calls",
+        "my"
+      ],
+      "gap": "Call",
+      "gapWrong": [
+        "Calls",
+        "Calling"
+      ]
+    },
+    {
+      "text": {
+        "en": "Nice to meet you.",
+        "es": "Encantado de conocerte.",
+        "fr": "Enchanté.",
+        "de": "Freut mich.",
+        "it": "Piacere di conoscerti.",
+        "pt": "Prazer em conhecer-te.",
+        "ru": "Приятно познакомиться.",
+        "uk": "Приємно познайомитися.",
+        "be": "Прыемна пазнаёміцца.",
+        "pl": "Miło mi.",
+        "tr": "Memnun oldum.",
+        "zh": "很高兴认识你。",
+        "zh-Hant": "很高興認識你。",
+        "ja": "はじめまして、よろしく。",
+        "ar": "تشرفت بمعرفتك.",
+        "hi": "आपसे मिलकर अच्छा लगा।"
+      },
+      "distractors": [
+        "me",
+        "meeting"
+      ],
+      "gap": "meet",
+      "gapWrong": [
+        "meat",
+        "meets"
+      ]
+    },
+    {
+      "text": {
+        "en": "I live next door.",
+        "es": "Vivo al lado.",
+        "fr": "J'habite à côté.",
+        "de": "Ich wohne nebenan.",
+        "it": "Abito qui accanto.",
+        "pt": "Moro aqui ao lado.",
+        "ru": "Я живу по соседству.",
+        "uk": "Я живу по сусідству.",
+        "be": "Я жыву па суседстве.",
+        "pl": "Mieszkam obok.",
+        "tr": "Hemen yanda oturuyorum.",
+        "zh": "我住隔壁。",
+        "zh-Hant": "我住隔壁。",
+        "ja": "隣に住んでいます。",
+        "ar": "أسكن في البيت المجاور.",
+        "hi": "मैं बगल में रहता हूँ।"
+      },
+      "distractors": [
+        "am",
+        "near"
+      ],
+      "gap": "next",
+      "gapWrong": [
+        "near",
+        "last"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "I live {slot}.",
+    "items": [
+      {
+        "word": {
+          "en": "upstairs",
+          "es": "arriba",
+          "fr": "au-dessus, en haut",
+          "de": "oben",
+          "it": "di sopra",
+          "pt": "no andar de cima, lá em cima",
+          "ru": "наверху",
+          "uk": "нагорі",
+          "be": "наверсе",
+          "pl": "na górze",
+          "tr": "üst katta",
+          "zh": "楼上",
+          "zh-Hant": "樓上",
+          "ja": "上の階",
+          "ar": "في الطابق العلوي",
+          "hi": "ऊपर"
+        },
+        "sentence": {
+          "en": "I live upstairs.",
+          "es": "Vivo arriba.",
+          "fr": "J'habite au-dessus.",
+          "de": "Ich wohne oben.",
+          "it": "Abito di sopra.",
+          "pt": "Moro no andar de cima.",
+          "ru": "Я живу наверху.",
+          "uk": "Я живу нагорі.",
+          "be": "Я жыву наверсе.",
+          "pl": "Mieszkam na górze.",
+          "tr": "Üst katta oturuyorum.",
+          "zh": "我住楼上。",
+          "zh-Hant": "我住樓上。",
+          "ja": "上の階に住んでいます。",
+          "ar": "أسكن في الطابق العلوي.",
+          "hi": "मैं ऊपर रहता हूँ।"
+        }
+      },
+      {
+        "word": {
+          "en": "downstairs",
+          "es": "abajo",
+          "fr": "en dessous, en bas",
+          "de": "unten",
+          "it": "di sotto",
+          "pt": "no andar de baixo, lá em baixo",
+          "ru": "внизу",
+          "uk": "внизу",
+          "be": "унізе",
+          "pl": "na dole",
+          "tr": "alt katta",
+          "zh": "楼下",
+          "zh-Hant": "樓下",
+          "ja": "下の階",
+          "ar": "في الطابق السفلي",
+          "hi": "नीचे"
+        },
+        "sentence": {
+          "en": "I live downstairs.",
+          "es": "Vivo abajo.",
+          "fr": "J'habite en dessous.",
+          "de": "Ich wohne unten.",
+          "it": "Abito di sotto.",
+          "pt": "Moro no andar de baixo.",
+          "ru": "Я живу внизу.",
+          "uk": "Я живу внизу.",
+          "be": "Я жыву ўнізе.",
+          "pl": "Mieszkam na dole.",
+          "tr": "Alt katta oturuyorum.",
+          "zh": "我住楼下。",
+          "zh-Hant": "我住樓下。",
+          "ja": "下の階に住んでいます。",
+          "ar": "أسكن في الطابق السفلي.",
+          "hi": "मैं नीचे रहता हूँ।"
+        }
+      },
+      {
+        "word": {
+          "en": "across the road",
+          "es": "enfrente",
+          "fr": "en face, de l'autre côté de la rue",
+          "de": "gegenüber, auf der anderen Straßenseite",
+          "it": "di fronte",
+          "pt": "do outro lado da rua, em frente",
+          "ru": "через дорогу",
+          "uk": "через дорогу",
+          "be": "праз дарогу",
+          "pl": "naprzeciwko",
+          "tr": "karşıda, yolun karşısında",
+          "zh": "马路对面",
+          "zh-Hant": "馬路對面",
+          "ja": "道の向かい",
+          "ar": "في الجهة المقابلة من الشارع",
+          "hi": "सड़क के उस पार"
+        },
+        "sentence": {
+          "en": "I live across the road.",
+          "es": "Vivo enfrente.",
+          "fr": "J'habite en face.",
+          "de": "Ich wohne gegenüber.",
+          "it": "Abito di fronte.",
+          "pt": "Moro do outro lado da rua.",
+          "ru": "Я живу через дорогу.",
+          "uk": "Я живу через дорогу.",
+          "be": "Я жыву праз дарогу.",
+          "pl": "Mieszkam naprzeciwko.",
+          "tr": "Yolun karşısında oturuyorum.",
+          "zh": "我住马路对面。",
+          "zh-Hant": "我住馬路對面。",
+          "ja": "道の向かいに住んでいます。",
+          "ar": "أسكن في الجهة المقابلة من الشارع.",
+          "hi": "मैं सड़क के उस पार रहता हूँ।"
+        }
+      }
+    ]
+  }
+}
