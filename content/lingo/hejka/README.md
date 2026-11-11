@@ -10,6 +10,10 @@
 
 ## Schema changes vs the Hutarka guide
 
+These notes describe the JSON files chapter 1 was written in. The content now lives in the
+`lingo` tables, where a tip is a step of its own and the `_f` variants are `value_female`
+(see [`../README.md`](../README.md)); the rules for Polish below still hold.
+
 1. **Taught language key is `pl`, not `en`.** Every text object: `pl` (required) + the learner languages `en es fr de it pt ru uk be tr zh zh-Hant ja ar hi`.
    Plain-string fields are Polish: `example`, `task.build`, `task.choose`, `distractors`, `gap`, `gapWrong`, `swap.frame`.
 

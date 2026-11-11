@@ -20,7 +20,7 @@ commands from the repo root; files at the root itself are invisible to it.
 | Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` | `affirmations/<route>` | `lingo/<route>` — one slug for the app family; the app key says which app |
 | Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` | `affirmations` | `lingo` |
 | Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` | `*_affirmations_*.sql` | `*_lingo_*.sql` |
-| Content          | `content/<app>/`                | —                               | —      | —      | —            | `lingo` lesson tables, built live by `lingo.content_bundle()`; docs + `check.ts` in `content/lingo/` |
+| Content          | `content/<app>/`                | —                               | —      | —      | —            | `lingo` lesson tables, built live by `lingo.content_bundle(app, learned, language)` (format 2); docs + `check.ts` in `content/lingo/` |
 | Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) | `affirmations-cleanup` (daily) | `lingo-cleanup` (daily) |
 | Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — | — | — |
 | Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) | `AFFIRMATIONS_*` (see functions/affirmations/index.ts) | `LINGO_*`, one `LINGO_<APP>_APP_KEY` per app (see functions/lingo/index.ts) |
@@ -176,17 +176,22 @@ in anonymously, and each route needs the caller's user token AND an app key
 `LINGO_HEJKA_APP_KEY`) and is how the route knows which app is calling, so
 one app's key rotates without touching the others. `content` serves the
 apps' lessons, which live in tables (`lingo.texts`/`translations`, `chapters`,
-`units`, `unit_steps`, `lessons`, `scene_lines`, `words`, `phrases`,
-`swap_items`; guide in `content/lingo/README.md`) and are built into the JSON
-the apps decode on every request by `lingo.content_bundle(app)`. The app
-fetches it on a splash at every launch, sending the version it has on disk
-and getting `unchanged` or the whole bundle, with the bundle on disk as its
-fallback when the backend cannot be reached. **Edits are live: a saved row
-changes what every installed copy teaches at its next launch**, so run
-`content/lingo/check.ts <app> --linked` after editing. A learner's progress is
-a position on the trail, so add `unit_steps` only after the last one and never
-reorder or remove them casually. `lingo.content_texts` lists every text with
-where it sits, for searching. `text-to-speech` takes
+`units`, `stumps`, `lessons`, `scenes`, `scene_lines`, `words`, `phrases`,
+`lesson_steps`, `step_words`; guide in `content/lingo/README.md`) and are
+built into the JSON the apps decode on every request by
+`lingo.content_bundle(app, learned, language)`: format 2, one learner language
+per request (the app sends `{format: 2, language, version}`), and each lesson
+plays the steps its teacher wrote, in order. Step kinds are free text; the
+apps skip kinds they don't know, so a new exercise needs an app build, not a
+migration. The app fetches on a splash at every launch and when the learner
+picks a language, sending the version it has on disk for that language and
+getting `unchanged` or the whole bundle, with the bundle on disk as its
+fallback. **Edits are live: a saved row changes what every installed copy
+teaches at its next launch**, so run `content/lingo/check.ts <app> --linked`
+after editing. A learner's progress is a position on the trail, so add
+`stumps` only after the last one and never reorder or remove them casually; a
+unit holds at most three (a trigger refuses a fourth). `lingo.content_texts`
+lists every text with where it sits, for searching. `text-to-speech` takes
 only `text` (≤ 200 characters) and a voice role (`narrator` or `partner`);
 the language, ElevenLabs model, voice ids and speed come from `apps.ts`, so
 a voice swap is a redeploy, not an App Store release. Clips are cached at
