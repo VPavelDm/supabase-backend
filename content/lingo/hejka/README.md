@@ -38,5 +38,6 @@ These notes describe the JSON files chapter 1 was written in. The content now li
 ## Content notes
 
 - In dialogue `pan / pani` is lowercase (correct Polish); capital `Pan` is only for letters.
-- Boar's name in `poznajmy-sie` is a placeholder: Kuba (male) / Ola (female). Replace after the mascot naming contest.
+- The boar is Kuba (`Куба` in Cyrillic) for every learner, male or female. In `poznajmy-sie` only the
+  words around his name follow the learner's gender (`nowy` / `nowa`).
 - Characters: owl = official / older lady (addressed as `pani`), fox = shop staff, dog = neighbour, rabbit = friend.
