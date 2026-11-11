@@ -6,8 +6,8 @@ the single source of truth for the shared Supabase project
 `ttjzshiaatqvszckjlhw` (org name "Futura"), which hosts several apps on one
 plan. It owns the migration history, every edge function, and the shared
 utilities. App repos (Treddy, Futura iOS, Lyncil iOS, Affirmations iOS, Hutarka iOS) contain no backend
-code — they point here. The Lingo apps' lesson content lives here too
-(`content/lingo/`), since the backend serves it.
+code — they point here. The Lingo apps' lessons live in this project too, in
+the `lingo` tables (docs and tooling in `content/lingo/`).
 
 Layout: everything lives under `supabase/` — the CLI's canonical layout. It
 looks for `supabase/config.toml` below the working directory, so run
@@ -20,7 +20,7 @@ commands from the repo root; files at the root itself are invisible to it.
 | Edge function    | one slug per app, routes inside | `treddy/<route>`                | `futura/<route>` (+ legacy single-route functions until the force update) | `lyncil/<route>` | `affirmations/<route>` | `lingo/<route>` — one slug for the app family; the app key says which app |
 | Postgres schema  | one schema per app              | `treddy`                        | `futura` | `lyncil` | `affirmations` | `lingo` |
 | Migrations       | `<timestamp>_<app>_<desc>.sql`  | `*_treddy_*.sql`                | historic names vary | `*_lyncil_*.sql` | `*_affirmations_*.sql` | `*_lingo_*.sql` |
-| Content          | `content/<app>/`                | —                               | —      | —      | —            | `content/lingo/<app>/` → `lingo.lesson_content` via `content/lingo/publish.ts` |
+| Content          | `content/<app>/`                | —                               | —      | —      | —            | `lingo` lesson tables, built live by `lingo.content_bundle()`; docs + `check.ts` in `content/lingo/` |
 | Cron jobs        | `<app>-` prefix                 | `treddy-publish-due` (every minute), `treddy-refresh-tokens` (daily), `treddy-cleanup` (daily) | — | `lyncil-cleanup` (daily) | `affirmations-cleanup` (daily) | `lingo-cleanup` (daily) |
 | Vault secrets    | `<app>_` prefix                 | `treddy_cron_secret`            | — | — | — | — |
 | Function secrets | `<APP>_` prefix                 | `TREDDY_*` (see functions/treddy/index.ts) | — | `LYNCIL_*` (see functions/lyncil/index.ts) | `AFFIRMATIONS_*` (see functions/affirmations/index.ts) | `LINGO_*`, one `LINGO_<APP>_APP_KEY` per app (see functions/lingo/index.ts) |
@@ -169,21 +169,24 @@ day). Before 1.8 the app called `generate-affirmations` and
 
 **Lingo** (the language-learning apps — Hutarka teaches English, Hejka
 Polish, the next one adds an entry to `functions/lingo/apps.ts`; `lingo`
-schema: ai_usage, lesson_content; storage bucket `lingo-tts-cache`): one
+schema: ai_usage and the lesson tables; storage bucket `lingo-tts-cache`): one
 function for the whole family, set up like Affirmations. Every install signs
 in anonymously, and each route needs the caller's user token AND an app key
 (`x-lingo-app-key`); the key is per app (`LINGO_HUTARKA_APP_KEY`,
 `LINGO_HEJKA_APP_KEY`) and is how the route knows which app is calling, so
 one app's key rotates without touching the others. `content` serves the
-apps' lessons (`content/lingo/<app>/`, format in `content/lingo/README.md`),
-published to `lingo.lesson_content` with `content/lingo/publish.ts`: the app
-fetches them on a splash at every launch, sending the version it has on disk
+apps' lessons, which live in tables (`lingo.texts`/`translations`, `chapters`,
+`units`, `unit_steps`, `lessons`, `scene_lines`, `words`, `phrases`,
+`swap_items`; guide in `content/lingo/README.md`) and are built into the JSON
+the apps decode on every request by `lingo.content_bundle(app)`. The app
+fetches it on a splash at every launch, sending the version it has on disk
 and getting `unchanged` or the whole bundle, with the bundle on disk as its
-fallback when the backend cannot be reached. **Publishing with
-`--linked` changes what every installed copy teaches at its next launch**,
-and a learner's progress is a position on the trail, so the publish script
-checks the files, shows the diff and asks for a typed confirmation; add
-lessons at the end, never reorder (see the script's header). `text-to-speech` takes
+fallback when the backend cannot be reached. **Edits are live: a saved row
+changes what every installed copy teaches at its next launch**, so run
+`content/lingo/check.ts <app> --linked` after editing. A learner's progress is
+a position on the trail, so add `unit_steps` only after the last one and never
+reorder or remove them casually. `lingo.content_texts` lists every text with
+where it sits, for searching. `text-to-speech` takes
 only `text` (≤ 200 characters) and a voice role (`narrator` or `partner`);
 the language, ElevenLabs model, voice ids and speed come from `apps.ts`, so
 a voice swap is a redeploy, not an App Store release. Clips are cached at

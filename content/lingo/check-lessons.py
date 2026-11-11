@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sanity-check each app's lesson content (content/lingo/<app>) against content/lingo/README.md.
+"""Sanity-check one app's lesson bundle, as lingo/content sends it, against content/lingo/README.md.
 
 - trail.json names only lessons that have a file (plus `checkpoint` as each chapter's last stump)
 - every lesson follows the format: speakers, tasks, word examples taken from the scene,
@@ -10,22 +10,19 @@
 - the lines a female learner sees (`<code>_f`, `example_f`) pass the same checks as the plain ones
 - tips (`tip`) sit on the lesson (`show: auto`) or on a phrase (`show: tap`) and have every learner language
 
-Run from anywhere:  python3 content/lingo/check-lessons.py [hutarka|hejka]   (no argument: both)
-publish.ts runs it before publishing, so nothing broken reaches the apps.
+Run it through check.ts, which builds the bundle from the lingo tables:
+  deno run --allow-run --allow-read --allow-write content/lingo/check.ts <hutarka|hejka> --linked
+or directly on a saved bundle:  python3 content/lingo/check-lessons.py <hutarka|hejka> <bundle.json>
 """
 import json
 import sys
 from pathlib import Path
 
-CONTENT = Path(__file__).resolve().parent
-# Per app: its content folder (trail.json + lessons/<id>.json), the language it teaches (the
-# required key of every text object) and the learner languages the lessons are translated into.
-# Keep in step with each app's AppConfig.swift in the iOS repo.
+# Per app: the language it teaches (the required key of every text object) and the learner
+# languages the lessons are translated into. Keep in step with each app's AppConfig.swift.
 APPS = {
-    "hutarka": (CONTENT / "hutarka", "en",
-                ["es", "fr", "de", "it", "pt", "ru", "uk", "be", "pl", "tr", "zh", "zh-Hant", "ja", "ar", "hi"]),
-    "hejka": (CONTENT / "hejka", "pl",
-              ["en", "es", "fr", "de", "it", "pt", "ru", "uk", "be", "tr", "zh", "zh-Hant", "ja", "ar", "hi"]),
+    "hutarka": ("en", ["es", "fr", "de", "it", "pt", "ru", "uk", "be", "pl", "tr", "zh", "zh-Hant", "ja", "ar", "hi"]),
+    "hejka": ("pl", ["en", "es", "fr", "de", "it", "pt", "ru", "uk", "be", "tr", "zh", "zh-Hant", "ja", "ar", "hi"]),
 }
 CHARACTERS = {"fox", "owl", "dog", "rabbit"}
 MAPS = {"forest", "meadow", "farm"}
@@ -36,8 +33,8 @@ def bare(token: str) -> str:
     return token.strip(PUNCTUATION)
 
 
-def check(app: str) -> int:
-    ROOT, LEARNED, LOCALES = APPS[app]
+def check(app: str, bundle: dict) -> int:
+    LEARNED, LOCALES = APPS[app]
     print(f"== {app}")
     problems: list[str] = []
     known = set(LOCALES) | {LEARNED}
@@ -54,7 +51,7 @@ def check(app: str) -> int:
             problems.append(f"{where}: unknown language keys {sorted(unknown)}")
         return obj[LEARNED]
 
-    trail = json.loads((ROOT / "trail.json").read_text(encoding="utf-8"))
+    trail = bundle["trail"]
     listed: list[str] = []
     for c, chapter in enumerate(trail["chapters"]):
         text(chapter["title"], f"trail chapter {c + 1}")
@@ -76,14 +73,14 @@ def check(app: str) -> int:
                     problems.append(f"{where}: the chapter's last stump must be `checkpoint`")
                 listed.append(lesson_id)
 
-    files = {p.stem for p in (ROOT / "lessons").glob("*.json")}
+    files = set(bundle["lessons"])
     for lesson_id in listed:
         if lesson_id not in files:
-            problems.append(f"trail: no file for lesson {lesson_id}")
+            problems.append(f"trail: no lesson {lesson_id}")
     for dup in sorted({i for i in listed if listed.count(i) > 1}):
         problems.append(f"trail: lesson {dup} listed twice")
     for extra in sorted(files - set(listed)):
-        print(f"note: {extra}.json is not on the trail")
+        print(f"note: {extra} is in the bundle but not on the trail")
 
     def tip(obj, where, show):
         if not isinstance(obj, dict) or obj.get("show") != show or not isinstance(obj.get("text"), dict):
@@ -148,11 +145,9 @@ def check(app: str) -> int:
                 found.append(f"{lid} swap: {sentence!r} is not the frame filled with {word!r}")
         return found
 
-    for path in sorted((ROOT / "lessons").glob("*.json")):
-        lesson = json.loads(path.read_text(encoding="utf-8"))
-        lid = path.stem
+    for lid, lesson in sorted(bundle["lessons"].items()):
         if lesson.get("id") != lid:
-            problems.append(f"{lid}: id must equal the file name")
+            problems.append(f"{lid}: id must equal its key")
         text(lesson.get("title"), f"{lid} title")
         text(lesson.get("subtitle"), f"{lid} subtitle")
         if lesson.get("with") not in CHARACTERS:
@@ -226,12 +221,10 @@ def check(app: str) -> int:
 
 
 def main() -> int:
-    apps = sys.argv[1:] or list(APPS)
-    unknown = [a for a in apps if a not in APPS]
-    if unknown:
-        print(f"unknown app(s) {unknown}; pick from {list(APPS)}")
+    if len(sys.argv) != 3 or sys.argv[1] not in APPS:
+        print(f"usage: check-lessons.py <{'|'.join(APPS)}> <bundle.json>")
         return 2
-    return max(check(app) for app in apps)
+    return check(sys.argv[1], json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")))
 
 
 if __name__ == "__main__":
