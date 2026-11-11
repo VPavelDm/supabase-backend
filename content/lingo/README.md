@@ -25,7 +25,7 @@ until it is fixed.
 | `translations` | text and language | `value`, plus `value_female` where a female learner sees something else (Hejka). The learned language (`en` in Hutarka, `pl` in Hejka) is a row like any other. |
 | `chapters` | chapter | `slug`, `position`, `title_id`. |
 | `units` | map in a chapter | `position`, `map` (`forest`, `meadow`, `farm`), `title_id`. |
-| `unit_steps` | stump on a map | `position`, `lesson_id`; no lesson means the chapter's checkpoint. |
+| `unit_steps` | stump on a map | `position`, `lesson_id`; no lesson means the chapter's checkpoint. At most 3 per unit: the database refuses a fourth (every map has three clearings). |
 | `lessons` | lesson | `slug` (the id the apps know), `partner`, `title_id`, `subtitle_id`, `tip_id`, `swap_frame`. |
 | `scene_lines` | line of a lesson's scene | `speaker`, `text_id`, `task_kind` + `task_options` on the boar's lines. |
 | `words` | new word | `text_id`, `example` (+ `example_female`). |

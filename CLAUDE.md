@@ -185,7 +185,8 @@ fallback when the backend cannot be reached. **Edits are live: a saved row
 changes what every installed copy teaches at its next launch**, so run
 `content/lingo/check.ts <app> --linked` after editing. A learner's progress is
 a position on the trail, so add `unit_steps` only after the last one and never
-reorder or remove them casually. `lingo.content_texts` lists every text with
+reorder or remove them casually; a unit holds at most three (a trigger refuses
+a fourth: the map art has three clearings). `lingo.content_texts` lists every text with
 where it sits, for searching. `text-to-speech` takes
 only `text` (≤ 200 characters) and a voice role (`narrator` or `partner`);
 the language, ElevenLabs model, voice ids and speed come from `apps.ts`, so
