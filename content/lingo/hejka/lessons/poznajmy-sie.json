@@ -1,0 +1,638 @@
+{
+  "id": "poznajmy-sie",
+  "title": {
+    "pl": "Poznajmy się",
+    "ru": "Давай знакомиться",
+    "uk": "Давай знайомитися",
+    "en": "Let's meet",
+    "es": "Vamos a conocernos",
+    "fr": "Faisons connaissance",
+    "de": "Lernen wir uns kennen",
+    "it": "Facciamo conoscenza",
+    "pt": "Vamos conhecer-nos",
+    "be": "Давай знаёміцца",
+    "tr": "Tanışalım",
+    "zh": "认识一下吧",
+    "zh-Hant": "來認識一下",
+    "ja": "自己紹介しよう",
+    "ar": "لنتعارف",
+    "hi": "चलो, जान-पहचान करें"
+  },
+  "subtitle": {
+    "pl": "Powiedz, jak masz na imię i gdzie mieszkasz",
+    "ru": "Сказать, как тебя зовут и где ты живёшь",
+    "uk": "Сказати, як тебе звати і де ти живеш",
+    "en": "Say your name and where you live",
+    "es": "Di cómo te llamas y dónde vives",
+    "fr": "Dis comment tu t'appelles et où tu habites",
+    "de": "Sag, wie du heißt und wo du wohnst",
+    "it": "Di' come ti chiami e dove abiti",
+    "pt": "Diz como te chamas e onde moras",
+    "be": "Сказаць, як цябе завуць і дзе ты жывеш",
+    "tr": "Adını ve nerede yaşadığını söyle",
+    "zh": "说说你叫什么、住在哪里",
+    "zh-Hant": "說說你叫什麼、住在哪裡",
+    "ja": "名前と住んでいる場所を言おう",
+    "ar": "التعريف باسمي ومكان سكني",
+    "hi": "अपना नाम और रहने की जगह बताएँ"
+  },
+  "with": "dog",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "С ровесником и ребёнком — на «ты»: Jak masz na imię? Со взрослым незнакомым — Jak ma pan / pani na imię? Официально спрашивают фамилию: Jak się pan nazywa?",
+      "uk": "З ровесником і дитиною — на «ти»: Jak masz na imię? З дорослим незнайомим — Jak ma pan / pani na imię? Офіційно питають прізвище: Jak się pan nazywa?",
+      "en": "With peers and kids use “ty”: Jak masz na imię? With an adult stranger: Jak ma pan / pani na imię? Officially they ask your surname: Jak się pan nazywa?",
+      "es": "Con gente de tu edad y con niños se habla de tú (ty): Jak masz na imię? Con un adulto desconocido: Jak ma pan / pani na imię? En trámites oficiales te preguntan el apellido: Jak się pan nazywa?",
+      "fr": "Avec quelqu'un de ton âge ou un enfant, on se tutoie : Jak masz na imię? Avec un adulte inconnu : Jak ma pan / pani na imię? Dans un cadre officiel, on demande le nom de famille : Jak się pan nazywa?",
+      "de": "Mit Gleichaltrigen und Kindern sagt man „ty“ (du): Jak masz na imię? Mit einem erwachsenen Fremden: Jak ma pan / pani na imię? Offiziell fragt man nach dem Nachnamen: Jak się pan nazywa?",
+      "it": "Con i coetanei e i bambini si dà del tu: Jak masz na imię? Con un adulto sconosciuto: Jak ma pan / pani na imię? In contesti ufficiali ti chiedono il cognome: Jak się pan nazywa?",
+      "pt": "Com pessoas da tua idade e com crianças trata-se por tu (ty): Jak masz na imię? Com um adulto desconhecido: Jak ma pan / pani na imię? Em situações oficiais perguntam o apelido: Jak się pan nazywa?",
+      "be": "З равеснікам і дзіцём — на «ты»: Jak masz na imię? З дарослым незнаёмым — Jak ma pan / pani na imię? Афіцыйна пытаюць прозвішча: Jak się pan nazywa?",
+      "tr": "Yaşıtlarla ve çocuklarla “ty” (sen) kullanılır: Jak masz na imię? Yetişkin bir yabancıyla: Jak ma pan / pani na imię? Resmî ortamda soyadını sorarlar: Jak się pan nazywa?",
+      "zh": "和同龄人、孩子说话用“ty”：Jak masz na imię? 对成年的陌生人用：Jak ma pan / pani na imię? 正式场合会问你的姓：Jak się pan nazywa?",
+      "zh-Hant": "跟同年齡的人、小孩說話用「ty」：Jak masz na imię? 對陌生的成年人用：Jak ma pan / pani na imię? 正式場合會問你的姓：Jak się pan nazywa?",
+      "ja": "同年代の人や子どもには「ty」を使います：Jak masz na imię? 知らない大人には：Jak ma pan / pani na imię? 公的な場では名字を聞かれます：Jak się pan nazywa?",
+      "ar": "مع الأقران والأطفال يُستخدم «ty»: Jak masz na imię? ومع شخص بالغ غريب: Jak ma pan / pani na imię? وفي المواقف الرسمية يُسأل عن اسم العائلة: Jak się pan nazywa?",
+      "hi": "हमउम्र लोगों और बच्चों से “ty”: Jak masz na imię? किसी अनजान बड़े व्यक्ति से: Jak ma pan / pani na imię? औपचारिक जगहों पर उपनाम पूछा जाता है: Jak się pan nazywa?"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Cześć! Jak masz na imię?",
+        "ru": "Привет! Как тебя зовут?",
+        "uk": "Привіт! Як тебе звати?",
+        "en": "Hi! What's your name?",
+        "es": "¡Hola! ¿Cómo te llamas?",
+        "fr": "Salut ! Comment tu t'appelles ?",
+        "de": "Hallo! Wie heißt du?",
+        "it": "Ciao! Come ti chiami?",
+        "pt": "Olá! Como te chamas?",
+        "be": "Прывітанне! Як цябе завуць?",
+        "tr": "Selam! Adın ne?",
+        "zh": "嗨！你叫什么名字？",
+        "zh-Hant": "嗨！你叫什麼名字？",
+        "ja": "やあ！名前は？",
+        "ar": "مرحبًا! ما اسمكَ؟",
+        "hi": "हाय! तुम्हारा नाम क्या है?",
+        "zh-Hant_f": "嗨！妳叫什麼名字？",
+        "ar_f": "مرحبًا! ما اسمكِ؟"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Mam na imię Kuba. A ty?",
+        "ru": "Меня зовут Куба. А тебя?",
+        "uk": "Мене звати Куба. А тебе?",
+        "en": "My name is Kuba. And you?",
+        "es": "Me llamo Kuba. ¿Y tú?",
+        "fr": "Je m'appelle Kuba. Et toi ?",
+        "de": "Ich heiße Kuba. Und du?",
+        "it": "Mi chiamo Kuba. E tu?",
+        "pt": "Chamo-me Kuba. E tu?",
+        "be": "Мяне завуць Куба. А цябе?",
+        "tr": "Benim adım Kuba. Ya sen?",
+        "zh": "我叫库巴。你呢？",
+        "zh-Hant": "我叫庫巴。你呢？",
+        "ja": "名前はクバだよ。きみは？",
+        "ar": "اسمي كوبا. وأنت؟",
+        "hi": "मेरा नाम कूबा है। और तुम्हारा?",
+        "pl_f": "Mam na imię Ola. A ty?",
+        "ru_f": "Меня зовут Оля. А тебя?",
+        "uk_f": "Мене звати Оля. А тебе?",
+        "en_f": "My name is Ola. And you?",
+        "es_f": "Me llamo Ola. ¿Y tú?",
+        "fr_f": "Je m'appelle Ola. Et toi ?",
+        "de_f": "Ich heiße Ola. Und du?",
+        "it_f": "Mi chiamo Ola. E tu?",
+        "pt_f": "Chamo-me Ola. E tu?",
+        "be_f": "Мяне завуць Оля. А цябе?",
+        "tr_f": "Benim adım Ola. Ya sen?",
+        "zh_f": "我叫奥拉。你呢？",
+        "zh-Hant_f": "我叫奧拉。你呢？",
+        "ja_f": "名前はオラだよ。きみは？",
+        "ar_f": "اسمي أولا. وأنت؟",
+        "hi_f": "मेरा नाम ओला है। और तुम्हारा?"
+      },
+      "task": {
+        "build": [
+          "Jestem",
+          "imienia"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Tomek. Miło mi! Skąd jesteś?",
+        "ru": "Томек. Приятно познакомиться! Откуда ты?",
+        "uk": "Томек. Приємно познайомитися! Звідки ти?",
+        "en": "Tomek. Nice to meet you! Where are you from?",
+        "es": "Tomek. ¡Encantado! ¿De dónde eres?",
+        "fr": "Tomek. Enchanté ! Tu viens d'où ?",
+        "de": "Tomek. Freut mich! Woher kommst du?",
+        "it": "Tomek. Piacere! Di dove sei?",
+        "pt": "Tomek. Muito prazer! De onde és?",
+        "be": "Томек. Прыемна пазнаёміцца! Адкуль ты?",
+        "tr": "Tomek. Memnun oldum! Nerelisin?",
+        "zh": "托梅克。很高兴认识你！你是从哪儿来的？",
+        "zh-Hant": "托梅克。很高興認識你！你從哪裡來？",
+        "ja": "トメク。よろしく！どこから来たの？",
+        "ar": "توميك. تشرفت! من أين أنتَ؟",
+        "hi": "तोमेक। तुमसे मिलकर ख़ुशी हुई! तुम कहाँ से हो?",
+        "zh-Hant_f": "托梅克。很高興認識妳！妳從哪裡來？",
+        "ar_f": "توميك. تشرفت! من أين أنتِ؟"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Mnie też miło! Jestem z lasu.",
+        "ru": "Мне тоже приятно! Я из леса.",
+        "uk": "Мені теж приємно! Я з лісу.",
+        "en": "Nice to meet you too! I'm from the forest.",
+        "es": "¡Igualmente! Soy del bosque.",
+        "fr": "Enchanté aussi ! Je viens de la forêt.",
+        "de": "Freut mich auch! Ich komme aus dem Wald.",
+        "it": "Piacere mio! Vengo dal bosco.",
+        "pt": "Igualmente! Sou da floresta.",
+        "be": "Мне таксама прыемна! Я з лесу.",
+        "tr": "Ben de memnun oldum! Ormanlıyım.",
+        "zh": "我也很高兴认识你！我从森林里来。",
+        "zh-Hant": "我也很高興認識你！我來自森林。",
+        "ja": "こっちこそよろしく！森から来たんだ。",
+        "ar": "وأنا أيضًا تشرفت! أنا من الغابة.",
+        "hi": "मुझे भी ख़ुशी हुई! मैं जंगल से हूँ।",
+        "fr_f": "Enchantée aussi ! Je viens de la forêt."
+      },
+      "task": {
+        "choose": [
+          "Mnie też miło! Jestem w lasu.",
+          "Ciebie też miło! Jestem z lasu."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Super! A gdzie teraz mieszkasz?",
+        "ru": "Супер! А где ты сейчас живёшь?",
+        "uk": "Супер! А де ти зараз живеш?",
+        "en": "Great! And where do you live now?",
+        "es": "¡Genial! ¿Y dónde vives ahora?",
+        "fr": "Génial ! Et tu habites où maintenant ?",
+        "de": "Super! Und wo wohnst du jetzt?",
+        "it": "Fantastico! E dove abiti adesso?",
+        "pt": "Ótimo! E onde moras agora?",
+        "be": "Супер! А дзе ты цяпер жывеш?",
+        "tr": "Süper! Peki şimdi nerede yaşıyorsun?",
+        "zh": "太好了！那你现在住在哪儿？",
+        "zh-Hant": "太棒了！那你現在住在哪裡？",
+        "ja": "いいね！で、今はどこに住んでるの？",
+        "ar": "رائع! وأين تسكن الآن؟",
+        "hi": "बढ़िया! और अब तुम कहाँ रहते हो?",
+        "zh-Hant_f": "太棒了！那妳現在住在哪裡？",
+        "ar_f": "رائع! وأين تسكنين الآن؟",
+        "hi_f": "बढ़िया! और अब तुम कहाँ रहती हो?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Mieszkam w Warszawie. Jestem tu nowy.",
+        "ru": "Я живу в Варшаве. Я тут новенький.",
+        "uk": "Я живу у Варшаві. Я тут новенький.",
+        "en": "I live in Warsaw. I'm new here.",
+        "es": "Vivo en Varsovia. Soy nuevo aquí.",
+        "fr": "J'habite à Varsovie. Je suis nouveau ici.",
+        "de": "Ich wohne in Warschau. Ich bin neu hier.",
+        "it": "Abito a Varsavia. Sono nuovo qui.",
+        "pt": "Moro em Varsóvia. Sou novo aqui.",
+        "be": "Я жыву ў Варшаве. Я тут новенькі.",
+        "tr": "Varşova'da yaşıyorum. Burada yeniyim.",
+        "zh": "我住在华沙。我是新来的。",
+        "zh-Hant": "我住在華沙。我是新來的。",
+        "ja": "ワルシャワに住んでるよ。ここに来たばかりなんだ。",
+        "ar": "أسكن في وارسو. أنا جديد هنا.",
+        "hi": "मैं वारसॉ में रहता हूँ। मैं यहाँ नया हूँ।",
+        "pl_f": "Mieszkam w Warszawie. Jestem tu nowa.",
+        "ru_f": "Я живу в Варшаве. Я тут новенькая.",
+        "uk_f": "Я живу у Варшаві. Я тут новенька.",
+        "es_f": "Vivo en Varsovia. Soy nueva aquí.",
+        "fr_f": "J'habite à Varsovie. Je suis nouvelle ici.",
+        "it_f": "Abito a Varsavia. Sono nuova qui.",
+        "pt_f": "Moro em Varsóvia. Sou nova aqui.",
+        "be_f": "Я жыву ў Варшаве. Я тут новенькая.",
+        "ar_f": "أسكن في وارسو. أنا جديدة هنا.",
+        "hi_f": "मैं वारसॉ में रहती हूँ। मैं यहाँ नई हूँ।"
+      },
+      "task": {
+        "build": [
+          "Mieszkasz",
+          "stary"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "imię",
+        "ru": "имя",
+        "uk": "ім'я",
+        "en": "first name",
+        "es": "nombre",
+        "fr": "prénom",
+        "de": "Vorname",
+        "it": "nome",
+        "pt": "nome",
+        "be": "імя",
+        "tr": "ad, isim",
+        "zh": "名字",
+        "zh-Hant": "名字",
+        "ja": "名前（下の名前）",
+        "ar": "الاسم الأول",
+        "hi": "नाम (पहला नाम)"
+      },
+      "example": "Cześć! Jak masz na imię?"
+    },
+    {
+      "text": {
+        "pl": "miło mi",
+        "ru": "приятно познакомиться",
+        "uk": "приємно познайомитися",
+        "en": "nice to meet you",
+        "es": "mucho gusto",
+        "fr": "enchanté",
+        "de": "freut mich",
+        "it": "piacere",
+        "pt": "muito prazer",
+        "be": "прыемна пазнаёміцца",
+        "tr": "memnun oldum",
+        "zh": "很高兴认识你",
+        "zh-Hant": "很高興認識你",
+        "ja": "よろしく、はじめまして",
+        "ar": "تشرفت بمعرفتك",
+        "hi": "मिलकर ख़ुशी हुई",
+        "fr_f": "enchantée"
+      },
+      "example": "Tomek. Miło mi! Skąd jesteś?"
+    },
+    {
+      "text": {
+        "pl": "skąd",
+        "ru": "откуда",
+        "uk": "звідки",
+        "en": "where from",
+        "es": "de dónde",
+        "fr": "d'où",
+        "de": "woher",
+        "it": "da dove",
+        "pt": "de onde",
+        "be": "адкуль",
+        "tr": "nereden",
+        "zh": "从哪里",
+        "zh-Hant": "從哪裡",
+        "ja": "どこから",
+        "ar": "من أين",
+        "hi": "कहाँ से"
+      },
+      "example": "Tomek. Miło mi! Skąd jesteś?"
+    },
+    {
+      "text": {
+        "pl": "mieszkam",
+        "ru": "я живу",
+        "uk": "я живу",
+        "en": "I live",
+        "es": "vivo",
+        "fr": "j'habite",
+        "de": "ich wohne",
+        "it": "abito",
+        "pt": "moro",
+        "be": "я жыву",
+        "tr": "yaşıyorum",
+        "zh": "我住",
+        "zh-Hant": "我住",
+        "ja": "住んでいます",
+        "ar": "أسكن",
+        "hi": "मैं रहता हूँ",
+        "hi_f": "मैं रहती हूँ"
+      },
+      "example": "Mieszkam w Warszawie. Jestem tu nowy.",
+      "example_f": "Mieszkam w Warszawie. Jestem tu nowa."
+    },
+    {
+      "text": {
+        "pl": "nowy",
+        "ru": "новый",
+        "uk": "новий",
+        "en": "new",
+        "es": "nuevo",
+        "fr": "nouveau",
+        "de": "neu",
+        "it": "nuovo",
+        "pt": "novo",
+        "be": "новы",
+        "tr": "yeni",
+        "zh": "新的，新来的",
+        "zh-Hant": "新的，新來的",
+        "ja": "新しい",
+        "ar": "جديد",
+        "hi": "नया",
+        "pl_f": "nowa",
+        "ru_f": "новая",
+        "uk_f": "нова",
+        "es_f": "nueva",
+        "fr_f": "nouvelle",
+        "it_f": "nuova",
+        "pt_f": "nova",
+        "be_f": "новая",
+        "ar_f": "جديدة",
+        "hi_f": "नई"
+      },
+      "example": "Mieszkam w Warszawie. Jestem tu nowy.",
+      "example_f": "Mieszkam w Warszawie. Jestem tu nowa."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Jak masz na imię?",
+        "ru": "Как тебя зовут?",
+        "uk": "Як тебе звати?",
+        "en": "What's your name?",
+        "es": "¿Cómo te llamas?",
+        "fr": "Comment tu t'appelles ?",
+        "de": "Wie heißt du?",
+        "it": "Come ti chiami?",
+        "pt": "Como te chamas?",
+        "be": "Як цябе завуць?",
+        "tr": "Adın ne?",
+        "zh": "你叫什么名字？",
+        "zh-Hant": "你叫什麼名字？",
+        "ja": "名前は？",
+        "ar": "ما اسمك؟",
+        "hi": "तुम्हारा नाम क्या है?"
+      },
+      "distractors": [
+        "jest",
+        "się"
+      ],
+      "gap": "imię",
+      "gapWrong": [
+        "imienia",
+        "imiona"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Mam na imię Kuba.",
+        "ru": "Меня зовут Куба.",
+        "uk": "Мене звати Куба.",
+        "en": "My name is Kuba.",
+        "es": "Me llamo Kuba.",
+        "fr": "Je m'appelle Kuba.",
+        "de": "Ich heiße Kuba.",
+        "it": "Mi chiamo Kuba.",
+        "pt": "Chamo-me Kuba.",
+        "be": "Мяне завуць Куба.",
+        "tr": "Benim adım Kuba.",
+        "zh": "我叫库巴。",
+        "zh-Hant": "我叫庫巴。",
+        "ja": "名前はクバだよ。",
+        "ar": "اسمي كوبا.",
+        "hi": "मेरा नाम कूबा है।",
+        "pl_f": "Mam na imię Ola.",
+        "ru_f": "Меня зовут Оля.",
+        "uk_f": "Мене звати Оля.",
+        "en_f": "My name is Ola.",
+        "es_f": "Me llamo Ola.",
+        "fr_f": "Je m'appelle Ola.",
+        "de_f": "Ich heiße Ola.",
+        "it_f": "Mi chiamo Ola.",
+        "pt_f": "Chamo-me Ola.",
+        "be_f": "Мяне завуць Оля.",
+        "tr_f": "Benim adım Ola.",
+        "zh_f": "我叫奥拉。",
+        "zh-Hant_f": "我叫奧拉。",
+        "ja_f": "名前はオラだよ。",
+        "ar_f": "اسمي أولا.",
+        "hi_f": "मेरा नाम ओला है।"
+      },
+      "distractors": [
+        "Jestem",
+        "się"
+      ],
+      "gap": "Mam",
+      "gapWrong": [
+        "Masz",
+        "Jestem"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Skąd jesteś?",
+        "ru": "Откуда ты?",
+        "uk": "Звідки ти?",
+        "en": "Where are you from?",
+        "es": "¿De dónde eres?",
+        "fr": "Tu viens d'où ?",
+        "de": "Woher kommst du?",
+        "it": "Di dove sei?",
+        "pt": "De onde és?",
+        "be": "Адкуль ты?",
+        "tr": "Nerelisin?",
+        "zh": "你是从哪儿来的？",
+        "zh-Hant": "你從哪裡來？",
+        "ja": "どこから来たの？",
+        "ar": "من أين أنت؟",
+        "hi": "तुम कहाँ से हो?"
+      },
+      "distractors": [
+        "Jak",
+        "się"
+      ],
+      "gap": "Skąd",
+      "gapWrong": [
+        "Gdzie",
+        "Kiedy"
+      ],
+      "tip": {
+        "show": "tap",
+        "text": {
+          "ru": "Страна после «z» меняет окончание: Polska → Jestem z Polski.",
+          "uk": "Країна після «z» змінює закінчення: Polska → Jestem z Polski.",
+          "en": "After “z” the country changes its ending: Polska → Jestem z Polski.",
+          "es": "Después de «z», el nombre del país cambia de terminación: Polska → Jestem z Polski.",
+          "fr": "Après « z », le nom du pays change de terminaison : Polska → Jestem z Polski.",
+          "de": "Nach „z“ ändert das Land seine Endung: Polska → Jestem z Polski.",
+          "it": "Dopo «z» il nome del paese cambia desinenza: Polska → Jestem z Polski.",
+          "pt": "Depois de «z», o nome do país muda de terminação: Polska → Jestem z Polski.",
+          "be": "Пасля «z» назва краіны мяняе канчатак: Polska → Jestem z Polski.",
+          "tr": "“z” edatından sonra ülke adının sonu değişir: Polska → Jestem z Polski.",
+          "zh": "在“z”后面，国家名的词尾会变：Polska → Jestem z Polski。",
+          "zh-Hant": "在「z」後面，國名的字尾會變：Polska → Jestem z Polski。",
+          "ja": "「z」のあとでは国名の語尾が変わります：Polska → Jestem z Polski。",
+          "ar": "بعد «z» تتغير نهاية اسم البلد: Polska → Jestem z Polski.",
+          "hi": "“z” के बाद देश के नाम का अंत बदल जाता है: Polska → Jestem z Polski।"
+        }
+      }
+    },
+    {
+      "text": {
+        "pl": "Mieszkam w Warszawie.",
+        "ru": "Я живу в Варшаве.",
+        "uk": "Я живу у Варшаві.",
+        "en": "I live in Warsaw.",
+        "es": "Vivo en Varsovia.",
+        "fr": "J'habite à Varsovie.",
+        "de": "Ich wohne in Warschau.",
+        "it": "Abito a Varsavia.",
+        "pt": "Moro em Varsóvia.",
+        "be": "Я жыву ў Варшаве.",
+        "tr": "Varşova'da yaşıyorum.",
+        "zh": "我住在华沙。",
+        "zh-Hant": "我住在華沙。",
+        "ja": "ワルシャワに住んでるよ。",
+        "ar": "أسكن في وارسو.",
+        "hi": "मैं वारसॉ में रहता हूँ।",
+        "hi_f": "मैं वारसॉ में रहती हूँ।"
+      },
+      "distractors": [
+        "Jestem",
+        "na"
+      ],
+      "gap": "Warszawie",
+      "gapWrong": [
+        "Warszawa",
+        "Warszawę"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Mieszkam w {slot}.",
+    "items": [
+      {
+        "word": {
+          "pl": "Krakowie",
+          "ru": "Кракове",
+          "uk": "Кракові",
+          "en": "Kraków",
+          "es": "Cracovia",
+          "fr": "Cracovie",
+          "de": "Krakau",
+          "it": "Cracovia",
+          "pt": "Cracóvia",
+          "be": "Кракаве",
+          "tr": "Krakov",
+          "zh": "克拉科夫",
+          "zh-Hant": "克拉科夫",
+          "ja": "クラクフ",
+          "ar": "كراكوف",
+          "hi": "क्राकोव"
+        },
+        "sentence": {
+          "pl": "Mieszkam w Krakowie.",
+          "ru": "Я живу в Кракове.",
+          "uk": "Я живу в Кракові.",
+          "en": "I live in Kraków.",
+          "es": "Vivo en Cracovia.",
+          "fr": "J'habite à Cracovie.",
+          "de": "Ich wohne in Krakau.",
+          "it": "Abito a Cracovia.",
+          "pt": "Moro em Cracóvia.",
+          "be": "Я жыву ў Кракаве.",
+          "tr": "Krakov'da yaşıyorum.",
+          "zh": "我住在克拉科夫。",
+          "zh-Hant": "我住在克拉科夫。",
+          "ja": "クラクフに住んでるよ。",
+          "ar": "أسكن في كراكوف.",
+          "hi": "मैं क्राकोव में रहता हूँ।",
+          "hi_f": "मैं क्राकोव में रहती हूँ।"
+        }
+      },
+      {
+        "word": {
+          "pl": "Gdańsku",
+          "ru": "Гданьске",
+          "uk": "Гданську",
+          "en": "Gdańsk",
+          "es": "Gdansk",
+          "fr": "Gdańsk",
+          "de": "Gdańsk",
+          "it": "Gdańsk",
+          "pt": "Gdansk",
+          "be": "Гданьску",
+          "tr": "Gdańsk",
+          "zh": "格但斯克",
+          "zh-Hant": "格但斯克",
+          "ja": "グダンスク",
+          "ar": "غدانسك",
+          "hi": "ग्दान्स्क"
+        },
+        "sentence": {
+          "pl": "Mieszkam w Gdańsku.",
+          "ru": "Я живу в Гданьске.",
+          "uk": "Я живу в Гданську.",
+          "en": "I live in Gdańsk.",
+          "es": "Vivo en Gdansk.",
+          "fr": "J'habite à Gdańsk.",
+          "de": "Ich wohne in Gdańsk.",
+          "it": "Abito a Gdańsk.",
+          "pt": "Moro em Gdansk.",
+          "be": "Я жыву ў Гданьску.",
+          "tr": "Gdańsk'ta yaşıyorum.",
+          "zh": "我住在格但斯克。",
+          "zh-Hant": "我住在格但斯克。",
+          "ja": "グダンスクに住んでるよ。",
+          "ar": "أسكن في غدانسك.",
+          "hi": "मैं ग्दान्स्क में रहता हूँ।",
+          "hi_f": "मैं ग्दान्स्क में रहती हूँ।"
+        }
+      },
+      {
+        "word": {
+          "pl": "Poznaniu",
+          "ru": "Познани",
+          "uk": "Познані",
+          "en": "Poznań",
+          "es": "Poznan",
+          "fr": "Poznań",
+          "de": "Poznań",
+          "it": "Poznań",
+          "pt": "Poznan",
+          "be": "Познані",
+          "tr": "Poznań",
+          "zh": "波兹南",
+          "zh-Hant": "波茲南",
+          "ja": "ポズナン",
+          "ar": "بوزنان",
+          "hi": "पोज़्नान"
+        },
+        "sentence": {
+          "pl": "Mieszkam w Poznaniu.",
+          "ru": "Я живу в Познани.",
+          "uk": "Я живу в Познані.",
+          "en": "I live in Poznań.",
+          "es": "Vivo en Poznan.",
+          "fr": "J'habite à Poznań.",
+          "de": "Ich wohne in Poznań.",
+          "it": "Abito a Poznań.",
+          "pt": "Moro em Poznan.",
+          "be": "Я жыву ў Познані.",
+          "tr": "Poznań'da yaşıyorum.",
+          "zh": "我住在波兹南。",
+          "zh-Hant": "我住在波茲南。",
+          "ja": "ポズナンに住んでるよ。",
+          "ar": "أسكن في بوزنان.",
+          "hi": "मैं पोज़्नान में रहता हूँ।",
+          "hi_f": "मैं पोज़्नान में रहती हूँ।"
+        }
+      }
+    ]
+  }
+}

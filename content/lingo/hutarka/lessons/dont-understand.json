@@ -1,0 +1,501 @@
+{
+  "id": "dont-understand",
+  "title": {
+    "en": "I don't understand",
+    "es": "No entiendo",
+    "fr": "Je ne comprends pas",
+    "de": "Ich verstehe nicht",
+    "it": "Non capisco",
+    "pt": "Não percebo",
+    "ru": "Я не понимаю",
+    "uk": "Я не розумію",
+    "be": "Я не разумею",
+    "pl": "Nie rozumiem",
+    "tr": "Anlamıyorum",
+    "zh": "我听不懂",
+    "zh-Hant": "我聽不懂",
+    "ja": "わかりません",
+    "ar": "لا أفهم",
+    "hi": "मुझे समझ नहीं आया"
+  },
+  "subtitle": {
+    "en": "Ask someone to say it again",
+    "es": "Pide que te lo repitan",
+    "fr": "Demande à quelqu'un de répéter",
+    "de": "Bitte jemanden, es zu wiederholen",
+    "it": "Chiedi di ripetere",
+    "pt": "Pede a alguém para repetir",
+    "ru": "Попросить повторить",
+    "uk": "Попросити повторити",
+    "be": "Папрасіць паўтарыць",
+    "pl": "Poproś, żeby ktoś powtórzył",
+    "tr": "Birinden tekrar etmesini iste",
+    "zh": "请别人再说一遍",
+    "zh-Hant": "請別人再說一次",
+    "ja": "もう一度言ってもらおう",
+    "ar": "اطلب من أحدهم أن يكرر كلامه",
+    "hi": "किसी से दोबारा कहने के लिए कहें"
+  },
+  "with": "owl",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Please fill in this form.",
+        "es": "Rellene este formulario, por favor.",
+        "fr": "Remplissez ce formulaire, s'il vous plaît.",
+        "de": "Bitte füllen Sie dieses Formular aus.",
+        "it": "Compili questo modulo, per favore.",
+        "pt": "Preencha este formulário, por favor.",
+        "ru": "Заполните, пожалуйста, эту анкету.",
+        "uk": "Заповніть, будь ласка, цю анкету.",
+        "be": "Запоўніце, калі ласка, гэтую анкету.",
+        "pl": "Proszę wypełnić ten formularz.",
+        "tr": "Lütfen bu formu doldurun.",
+        "zh": "请填一下这张表。",
+        "zh-Hant": "請填寫這張表格。",
+        "ja": "この用紙にご記入ください。",
+        "ar": "من فضلك، املأ هذه الاستمارة.",
+        "hi": "कृपया यह फ़ॉर्म भरिए।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Sorry, I don't understand.",
+        "es": "Perdone, no entiendo.",
+        "fr": "Pardon, je ne comprends pas.",
+        "de": "Entschuldigung, ich verstehe nicht.",
+        "it": "Mi scusi, non capisco.",
+        "pt": "Desculpe, não percebo.",
+        "ru": "Извините, я не понимаю.",
+        "uk": "Вибачте, я не розумію.",
+        "be": "Прабачце, я не разумею.",
+        "pl": "Przepraszam, nie rozumiem.",
+        "tr": "Affedersiniz, anlamıyorum.",
+        "zh": "不好意思，我听不懂。",
+        "zh-Hant": "不好意思，我聽不懂。",
+        "ja": "すみません、わかりません。",
+        "ar": "عذرًا، لا أفهم.",
+        "hi": "माफ़ कीजिए, मुझे समझ नहीं आया।"
+      },
+      "task": {
+        "build": [
+          "doesn't",
+          "Please"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "You need to fill in the form and sign it.",
+        "es": "Tiene que rellenar el formulario y firmarlo.",
+        "fr": "Il faut remplir le formulaire et le signer.",
+        "de": "Sie müssen das Formular ausfüllen und unterschreiben.",
+        "it": "Deve compilare il modulo e firmarlo.",
+        "pt": "Tem de preencher o formulário e assiná-lo.",
+        "ru": "Анкету нужно заполнить и подписать.",
+        "uk": "Анкету треба заповнити й підписати.",
+        "be": "Анкету трэба запоўніць і падпісаць.",
+        "pl": "Formularz trzeba wypełnić i podpisać.",
+        "tr": "Formu doldurup imzalamanız gerekiyor.",
+        "zh": "您需要把表填好，然后签字。",
+        "zh-Hant": "您要把表格填好，然後簽名。",
+        "ja": "この用紙に記入して、署名してください。",
+        "ar": "عليك أن تملأ الاستمارة وتوقّع عليها.",
+        "hi": "आपको फ़ॉर्म भरकर उस पर हस्ताक्षर करने हैं।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Could you say that again more slowly?",
+        "es": "¿Puede repetirlo más despacio?",
+        "fr": "Vous pouvez répéter plus lentement ?",
+        "de": "Können Sie das bitte langsamer wiederholen?",
+        "it": "Può ripetere più lentamente?",
+        "pt": "Pode repetir mais devagar, por favor?",
+        "ru": "Можете повторить помедленнее?",
+        "uk": "Можете повторити повільніше?",
+        "be": "Можаце паўтарыць павольней?",
+        "pl": "Może pani powtórzyć wolniej?",
+        "tr": "Daha yavaş tekrar edebilir misiniz?",
+        "zh": "您能说慢一点，再说一遍吗？",
+        "zh-Hant": "可以請您說慢一點，再說一次嗎？",
+        "ja": "もう一度、もう少しゆっくり言っていただけますか？",
+        "ar": "هل يمكنك أن تعيد ذلك ببطء أكثر؟",
+        "hi": "क्या आप इसे थोड़ा धीरे दोबारा कह सकते हैं?"
+      },
+      "task": {
+        "choose": [
+          "Could you say that again more quickly?",
+          "Could you saying that again more slowly?"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Of course. Write your name here, and sign here.",
+        "es": "Por supuesto. Escriba aquí su nombre y firme aquí.",
+        "fr": "Bien sûr. Écrivez votre nom ici, et signez là.",
+        "de": "Natürlich. Schreiben Sie hier Ihren Namen hin und unterschreiben Sie hier.",
+        "it": "Certo. Scriva qui il suo nome e firmi qui.",
+        "pt": "Claro. Escreva aqui o seu nome e assine aqui.",
+        "ru": "Конечно. Напишите здесь своё имя и распишитесь вот здесь.",
+        "uk": "Звісно. Напишіть тут своє ім'я і розпишіться ось тут.",
+        "be": "Вядома. Напішыце тут сваё імя і распішыцеся вось тут.",
+        "pl": "Oczywiście. Proszę wpisać tutaj imię i podpisać tutaj.",
+        "tr": "Tabii. Adınızı buraya yazın, buraya da imzanızı atın.",
+        "zh": "当然。在这里写上您的名字，在这里签字。",
+        "zh-Hant": "當然。請在這裡寫上您的名字，然後在這裡簽名。",
+        "ja": "もちろんです。ここにお名前を書いて、ここにサインしてください。",
+        "ar": "طبعًا. اكتب اسمك هنا، ووقّع هنا.",
+        "hi": "ज़रूर। यहाँ अपना नाम लिखिए, और यहाँ हस्ताक्षर कीजिए।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Oh, now I understand! Thank you.",
+        "es": "¡Ah, ahora lo entiendo! Gracias.",
+        "fr": "Ah, maintenant je comprends ! Merci.",
+        "de": "Ah, jetzt verstehe ich! Danke.",
+        "it": "Ah, ora capisco! Grazie.",
+        "pt": "Ah, agora percebo! Obrigado.",
+        "ru": "А, теперь понимаю! Спасибо.",
+        "uk": "А, тепер розумію! Дякую.",
+        "be": "А, цяпер разумею! Дзякуй.",
+        "pl": "Aha, teraz rozumiem! Dziękuję.",
+        "tr": "Ha, şimdi anladım! Teşekkürler.",
+        "zh": "哦，现在我明白了！谢谢。",
+        "zh-Hant": "喔，我現在懂了！謝謝。",
+        "ja": "ああ、やっとわかりました！ありがとうございます。",
+        "ar": "آه، الآن فهمت! شكرًا.",
+        "hi": "अच्छा, अब समझ आया! धन्यवाद।"
+      },
+      "task": {
+        "build": [
+          "don't",
+          "understands"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "form",
+        "es": "formulario, impreso",
+        "fr": "formulaire",
+        "de": "Formular",
+        "it": "modulo",
+        "pt": "formulário, impresso",
+        "ru": "анкета, бланк",
+        "uk": "анкета, бланк",
+        "be": "анкета, бланк",
+        "pl": "formularz",
+        "tr": "form",
+        "zh": "表格，表",
+        "zh-Hant": "表格，單子",
+        "ja": "用紙、書類",
+        "ar": "استمارة، نموذج",
+        "hi": "फ़ॉर्म"
+      },
+      "example": "Please fill in this form."
+    },
+    {
+      "text": {
+        "en": "understand",
+        "es": "entender, comprender",
+        "fr": "comprendre",
+        "de": "verstehen",
+        "it": "capire",
+        "pt": "perceber, compreender",
+        "ru": "понимать",
+        "uk": "розуміти",
+        "be": "разумець",
+        "pl": "rozumieć",
+        "tr": "anlamak",
+        "zh": "懂，明白",
+        "zh-Hant": "懂，了解",
+        "ja": "わかる、理解する",
+        "ar": "يفهم",
+        "hi": "समझना"
+      },
+      "example": "Sorry, I don't understand."
+    },
+    {
+      "text": {
+        "en": "again",
+        "es": "otra vez, de nuevo",
+        "fr": "encore, de nouveau",
+        "de": "noch einmal, wieder",
+        "it": "di nuovo, ancora",
+        "pt": "outra vez, de novo",
+        "ru": "ещё раз, снова",
+        "uk": "ще раз, знову",
+        "be": "яшчэ раз, зноў",
+        "pl": "jeszcze raz",
+        "tr": "tekrar, yine",
+        "zh": "再，再一次",
+        "zh-Hant": "再，再一次",
+        "ja": "もう一度、また",
+        "ar": "مرة أخرى، من جديد",
+        "hi": "फिर से, दोबारा"
+      },
+      "example": "Could you say that again more slowly?"
+    },
+    {
+      "text": {
+        "en": "slowly",
+        "es": "despacio",
+        "fr": "lentement",
+        "de": "langsam",
+        "it": "lentamente, piano",
+        "pt": "devagar",
+        "ru": "медленно",
+        "uk": "повільно",
+        "be": "павольна",
+        "pl": "wolno",
+        "tr": "yavaş, yavaşça",
+        "zh": "慢，慢慢地",
+        "zh-Hant": "慢，慢慢地",
+        "ja": "ゆっくり",
+        "ar": "ببطء",
+        "hi": "धीरे"
+      },
+      "example": "Could you say that again more slowly?"
+    },
+    {
+      "text": {
+        "en": "now",
+        "es": "ahora",
+        "fr": "maintenant",
+        "de": "jetzt",
+        "it": "ora, adesso",
+        "pt": "agora",
+        "ru": "теперь, сейчас",
+        "uk": "тепер, зараз",
+        "be": "цяпер, зараз",
+        "pl": "teraz",
+        "tr": "şimdi",
+        "zh": "现在",
+        "zh-Hant": "現在",
+        "ja": "今、やっと",
+        "ar": "الآن",
+        "hi": "अब, अभी"
+      },
+      "example": "Oh, now I understand! Thank you."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "Sorry, I don't understand.",
+        "es": "Perdone, no entiendo.",
+        "fr": "Pardon, je ne comprends pas.",
+        "de": "Entschuldigung, ich verstehe nicht.",
+        "it": "Mi scusi, non capisco.",
+        "pt": "Desculpe, não percebo.",
+        "ru": "Извините, я не понимаю.",
+        "uk": "Вибачте, я не розумію.",
+        "be": "Прабачце, я не разумею.",
+        "pl": "Przepraszam, nie rozumiem.",
+        "tr": "Affedersiniz, anlamıyorum.",
+        "zh": "不好意思，我听不懂。",
+        "zh-Hant": "不好意思，我聽不懂。",
+        "ja": "すみません、わかりません。",
+        "ar": "عذرًا، لا أفهم.",
+        "hi": "माफ़ कीजिए, मुझे समझ नहीं आया।"
+      },
+      "distractors": [
+        "doesn't",
+        "Please"
+      ],
+      "gap": "don't",
+      "gapWrong": [
+        "doesn't",
+        "not"
+      ]
+    },
+    {
+      "text": {
+        "en": "Could you say that again more slowly?",
+        "es": "¿Puede repetirlo más despacio?",
+        "fr": "Vous pouvez répéter plus lentement ?",
+        "de": "Können Sie das bitte langsamer wiederholen?",
+        "it": "Può ripetere più lentamente?",
+        "pt": "Pode repetir mais devagar, por favor?",
+        "ru": "Можете повторить помедленнее?",
+        "uk": "Можете повторити повільніше?",
+        "be": "Можаце паўтарыць павольней?",
+        "pl": "Może pani powtórzyć wolniej?",
+        "tr": "Daha yavaş tekrar edebilir misiniz?",
+        "zh": "您能说慢一点，再说一遍吗？",
+        "zh-Hant": "可以請您說慢一點，再說一次嗎？",
+        "ja": "もう一度、もう少しゆっくり言っていただけますか？",
+        "ar": "هل يمكنك أن تعيد ذلك ببطء أكثر؟",
+        "hi": "क्या आप इसे थोड़ा धीरे दोबारा कह सकते हैं?"
+      },
+      "distractors": [
+        "slow",
+        "saying"
+      ],
+      "gap": "slowly",
+      "gapWrong": [
+        "slowing",
+        "slower"
+      ]
+    },
+    {
+      "text": {
+        "en": "Now I understand!",
+        "es": "¡Ahora lo entiendo!",
+        "fr": "Maintenant je comprends !",
+        "de": "Jetzt verstehe ich!",
+        "it": "Ora capisco!",
+        "pt": "Agora percebo!",
+        "ru": "Теперь понимаю!",
+        "uk": "Тепер розумію!",
+        "be": "Цяпер разумею!",
+        "pl": "Teraz rozumiem!",
+        "tr": "Şimdi anladım!",
+        "zh": "现在我明白了！",
+        "zh-Hant": "我現在懂了！",
+        "ja": "やっとわかりました！",
+        "ar": "الآن فهمت!",
+        "hi": "अब समझ आया!"
+      },
+      "distractors": [
+        "don't",
+        "is"
+      ],
+      "gap": "Now",
+      "gapWrong": [
+        "Know",
+        "No"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Please speak {slot}.",
+    "items": [
+      {
+        "word": {
+          "en": "louder",
+          "es": "más alto",
+          "fr": "plus fort",
+          "de": "lauter",
+          "it": "più forte",
+          "pt": "mais alto",
+          "ru": "громче",
+          "uk": "голосніше",
+          "be": "гучней",
+          "pl": "głośniej",
+          "tr": "daha yüksek sesle",
+          "zh": "大声一点",
+          "zh-Hant": "大聲一點",
+          "ja": "もっと大きな声で",
+          "ar": "بصوت أعلى",
+          "hi": "ज़ोर से"
+        },
+        "sentence": {
+          "en": "Please speak louder.",
+          "es": "Hable más alto, por favor.",
+          "fr": "Parlez plus fort, s'il vous plaît.",
+          "de": "Sprechen Sie bitte lauter.",
+          "it": "Parli più forte, per favore.",
+          "pt": "Fale mais alto, por favor.",
+          "ru": "Говорите, пожалуйста, громче.",
+          "uk": "Говоріть, будь ласка, голосніше.",
+          "be": "Гаварыце, калі ласка, гучней.",
+          "pl": "Proszę mówić głośniej.",
+          "tr": "Lütfen daha yüksek sesle konuşun.",
+          "zh": "请您说大声一点。",
+          "zh-Hant": "請您說大聲一點。",
+          "ja": "もっと大きな声で話してください。",
+          "ar": "من فضلك، تكلّم بصوت أعلى.",
+          "hi": "कृपया ज़ोर से बोलिए।"
+        }
+      },
+      {
+        "word": {
+          "en": "more simply",
+          "es": "de forma más sencilla",
+          "fr": "plus simplement",
+          "de": "einfacher",
+          "it": "in modo più semplice",
+          "pt": "de forma mais simples",
+          "ru": "проще",
+          "uk": "простіше",
+          "be": "прасцей",
+          "pl": "prościej",
+          "tr": "daha basit",
+          "zh": "简单一点",
+          "zh-Hant": "簡單一點",
+          "ja": "もっと簡単に",
+          "ar": "بشكل أبسط",
+          "hi": "आसान भाषा में"
+        },
+        "sentence": {
+          "en": "Please speak more simply.",
+          "es": "Hable de forma más sencilla, por favor.",
+          "fr": "Parlez plus simplement, s'il vous plaît.",
+          "de": "Sprechen Sie bitte einfacher.",
+          "it": "Parli in modo più semplice, per favore.",
+          "pt": "Fale de forma mais simples, por favor.",
+          "ru": "Говорите, пожалуйста, проще.",
+          "uk": "Говоріть, будь ласка, простіше.",
+          "be": "Гаварыце, калі ласка, прасцей.",
+          "pl": "Proszę mówić prościej.",
+          "tr": "Lütfen daha basit konuşun.",
+          "zh": "请您说简单一点。",
+          "zh-Hant": "請您說簡單一點。",
+          "ja": "もっと簡単に話してください。",
+          "ar": "من فضلك، تكلّم بشكل أبسط.",
+          "hi": "कृपया आसान भाषा में बोलिए।"
+        }
+      },
+      {
+        "word": {
+          "en": "English",
+          "es": "en inglés",
+          "fr": "anglais",
+          "de": "Englisch",
+          "it": "in inglese",
+          "pt": "em inglês",
+          "ru": "по-английски",
+          "uk": "англійською",
+          "be": "па-англійску",
+          "pl": "po angielsku",
+          "tr": "İngilizce",
+          "zh": "英语",
+          "zh-Hant": "英文",
+          "ja": "英語で",
+          "ar": "بالإنجليزية",
+          "hi": "अंग्रेज़ी में"
+        },
+        "sentence": {
+          "en": "Please speak English.",
+          "es": "Hable en inglés, por favor.",
+          "fr": "Parlez anglais, s'il vous plaît.",
+          "de": "Sprechen Sie bitte Englisch.",
+          "it": "Parli in inglese, per favore.",
+          "pt": "Fale em inglês, por favor.",
+          "ru": "Говорите, пожалуйста, по-английски.",
+          "uk": "Говоріть, будь ласка, англійською.",
+          "be": "Гаварыце, калі ласка, па-англійску.",
+          "pl": "Proszę mówić po angielsku.",
+          "tr": "Lütfen İngilizce konuşun.",
+          "zh": "请您说英语。",
+          "zh-Hant": "請您說英文。",
+          "ja": "英語で話してください。",
+          "ar": "من فضلك، تكلّم بالإنجليزية.",
+          "hi": "कृपया अंग्रेज़ी में बोलिए।"
+        }
+      }
+    ]
+  }
+}

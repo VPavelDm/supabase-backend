@@ -1,0 +1,35 @@
+{
+  "chapters": [
+    {
+      "id": "first-steps",
+      "title": { "en": "First steps", "ru": "Первые шаги", "es": "Primeros pasos" },
+      "units": [
+        {
+          "title": { "en": "Hello there", "ru": "Привет", "es": "Hola" },
+          "map": "forest",
+          "lessons": ["greetings", "small-talk", "where-from"]
+        },
+        {
+          "title": { "en": "Eating out", "ru": "В кафе", "es": "Comer fuera" },
+          "map": "meadow",
+          "lessons": ["cafe", "restaurant", "the-bill"]
+        },
+        {
+          "title": { "en": "Shopping", "ru": "Покупки", "es": "De compras" },
+          "map": "farm",
+          "lessons": ["groceries", "clothes", "returns"]
+        },
+        {
+          "title": { "en": "Getting around", "ru": "В пути", "es": "Moverse" },
+          "map": "forest",
+          "lessons": ["directions", "buses-trains", "taxi"]
+        },
+        {
+          "title": { "en": "At the hotel", "ru": "В отеле", "es": "En el hotel" },
+          "map": "meadow",
+          "lessons": ["check-in", "room-problems", "checkpoint"]
+        }
+      ]
+    }
+  ]
+}

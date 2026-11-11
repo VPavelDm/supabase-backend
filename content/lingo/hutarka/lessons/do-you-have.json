@@ -1,0 +1,501 @@
+{
+  "id": "do-you-have",
+  "title": {
+    "en": "Do you have…?",
+    "es": "¿Tiene…?",
+    "fr": "Vous avez… ?",
+    "de": "Haben Sie…?",
+    "it": "Ha…?",
+    "pt": "Tem…?",
+    "ru": "У вас есть…?",
+    "uk": "У вас є…?",
+    "be": "У вас ёсць…?",
+    "pl": "Czy ma pan…?",
+    "tr": "… var mı?",
+    "zh": "有……吗？",
+    "zh-Hant": "有……嗎？",
+    "ja": "～はありますか？",
+    "ar": "هل لديكم…؟",
+    "hi": "क्या आपके पास … है?"
+  },
+  "subtitle": {
+    "en": "Ask a stranger politely",
+    "es": "Pregunta con educación a un desconocido",
+    "fr": "Adresse-toi poliment à un inconnu",
+    "de": "Sprich Fremde höflich an",
+    "it": "Chiedi gentilmente a uno sconosciuto",
+    "pt": "Pergunta educadamente a um desconhecido",
+    "ru": "Вежливо обратиться к незнакомцу",
+    "uk": "Ввічливо звернутися до незнайомця",
+    "be": "Ветліва звярнуцца да незнаёмца",
+    "pl": "Zapytaj grzecznie nieznajomego",
+    "tr": "Bir yabancıya kibarca soru sor",
+    "zh": "礼貌地向陌生人提问",
+    "zh-Hant": "有禮貌地向陌生人詢問",
+    "ja": "知らない人にていねいに尋ねよう",
+    "ar": "اسأل شخصًا غريبًا بأدب",
+    "hi": "किसी अजनबी से शिष्टता से पूछें"
+  },
+  "with": "fox",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Hello! How can I help you?",
+        "es": "¡Hola! ¿En qué puedo ayudarle?",
+        "fr": "Bonjour ! Je peux vous aider ?",
+        "de": "Hallo! Kann ich Ihnen helfen?",
+        "it": "Buongiorno! Come posso aiutarla?",
+        "pt": "Olá! Em que posso ajudar?",
+        "ru": "Здравствуйте! Чем могу помочь?",
+        "uk": "Добрий день! Чим можу допомогти?",
+        "be": "Добры дзень! Чым магу дапамагчы?",
+        "pl": "Dzień dobry! W czym mogę pomóc?",
+        "tr": "Merhaba! Nasıl yardımcı olabilirim?",
+        "zh": "您好！有什么可以帮您的？",
+        "zh-Hant": "您好！有什麼需要幫忙的嗎？",
+        "ja": "こんにちは！何かお手伝いしましょうか？",
+        "ar": "مرحبًا! كيف يمكنني مساعدتك؟",
+        "hi": "नमस्ते! मैं आपकी क्या मदद कर सकता हूँ?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Hello! Do you have a city map?",
+        "es": "¡Hola! ¿Tiene un mapa de la ciudad?",
+        "fr": "Bonjour ! Vous avez un plan de la ville ?",
+        "de": "Hallo! Haben Sie einen Stadtplan?",
+        "it": "Buongiorno! Ha una mappa della città?",
+        "pt": "Olá! Tem um mapa da cidade?",
+        "ru": "Здравствуйте! У вас есть карта города?",
+        "uk": "Добрий день! У вас є мапа міста?",
+        "be": "Добры дзень! У вас ёсць карта горада?",
+        "pl": "Dzień dobry! Czy ma pan mapę miasta?",
+        "tr": "Merhaba! Şehir haritanız var mı?",
+        "zh": "您好！请问有城市地图吗？",
+        "zh-Hant": "您好！請問有市區地圖嗎？",
+        "ja": "こんにちは！市内の地図はありますか？",
+        "ar": "مرحبًا! هل لديكم خريطة للمدينة؟",
+        "hi": "नमस्ते! क्या आपके पास शहर का नक्शा है?"
+      },
+      "task": {
+        "build": [
+          "Does",
+          "has"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Yes, here you go. Are you a tourist?",
+        "es": "Sí, aquí tiene. ¿Es usted turista?",
+        "fr": "Oui, voilà. Vous êtes touriste ?",
+        "de": "Ja, bitte schön. Sind Sie Tourist?",
+        "it": "Sì, ecco a lei. È un turista?",
+        "pt": "Sim, aqui tem. É turista?",
+        "ru": "Да, пожалуйста. Вы турист?",
+        "uk": "Так, прошу. Ви турист?",
+        "be": "Так, калі ласка. Вы турыст?",
+        "pl": "Tak, proszę. Czy jest pan turystą?",
+        "tr": "Evet, buyurun. Turist misiniz?",
+        "zh": "有，给您。您是游客吗？",
+        "zh-Hant": "有，給您。您是觀光客嗎？",
+        "ja": "はい、どうぞ。観光の方ですか？",
+        "ar": "نعم، تفضل. هل أنت سائح؟",
+        "hi": "हाँ, यह लीजिए। क्या आप पर्यटक हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "No, I live here.",
+        "es": "No, vivo aquí.",
+        "fr": "Non, j'habite ici.",
+        "de": "Nein, ich wohne hier.",
+        "it": "No, abito qui.",
+        "pt": "Não, moro aqui.",
+        "ru": "Нет, я здесь живу.",
+        "uk": "Ні, я тут живу.",
+        "be": "Не, я тут жыву.",
+        "pl": "Nie, mieszkam tutaj.",
+        "tr": "Hayır, burada yaşıyorum.",
+        "zh": "不是，我住在这儿。",
+        "zh-Hant": "不是，我住在這裡。",
+        "ja": "いいえ、ここに住んでいます。",
+        "ar": "لا، أنا أسكن هنا.",
+        "hi": "नहीं, मैं यहीं रहता हूँ।"
+      },
+      "task": {
+        "choose": [
+          "No, I lives here.",
+          "No, you live here."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Then welcome to London!",
+        "es": "¡Entonces bienvenido a Londres!",
+        "fr": "Alors bienvenue à Londres !",
+        "de": "Dann willkommen in London!",
+        "it": "Allora benvenuto a Londra!",
+        "pt": "Então bem-vindo a Londres!",
+        "ru": "Тогда добро пожаловать в Лондон!",
+        "uk": "Тоді ласкаво просимо до Лондона!",
+        "be": "Тады сардэчна запрашаем у Лондан!",
+        "pl": "To witamy w Londynie!",
+        "tr": "O zaman Londra'ya hoş geldiniz!",
+        "zh": "那欢迎来到伦敦！",
+        "zh-Hant": "那歡迎來到倫敦！",
+        "ja": "それなら、ようこそロンドンへ！",
+        "ar": "إذن، أهلًا بك في لندن!",
+        "hi": "तो लंदन में आपका स्वागत है!"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Thank you! Goodbye!",
+        "es": "¡Gracias! ¡Adiós!",
+        "fr": "Merci ! Au revoir !",
+        "de": "Danke! Auf Wiedersehen!",
+        "it": "Grazie! Arrivederci!",
+        "pt": "Obrigado! Adeus!",
+        "ru": "Спасибо! До свидания!",
+        "uk": "Дякую! До побачення!",
+        "be": "Дзякуй! Да пабачэння!",
+        "pl": "Dziękuję! Do widzenia!",
+        "tr": "Teşekkürler! Hoşça kalın!",
+        "zh": "谢谢！再见！",
+        "zh-Hant": "謝謝！再見！",
+        "ja": "ありがとうございます！さようなら！",
+        "ar": "شكرًا! مع السلامة!",
+        "hi": "धन्यवाद! फिर मिलेंगे!"
+      },
+      "task": {
+        "build": [
+          "Please!",
+          "Hello!"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "help",
+        "es": "ayudar",
+        "fr": "aider",
+        "de": "helfen",
+        "it": "aiutare",
+        "pt": "ajudar",
+        "ru": "помочь",
+        "uk": "допомогти",
+        "be": "дапамагчы",
+        "pl": "pomóc",
+        "tr": "yardım etmek",
+        "zh": "帮助，帮忙",
+        "zh-Hant": "幫忙，幫助",
+        "ja": "手伝う、助ける",
+        "ar": "يساعد",
+        "hi": "मदद करना"
+      },
+      "example": "Hello! How can I help you?"
+    },
+    {
+      "text": {
+        "en": "map",
+        "es": "mapa",
+        "fr": "plan, carte",
+        "de": "Karte, Stadtplan",
+        "it": "mappa, cartina",
+        "pt": "mapa",
+        "ru": "карта",
+        "uk": "мапа",
+        "be": "карта",
+        "pl": "mapa",
+        "tr": "harita",
+        "zh": "地图",
+        "zh-Hant": "地圖",
+        "ja": "地図",
+        "ar": "خريطة",
+        "hi": "नक्शा"
+      },
+      "example": "Hello! Do you have a city map?"
+    },
+    {
+      "text": {
+        "en": "tourist",
+        "es": "turista",
+        "fr": "touriste",
+        "de": "Tourist",
+        "it": "turista",
+        "pt": "turista",
+        "ru": "турист",
+        "uk": "турист",
+        "be": "турыст",
+        "pl": "turysta",
+        "tr": "turist",
+        "zh": "游客",
+        "zh-Hant": "觀光客，遊客",
+        "ja": "観光客",
+        "ar": "سائح",
+        "hi": "पर्यटक"
+      },
+      "example": "Yes, here you go. Are you a tourist?"
+    },
+    {
+      "text": {
+        "en": "here",
+        "es": "aquí",
+        "fr": "ici",
+        "de": "hier",
+        "it": "qui",
+        "pt": "aqui",
+        "ru": "здесь",
+        "uk": "тут",
+        "be": "тут",
+        "pl": "tutaj",
+        "tr": "burada",
+        "zh": "这里，这儿",
+        "zh-Hant": "這裡",
+        "ja": "ここ",
+        "ar": "هنا",
+        "hi": "यहाँ"
+      },
+      "example": "No, I live here."
+    },
+    {
+      "text": {
+        "en": "welcome",
+        "es": "bienvenido",
+        "fr": "bienvenue",
+        "de": "willkommen",
+        "it": "benvenuto",
+        "pt": "bem-vindo",
+        "ru": "добро пожаловать",
+        "uk": "ласкаво просимо",
+        "be": "сардэчна запрашаем",
+        "pl": "witamy",
+        "tr": "hoş geldiniz",
+        "zh": "欢迎",
+        "zh-Hant": "歡迎",
+        "ja": "ようこそ",
+        "ar": "أهلًا بك، مرحبًا بك",
+        "hi": "स्वागत"
+      },
+      "example": "Then welcome to London!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "How can I help you?",
+        "es": "¿En qué puedo ayudarle?",
+        "fr": "Je peux vous aider ?",
+        "de": "Kann ich Ihnen helfen?",
+        "it": "Come posso aiutarla?",
+        "pt": "Em que posso ajudar?",
+        "ru": "Чем могу помочь?",
+        "uk": "Чим можу допомогти?",
+        "be": "Чым магу дапамагчы?",
+        "pl": "W czym mogę pomóc?",
+        "tr": "Nasıl yardımcı olabilirim?",
+        "zh": "有什么可以帮您的？",
+        "zh-Hant": "有什麼需要幫忙的嗎？",
+        "ja": "何かお手伝いしましょうか？",
+        "ar": "كيف يمكنني مساعدتك؟",
+        "hi": "मैं आपकी क्या मदद कर सकता हूँ?"
+      },
+      "distractors": [
+        "What",
+        "me"
+      ],
+      "gap": "help",
+      "gapWrong": [
+        "helps",
+        "helping"
+      ]
+    },
+    {
+      "text": {
+        "en": "Do you have a city map?",
+        "es": "¿Tiene un mapa de la ciudad?",
+        "fr": "Vous avez un plan de la ville ?",
+        "de": "Haben Sie einen Stadtplan?",
+        "it": "Ha una mappa della città?",
+        "pt": "Tem um mapa da cidade?",
+        "ru": "У вас есть карта города?",
+        "uk": "У вас є мапа міста?",
+        "be": "У вас ёсць карта горада?",
+        "pl": "Czy ma pan mapę miasta?",
+        "tr": "Şehir haritanız var mı?",
+        "zh": "请问有城市地图吗？",
+        "zh-Hant": "請問有市區地圖嗎？",
+        "ja": "市内の地図はありますか？",
+        "ar": "هل لديكم خريطة للمدينة؟",
+        "hi": "क्या आपके पास शहर का नक्शा है?"
+      },
+      "distractors": [
+        "Does",
+        "has"
+      ],
+      "gap": "Do",
+      "gapWrong": [
+        "Does",
+        "Are"
+      ]
+    },
+    {
+      "text": {
+        "en": "I live here.",
+        "es": "Vivo aquí.",
+        "fr": "J'habite ici.",
+        "de": "Ich wohne hier.",
+        "it": "Abito qui.",
+        "pt": "Moro aqui.",
+        "ru": "Я здесь живу.",
+        "uk": "Я тут живу.",
+        "be": "Я тут жыву.",
+        "pl": "Mieszkam tutaj.",
+        "tr": "Burada yaşıyorum.",
+        "zh": "我住在这儿。",
+        "zh-Hant": "我住在這裡。",
+        "ja": "ここに住んでいます。",
+        "ar": "أنا أسكن هنا.",
+        "hi": "मैं यहीं रहता हूँ।"
+      },
+      "distractors": [
+        "am",
+        "there"
+      ],
+      "gap": "here",
+      "gapWrong": [
+        "hear",
+        "her"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Do you have a {slot}?",
+    "items": [
+      {
+        "word": {
+          "en": "pen",
+          "es": "bolígrafo",
+          "fr": "stylo",
+          "de": "Stift, Kuli",
+          "it": "penna",
+          "pt": "caneta, esferográfica",
+          "ru": "ручка",
+          "uk": "ручка",
+          "be": "ручка",
+          "pl": "długopis",
+          "tr": "kalem",
+          "zh": "笔",
+          "zh-Hant": "筆，原子筆",
+          "ja": "ペン",
+          "ar": "قلم",
+          "hi": "पेन"
+        },
+        "sentence": {
+          "en": "Do you have a pen?",
+          "es": "¿Tiene un bolígrafo?",
+          "fr": "Vous avez un stylo ?",
+          "de": "Haben Sie einen Stift?",
+          "it": "Ha una penna?",
+          "pt": "Tem uma caneta?",
+          "ru": "У вас есть ручка?",
+          "uk": "У вас є ручка?",
+          "be": "У вас ёсць ручка?",
+          "pl": "Czy ma pan długopis?",
+          "tr": "Kaleminiz var mı?",
+          "zh": "请问有笔吗？",
+          "zh-Hant": "請問有筆嗎？",
+          "ja": "ペンはありますか？",
+          "ar": "هل لديكم قلم؟",
+          "hi": "क्या आपके पास पेन है?"
+        }
+      },
+      {
+        "word": {
+          "en": "bag",
+          "es": "bolsa",
+          "fr": "sac",
+          "de": "Tüte",
+          "it": "sacchetto, busta",
+          "pt": "saco",
+          "ru": "пакет",
+          "uk": "пакет",
+          "be": "пакет",
+          "pl": "torba",
+          "tr": "poşet",
+          "zh": "袋子，购物袋",
+          "zh-Hant": "袋子",
+          "ja": "袋、レジ袋",
+          "ar": "كيس",
+          "hi": "थैली, थैला"
+        },
+        "sentence": {
+          "en": "Do you have a bag?",
+          "es": "¿Tiene una bolsa?",
+          "fr": "Vous avez un sac ?",
+          "de": "Haben Sie eine Tüte?",
+          "it": "Ha un sacchetto?",
+          "pt": "Tem um saco?",
+          "ru": "У вас есть пакет?",
+          "uk": "У вас є пакет?",
+          "be": "У вас ёсць пакет?",
+          "pl": "Czy ma pan torbę?",
+          "tr": "Poşetiniz var mı?",
+          "zh": "请问有袋子吗？",
+          "zh-Hant": "請問有袋子嗎？",
+          "ja": "袋はありますか？",
+          "ar": "هل لديكم كيس؟",
+          "hi": "क्या आपके पास थैली है?"
+        }
+      },
+      {
+        "word": {
+          "en": "phone charger",
+          "es": "cargador de móvil",
+          "fr": "chargeur de téléphone",
+          "de": "Handyladegerät",
+          "it": "caricabatterie del telefono",
+          "pt": "carregador de telemóvel",
+          "ru": "зарядка для телефона",
+          "uk": "зарядка для телефона",
+          "be": "зарадка для тэлефона",
+          "pl": "ładowarka do telefonu",
+          "tr": "telefon şarj aleti",
+          "zh": "手机充电器",
+          "zh-Hant": "手機充電器",
+          "ja": "スマホの充電器",
+          "ar": "شاحن هاتف",
+          "hi": "फ़ोन चार्जर"
+        },
+        "sentence": {
+          "en": "Do you have a phone charger?",
+          "es": "¿Tiene un cargador de móvil?",
+          "fr": "Vous avez un chargeur de téléphone ?",
+          "de": "Haben Sie ein Handyladegerät?",
+          "it": "Ha un caricabatterie per il telefono?",
+          "pt": "Tem um carregador de telemóvel?",
+          "ru": "У вас есть зарядка для телефона?",
+          "uk": "У вас є зарядка для телефона?",
+          "be": "У вас ёсць зарадка для тэлефона?",
+          "pl": "Czy ma pan ładowarkę do telefonu?",
+          "tr": "Telefon şarj aletiniz var mı?",
+          "zh": "请问有手机充电器吗？",
+          "zh-Hant": "請問有手機充電器嗎？",
+          "ja": "スマホの充電器はありますか？",
+          "ar": "هل لديكم شاحن هاتف؟",
+          "hi": "क्या आपके पास फ़ोन चार्जर है?"
+        }
+      }
+    ]
+  }
+}

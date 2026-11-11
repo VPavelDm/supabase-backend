@@ -1,0 +1,521 @@
+{
+  "id": "liczby",
+  "title": {
+    "pl": "Liczby",
+    "ru": "Числа",
+    "uk": "Числа",
+    "en": "Numbers",
+    "es": "Números",
+    "fr": "Les nombres",
+    "de": "Zahlen",
+    "it": "Numeri",
+    "pt": "Números",
+    "be": "Лічбы",
+    "tr": "Sayılar",
+    "zh": "数字",
+    "zh-Hant": "數字",
+    "ja": "数字",
+    "ar": "الأرقام",
+    "hi": "संख्याएँ"
+  },
+  "subtitle": {
+    "pl": "Podaj swój numer telefonu",
+    "ru": "Продиктовать номер телефона",
+    "uk": "Продиктувати номер телефону",
+    "en": "Give your phone number",
+    "es": "Da tu número de teléfono",
+    "fr": "Donne ton numéro de téléphone",
+    "de": "Gib deine Telefonnummer an",
+    "it": "Dai il tuo numero di telefono",
+    "pt": "Dá o teu número de telefone",
+    "be": "Прадыктаваць свой нумар тэлефона",
+    "tr": "Telefon numaranı söyle",
+    "zh": "报出你的电话号码",
+    "zh-Hant": "說出你的電話號碼",
+    "ja": "電話番号を伝えよう",
+    "ar": "إعطاء رقم الهاتف",
+    "hi": "अपना फ़ोन नंबर बताएँ"
+  },
+  "with": "owl",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Номер часто диктуют группами по три цифры: 501 234 567.",
+      "uk": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Номер часто диктують групами по три цифри: 501 234 567.",
+      "en": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Phone numbers are often read in groups of three: 501 234 567.",
+      "es": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Los números de teléfono se suelen decir en grupos de tres: 501 234 567.",
+      "fr": "0–10 : zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Les numéros de téléphone se lisent souvent par groupes de trois : 501 234 567.",
+      "de": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Telefonnummern liest man oft in Dreiergruppen: 501 234 567.",
+      "it": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. I numeri di telefono si leggono spesso a gruppi di tre: 501 234 567.",
+      "pt": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Os números de telefone dizem-se muitas vezes em grupos de três: 501 234 567.",
+      "be": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Нумар часта дыктуюць групамі па тры лічбы: 501 234 567.",
+      "tr": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. Telefon numaraları genellikle üçerli gruplar hâlinde okunur: 501 234 567.",
+      "zh": "0–10：zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć。电话号码常常三位一组来读：501 234 567。",
+      "zh-Hant": "0–10：zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć。電話號碼常常三個數字一組來唸：501 234 567。",
+      "ja": "0–10：zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć。電話番号は3けたずつ区切って読むことがよくあります：501 234 567。",
+      "ar": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć. وكثيرًا ما تُقرأ أرقام الهاتف في مجموعات من ثلاثة: 501 234 567.",
+      "hi": "0–10: zero, jeden, dwa, trzy, cztery, pięć, sześć, siedem, osiem, dziewięć, dziesięć। फ़ोन नंबर अक्सर तीन-तीन अंकों के समूहों में बोले जाते हैं: 501 234 567।"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Proszę podać numer telefonu.",
+        "ru": "Назовите, пожалуйста, номер телефона.",
+        "uk": "Назвіть, будь ласка, номер телефону.",
+        "en": "Please give me your phone number.",
+        "es": "Dígame su número de teléfono, por favor.",
+        "fr": "Votre numéro de téléphone, s'il vous plaît.",
+        "de": "Bitte nennen Sie Ihre Telefonnummer.",
+        "it": "Mi dica il suo numero di telefono, per favore.",
+        "pt": "Diga-me o seu número de telefone, por favor.",
+        "be": "Назавіце, калі ласка, нумар тэлефона.",
+        "tr": "Telefon numaranızı söyler misiniz, lütfen?",
+        "zh": "请告诉我您的电话号码。",
+        "zh-Hant": "請告訴我您的電話號碼。",
+        "ja": "電話番号を教えてください。",
+        "ar": "يُرجى ذكر رقم الهاتف.",
+        "hi": "कृपया अपना फ़ोन नंबर बताइए।"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Pięć, zero, jeden, dwa, trzy, cztery.",
+        "ru": "Пять, ноль, один, два, три, четыре.",
+        "uk": "П'ять, нуль, один, два, три, чотири.",
+        "en": "Five, zero, one, two, three, four.",
+        "es": "Cinco, cero, uno, dos, tres, cuatro.",
+        "fr": "Cinq, zéro, un, deux, trois, quatre.",
+        "de": "Fünf, null, eins, zwei, drei, vier.",
+        "it": "Cinque, zero, uno, due, tre, quattro.",
+        "pt": "Cinco, zero, um, dois, três, quatro.",
+        "be": "Пяць, нуль, адзін, два, тры, чатыры.",
+        "tr": "Beş, sıfır, bir, iki, üç, dört.",
+        "zh": "五、零、一、二、三、四。",
+        "zh-Hant": "五、零、一、二、三、四。",
+        "ja": "ご、ゼロ、いち、に、さん、よん。",
+        "ar": "خمسة، صفر، واحد، اثنان، ثلاثة، أربعة.",
+        "hi": "पाँच, शून्य, एक, दो, तीन, चार।"
+      },
+      "task": {
+        "build": [
+          "sześć,",
+          "dziesięć,"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Dobrze. A dalej?",
+        "ru": "Хорошо. А дальше?",
+        "uk": "Добре. А далі?",
+        "en": "OK. And then?",
+        "es": "Bien. ¿Y luego?",
+        "fr": "Bien. Et ensuite ?",
+        "de": "Gut. Und weiter?",
+        "it": "Bene. E poi?",
+        "pt": "Muito bem. E a seguir?",
+        "be": "Добра. А далей?",
+        "tr": "Tamam. Devamı?",
+        "zh": "好的。然后呢？",
+        "zh-Hant": "好的。然後呢？",
+        "ja": "はい。それから？",
+        "ar": "حسنًا. وبعد ذلك؟",
+        "hi": "ठीक है। और आगे?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Pięć, sześć, siedem.",
+        "ru": "Пять, шесть, семь.",
+        "uk": "П'ять, шість, сім.",
+        "en": "Five, six, seven.",
+        "es": "Cinco, seis, siete.",
+        "fr": "Cinq, six, sept.",
+        "de": "Fünf, sechs, sieben.",
+        "it": "Cinque, sei, sette.",
+        "pt": "Cinco, seis, sete.",
+        "be": "Пяць, шэсць, сем.",
+        "tr": "Beş, altı, yedi.",
+        "zh": "五、六、七。",
+        "zh-Hant": "五、六、七。",
+        "ja": "ご、ろく、なな。",
+        "ar": "خمسة، ستة، سبعة.",
+        "hi": "पाँच, छह, सात।"
+      },
+      "task": {
+        "build": [
+          "osiem,",
+          "dziewięć."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Pięćset jeden, dwieście trzydzieści cztery, pięćset sześćdziesiąt siedem. Tak?",
+        "ru": "Пятьсот один, двести тридцать четыре, пятьсот шестьдесят семь. Верно?",
+        "uk": "П'ятсот один, двісті тридцять чотири, п'ятсот шістдесят сім. Так?",
+        "en": "Five hundred and one, two hundred and thirty-four, five hundred and sixty-seven. Right?",
+        "es": "Quinientos uno, doscientos treinta y cuatro, quinientos sesenta y siete. ¿Es así?",
+        "fr": "Cinq cent un, deux cent trente-quatre, cinq cent soixante-sept. C'est bien ça ?",
+        "de": "Fünfhunderteins, zweihundertvierunddreißig, fünfhundertsiebenundsechzig. Richtig?",
+        "it": "Cinquecentouno, duecentotrentaquattro, cinquecentosessantasette. Giusto?",
+        "pt": "Quinhentos e um, duzentos e trinta e quatro, quinhentos e sessenta e sete. Certo?",
+        "be": "Пяцьсот адзін, дзвесце трыццаць чатыры, пяцьсот шэсцьдзясят сем. Так?",
+        "tr": "Beş yüz bir, iki yüz otuz dört, beş yüz altmış yedi. Doğru mu?",
+        "zh": "五零一，二三四，五六七。对吗？",
+        "zh-Hant": "五零一，二三四，五六七。對嗎？",
+        "ja": "ごひゃくいち、にひゃくさんじゅうよん、ごひゃくろくじゅうなな。よろしいですか？",
+        "ar": "خمسمئة وواحد، مئتان وأربعة وثلاثون، خمسمئة وسبعة وستون. صحيح؟",
+        "hi": "पाँच सौ एक, दो सौ चौंतीस, पाँच सौ सड़सठ। सही है?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Tak, wszystko się zgadza.",
+        "ru": "Да, всё верно.",
+        "uk": "Так, усе правильно.",
+        "en": "Yes, that's all correct.",
+        "es": "Sí, todo correcto.",
+        "fr": "Oui, tout est exact.",
+        "de": "Ja, das stimmt alles.",
+        "it": "Sì, è tutto giusto.",
+        "pt": "Sim, está tudo certo.",
+        "be": "Так, усё правільна.",
+        "tr": "Evet, hepsi doğru.",
+        "zh": "对，全都没错。",
+        "zh-Hant": "對，全部都對。",
+        "ja": "はい、全部合っています。",
+        "ar": "نعم، كل شيء صحيح.",
+        "hi": "जी हाँ, सब सही है।"
+      },
+      "task": {
+        "choose": [
+          "Nie, wszystko się zgadza.",
+          "Tak, wszystko się zgadzam."
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "numer telefonu",
+        "ru": "номер телефона",
+        "uk": "номер телефону",
+        "en": "phone number",
+        "es": "número de teléfono",
+        "fr": "numéro de téléphone",
+        "de": "Telefonnummer",
+        "it": "numero di telefono",
+        "pt": "número de telefone",
+        "be": "нумар тэлефона",
+        "tr": "telefon numarası",
+        "zh": "电话号码",
+        "zh-Hant": "電話號碼",
+        "ja": "電話番号",
+        "ar": "رقم الهاتف",
+        "hi": "फ़ोन नंबर"
+      },
+      "example": "Proszę podać numer telefonu."
+    },
+    {
+      "text": {
+        "pl": "zero",
+        "ru": "ноль",
+        "uk": "нуль",
+        "en": "zero",
+        "es": "cero",
+        "fr": "zéro",
+        "de": "null",
+        "it": "zero",
+        "pt": "zero",
+        "be": "нуль",
+        "tr": "sıfır",
+        "zh": "零",
+        "zh-Hant": "零",
+        "ja": "ゼロ",
+        "ar": "صفر",
+        "hi": "शून्य"
+      },
+      "example": "Pięć, zero, jeden, dwa, trzy, cztery."
+    },
+    {
+      "text": {
+        "pl": "cztery",
+        "ru": "четыре",
+        "uk": "чотири",
+        "en": "four",
+        "es": "cuatro",
+        "fr": "quatre",
+        "de": "vier",
+        "it": "quattro",
+        "pt": "quatro",
+        "be": "чатыры",
+        "tr": "dört",
+        "zh": "四",
+        "zh-Hant": "四",
+        "ja": "4、よん",
+        "ar": "أربعة",
+        "hi": "चार"
+      },
+      "example": "Pięć, zero, jeden, dwa, trzy, cztery."
+    },
+    {
+      "text": {
+        "pl": "siedem",
+        "ru": "семь",
+        "uk": "сім",
+        "en": "seven",
+        "es": "siete",
+        "fr": "sept",
+        "de": "sieben",
+        "it": "sette",
+        "pt": "sete",
+        "be": "сем",
+        "tr": "yedi",
+        "zh": "七",
+        "zh-Hant": "七",
+        "ja": "7、なな",
+        "ar": "سبعة",
+        "hi": "सात"
+      },
+      "example": "Pięć, sześć, siedem."
+    },
+    {
+      "text": {
+        "pl": "zgadza się",
+        "ru": "верно",
+        "uk": "правильно",
+        "en": "that's right",
+        "es": "es correcto",
+        "fr": "c'est exact",
+        "de": "das stimmt",
+        "it": "esatto, giusto",
+        "pt": "está certo",
+        "be": "правільна",
+        "tr": "doğru",
+        "zh": "没错，对",
+        "zh-Hant": "沒錯，對",
+        "ja": "合っている",
+        "ar": "صحيح، هذا مضبوط",
+        "hi": "सही है"
+      },
+      "example": "Tak, wszystko się zgadza."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Proszę podać numer telefonu.",
+        "ru": "Назовите, пожалуйста, номер телефона.",
+        "uk": "Назвіть, будь ласка, номер телефону.",
+        "en": "Please give me your phone number.",
+        "es": "Dígame su número de teléfono, por favor.",
+        "fr": "Votre numéro de téléphone, s'il vous plaît.",
+        "de": "Bitte nennen Sie Ihre Telefonnummer.",
+        "it": "Mi dica il suo numero di telefono, per favore.",
+        "pt": "Diga-me o seu número de telefone, por favor.",
+        "be": "Назавіце, калі ласка, нумар тэлефона.",
+        "tr": "Telefon numaranızı söyler misiniz, lütfen?",
+        "zh": "请告诉我您的电话号码。",
+        "zh-Hant": "請告訴我您的電話號碼。",
+        "ja": "電話番号を教えてください。",
+        "ar": "يُرجى ذكر رقم الهاتف.",
+        "hi": "कृपया अपना फ़ोन नंबर बताइए।"
+      },
+      "distractors": [
+        "jest",
+        "mój"
+      ],
+      "gap": "numer",
+      "gapWrong": [
+        "numery",
+        "numeru"
+      ]
+    },
+    {
+      "text": {
+        "pl": "A dalej?",
+        "ru": "А дальше?",
+        "uk": "А далі?",
+        "en": "And then?",
+        "es": "¿Y luego?",
+        "fr": "Et ensuite ?",
+        "de": "Und weiter?",
+        "it": "E poi?",
+        "pt": "E a seguir?",
+        "be": "А далей?",
+        "tr": "Devamı?",
+        "zh": "然后呢？",
+        "zh-Hant": "然後呢？",
+        "ja": "それから？",
+        "ar": "وبعد ذلك؟",
+        "hi": "और आगे?"
+      },
+      "distractors": [
+        "Co",
+        "i"
+      ],
+      "gap": "dalej",
+      "gapWrong": [
+        "daleko",
+        "dalszy"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Wszystko się zgadza.",
+        "ru": "Всё верно.",
+        "uk": "Усе правильно.",
+        "en": "That's all correct.",
+        "es": "Todo correcto.",
+        "fr": "Tout est exact.",
+        "de": "Das stimmt alles.",
+        "it": "È tutto giusto.",
+        "pt": "Está tudo certo.",
+        "be": "Усё правільна.",
+        "tr": "Hepsi doğru.",
+        "zh": "全都没错。",
+        "zh-Hant": "全部都對。",
+        "ja": "全部合っています。",
+        "ar": "كل شيء صحيح.",
+        "hi": "सब सही है।"
+      },
+      "distractors": [
+        "nie",
+        "jest"
+      ],
+      "gap": "zgadza",
+      "gapWrong": [
+        "zgadzam",
+        "zgadzasz"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Pokój numer {slot}.",
+    "items": [
+      {
+        "word": {
+          "pl": "osiem",
+          "ru": "восемь",
+          "uk": "вісім",
+          "en": "eight",
+          "es": "ocho",
+          "fr": "huit",
+          "de": "acht",
+          "it": "otto",
+          "pt": "oito",
+          "be": "восем",
+          "tr": "sekiz",
+          "zh": "八",
+          "zh-Hant": "八",
+          "ja": "8、はち",
+          "ar": "ثمانية",
+          "hi": "आठ"
+        },
+        "sentence": {
+          "pl": "Pokój numer osiem.",
+          "ru": "Комната номер восемь.",
+          "uk": "Кімната номер вісім.",
+          "en": "Room number eight.",
+          "es": "Habitación número ocho.",
+          "fr": "Chambre numéro huit.",
+          "de": "Zimmer Nummer acht.",
+          "it": "Stanza numero otto.",
+          "pt": "Quarto número oito.",
+          "be": "Пакой нумар восем.",
+          "tr": "Sekiz numaralı oda.",
+          "zh": "八号房间。",
+          "zh-Hant": "八號房。",
+          "ja": "8号室です。",
+          "ar": "الغرفة رقم ثمانية.",
+          "hi": "कमरा नंबर आठ।"
+        }
+      },
+      {
+        "word": {
+          "pl": "dziewięć",
+          "ru": "девять",
+          "uk": "дев'ять",
+          "en": "nine",
+          "es": "nueve",
+          "fr": "neuf",
+          "de": "neun",
+          "it": "nove",
+          "pt": "nove",
+          "be": "дзевяць",
+          "tr": "dokuz",
+          "zh": "九",
+          "zh-Hant": "九",
+          "ja": "9、きゅう",
+          "ar": "تسعة",
+          "hi": "नौ"
+        },
+        "sentence": {
+          "pl": "Pokój numer dziewięć.",
+          "ru": "Комната номер девять.",
+          "uk": "Кімната номер дев'ять.",
+          "en": "Room number nine.",
+          "es": "Habitación número nueve.",
+          "fr": "Chambre numéro neuf.",
+          "de": "Zimmer Nummer neun.",
+          "it": "Stanza numero nove.",
+          "pt": "Quarto número nove.",
+          "be": "Пакой нумар дзевяць.",
+          "tr": "Dokuz numaralı oda.",
+          "zh": "九号房间。",
+          "zh-Hant": "九號房。",
+          "ja": "9号室です。",
+          "ar": "الغرفة رقم تسعة.",
+          "hi": "कमरा नंबर नौ।"
+        }
+      },
+      {
+        "word": {
+          "pl": "dziesięć",
+          "ru": "десять",
+          "uk": "десять",
+          "en": "ten",
+          "es": "diez",
+          "fr": "dix",
+          "de": "zehn",
+          "it": "dieci",
+          "pt": "dez",
+          "be": "дзесяць",
+          "tr": "on",
+          "zh": "十",
+          "zh-Hant": "十",
+          "ja": "10、じゅう",
+          "ar": "عشرة",
+          "hi": "दस"
+        },
+        "sentence": {
+          "pl": "Pokój numer dziesięć.",
+          "ru": "Комната номер десять.",
+          "uk": "Кімната номер десять.",
+          "en": "Room number ten.",
+          "es": "Habitación número diez.",
+          "fr": "Chambre numéro dix.",
+          "de": "Zimmer Nummer zehn.",
+          "it": "Stanza numero dieci.",
+          "pt": "Quarto número dez.",
+          "be": "Пакой нумар дзесяць.",
+          "tr": "On numaralı oda.",
+          "zh": "十号房间。",
+          "zh-Hant": "十號房。",
+          "ja": "10号室です。",
+          "ar": "الغرفة رقم عشرة.",
+          "hi": "कमरा नंबर दस।"
+        }
+      }
+    ]
+  }
+}

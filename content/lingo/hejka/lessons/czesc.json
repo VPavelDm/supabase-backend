@@ -1,0 +1,517 @@
+{
+  "id": "czesc",
+  "title": {
+    "pl": "Cześć!",
+    "ru": "Привет!",
+    "uk": "Привіт!",
+    "en": "Hi!",
+    "es": "¡Hola!",
+    "fr": "Salut !",
+    "de": "Hallo!",
+    "it": "Ciao!",
+    "pt": "Olá!",
+    "be": "Прывітанне!",
+    "tr": "Selam!",
+    "zh": "嗨！",
+    "zh-Hant": "嗨！",
+    "ja": "やあ！",
+    "ar": "مرحبًا!",
+    "hi": "हाय!"
+  },
+  "subtitle": {
+    "pl": "Przywitaj się z kolegą",
+    "ru": "Поздороваться с другом",
+    "uk": "Привітатися з другом",
+    "en": "Say hi to a friend",
+    "es": "Saluda a un amigo",
+    "fr": "Dis salut à un ami",
+    "de": "Sag Hallo zu einem Freund",
+    "it": "Saluta un amico",
+    "pt": "Cumprimenta um amigo",
+    "be": "Павітацца з сябрам",
+    "tr": "Bir arkadaşınla selamlaş",
+    "zh": "跟朋友打个招呼",
+    "zh-Hant": "跟朋友打個招呼",
+    "ja": "友だちにあいさつしよう",
+    "ar": "إلقاء التحية على صديق",
+    "hi": "दोस्त को हाय कहें"
+  },
+  "with": "rabbit",
+  "tip": {
+    "show": "auto",
+    "text": {
+      "ru": "Чтение: cz — твёрдое «ч», sz — «ш», ś и si — мягкое «щь». Cześć и siema — только для друзей.",
+      "uk": "Читання: cz — тверде «ч», sz — «ш», ś і si — м'яке «щь». Cześć і siema — лише для друзів.",
+      "en": "Reading: cz sounds like “ch”, sz like “sh”, ś and si like a soft “sh”. Cześć and siema are only for friends.",
+      "es": "Lectura: cz suena como «ch», sz como la «sh» inglesa, y ś y si como una «sh» más suave. Cześć y siema son solo para amigos.",
+      "fr": "Lecture : cz se prononce « tch », sz « ch », ś et si comme un « ch » plus doux. Cześć et siema, c'est seulement entre amis.",
+      "de": "Aussprache: cz klingt wie „tsch“, sz wie „sch“, ś und si wie ein weiches „sch“. Cześć und siema sagt man nur zu Freunden.",
+      "it": "Lettura: cz si legge come la «c» di «ciao», sz come «sc» di «scena», ś e si come una «sc» più morbida. Cześć e siema si usano solo tra amici.",
+      "pt": "Leitura: cz soa como «tch», sz como o «ch» de «chave», e ś e si como um «ch» mais suave. Cześć e siema são só para amigos.",
+      "be": "Чытанне: cz — «ч», sz — «ш», ś і si — мяккі гук, падобны да «сь». Cześć і siema — толькі для сяброў.",
+      "tr": "Okunuş: cz “ç” gibi, sz “ş” gibi, ś ve si ise yumuşak bir “ş” gibi okunur. Cześć ve siema yalnızca arkadaşlar arasında kullanılır.",
+      "zh": "读音：cz 像拼音的 ch，sz 像 sh，ś 和 si 像 x。Cześć 和 siema 只在朋友之间用。",
+      "zh-Hant": "讀音：cz 像注音的「ㄔ」，sz 像「ㄕ」，ś 和 si 像「ㄒ」。Cześć 和 siema 只能跟朋友說。",
+      "ja": "読み方：cz は硬めの「チ」、sz は「シュ」、ś と si はやわらかい「シ」のような音です。Cześć と siema は友だち同士でだけ使います。",
+      "ar": "القراءة: يُنطق cz مثل «تش»، و sz مثل «ش»، و ś و si مثل «ش» مُرقّقة. أما Cześć و siema فللأصدقاء فقط.",
+      "hi": "पढ़ना: cz “च” जैसा, sz “श” जैसा, ś और si नरम “श” जैसे। Cześć और siema सिर्फ़ दोस्तों के लिए हैं।"
+    }
+  },
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Hejka! Co słychać?",
+        "ru": "Приветик! Как дела?",
+        "uk": "Привітик! Як справи?",
+        "en": "Hiya! How's it going?",
+        "es": "¡Holi! ¿Qué tal?",
+        "fr": "Coucou ! Quoi de neuf ?",
+        "de": "Hallöchen! Wie geht’s?",
+        "it": "Ehilà! Come va?",
+        "pt": "Oi! Como vai isso?",
+        "be": "Прывітанкі! Як справы?",
+        "tr": "Selamlar! Ne haber?",
+        "zh": "哈喽！最近怎么样？",
+        "zh-Hant": "哈囉！最近怎麼樣？",
+        "ja": "やっほー！元気？",
+        "ar": "أهلًا! كيف الحال؟",
+        "hi": "अरे, हाय! क्या हाल है?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Cześć! Dobrze, a u ciebie?",
+        "ru": "Привет! Хорошо, а у тебя?",
+        "uk": "Привіт! Добре, а в тебе?",
+        "en": "Hi! Good, and you?",
+        "es": "¡Hola! Bien, ¿y tú?",
+        "fr": "Salut ! Ça va bien, et toi ?",
+        "de": "Hallo! Gut, und dir?",
+        "it": "Ciao! Bene, e tu?",
+        "pt": "Olá! Bem, e tu?",
+        "be": "Прывітанне! Добра, а ў цябе?",
+        "tr": "Selam! İyiyim, ya sen?",
+        "zh": "嗨！挺好的，你呢？",
+        "zh-Hant": "嗨！還不錯，你呢？",
+        "ja": "やあ！元気だよ、そっちは？",
+        "ar": "مرحبًا! بخير، وأنت؟",
+        "hi": "हाय! ठीक हूँ, और तुम?"
+      },
+      "task": {
+        "build": [
+          "dobry",
+          "ty"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Też dobrze. Idziesz na kawę?",
+        "ru": "Тоже хорошо. Пойдёшь на кофе?",
+        "uk": "Теж добре. Підеш на каву?",
+        "en": "Good too. Coming for a coffee?",
+        "es": "También bien. ¿Te vienes a tomar un café?",
+        "fr": "Bien aussi. Tu viens prendre un café ?",
+        "de": "Auch gut. Kommst du mit auf einen Kaffee?",
+        "it": "Bene anch'io. Vieni a prendere un caffè?",
+        "pt": "Também bem. Vens tomar um café?",
+        "be": "Таксама добра. Пойдзеш на каву?",
+        "tr": "Ben de iyiyim. Kahveye geliyor musun?",
+        "zh": "我也挺好。一起去喝咖啡吗？",
+        "zh-Hant": "我也不錯。要一起去喝咖啡嗎？",
+        "ja": "こっちも元気。コーヒー飲みに行く？",
+        "ar": "وأنا بخير أيضًا. هل تأتي لنشرب القهوة؟",
+        "hi": "मैं भी ठीक हूँ। कॉफ़ी पीने चलोगे?",
+        "ar_f": "وأنا بخير أيضًا. هل تأتين لنشرب القهوة؟",
+        "hi_f": "मैं भी ठीक हूँ। कॉफ़ी पीने चलोगी?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "pl": "Nie dzisiaj. Na razie!",
+        "ru": "Не сегодня. Пока!",
+        "uk": "Не сьогодні. Бувай!",
+        "en": "Not today. See you!",
+        "es": "Hoy no. ¡Hasta luego!",
+        "fr": "Pas aujourd'hui. À plus !",
+        "de": "Heute nicht. Bis dann!",
+        "it": "Oggi no. A dopo!",
+        "pt": "Hoje não. Até logo!",
+        "be": "Не сёння. Пакуль!",
+        "tr": "Bugün olmaz. Görüşürüz!",
+        "zh": "今天不了。回头见！",
+        "zh-Hant": "今天不行。回頭見！",
+        "ja": "今日はやめとく。またね！",
+        "ar": "ليس اليوم. أراك لاحقًا!",
+        "hi": "आज नहीं। फिर मिलते हैं!"
+      },
+      "task": {
+        "build": [
+          "Tak,",
+          "jutro"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "pl": "Pa! Do zobaczenia jutro!",
+        "ru": "Пока! До завтра!",
+        "uk": "Бувай! До завтра!",
+        "en": "Bye! See you tomorrow!",
+        "es": "¡Chao! ¡Nos vemos mañana!",
+        "fr": "Salut ! On se voit demain !",
+        "de": "Tschüss! Bis morgen!",
+        "it": "Ciao ciao! Ci vediamo domani!",
+        "pt": "Tchau! Até amanhã!",
+        "be": "Бывай! Да сустрэчы заўтра!",
+        "tr": "Bay bay! Yarın görüşmek üzere!",
+        "zh": "拜拜！明天见！",
+        "zh-Hant": "掰掰！明天見！",
+        "ja": "バイバイ！また明日！",
+        "ar": "سلام! إلى اللقاء غدًا!",
+        "hi": "बाय! कल मिलेंगे!"
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "pl": "hejka",
+        "ru": "приветик",
+        "uk": "привітик",
+        "en": "hiya",
+        "es": "holi",
+        "fr": "coucou",
+        "de": "hallöchen",
+        "it": "ehilà",
+        "pt": "oi",
+        "be": "прывітанкі",
+        "tr": "selamlar",
+        "zh": "嗨，哈喽",
+        "zh-Hant": "嗨，哈囉",
+        "ja": "やっほー",
+        "ar": "أهلًا",
+        "hi": "हाय (प्यार से)"
+      },
+      "example": "Hejka! Co słychać?"
+    },
+    {
+      "text": {
+        "pl": "co słychać",
+        "ru": "как дела",
+        "uk": "як справи",
+        "en": "how's it going",
+        "es": "qué tal",
+        "fr": "quoi de neuf",
+        "de": "wie geht’s",
+        "it": "come va",
+        "pt": "como vai isso",
+        "be": "як справы",
+        "tr": "ne haber",
+        "zh": "最近怎么样",
+        "zh-Hant": "最近怎麼樣",
+        "ja": "元気？、調子どう？",
+        "ar": "كيف الحال",
+        "hi": "क्या हाल है"
+      },
+      "example": "Hejka! Co słychać?"
+    },
+    {
+      "text": {
+        "pl": "cześć",
+        "ru": "привет",
+        "uk": "привіт",
+        "en": "hi",
+        "es": "hola",
+        "fr": "salut",
+        "de": "hallo",
+        "it": "ciao",
+        "pt": "olá",
+        "be": "прывітанне",
+        "tr": "selam",
+        "zh": "嗨，你好",
+        "zh-Hant": "嗨，你好",
+        "ja": "やあ",
+        "ar": "مرحبًا",
+        "hi": "हाय"
+      },
+      "example": "Cześć! Dobrze, a u ciebie?"
+    },
+    {
+      "text": {
+        "pl": "na razie",
+        "ru": "пока",
+        "uk": "бувай",
+        "en": "see you",
+        "es": "hasta luego",
+        "fr": "à plus",
+        "de": "bis dann",
+        "it": "a dopo",
+        "pt": "até logo",
+        "be": "пакуль",
+        "tr": "görüşürüz",
+        "zh": "回头见",
+        "zh-Hant": "回頭見",
+        "ja": "またね",
+        "ar": "أراك لاحقًا",
+        "hi": "फिर मिलते हैं"
+      },
+      "example": "Nie dzisiaj. Na razie!"
+    },
+    {
+      "text": {
+        "pl": "pa",
+        "ru": "пока",
+        "uk": "па-па",
+        "en": "bye",
+        "es": "chao",
+        "fr": "salut, tchao",
+        "de": "tschüss",
+        "it": "ciao ciao",
+        "pt": "tchau",
+        "be": "бывай",
+        "tr": "bay bay",
+        "zh": "拜拜",
+        "zh-Hant": "掰掰",
+        "ja": "バイバイ",
+        "ar": "سلام، باي",
+        "hi": "बाय"
+      },
+      "example": "Pa! Do zobaczenia jutro!"
+    },
+    {
+      "text": {
+        "pl": "do zobaczenia",
+        "ru": "до встречи",
+        "uk": "до зустрічі",
+        "en": "see you",
+        "es": "nos vemos",
+        "fr": "à bientôt, on se voit",
+        "de": "bis bald",
+        "it": "ci vediamo, arrivederci",
+        "pt": "até à vista",
+        "be": "да сустрэчы",
+        "tr": "görüşmek üzere",
+        "zh": "再见",
+        "zh-Hant": "再見",
+        "ja": "また会おう",
+        "ar": "إلى اللقاء",
+        "hi": "फिर मिलेंगे"
+      },
+      "example": "Pa! Do zobaczenia jutro!"
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "pl": "Co słychać?",
+        "ru": "Как дела?",
+        "uk": "Як справи?",
+        "en": "How's it going?",
+        "es": "¿Qué tal?",
+        "fr": "Quoi de neuf ?",
+        "de": "Wie geht’s?",
+        "it": "Come va?",
+        "pt": "Como vai isso?",
+        "be": "Як справы?",
+        "tr": "Ne haber?",
+        "zh": "最近怎么样？",
+        "zh-Hant": "最近怎麼樣？",
+        "ja": "元気？",
+        "ar": "كيف الحال؟",
+        "hi": "क्या हाल है?"
+      },
+      "distractors": [
+        "Jak",
+        "jest"
+      ],
+      "gap": "słychać",
+      "gapWrong": [
+        "słyszeć",
+        "słucham"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Dobrze, a u ciebie?",
+        "ru": "Хорошо, а у тебя?",
+        "uk": "Добре, а в тебе?",
+        "en": "Good, and you?",
+        "es": "Bien, ¿y tú?",
+        "fr": "Ça va bien, et toi ?",
+        "de": "Gut, und dir?",
+        "it": "Bene, e tu?",
+        "pt": "Bem, e tu?",
+        "be": "Добра, а ў цябе?",
+        "tr": "İyiyim, ya sen?",
+        "zh": "挺好的，你呢？",
+        "zh-Hant": "還不錯，你呢？",
+        "ja": "元気だよ、そっちは？",
+        "ar": "بخير، وأنت؟",
+        "hi": "ठीक हूँ, और तुम?"
+      },
+      "distractors": [
+        "ty",
+        "jest"
+      ],
+      "gap": "ciebie",
+      "gapWrong": [
+        "ty",
+        "tobie"
+      ]
+    },
+    {
+      "text": {
+        "pl": "Do zobaczenia jutro!",
+        "ru": "До завтра!",
+        "uk": "До завтра!",
+        "en": "See you tomorrow!",
+        "es": "¡Nos vemos mañana!",
+        "fr": "On se voit demain !",
+        "de": "Bis morgen!",
+        "it": "Ci vediamo domani!",
+        "pt": "Até amanhã!",
+        "be": "Да сустрэчы заўтра!",
+        "tr": "Yarın görüşmek üzere!",
+        "zh": "明天见！",
+        "zh-Hant": "明天見！",
+        "ja": "また明日！",
+        "ar": "إلى اللقاء غدًا!",
+        "hi": "कल मिलेंगे!"
+      },
+      "distractors": [
+        "Na",
+        "widzenia"
+      ],
+      "gap": "jutro",
+      "gapWrong": [
+        "wczoraj",
+        "jutra"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "{slot}! Co słychać?",
+    "items": [
+      {
+        "word": {
+          "pl": "Siema",
+          "ru": "здорово",
+          "uk": "здоров",
+          "en": "hey",
+          "es": "ey",
+          "fr": "yo",
+          "de": "hi",
+          "it": "ehi",
+          "pt": "boas",
+          "be": "здароў",
+          "tr": "hey",
+          "zh": "嘿",
+          "zh-Hant": "嘿",
+          "ja": "よっ",
+          "ar": "هلا",
+          "hi": "हे"
+        },
+        "sentence": {
+          "pl": "Siema! Co słychać?",
+          "ru": "Здорово! Как дела?",
+          "uk": "Здоров! Як справи?",
+          "en": "Hey! How's it going?",
+          "es": "¡Ey! ¿Qué tal?",
+          "fr": "Yo ! Quoi de neuf ?",
+          "de": "Hi! Wie geht’s?",
+          "it": "Ehi! Come va?",
+          "pt": "Boas! Como vai isso?",
+          "be": "Здароў! Як справы?",
+          "tr": "Hey! Ne haber?",
+          "zh": "嘿！最近怎么样？",
+          "zh-Hant": "嘿！最近怎麼樣？",
+          "ja": "よっ！元気？",
+          "ar": "هلا! كيف الحال؟",
+          "hi": "हे! क्या हाल है?"
+        }
+      },
+      {
+        "word": {
+          "pl": "Hej",
+          "ru": "привет",
+          "uk": "привіт",
+          "en": "hi",
+          "es": "hola",
+          "fr": "salut",
+          "de": "hey",
+          "it": "ciao",
+          "pt": "olá",
+          "be": "прывітанне",
+          "tr": "selam",
+          "zh": "嗨",
+          "zh-Hant": "嗨",
+          "ja": "ハーイ",
+          "ar": "هاي",
+          "hi": "हाय"
+        },
+        "sentence": {
+          "pl": "Hej! Co słychać?",
+          "ru": "Привет! Как дела?",
+          "uk": "Привіт! Як справи?",
+          "en": "Hi! How's it going?",
+          "es": "¡Hola! ¿Qué tal?",
+          "fr": "Salut ! Quoi de neuf ?",
+          "de": "Hey! Wie geht’s?",
+          "it": "Ciao! Come va?",
+          "pt": "Olá! Como vai isso?",
+          "be": "Прывітанне! Як справы?",
+          "tr": "Selam! Ne haber?",
+          "zh": "嗨！最近怎么样？",
+          "zh-Hant": "嗨！最近怎麼樣？",
+          "ja": "ハーイ！元気？",
+          "ar": "هاي! كيف الحال؟",
+          "hi": "हाय! क्या हाल है?"
+        }
+      },
+      {
+        "word": {
+          "pl": "Witaj",
+          "ru": "здравствуй",
+          "uk": "вітаю",
+          "en": "hello",
+          "es": "saludos",
+          "fr": "bonjour",
+          "de": "grüß dich",
+          "it": "salve",
+          "pt": "viva",
+          "be": "вітаю",
+          "tr": "merhaba",
+          "zh": "你好",
+          "zh-Hant": "你好",
+          "ja": "こんにちは",
+          "ar": "أهلًا بك",
+          "hi": "नमस्ते"
+        },
+        "sentence": {
+          "pl": "Witaj! Co słychać?",
+          "ru": "Здравствуй! Как дела?",
+          "uk": "Вітаю! Як справи?",
+          "en": "Hello! How's it going?",
+          "es": "¡Saludos! ¿Qué tal?",
+          "fr": "Bonjour ! Quoi de neuf ?",
+          "de": "Grüß dich! Wie geht’s?",
+          "it": "Salve! Come va?",
+          "pt": "Viva! Como vai isso?",
+          "be": "Вітаю! Як справы?",
+          "tr": "Merhaba! Ne haber?",
+          "zh": "你好！最近怎么样？",
+          "zh-Hant": "你好！最近怎麼樣？",
+          "ja": "こんにちは！元気？",
+          "ar": "أهلًا بك! كيف الحال؟",
+          "hi": "नमस्ते! क्या हाल है?"
+        }
+      }
+    ]
+  }
+}

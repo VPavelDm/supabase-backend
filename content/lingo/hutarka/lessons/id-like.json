@@ -1,0 +1,522 @@
+{
+  "id": "id-like",
+  "title": {
+    "en": "I'd like…",
+    "es": "Quería…",
+    "fr": "Je voudrais…",
+    "de": "Ich hätte gern…",
+    "it": "Vorrei…",
+    "pt": "Queria…",
+    "ru": "Мне, пожалуйста…",
+    "uk": "Мені, будь ласка…",
+    "be": "Мне, калі ласка…",
+    "pl": "Poproszę…",
+    "tr": "… istiyorum",
+    "zh": "我想要……",
+    "zh-Hant": "我想要……",
+    "ja": "～をください",
+    "ar": "أريد…",
+    "hi": "मुझे … चाहिए"
+  },
+  "subtitle": {
+    "en": "Ask for something in a shop",
+    "es": "Pide algo en una tienda",
+    "fr": "Demande quelque chose dans un magasin",
+    "de": "Bitte im Laden um etwas",
+    "it": "Chiedi qualcosa in un negozio",
+    "pt": "Pede alguma coisa numa loja",
+    "ru": "Попросить что-то в магазине",
+    "uk": "Попросити щось у магазині",
+    "be": "Папрасіць нешта ў краме",
+    "pl": "Poproś o coś w sklepie",
+    "tr": "Mağazada bir şey iste",
+    "zh": "在商店里说出想要的东西",
+    "zh-Hant": "在店裡說出想買的東西",
+    "ja": "お店でほしいものを頼もう",
+    "ar": "اطلب شيئًا في متجر",
+    "hi": "दुकान में कुछ माँगें"
+  },
+  "with": "fox",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Hello! What would you like?",
+        "es": "¡Hola! ¿Qué desea?",
+        "fr": "Bonjour ! Qu'est-ce que vous désirez ?",
+        "de": "Hallo! Was möchten Sie?",
+        "it": "Buongiorno! Cosa desidera?",
+        "pt": "Olá! O que deseja?",
+        "ru": "Здравствуйте! Что желаете?",
+        "uk": "Добрий день! Що бажаєте?",
+        "be": "Добры дзень! Што жадаеце?",
+        "pl": "Dzień dobry! Co podać?",
+        "tr": "Merhaba! Ne arzu edersiniz?",
+        "zh": "您好！您想要点什么？",
+        "zh-Hant": "您好！請問要什麼？",
+        "ja": "いらっしゃいませ！何になさいますか？",
+        "ar": "مرحبًا! ماذا تودّ أن تطلب؟",
+        "hi": "नमस्ते! आप क्या लेंगे?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "I'd like some water, please.",
+        "es": "Quería un agua, por favor.",
+        "fr": "Je voudrais de l'eau, s'il vous plaît.",
+        "de": "Ich hätte gern ein Wasser, bitte.",
+        "it": "Vorrei un'acqua, per favore.",
+        "pt": "Queria uma água, por favor.",
+        "ru": "Мне воды, пожалуйста.",
+        "uk": "Мені води, будь ласка.",
+        "be": "Мне вады, калі ласка.",
+        "pl": "Poproszę wodę.",
+        "tr": "Su istiyorum, lütfen.",
+        "zh": "我想要一瓶水，谢谢。",
+        "zh-Hant": "我想要一瓶水，謝謝。",
+        "ja": "お水をください。",
+        "ar": "أريد ماءً، من فضلك.",
+        "hi": "मुझे पानी दीजिए।"
+      },
+      "task": {
+        "build": [
+          "waters",
+          "is"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Sparkling or still?",
+        "es": "¿Con gas o sin gas?",
+        "fr": "Gazeuse ou plate ?",
+        "de": "Mit oder ohne Kohlensäure?",
+        "it": "Frizzante o naturale?",
+        "pt": "Com gás ou sem gás?",
+        "ru": "С газом или без?",
+        "uk": "Газовану чи негазовану?",
+        "be": "З газам ці без?",
+        "pl": "Gazowaną czy niegazowaną?",
+        "tr": "Gazlı mı, gazsız mı?",
+        "zh": "要气泡水还是普通的？",
+        "zh-Hant": "要氣泡水還是一般的水？",
+        "ja": "炭酸入りですか、炭酸なしですか？",
+        "ar": "بغاز أم بدون غاز؟",
+        "hi": "सोडा वाला या सादा?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Still, please.",
+        "es": "Sin gas, por favor.",
+        "fr": "Plate, s'il vous plaît.",
+        "de": "Ohne Kohlensäure, bitte.",
+        "it": "Naturale, per favore.",
+        "pt": "Sem gás, por favor.",
+        "ru": "Без газа, пожалуйста.",
+        "uk": "Негазовану, будь ласка.",
+        "be": "Без газу, калі ласка.",
+        "pl": "Niegazowaną, proszę.",
+        "tr": "Gazsız, lütfen.",
+        "zh": "普通的就好，谢谢。",
+        "zh-Hant": "一般的就好，謝謝。",
+        "ja": "炭酸なしでお願いします。",
+        "ar": "بدون غاز، من فضلك.",
+        "hi": "सादा दीजिए।"
+      },
+      "task": {
+        "build": [
+          "Stay,",
+          "pleased."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Anything else?",
+        "es": "¿Algo más?",
+        "fr": "Autre chose ?",
+        "de": "Sonst noch etwas?",
+        "it": "Altro?",
+        "pt": "Mais alguma coisa?",
+        "ru": "Что-нибудь ещё?",
+        "uk": "Щось іще?",
+        "be": "Нешта яшчэ?",
+        "pl": "Coś jeszcze?",
+        "tr": "Başka bir şey?",
+        "zh": "还要别的吗？",
+        "zh-Hant": "還需要什麼嗎？",
+        "ja": "ほかに何かございますか？",
+        "ar": "هل تريد شيئًا آخر؟",
+        "hi": "और कुछ?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "No, that's all.",
+        "es": "No, eso es todo.",
+        "fr": "Non, ce sera tout.",
+        "de": "Nein, das ist alles.",
+        "it": "No, è tutto.",
+        "pt": "Não, é tudo.",
+        "ru": "Нет, это всё.",
+        "uk": "Ні, це все.",
+        "be": "Не, гэта ўсё.",
+        "pl": "Nie, to wszystko.",
+        "tr": "Hayır, bu kadar.",
+        "zh": "不用了，就这些。",
+        "zh-Hant": "不用了，這樣就好。",
+        "ja": "いいえ、以上です。",
+        "ar": "لا، هذا كل شيء.",
+        "hi": "नहीं, बस इतना ही।"
+      },
+      "task": {
+        "choose": [
+          "No, this all.",
+          "Yes, that's all."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Two pounds, please.",
+        "es": "Son dos libras, por favor.",
+        "fr": "Deux livres, s'il vous plaît.",
+        "de": "Zwei Pfund, bitte.",
+        "it": "Sono due sterline, per favore.",
+        "pt": "São duas libras, por favor.",
+        "ru": "Два фунта, пожалуйста.",
+        "uk": "Два фунти, будь ласка.",
+        "be": "Два фунты, калі ласка.",
+        "pl": "Dwa funty, proszę.",
+        "tr": "İki sterlin, lütfen.",
+        "zh": "一共两英镑。",
+        "zh-Hant": "這樣兩英鎊。",
+        "ja": "2ポンドです。",
+        "ar": "جنيهان، من فضلك.",
+        "hi": "दो पाउंड हुए।"
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "I'd like",
+        "es": "quería, me gustaría",
+        "fr": "je voudrais",
+        "de": "ich hätte gern, ich möchte",
+        "it": "vorrei",
+        "pt": "queria, gostaria",
+        "ru": "я бы хотел, мне, пожалуйста",
+        "uk": "я б хотів, мені, будь ласка",
+        "be": "я хацеў бы, мне, калі ласка",
+        "pl": "poproszę, chciałbym",
+        "tr": "istiyorum, rica ediyorum",
+        "zh": "我想要，请给我",
+        "zh-Hant": "我想要，請給我",
+        "ja": "～がほしいです、～をください",
+        "ar": "أريد، أودّ",
+        "hi": "मुझे … चाहिए, मुझे … दीजिए"
+      },
+      "example": "I'd like some water, please."
+    },
+    {
+      "text": {
+        "en": "water",
+        "es": "agua",
+        "fr": "eau",
+        "de": "Wasser",
+        "it": "acqua",
+        "pt": "água",
+        "ru": "вода",
+        "uk": "вода",
+        "be": "вада",
+        "pl": "woda",
+        "tr": "su",
+        "zh": "水",
+        "zh-Hant": "水",
+        "ja": "水",
+        "ar": "ماء",
+        "hi": "पानी"
+      },
+      "example": "I'd like some water, please."
+    },
+    {
+      "text": {
+        "en": "still",
+        "es": "sin gas",
+        "fr": "plate (eau)",
+        "de": "ohne Kohlensäure, still",
+        "it": "naturale, liscia",
+        "pt": "sem gás",
+        "ru": "без газа",
+        "uk": "негазована",
+        "be": "без газу",
+        "pl": "niegazowana",
+        "tr": "gazsız",
+        "zh": "不带气的，无气泡",
+        "zh-Hant": "不含氣泡的，一般的",
+        "ja": "炭酸なし",
+        "ar": "بدون غاز",
+        "hi": "सादा (बिना सोडा का)"
+      },
+      "example": "Still, please."
+    },
+    {
+      "text": {
+        "en": "anything else",
+        "es": "algo más",
+        "fr": "autre chose",
+        "de": "sonst noch etwas",
+        "it": "altro, qualcos'altro",
+        "pt": "mais alguma coisa",
+        "ru": "что-нибудь ещё",
+        "uk": "щось іще",
+        "be": "нешта яшчэ",
+        "pl": "coś jeszcze",
+        "tr": "başka bir şey",
+        "zh": "还要别的，别的东西",
+        "zh-Hant": "還需要什麼，其他東西",
+        "ja": "ほかに何か",
+        "ar": "شيء آخر",
+        "hi": "और कुछ"
+      },
+      "example": "Anything else?"
+    },
+    {
+      "text": {
+        "en": "that's all",
+        "es": "eso es todo, nada más",
+        "fr": "c'est tout",
+        "de": "das ist alles",
+        "it": "è tutto",
+        "pt": "é tudo, mais nada",
+        "ru": "это всё",
+        "uk": "це все",
+        "be": "гэта ўсё",
+        "pl": "to wszystko",
+        "tr": "bu kadar",
+        "zh": "就这些",
+        "zh-Hant": "這樣就好，就這些",
+        "ja": "以上です、それで全部",
+        "ar": "هذا كل شيء",
+        "hi": "बस इतना ही"
+      },
+      "example": "No, that's all."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "I'd like some water, please.",
+        "es": "Quería un agua, por favor.",
+        "fr": "Je voudrais de l'eau, s'il vous plaît.",
+        "de": "Ich hätte gern ein Wasser, bitte.",
+        "it": "Vorrei un'acqua, per favore.",
+        "pt": "Queria uma água, por favor.",
+        "ru": "Мне воды, пожалуйста.",
+        "uk": "Мені води, будь ласка.",
+        "be": "Мне вады, калі ласка.",
+        "pl": "Poproszę wodę.",
+        "tr": "Su istiyorum, lütfen.",
+        "zh": "我想要一瓶水，谢谢。",
+        "zh-Hant": "我想要一瓶水，謝謝。",
+        "ja": "お水をください。",
+        "ar": "أريد ماءً، من فضلك.",
+        "hi": "मुझे पानी दीजिए।"
+      },
+      "distractors": [
+        "waters",
+        "is"
+      ],
+      "gap": "like",
+      "gapWrong": [
+        "likes",
+        "liked"
+      ]
+    },
+    {
+      "text": {
+        "en": "Anything else?",
+        "es": "¿Algo más?",
+        "fr": "Autre chose ?",
+        "de": "Sonst noch etwas?",
+        "it": "Altro?",
+        "pt": "Mais alguma coisa?",
+        "ru": "Что-нибудь ещё?",
+        "uk": "Щось іще?",
+        "be": "Нешта яшчэ?",
+        "pl": "Coś jeszcze?",
+        "tr": "Başka bir şey?",
+        "zh": "还要别的吗？",
+        "zh-Hant": "還需要什麼嗎？",
+        "ja": "ほかに何かございますか？",
+        "ar": "هل تريد شيئًا آخر؟",
+        "hi": "और कुछ?"
+      },
+      "distractors": [
+        "Something",
+        "other"
+      ],
+      "gap": "else",
+      "gapWrong": [
+        "other",
+        "more"
+      ]
+    },
+    {
+      "text": {
+        "en": "No, that's all.",
+        "es": "No, eso es todo.",
+        "fr": "Non, ce sera tout.",
+        "de": "Nein, das ist alles.",
+        "it": "No, è tutto.",
+        "pt": "Não, é tudo.",
+        "ru": "Нет, это всё.",
+        "uk": "Ні, це все.",
+        "be": "Не, гэта ўсё.",
+        "pl": "Nie, to wszystko.",
+        "tr": "Hayır, bu kadar.",
+        "zh": "不用了，就这些。",
+        "zh-Hant": "不用了，這樣就好。",
+        "ja": "いいえ、以上です。",
+        "ar": "لا، هذا كل شيء.",
+        "hi": "नहीं, बस इतना ही।"
+      },
+      "distractors": [
+        "Yes,",
+        "this"
+      ],
+      "gap": "all",
+      "gapWrong": [
+        "every",
+        "full"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "I'd like {slot}, please.",
+    "items": [
+      {
+        "word": {
+          "en": "a juice",
+          "es": "un zumo",
+          "fr": "un jus",
+          "de": "ein Saft",
+          "it": "un succo",
+          "pt": "um sumo",
+          "ru": "сок",
+          "uk": "сік",
+          "be": "сок",
+          "pl": "sok",
+          "tr": "bir meyve suyu",
+          "zh": "一杯果汁",
+          "zh-Hant": "一杯果汁",
+          "ja": "ジュース",
+          "ar": "عصير",
+          "hi": "एक जूस"
+        },
+        "sentence": {
+          "en": "I'd like a juice, please.",
+          "es": "Quería un zumo, por favor.",
+          "fr": "Je voudrais un jus, s'il vous plaît.",
+          "de": "Ich hätte gern einen Saft, bitte.",
+          "it": "Vorrei un succo, per favore.",
+          "pt": "Queria um sumo, por favor.",
+          "ru": "Мне сок, пожалуйста.",
+          "uk": "Мені сік, будь ласка.",
+          "be": "Мне сок, калі ласка.",
+          "pl": "Poproszę sok.",
+          "tr": "Bir meyve suyu istiyorum, lütfen.",
+          "zh": "我想要一杯果汁，谢谢。",
+          "zh-Hant": "我想要一杯果汁，謝謝。",
+          "ja": "ジュースをください。",
+          "ar": "أريد عصيرًا، من فضلك.",
+          "hi": "मुझे एक जूस दीजिए।"
+        }
+      },
+      {
+        "word": {
+          "en": "a croissant",
+          "es": "un cruasán",
+          "fr": "un croissant",
+          "de": "ein Croissant",
+          "it": "un cornetto",
+          "pt": "um croissant",
+          "ru": "круассан",
+          "uk": "круасан",
+          "be": "круасан",
+          "pl": "rogal",
+          "tr": "bir kruvasan",
+          "zh": "一个牛角面包，可颂",
+          "zh-Hant": "一個可頌，牛角麵包",
+          "ja": "クロワッサン",
+          "ar": "كرواسون",
+          "hi": "एक क्रोसां"
+        },
+        "sentence": {
+          "en": "I'd like a croissant, please.",
+          "es": "Quería un cruasán, por favor.",
+          "fr": "Je voudrais un croissant, s'il vous plaît.",
+          "de": "Ich hätte gern ein Croissant, bitte.",
+          "it": "Vorrei un cornetto, per favore.",
+          "pt": "Queria um croissant, por favor.",
+          "ru": "Мне круассан, пожалуйста.",
+          "uk": "Мені круасан, будь ласка.",
+          "be": "Мне круасан, калі ласка.",
+          "pl": "Poproszę rogala.",
+          "tr": "Bir kruvasan istiyorum, lütfen.",
+          "zh": "我想要一个牛角面包，谢谢。",
+          "zh-Hant": "我想要一個可頌，謝謝。",
+          "ja": "クロワッサンをください。",
+          "ar": "أريد كرواسون، من فضلك.",
+          "hi": "मुझे एक क्रोसां दीजिए।"
+        }
+      },
+      {
+        "word": {
+          "en": "a ticket",
+          "es": "un billete",
+          "fr": "un billet",
+          "de": "ein Ticket",
+          "it": "un biglietto",
+          "pt": "um bilhete",
+          "ru": "билет",
+          "uk": "квиток",
+          "be": "білет",
+          "pl": "bilet",
+          "tr": "bir bilet",
+          "zh": "一张票",
+          "zh-Hant": "一張票",
+          "ja": "チケット、切符",
+          "ar": "تذكرة",
+          "hi": "एक टिकट"
+        },
+        "sentence": {
+          "en": "I'd like a ticket, please.",
+          "es": "Quería un billete, por favor.",
+          "fr": "Je voudrais un billet, s'il vous plaît.",
+          "de": "Ich hätte gern ein Ticket, bitte.",
+          "it": "Vorrei un biglietto, per favore.",
+          "pt": "Queria um bilhete, por favor.",
+          "ru": "Мне билет, пожалуйста.",
+          "uk": "Мені квиток, будь ласка.",
+          "be": "Мне білет, калі ласка.",
+          "pl": "Poproszę bilet.",
+          "tr": "Bir bilet istiyorum, lütfen.",
+          "zh": "我想要一张票，谢谢。",
+          "zh-Hant": "我想要一張票，謝謝。",
+          "ja": "チケットをください。",
+          "ar": "أريد تذكرة، من فضلك.",
+          "hi": "मुझे एक टिकट दीजिए।"
+        }
+      }
+    ]
+  }
+}

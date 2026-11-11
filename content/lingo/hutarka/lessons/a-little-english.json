@@ -1,0 +1,501 @@
+{
+  "id": "a-little-english",
+  "title": {
+    "en": "A little English",
+    "es": "Un poco de inglés",
+    "fr": "Un peu d'anglais",
+    "de": "Ein bisschen Englisch",
+    "it": "Un po' di inglese",
+    "pt": "Um pouco de inglês",
+    "ru": "Немного по-английски",
+    "uk": "Трохи англійською",
+    "be": "Трохі па-англійску",
+    "pl": "Trochę po angielsku",
+    "tr": "Biraz İngilizce",
+    "zh": "会一点英语",
+    "zh-Hant": "會一點英文",
+    "ja": "少しだけ英語",
+    "ar": "قليل من الإنجليزية",
+    "hi": "थोड़ी-सी अंग्रेज़ी"
+  },
+  "subtitle": {
+    "en": "Say which languages you speak",
+    "es": "Di qué idiomas hablas",
+    "fr": "Dis quelles langues tu parles",
+    "de": "Sag, welche Sprachen du sprichst",
+    "it": "Di' quali lingue parli",
+    "pt": "Diz que línguas falas",
+    "ru": "Сказать, на каких языках ты говоришь",
+    "uk": "Сказати, якими мовами ти говориш",
+    "be": "Сказаць, на якіх мовах ты размаўляеш",
+    "pl": "Powiedz, w jakim języku mówisz",
+    "tr": "Hangi dilleri konuştuğunu söyle",
+    "zh": "说说你会讲哪些语言",
+    "zh-Hant": "說說你會講哪些語言",
+    "ja": "話せる言語を伝えよう",
+    "ar": "قل ما اللغات التي تتحدثها",
+    "hi": "बताएँ कि आप कौन-सी भाषाएँ बोलते हैं"
+  },
+  "with": "fox",
+  "scene": [
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Hello! Are you looking for something?",
+        "es": "¡Hola! ¿Busca algo?",
+        "fr": "Bonjour ! Vous cherchez quelque chose ?",
+        "de": "Hallo! Suchen Sie etwas?",
+        "it": "Buongiorno! Cerca qualcosa?",
+        "pt": "Olá! Está à procura de alguma coisa?",
+        "ru": "Здравствуйте! Вы что-то ищете?",
+        "uk": "Добрий день! Ви щось шукаєте?",
+        "be": "Добры дзень! Вы нешта шукаеце?",
+        "pl": "Dzień dobry! Szuka pan czegoś?",
+        "tr": "Merhaba! Bir şey mi arıyorsunuz?",
+        "zh": "您好！您在找什么吗？",
+        "zh-Hant": "您好！請問在找什麼嗎？",
+        "ja": "いらっしゃいませ！何かお探しですか？",
+        "ar": "مرحبًا! هل تبحث عن شيء ما؟",
+        "hi": "नमस्ते! क्या आप कुछ ढूँढ रहे हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Sorry, I speak a little English.",
+        "es": "Perdone, hablo un poco de inglés.",
+        "fr": "Désolé, je parle un peu anglais.",
+        "de": "Entschuldigung, ich spreche ein bisschen Englisch.",
+        "it": "Mi scusi, parlo un po' di inglese.",
+        "pt": "Desculpe, falo um pouco de inglês.",
+        "ru": "Извините, я немного говорю по-английски.",
+        "uk": "Вибачте, я трохи говорю англійською.",
+        "be": "Прабачце, я трохі размаўляю па-англійску.",
+        "pl": "Przepraszam, mówię trochę po angielsku.",
+        "tr": "Affedersiniz, biraz İngilizce konuşuyorum.",
+        "zh": "不好意思，我只会说一点英语。",
+        "zh-Hant": "不好意思，我只會說一點英文。",
+        "ja": "すみません、英語は少ししか話せません。",
+        "ar": "عذرًا، أتحدث الإنجليزية قليلًا.",
+        "hi": "माफ़ कीजिए, मैं थोड़ी-सी अंग्रेज़ी बोलता हूँ।"
+      },
+      "task": {
+        "build": [
+          "speaks",
+          "lot"
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "That's OK! Do you speak Spanish?",
+        "es": "¡No pasa nada! ¿Habla español?",
+        "fr": "Pas de problème ! Vous parlez espagnol ?",
+        "de": "Kein Problem! Sprechen Sie Spanisch?",
+        "it": "Non fa niente! Parla spagnolo?",
+        "pt": "Não faz mal! Fala espanhol?",
+        "ru": "Ничего! Вы говорите по-испански?",
+        "uk": "Нічого! Ви говорите іспанською?",
+        "be": "Нічога! Вы размаўляеце па-іспанску?",
+        "pl": "Nic nie szkodzi! Mówi pan po hiszpańsku?",
+        "tr": "Sorun değil! İspanyolca konuşuyor musunuz?",
+        "zh": "没关系！您会说西班牙语吗？",
+        "zh-Hant": "沒關係！您會說西班牙文嗎？",
+        "ja": "大丈夫ですよ！スペイン語は話せますか？",
+        "ar": "لا بأس! هل تتحدث الإسبانية؟",
+        "hi": "कोई बात नहीं! क्या आप स्पेनिश बोलते हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "No, I don't. I'm learning English.",
+        "es": "No. Estoy aprendiendo inglés.",
+        "fr": "Non. J'apprends l'anglais.",
+        "de": "Nein. Ich lerne Englisch.",
+        "it": "No. Sto imparando l'inglese.",
+        "pt": "Não. Estou a aprender inglês.",
+        "ru": "Нет. Я учу английский.",
+        "uk": "Ні. Я вчу англійську.",
+        "be": "Не. Я вучу англійскую.",
+        "pl": "Nie. Uczę się angielskiego.",
+        "tr": "Hayır. İngilizce öğreniyorum.",
+        "zh": "不会。我在学英语。",
+        "zh-Hant": "不會。我正在學英文。",
+        "ja": "いいえ、話せません。英語を勉強中です。",
+        "ar": "لا. أنا أتعلم الإنجليزية.",
+        "hi": "नहीं। मैं अंग्रेज़ी सीख रहा हूँ।"
+      },
+      "task": {
+        "choose": [
+          "No, I don't. I'm learn English.",
+          "No, I'm not. I'm learning English."
+        ]
+      }
+    },
+    {
+      "speaker": "other",
+      "text": {
+        "en": "Your English is very good! What are you looking for?",
+        "es": "¡Habla muy bien inglés! ¿Qué busca?",
+        "fr": "Vous parlez très bien anglais ! Qu'est-ce que vous cherchez ?",
+        "de": "Ihr Englisch ist sehr gut! Was suchen Sie denn?",
+        "it": "Parla molto bene l'inglese! Cosa cerca?",
+        "pt": "Fala muito bem inglês! De que está à procura?",
+        "ru": "Вы отлично говорите по-английски! Что вы ищете?",
+        "uk": "Ви чудово говорите англійською! Що ви шукаєте?",
+        "be": "Вы выдатна размаўляеце па-англійску! Што вы шукаеце?",
+        "pl": "Bardzo dobrze pan mówi po angielsku! Czego pan szuka?",
+        "tr": "İngilizceniz çok iyi! Ne arıyorsunuz?",
+        "zh": "您英语说得真好！您在找什么？",
+        "zh-Hant": "您英文說得真好！您在找什麼呢？",
+        "ja": "英語、とてもお上手ですね！何をお探しですか？",
+        "ar": "إنجليزيتك جيدة جدًا! عمّ تبحث؟",
+        "hi": "आपकी अंग्रेज़ी बहुत अच्छी है! आप क्या ढूँढ रहे हैं?"
+      }
+    },
+    {
+      "speaker": "boar",
+      "text": {
+        "en": "Thank you! I'm looking for a jacket.",
+        "es": "¡Gracias! Busco una chaqueta.",
+        "fr": "Merci ! Je cherche une veste.",
+        "de": "Danke! Ich suche eine Jacke.",
+        "it": "Grazie! Cerco una giacca.",
+        "pt": "Obrigado! Estou à procura de um casaco.",
+        "ru": "Спасибо! Я ищу куртку.",
+        "uk": "Дякую! Я шукаю куртку.",
+        "be": "Дзякуй! Я шукаю куртку.",
+        "pl": "Dziękuję! Szukam kurtki.",
+        "tr": "Teşekkürler! Bir ceket arıyorum.",
+        "zh": "谢谢！我在找一件夹克。",
+        "zh-Hant": "謝謝！我在找夾克。",
+        "ja": "ありがとうございます！ジャケットを探しています。",
+        "ar": "شكرًا! أبحث عن سترة.",
+        "hi": "धन्यवाद! मैं एक जैकेट ढूँढ रहा हूँ।"
+      },
+      "task": {
+        "build": [
+          "look",
+          "jackets"
+        ]
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": {
+        "en": "looking for",
+        "es": "buscar",
+        "fr": "chercher",
+        "de": "suchen",
+        "it": "cercare",
+        "pt": "procurar, estar à procura de",
+        "ru": "искать",
+        "uk": "шукати",
+        "be": "шукаць",
+        "pl": "szukać",
+        "tr": "aramak",
+        "zh": "找，寻找",
+        "zh-Hant": "找，尋找",
+        "ja": "探す、探している",
+        "ar": "يبحث عن",
+        "hi": "ढूँढना, तलाशना"
+      },
+      "example": "Hello! Are you looking for something?"
+    },
+    {
+      "text": {
+        "en": "speak",
+        "es": "hablar",
+        "fr": "parler",
+        "de": "sprechen",
+        "it": "parlare",
+        "pt": "falar",
+        "ru": "говорить",
+        "uk": "говорити",
+        "be": "размаўляць, гаварыць",
+        "pl": "mówić",
+        "tr": "konuşmak",
+        "zh": "说，讲",
+        "zh-Hant": "說，講",
+        "ja": "話す",
+        "ar": "يتحدث، يتكلم",
+        "hi": "बोलना"
+      },
+      "example": "Sorry, I speak a little English."
+    },
+    {
+      "text": {
+        "en": "a little",
+        "es": "un poco",
+        "fr": "un peu",
+        "de": "ein bisschen, etwas",
+        "it": "un po'",
+        "pt": "um pouco",
+        "ru": "немного",
+        "uk": "трохи",
+        "be": "трохі",
+        "pl": "trochę",
+        "tr": "biraz",
+        "zh": "一点，一些",
+        "zh-Hant": "一點，一些",
+        "ja": "少し",
+        "ar": "قليلًا",
+        "hi": "थोड़ा-सा"
+      },
+      "example": "Sorry, I speak a little English."
+    },
+    {
+      "text": {
+        "en": "learning",
+        "es": "aprendo, estoy aprendiendo",
+        "fr": "j'apprends, j'étudie",
+        "de": "ich lerne",
+        "it": "imparo, sto imparando",
+        "pt": "aprendo, estou a aprender",
+        "ru": "учу, изучаю",
+        "uk": "вчу, вивчаю",
+        "be": "вучу, вывучаю",
+        "pl": "uczę się",
+        "tr": "öğreniyorum",
+        "zh": "在学，学习",
+        "zh-Hant": "正在學，學習",
+        "ja": "勉強している、学んでいる",
+        "ar": "أتعلّم، أدرس",
+        "hi": "सीखना, सीख रहा हूँ"
+      },
+      "example": "No, I don't. I'm learning English."
+    },
+    {
+      "text": {
+        "en": "jacket",
+        "es": "chaqueta",
+        "fr": "veste",
+        "de": "Jacke",
+        "it": "giacca",
+        "pt": "casaco, blusão",
+        "ru": "куртка",
+        "uk": "куртка",
+        "be": "куртка",
+        "pl": "kurtka",
+        "tr": "ceket",
+        "zh": "夹克，外套",
+        "zh-Hant": "夾克，外套",
+        "ja": "ジャケット、上着",
+        "ar": "سترة، جاكيت",
+        "hi": "जैकेट"
+      },
+      "example": "Thank you! I'm looking for a jacket."
+    }
+  ],
+  "phrases": [
+    {
+      "text": {
+        "en": "I speak a little English.",
+        "es": "Hablo un poco de inglés.",
+        "fr": "Je parle un peu anglais.",
+        "de": "Ich spreche ein bisschen Englisch.",
+        "it": "Parlo un po' di inglese.",
+        "pt": "Falo um pouco de inglês.",
+        "ru": "Я немного говорю по-английски.",
+        "uk": "Я трохи говорю англійською.",
+        "be": "Я трохі размаўляю па-англійску.",
+        "pl": "Mówię trochę po angielsku.",
+        "tr": "Biraz İngilizce konuşuyorum.",
+        "zh": "我会说一点英语。",
+        "zh-Hant": "我會說一點英文。",
+        "ja": "英語を少し話せます。",
+        "ar": "أتحدث الإنجليزية قليلًا.",
+        "hi": "मैं थोड़ी-सी अंग्रेज़ी बोलता हूँ।"
+      },
+      "distractors": [
+        "speaks",
+        "lot"
+      ],
+      "gap": "little",
+      "gapWrong": [
+        "few",
+        "lot"
+      ]
+    },
+    {
+      "text": {
+        "en": "Do you speak Spanish?",
+        "es": "¿Habla español?",
+        "fr": "Vous parlez espagnol ?",
+        "de": "Sprechen Sie Spanisch?",
+        "it": "Parla spagnolo?",
+        "pt": "Fala espanhol?",
+        "ru": "Вы говорите по-испански?",
+        "uk": "Ви говорите іспанською?",
+        "be": "Вы размаўляеце па-іспанску?",
+        "pl": "Mówi pan po hiszpańsku?",
+        "tr": "İspanyolca konuşuyor musunuz?",
+        "zh": "您会说西班牙语吗？",
+        "zh-Hant": "您會說西班牙文嗎？",
+        "ja": "スペイン語を話せますか？",
+        "ar": "هل تتحدث الإسبانية؟",
+        "hi": "क्या आप स्पेनिश बोलते हैं?"
+      },
+      "distractors": [
+        "Does",
+        "speaking"
+      ],
+      "gap": "speak",
+      "gapWrong": [
+        "speaks",
+        "talk"
+      ]
+    },
+    {
+      "text": {
+        "en": "I'm learning English.",
+        "es": "Estoy aprendiendo inglés.",
+        "fr": "J'apprends l'anglais.",
+        "de": "Ich lerne Englisch.",
+        "it": "Sto imparando l'inglese.",
+        "pt": "Estou a aprender inglês.",
+        "ru": "Я учу английский.",
+        "uk": "Я вчу англійську.",
+        "be": "Я вучу англійскую.",
+        "pl": "Uczę się angielskiego.",
+        "tr": "İngilizce öğreniyorum.",
+        "zh": "我在学英语。",
+        "zh-Hant": "我正在學英文。",
+        "ja": "英語を勉強しています。",
+        "ar": "أنا أتعلم الإنجليزية.",
+        "hi": "मैं अंग्रेज़ी सीख रहा हूँ।"
+      },
+      "distractors": [
+        "learn",
+        "am"
+      ],
+      "gap": "learning",
+      "gapWrong": [
+        "learn",
+        "learned"
+      ]
+    }
+  ],
+  "swap": {
+    "frame": "Do you speak {slot}?",
+    "items": [
+      {
+        "word": {
+          "en": "French",
+          "es": "francés",
+          "fr": "français",
+          "de": "Französisch",
+          "it": "francese",
+          "pt": "francês",
+          "ru": "по-французски",
+          "uk": "французькою",
+          "be": "па-французску",
+          "pl": "po francusku",
+          "tr": "Fransızca",
+          "zh": "法语",
+          "zh-Hant": "法文",
+          "ja": "フランス語",
+          "ar": "الفرنسية",
+          "hi": "फ़्रेंच"
+        },
+        "sentence": {
+          "en": "Do you speak French?",
+          "es": "¿Habla francés?",
+          "fr": "Vous parlez français ?",
+          "de": "Sprechen Sie Französisch?",
+          "it": "Parla francese?",
+          "pt": "Fala francês?",
+          "ru": "Вы говорите по-французски?",
+          "uk": "Ви говорите французькою?",
+          "be": "Вы размаўляеце па-французску?",
+          "pl": "Mówi pan po francusku?",
+          "tr": "Fransızca konuşuyor musunuz?",
+          "zh": "您会说法语吗？",
+          "zh-Hant": "您會說法文嗎？",
+          "ja": "フランス語を話せますか？",
+          "ar": "هل تتحدث الفرنسية؟",
+          "hi": "क्या आप फ़्रेंच बोलते हैं?"
+        }
+      },
+      {
+        "word": {
+          "en": "German",
+          "es": "alemán",
+          "fr": "allemand",
+          "de": "Deutsch",
+          "it": "tedesco",
+          "pt": "alemão",
+          "ru": "по-немецки",
+          "uk": "німецькою",
+          "be": "па-нямецку",
+          "pl": "po niemiecku",
+          "tr": "Almanca",
+          "zh": "德语",
+          "zh-Hant": "德文",
+          "ja": "ドイツ語",
+          "ar": "الألمانية",
+          "hi": "जर्मन"
+        },
+        "sentence": {
+          "en": "Do you speak German?",
+          "es": "¿Habla alemán?",
+          "fr": "Vous parlez allemand ?",
+          "de": "Sprechen Sie Deutsch?",
+          "it": "Parla tedesco?",
+          "pt": "Fala alemão?",
+          "ru": "Вы говорите по-немецки?",
+          "uk": "Ви говорите німецькою?",
+          "be": "Вы размаўляеце па-нямецку?",
+          "pl": "Mówi pan po niemiecku?",
+          "tr": "Almanca konuşuyor musunuz?",
+          "zh": "您会说德语吗？",
+          "zh-Hant": "您會說德文嗎？",
+          "ja": "ドイツ語を話せますか？",
+          "ar": "هل تتحدث الألمانية؟",
+          "hi": "क्या आप जर्मन बोलते हैं?"
+        }
+      },
+      {
+        "word": {
+          "en": "Chinese",
+          "es": "chino",
+          "fr": "chinois",
+          "de": "Chinesisch",
+          "it": "cinese",
+          "pt": "chinês",
+          "ru": "по-китайски",
+          "uk": "китайською",
+          "be": "па-кітайску",
+          "pl": "po chińsku",
+          "tr": "Çince",
+          "zh": "中文，汉语",
+          "zh-Hant": "中文",
+          "ja": "中国語",
+          "ar": "الصينية",
+          "hi": "चीनी"
+        },
+        "sentence": {
+          "en": "Do you speak Chinese?",
+          "es": "¿Habla chino?",
+          "fr": "Vous parlez chinois ?",
+          "de": "Sprechen Sie Chinesisch?",
+          "it": "Parla cinese?",
+          "pt": "Fala chinês?",
+          "ru": "Вы говорите по-китайски?",
+          "uk": "Ви говорите китайською?",
+          "be": "Вы размаўляеце па-кітайску?",
+          "pl": "Mówi pan po chińsku?",
+          "tr": "Çince konuşuyor musunuz?",
+          "zh": "您会说中文吗？",
+          "zh-Hant": "您會說中文嗎？",
+          "ja": "中国語を話せますか？",
+          "ar": "هل تتحدث الصينية؟",
+          "hi": "क्या आप चीनी बोलते हैं?"
+        }
+      }
+    ]
+  }
+}
