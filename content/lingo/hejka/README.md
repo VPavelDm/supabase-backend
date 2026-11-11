@@ -4,8 +4,8 @@
 
 ## Files
 
-- `lessons/*.json` — 14 lessons of chapter 1 "Pierwsze kroki".
-- `trail.json` — chapter 1 only (every lesson in it has a file, so it loads).
+- The lessons themselves are in the `lingo` tables (see [`../README.md`](../README.md)); they were
+  imported from the chapter 1 JSON files that used to sit here.
 - `trail-plan.json` — all chapters incl. Extra; units of chapters 2–12 have empty `lessons` until written. Not for the app yet.
 
 ## Schema changes vs the Hutarka guide
