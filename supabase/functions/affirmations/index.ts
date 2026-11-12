@@ -8,8 +8,12 @@
 // ELEVENLABS_API_KEY work as project-wide fallbacks):
 //   AFFIRMATIONS_APP_KEY, AFFIRMATIONS_OPENAI_API_KEY,
 //   AFFIRMATIONS_OPENAI_MODEL (optional), AFFIRMATIONS_ELEVENLABS_API_KEY
+// Sign in with Apple's token exchange and revocation use the team-wide
+// APPLE_SIGN_IN_TEAM_ID, APPLE_SIGN_IN_KEY_ID and APPLE_SIGN_IN_PRIVATE_KEY
+// (_shared/apple-sign-in.ts).
 
 import { router } from "../_shared/router.ts";
+import { handleAppleToken } from "./apple-token.ts";
 import { handleDeleteMyData } from "./delete-my-data.ts";
 import { handleGenerateAffirmations } from "./generate-affirmations.ts";
 import { handleTextToSpeech } from "./text-to-speech.ts";
@@ -18,4 +22,5 @@ Deno.serve(router("affirmations", {
   "generate-affirmations": { POST: handleGenerateAffirmations },
   "text-to-speech": { POST: handleTextToSpeech },
   "delete-my-data": { POST: handleDeleteMyData },
+  "apple-token": { POST: handleAppleToken },
 }));

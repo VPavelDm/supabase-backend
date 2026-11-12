@@ -188,6 +188,22 @@ them. **Built-in collections are live content**:
 language); a saved row changes what every installed copy shows at its next
 library load, and the first play of a new text is paid ElevenLabs time.
 
+Affirmations' **Sign in with Apple** (`*_affirmations_apple_tokens.sql`): the
+app links Apple to its anonymous user with `linkIdentityWithIdToken` (same auth
+id, so the library stays), or — when that Apple ID already has an account —
+signs in to that account instead, leaving the guest behind. It needs, on the
+project: the Apple provider enabled with the bundle id `com.affirmations.sound`
+in its client ids (comma-separated, one per app), and manual linking on
+(Authentication → Sign In / Providers in the dashboard; `config.toml` has both
+for the local stack). Right after signing in the app posts Apple's
+authorization code to `affirmations/apple-token`, which trades it for a refresh
+token (only if that Apple account is linked to the caller) and keeps it in
+`affirmations.apple_tokens`; `delete-my-data` revokes it first (App Store
+guideline 5.1.1(v)). Both need the team-wide `APPLE_SIGN_IN_TEAM_ID`,
+`APPLE_SIGN_IN_KEY_ID` and `APPLE_SIGN_IN_PRIVATE_KEY` secrets
+(`_shared/apple-sign-in.ts`); until they are set, apple-token answers 503 and
+revocation is skipped with a warning.
+
 **Lingo** (the language-learning apps — Hutarka teaches English, Hejka
 Polish, the next one adds an entry to `functions/lingo/apps.ts`; `lingo`
 schema: ai_usage and the lesson tables; storage bucket `lingo-tts-cache`): one
