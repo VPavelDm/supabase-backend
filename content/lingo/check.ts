@@ -32,7 +32,7 @@ type Text = Record<string, string>;
 interface Line { speaker: string; text: Text; task?: { build?: string[]; choose?: string[] } }
 interface Step {
   kind: string; scene?: number; word?: number | Text; words?: number[]; phrase?: number; text?: string;
-  sentence?: Text; frame?: string; gap?: string; wrong?: string[]; extra?: string[];
+  sentence?: Text; frame?: string; gap?: string; wrong?: string[]; extra?: string[]; premium?: boolean;
 }
 interface Lesson {
   id: string; title: string; subtitle: string; with: string; scenes: Line[][];
@@ -121,6 +121,7 @@ for (const [id, lesson] of Object.entries(bundle.lessons)) {
       notes.push(`${id} ${where}: unknown kind, the apps skip this step`);
       return;
     }
+    if (step.premium !== undefined && step.premium !== true) sp("premium is sent only as true");
     const word = typeof step.word === "number" ? lesson.words[step.word] : undefined;
     const phrase = step.phrase === undefined ? undefined : lesson.phrases[step.phrase];
     const scene = step.scene === undefined ? undefined : lesson.scenes[step.scene];

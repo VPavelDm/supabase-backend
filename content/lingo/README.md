@@ -73,6 +73,13 @@ words, phrases) is on the lesson and the step points at it.
 | `listen_build` | Hears the phrase, builds it from tiles | `phrase_id`, `extra` |
 | `swap` | Fills a frame's slot with the right word | `frame` (with `{slot}`), `text_id` (the word), `sentence_id`, `wrong` |
 
+**Premium steps.** `lesson_steps.premium` marks a step only Premium learners play; free learners
+get a locked card there, with Unlock (the paywall) and Skip, which counts as neither right nor
+wrong. Set it per step: any kind can be either. It started (2026-11-12) as true on every `swap`,
+`listen_build`, `spell`, `conversation`, `say_in_english` and `spot_mistake` step in both apps; new
+steps are free until marked. The bundle sends `"premium": true` on those steps only. A checkpoint
+step keeps the flag of the lesson step it was taken from.
+
 The picking quizzes take their wrong options from the lesson's other words or phrases. `gap`,
 `wrong`, `extra` and `frame` are in the learned language and never translated. A `kind` the apps
 don't know is saved and sent, and an app that can't play it skips that step: a new exercise ships
