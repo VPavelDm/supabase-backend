@@ -80,6 +80,16 @@ wrong. Set it per step: any kind can be either. It started (2026-11-12) as true 
 steps are free until marked. The bundle sends `"premium": true` on those steps only. A checkpoint
 step keeps the flag of the lesson step it was taken from.
 
+**Premium lessons.** `lessons.premium` marks a whole lesson only Premium learners get. Unlike a
+premium step, its content never reaches a free learner: `lingo/content` asks Adapty whether the
+caller has Premium (only when the app has a premium lesson on its trail) and otherwise sends the
+lesson as a stub with `"locked": true` and empty `scenes`, `words`, `phrases` and `steps`. The apps
+show it locked on the trail and open the paywall; after a purchase they ask again and get it whole.
+When Adapty can't answer, everyone gets everything (logged as `no_adapty_key` or `adapty_failed`).
+The trail's first lesson must stay free (onboarding plays it); `check.ts` checks the content as a
+Premium learner gets it and lists the premium lessons. Mark lessons only once every app build in
+use knows `locked`: older builds read a stub as a lesson with no steps.
+
 The picking quizzes take their wrong options from the lesson's other words or phrases. `gap`,
 `wrong`, `extra` and `frame` are in the learned language and never translated. A `kind` the apps
 don't know is saved and sent, and an app that can't play it skips that step: a new exercise ships

@@ -7,7 +7,8 @@
 // top, which also says which app is calling.
 //
 // Secrets (ELEVENLABS_API_KEY works as a project-wide fallback):
-//   LINGO_HUTARKA_APP_KEY, LINGO_HEJKA_APP_KEY, LINGO_ELEVENLABS_API_KEY
+//   LINGO_HUTARKA_APP_KEY, LINGO_HEJKA_APP_KEY, LINGO_ELEVENLABS_API_KEY,
+//   LINGO_<APP>_ADAPTY_SECRET_KEY, LINGO_<APP>_ADAPTY_STAGING_SECRET_KEY (premium.ts)
 
 import { router } from "../_shared/router.ts";
 import { handleContent } from "./content.ts";

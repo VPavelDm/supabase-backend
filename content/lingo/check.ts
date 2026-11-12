@@ -101,6 +101,14 @@ bundle.chapters.forEach((chapter, c) => {
 });
 for (const id of new Set(listed.filter((id, i) => listed.indexOf(id) !== i))) problems.push(`trail: lesson ${id} is on it twice`);
 
+// Premium lessons: onboarding plays the trail's first lesson to everyone, so it stays free.
+const premiumLessons = new Set((await query(
+  `select slug from lingo.lessons where app = ${quote(app)} and premium`,
+)).map((row) => String(row.slug)));
+const firstLesson = bundle.chapters.flatMap((c) => c.units.flatMap((u) => u.lessons)).find((id) => id !== "checkpoint");
+if (firstLesson && premiumLessons.has(firstLesson)) problems.push(`${firstLesson}: the trail's first lesson can't be premium (onboarding plays it)`);
+if (premiumLessons.size > 0) notes.push(`premium lessons: ${[...premiumLessons].join(", ")}`);
+
 // Lessons
 for (const [id, lesson] of Object.entries(bundle.lessons)) {
   const p = (message: string) => problems.push(`${id}: ${message}`);

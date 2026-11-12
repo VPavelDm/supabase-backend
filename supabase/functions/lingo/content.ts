@@ -8,11 +8,17 @@
 // whole bundle. Like every other route: the app key says which app's content
 // to send, and the caller must be a signed-in user.
 //
+// Premium lessons (lingo.lessons.premium) reach only learners with Premium,
+// asked of Adapty (premium.ts) when the app has any; everyone else gets them
+// as locked stubs. The version follows what was sent, so a learner who buys
+// Premium and asks again gets the whole bundle, not `unchanged`.
+//
 // Body: { "format": 2, "language": "ru", "version"?: "…" }
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { callerApp, callerUserId } from "./auth.ts";
+import { hasPremium, isStagingBuild } from "./premium.ts";
 
 const FN = "lingo/content";
 const FORMAT = 2;
@@ -30,7 +36,8 @@ async function versionOf(body: string): Promise<string> {
 export async function handleContent(req: Request): Promise<Response> {
   const app = await callerApp(req);
   if (!app) return json({ error: "Unauthorized" }, 401);
-  if (!await callerUserId(req)) return json({ error: "Sign-in required" }, 401);
+  const userId = await callerUserId(req);
+  if (!userId) return json({ error: "Sign-in required" }, 401);
 
   const request = await req.json().catch(() => null) as Record<string, unknown> | null;
   if (request?.format !== FORMAT) return json({ error: "Unsupported format" }, 400);
@@ -38,8 +45,10 @@ export async function handleContent(req: Request): Promise<Response> {
   if (!LANGUAGE.test(language)) return json({ error: "language is required" }, 400);
   const known = typeof request.version === "string" ? request.version : null;
 
+  const [{ locks }] = await sql<{ locks: boolean }[]>`select lingo.has_premium_lessons(${app.id}) as locks`;
+  const unlocked = !locks || await hasPremium(app, userId, isStagingBuild(req));
   const [row] = await sql<{ bundle: { chapters: unknown[]; lessons: Record<string, unknown> } }[]>`
-    select lingo.content_bundle(${app.id}, ${app.language}, ${language}) as bundle`;
+    select lingo.content_bundle(${app.id}, ${app.language}, ${language}, ${unlocked}) as bundle`;
   const bundle = row.bundle;
   if (bundle.chapters.length === 0) {
     console.error(JSON.stringify({ level: "error", fn: FN, event: "no_content", app: app.id }));
@@ -49,7 +58,7 @@ export async function handleContent(req: Request): Promise<Response> {
   if (known === version) return json({ version, unchanged: true });
 
   console.log(JSON.stringify({
-    fn: FN, event: "sent", app: app.id, language, version, lessons: Object.keys(bundle.lessons).length,
+    fn: FN, event: "sent", app: app.id, language, version, lessons: Object.keys(bundle.lessons).length, unlocked,
   }));
   return json({ version, ...bundle });
 }
