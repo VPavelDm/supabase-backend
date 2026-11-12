@@ -1,5 +1,6 @@
 // delete-my-data: erases what Affirmations holds about the caller — their
-// library (collections, listening sessions with their moods, favorites) and
+// library (their affirmations, collections, listening sessions with their
+// moods, favorites) and
 // the daily usage counters in affirmations.ai_usage — then the auth user
 // unless another app on the project still holds something of theirs
 // (_shared/erase-user.ts). A user who signed in with Apple has the app's
@@ -29,10 +30,13 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
   // down would otherwise find nothing to revoke.
   const apple = await revokeAppleSignIn(id);
 
-  const [collections, sessions, favorites, counters] = await sql.begin((tx) => [
-    tx`delete from affirmations.collections where user_id = ${id}::uuid returning id`,
+  // Collections and sessions take their items with them; the user's own
+  // affirmations go last, once nothing of theirs points at them.
+  const [favorites, sessions, collections, affirmations, counters] = await sql.begin((tx) => [
+    tx`delete from affirmations.favorites where user_id = ${id}::uuid returning affirmation_id`,
     tx`delete from affirmations.sessions where user_id = ${id}::uuid returning id`,
-    tx`delete from affirmations.favorites where user_id = ${id}::uuid returning text`,
+    tx`delete from affirmations.collections where owner_id = ${id}::uuid returning id`,
+    tx`delete from affirmations.affirmations where owner_id = ${id}::uuid returning id`,
     tx`delete from affirmations.ai_usage where caller = ${`user:${userId}`} returning day`,
     tx`delete from affirmations.apple_tokens where user_id = ${id}::uuid returning user_id`,
   ]);
@@ -41,6 +45,7 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
   console.log(JSON.stringify({
     fn: FN,
     event: "deleted",
+    affirmations: affirmations.length,
     collections: collections.length,
     sessions: sessions.length,
     favorites: favorites.length,

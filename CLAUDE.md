@@ -168,25 +168,32 @@ day. Both routes count through `affirmations.ai_usage` (per user, route and
 day). Before 1.8 the app called `generate-affirmations` and
 `text-to-speech` on Pretzly's project with the anon key alone.
 
-Affirmations' library (`*_affirmations_library.sql`) is reached straight from
-the app through Futura-style public RPCs, no app key: `affirmations_get_library(p_language)`
-returns everything in one call (built-in collections in the caller's language,
-falling back to the language without its region, then `en`; the caller's
-collections, favorites and sessions, newest first), and
-`affirmations_save_collection` (the whole collection, items as `[{text, own}]`
-in the row), `affirmations_delete_collection`, `affirmations_record_session`,
-`affirmations_set_session_mood`, `affirmations_delete_session`,
-`affirmations_set_favorite` and `affirmations_import_favorites` (one-time
-upload of hearts older builds kept on the phone) write it. Every id is minted
-by the app, so every write is safe to retry. Caps per user: 100 collections,
-200 affirmations each, 400 characters an affirmation, 1,000 favorites, the
-newest 500 sessions. Session titles are the user's own words, so these rows
-are personal data: `delete-my-data` deletes them and `userHoldsAppData` lists
-them. **Built-in collections are live content**:
-`affirmations.builtin_collections` (look, order, `moments`, `enabled`) and
-`affirmations.builtin_collection_texts` (title, subtitle and affirmations per
-language); a saved row changes what every installed copy shows at its next
-library load, and the first play of a new text is paid ElevenLabs time.
+Affirmations' library (`*_affirmations_library.sql`) is relational: an
+affirmation is a row (`affirmations.affirmations`: owner null = built-in with a
+language, else the user's, `generated` or `written`), and `collections` (built-in
+and the user's) / `collection_items`, `sessions` / `session_items` (what was heard,
+in order, plus the collection it was played from) and `favorites` point at it.
+Rows are never edited in place — changed text is a new row — so a session
+replays what was heard. The app mints every id, so every write is safe to
+retry, and a user can only point at their own affirmations or built-in ones
+(`ensure_affirmations`). Public RPCs, no app key: `affirmations_get_library(p_language,
+p_session_limit)` (built-in collections in the caller's language, falling back to
+the language without its region, then `en`; the caller's collections and
+favorites; the newest sessions plus `has_more_sessions`),
+`affirmations_get_sessions(p_before, p_limit)` for older pages, and the writes
+`affirmations_save_collection` (whole collection), `_delete_collection`,
+`_record_session`, `_set_session_mood`, `_delete_session`, `_set_favorite`,
+`_import_favorites` (one-time upload of hearts older builds kept on the phone).
+Caps per user: 100 collections, 200 affirmations each, 400 characters an
+affirmation, 1,000 favorites, the newest 500 sessions. `affirmations-cleanup`
+also sweeps the user's affirmations nothing points at any more. Session titles
+and written affirmations are the user's own words: `delete-my-data` deletes
+them and `userHoldsAppData` lists the tables. **Built-in collections are live
+content**: `collections` rows with no owner (`slug`, `position`, `moments`,
+`enabled`), `collection_texts` (title and subtitle per language) and their items;
+a saved row changes what every installed copy shows at its next library load.
+To change a text, add a new affirmation and point the collection at it; the
+first play of a new text is paid ElevenLabs time.
 
 Affirmations' **Sign in with Apple** (`*_affirmations_apple_tokens.sql`): the
 app links Apple to its anonymous user with `linkIdentityWithIdToken` (same auth

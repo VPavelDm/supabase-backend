@@ -71,7 +71,8 @@ async function userHoldsAppData(userId: string): Promise<boolean> {
       or exists (select 1 from lyncil.ai_usage
                  where caller in (${`user:${id}`}, ${`adfree:user:${id}`}))
       or exists (select 1 from affirmations.ai_usage where caller = ${`user:${id}`})
-      or exists (select 1 from affirmations.collections where user_id = ${id}::uuid)
+      or exists (select 1 from affirmations.affirmations where owner_id = ${id}::uuid)
+      or exists (select 1 from affirmations.collections where owner_id = ${id}::uuid)
       or exists (select 1 from affirmations.sessions where user_id = ${id}::uuid)
       or exists (select 1 from affirmations.favorites where user_id = ${id}::uuid)
       or exists (select 1 from affirmations.apple_tokens where user_id = ${id}::uuid)
