@@ -153,7 +153,8 @@ held by the page's Lambda), never the app key, and a deleted song, a revoked
 link and an unknown slug all answer the same 404.
 
 **Affirmations** (Here: Daily Audio Affirmations; `affirmations` schema:
-ai_usage; storage bucket `affirmations-tts-cache`): set up like Lyncil. The
+ai_usage, the user's library — collections, sessions, favorites — and the
+built-in collections; storage bucket `affirmations-tts-cache`): set up like Lyncil. The
 app signs every install in anonymously on launch, and both routes need the
 caller's user token AND the app key baked into the binary
 (`x-affirmations-app-key`, secret `AFFIRMATIONS_APP_KEY`).
@@ -166,6 +167,26 @@ settings; a cache miss counts its characters against 20,000 per user per
 day. Both routes count through `affirmations.ai_usage` (per user, route and
 day). Before 1.8 the app called `generate-affirmations` and
 `text-to-speech` on Pretzly's project with the anon key alone.
+
+Affirmations' library (`*_affirmations_library.sql`) is reached straight from
+the app through Futura-style public RPCs, no app key: `affirmations_get_library(p_language)`
+returns everything in one call (built-in collections in the caller's language,
+falling back to the language without its region, then `en`; the caller's
+collections, favorites and sessions, newest first), and
+`affirmations_save_collection` (the whole collection, items as `[{text, own}]`
+in the row), `affirmations_delete_collection`, `affirmations_record_session`,
+`affirmations_set_session_mood`, `affirmations_delete_session`,
+`affirmations_set_favorite` and `affirmations_import_favorites` (one-time
+upload of hearts older builds kept on the phone) write it. Every id is minted
+by the app, so every write is safe to retry. Caps per user: 100 collections,
+200 affirmations each, 400 characters an affirmation, 1,000 favorites, the
+newest 500 sessions. Session titles are the user's own words, so these rows
+are personal data: `delete-my-data` deletes them and `userHoldsAppData` lists
+them. **Built-in collections are live content**:
+`affirmations.builtin_collections` (look, order, `moments`, `enabled`) and
+`affirmations.builtin_collection_texts` (title, subtitle and affirmations per
+language); a saved row changes what every installed copy shows at its next
+library load, and the first play of a new text is paid ElevenLabs time.
 
 **Lingo** (the language-learning apps — Hutarka teaches English, Hejka
 Polish, the next one adds an entry to `functions/lingo/apps.ts`; `lingo`
