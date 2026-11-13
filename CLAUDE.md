@@ -294,6 +294,17 @@ opens the offer from the push is live. Deploy order: migration first —
 `_shared/erase-user.ts` selects from `lingo.devices` and
 `lingo.winback_pushes`, so every app's `delete-my-data` fails until it is in.
 
+Android installs (Hejka for Android; `*_lingo_android_devices.sql`) register an
+FCM token with `p_platform => 'android'` (`lingo.devices.platform`, default
+'ios'; FCM tokens are stored as given, not lowercased). `winback.ts` sends them
+an FCM notification (`_shared/fcm.ts`) with the app's string resource names as
+loc keys (`a_gift_for_you`, `we_saved_you_a_special_price_on_premium_tap_to_open_it`)
+on the `offers` channel, from the service account in
+`LINGO_<APP>_FCM_SERVICE_ACCOUNT` (the app's Firebase project); without it
+Android pushes are skipped. iOS and Android of one app share its Adapty apps,
+so one webhook covers both. Deploy order: this migration, then the function
+(it selects `platform`).
+
 ## Commands
 
 Run from the repo root.

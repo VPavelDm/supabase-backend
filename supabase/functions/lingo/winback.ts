@@ -20,6 +20,7 @@
 
 import { sql } from "../_shared/db.ts";
 import { type APNsClient, type Device, makeAPNs } from "../_shared/apns.ts";
+import { type FCMClient, makeFCM } from "../_shared/fcm.ts";
 import { json } from "../_shared/router.ts";
 import { hasActiveAccess, isAuthorized, winbackEvent } from "../_shared/adapty-webhook.ts";
 import { APPS, LingoApp } from "./apps.ts";
@@ -34,6 +35,19 @@ function apns(app: LingoApp): APNsClient {
   if (!client) {
     client = makeAPNs({ topic: app.bundleID, secretPrefix: `LINGO_${app.id.toUpperCase()}` });
     apnsClients.set(app.id, client);
+  }
+  return client;
+}
+
+/// One FCM client per app, for its Android installs: LINGO_<APP>_FCM_SERVICE_ACCOUNT
+/// (_shared/fcm.ts), the service account of the app's Firebase project.
+const fcmClients = new Map<string, FCMClient>();
+
+function fcm(app: LingoApp): FCMClient {
+  let client = fcmClients.get(app.id);
+  if (!client) {
+    client = makeFCM({ secretPrefix: `LINGO_${app.id.toUpperCase()}` });
+    fcmClients.set(app.id, client);
   }
   return client;
 }
@@ -74,17 +88,28 @@ async function handleAdaptyWebhook(app: LingoApp, req: Request): Promise<Respons
     if (gate.length === 0) return json({ ok: true });
 
     const devices = await sql`
-      select device_token, environment, locale
+      select device_token, environment, locale, platform
       from lingo.devices where user_id = ${event.userId} and app = ${app.id}`;
     let sent = 0;
     for (const device of devices) {
-      // Keys are the apps' English strings (Shared/Resources/Localizable.xcstrings),
-      // translated on the phone.
-      const result = await apns(app).push(
-        device as unknown as Device,
-        { "title-loc-key": "A gift for you 🎁", "loc-key": "We saved you a special price on Premium. Tap to open it." },
-        { offer: "winback" },
-      );
+      // Translated on the phone: iOS looks its keys up as the apps' English
+      // strings (Shared/Resources/Localizable.xcstrings), Android as the
+      // resource names the app's strings sync generates from them.
+      const result = device.platform === "android"
+        ? await fcm(app).push(
+          device.device_token,
+          {
+            titleLocKey: "a_gift_for_you",
+            bodyLocKey: "we_saved_you_a_special_price_on_premium_tap_to_open_it",
+            channelId: "offers",
+          },
+          { offer: "winback" },
+        )
+        : await apns(app).push(
+          device as unknown as Device,
+          { "title-loc-key": "A gift for you 🎁", "loc-key": "We saved you a special price on Premium. Tap to open it." },
+          { offer: "winback" },
+        );
       if (result === "ok") sent++;
       if (result === "gone") {
         await sql`delete from lingo.devices where device_token = ${device.device_token}`;
