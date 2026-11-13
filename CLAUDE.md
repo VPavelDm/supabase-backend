@@ -41,6 +41,14 @@ finds nothing of any other app's. Auth users are shared by every app on the
 project, and rows that reference `auth.users` cascade, so **an app that starts
 keeping per-user rows or files here adds them to `userHoldsAppData`** —
 otherwise another app's deletion can take its data with the auth user.
+**Before every `supabase functions deploy`** (after `db push`), run
+`deno run --allow-run=supabase --allow-read snippets/check-account-tables.ts`.
+It reads the production catalog (read-only) and fails on any table or bucket
+that `userHoldsAppData` neither checks, reaches through a cascading parent,
+nor lists in its `NOT_PER_USER` / `SHARED_BUCKETS` with a reason. It also
+fails on a listed table whose migration isn't applied yet, because deploying
+then breaks every app's delete-my-data. Use `--local` to check a migration
+that isn't pushed yet.
 `OPENAI_API_KEY` without a prefix is the project-wide fallback key.
 
 API keys come from `functions/_shared/keys.ts`: `publishableKey()` for calls
@@ -286,6 +294,7 @@ Run from the repo root.
 
 ```bash
 supabase db push                        # Apply new migrations to remote
+deno run --allow-run=supabase --allow-read snippets/check-account-tables.ts  # Before any deploy
 supabase functions deploy               # Deploy all edge functions
 supabase functions deploy treddy        # Deploy one app's function
 supabase migration list                 # Check migration status
