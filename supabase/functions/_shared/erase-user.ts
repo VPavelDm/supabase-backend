@@ -2,8 +2,8 @@
 // folder, deleting the auth user once no app on the project holds anything of
 // theirs, and erasing them at the third-party services that know their id.
 //
-// The auth user is shared: Futura, Lyncil and Affirmations all sign users in
-// against this project's auth. Each app's install has its own anonymous user
+// The auth user is shared: Futura, Lyncil, Affirmations and Lingo all sign
+// users in against this project's auth. Each app's install has its own anonymous user
 // (the session lives in that app's Keychain), but nothing in the schema
 // enforces that, so an app's route deletes only its own rows and files and
 // leaves the auth user alone while `userHoldsAppData` finds anything of
@@ -79,6 +79,8 @@ async function userHoldsAppData(userId: string): Promise<boolean> {
       or exists (select 1 from affirmations.devices where user_id = ${id}::uuid)
       or exists (select 1 from affirmations.winback_pushes where user_id = ${id}::uuid)
       or exists (select 1 from lingo.ai_usage where caller = ${`user:${id}`})
+      or exists (select 1 from lingo.devices where user_id = ${id}::uuid)
+      or exists (select 1 from lingo.winback_pushes where user_id = ${id}::uuid)
       or exists (select 1 from storage.objects
                  where bucket_id in ('capsule-photos', 'capsule-voice-notes', 'lyncil-tracks')
                    and (name like ${prefixes[0]} or name like ${prefixes.at(-1)!}))

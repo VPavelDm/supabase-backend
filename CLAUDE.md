@@ -262,6 +262,24 @@ Deploy order on first rollout: migration, then `_shared/erase-user.ts`
 selects from `lingo.ai_usage`, so every app's `delete-my-data` fails until
 the migration is in.
 
+Lingo's **win-back push** (`*_lingo_winback_push.sql`, subscription-offers
+skill; the offers themselves run in the apps through onboarding-ios'
+`OfferCenter`): the app's Supabase user id, lowercased, is its Adapty
+`customer_user_id`. Each app registers its APNs token through
+`lingo_register_device(p_app, …)` (`lingo.devices`, one row per token with the
+app it belongs to). Each app's Adapty projects post `trial_expired` /
+`subscription_expired` to its own URL, `lingo/adapty-webhook/<app>`
+(`winback.ts`; routes are generated from `apps.ts`), with that app's
+`LINGO_<APP>_ADAPTY_WEBHOOK_SECRET` as the Authorization header; the route
+re-checks that app's Adapty projects, keeps one row per ending in
+`lingo.winback_pushes` and pushes "A gift for you 🎁" (`"offer": "winback"`)
+under the app's bundle id (`apps.ts` `bundleID`) with its
+`LINGO_<APP>_APNS_*` keys. A new app needs its `bundleID` in `apps.ts` and its
+own secrets. Connect an app's webhook in Adapty only once an app version that
+opens the offer from the push is live. Deploy order: migration first —
+`_shared/erase-user.ts` selects from `lingo.devices` and
+`lingo.winback_pushes`, so every app's `delete-my-data` fails until it is in.
+
 ## Commands
 
 Run from the repo root.

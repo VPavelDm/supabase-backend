@@ -22,7 +22,7 @@ export function isStagingBuild(req: Request): boolean {
   return req.headers.get("x-lingo-build") === "staging";
 }
 
-function adaptyKeys(app: LingoApp, stagingBuild: boolean): string[] {
+export function adaptyKeys(app: LingoApp, stagingBuild: boolean): string[] {
   const prefix = `LINGO_${app.id.toUpperCase()}_ADAPTY`;
   return [
     Deno.env.get(`${prefix}_SECRET_KEY`),

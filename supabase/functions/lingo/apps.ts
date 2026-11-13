@@ -8,6 +8,8 @@
 
 export interface LingoApp {
   id: string;
+  /// The iOS bundle id: the APNs topic of the win-back push (winback.ts).
+  bundleID: string;
   /// ISO 639-1 code of the language the app teaches: what every clip is spoken in.
   language: string;
   modelId: string;
@@ -24,6 +26,7 @@ export interface LingoApp {
 export const APPS: Record<string, LingoApp> = {
   hutarka: {
     id: "hutarka",
+    bundleID: "com.vaitsikhouski.pavel.mywords",
     language: "en",
     modelId: "eleven_turbo_v2_5",
     voices: {
@@ -34,6 +37,7 @@ export const APPS: Record<string, LingoApp> = {
   },
   hejka: {
     id: "hejka",
+    bundleID: "com.hejka",
     language: "pl",
     modelId: "eleven_multilingual_v2",
     voices: {
