@@ -18,6 +18,8 @@ secrets/
 snippets/lyria-*.mp3
 snippets/lyria-*.wav
 snippets/my-lyrics*.txt
+# A Lyria staging sample kept for listening, not used by any code
+supabase/snippets/*.mp3
 
 # CloudFront configs generated with secrets in them (workers/treddy-mcp/cloudfront)
 workers/treddy-mcp/cloudfront/*.json
