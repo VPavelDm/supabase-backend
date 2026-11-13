@@ -1,8 +1,9 @@
 // The pure half of an app's Adapty win-back webhook (subscription-offers
 // skill, references/winback-pipeline.md): which posts are a fresh ending
-// worth a push, and the secret check in front of them. Affirmations uses it
-// (functions/affirmations/winback.ts); Lyncil's lyncil/winback.ts still
-// carries its own copy of the same rules.
+// worth a push, and the secret check in front of them. Lyncil
+// (functions/lyncil/winback.ts) and Affirmations (functions/affirmations/winback.ts)
+// both use it; Calyo's webhook lives in its own Supabase project with the same
+// rules. A change here reaches every app's webhook at its next deploy.
 
 const WINBACK_EVENTS = new Set(["trial_expired", "subscription_expired"]);
 /// An older ending sends nothing: a dashboard resend of old events must not

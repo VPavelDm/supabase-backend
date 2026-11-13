@@ -12,55 +12,16 @@
 //
 // Every authorized call answers 200 (Adapty retries anything else); every
 // failure degrades to "no push". One push per ending (lyncil.winback_pushes).
+// Which posts count as a fresh ending, and the secret check, are the shared
+// rules in _shared/adapty-webhook.ts (Affirmations uses them too).
 
 import { sql } from "../_shared/db.ts";
 import { type Device, makeAPNs } from "../_shared/apns.ts";
 import { json } from "../_shared/router.ts";
+import { isAuthorized, winbackEvent } from "../_shared/adapty-webhook.ts";
 import { hasPremium } from "./song-quota.ts";
 
 const apns = makeAPNs({ topic: "com.vaitsikhouskaya.ala.lyncil", secretPrefix: "LYNCIL" });
-
-const WINBACK_EVENTS = new Set(["trial_expired", "subscription_expired"]);
-/// An older ending sends nothing: a dashboard resend of old events must not
-/// push everyone who ever lapsed.
-const FRESH_MS = 3 * 24 * 3600 * 1000;
-const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-export interface WinbackEvent {
-  userId: string;
-  lapsedAt: string;
-  eventType: string;
-}
-
-/// The win-back event in an Adapty webhook body, or null for anything else
-/// (the empty verification request, other events, unknown ids, stale ones).
-export function winbackEvent(body: unknown, now: Date): WinbackEvent | null {
-  if (typeof body !== "object" || body === null) return null;
-  const event = body as {
-    event_type?: unknown;
-    customer_user_id?: unknown;
-    event_datetime?: unknown;
-    event_properties?: { expires_at?: unknown } | null;
-  };
-  if (typeof event.event_type !== "string" || !WINBACK_EVENTS.has(event.event_type)) return null;
-  if (typeof event.customer_user_id !== "string" || !UUID_RE.test(event.customer_user_id)) return null;
-  const raw = event.event_properties?.expires_at ?? event.event_datetime;
-  if (typeof raw !== "string") return null;
-  const lapsedAt = new Date(raw);
-  if (Number.isNaN(lapsedAt.getTime()) || now.getTime() - lapsedAt.getTime() > FRESH_MS) return null;
-  return { userId: event.customer_user_id.toLowerCase(), lapsedAt: lapsedAt.toISOString(), eventType: event.event_type };
-}
-
-/// Constant-time comparison against the configured secret; none configured
-/// accepts nothing.
-export function isAuthorized(header: string | null, secret: string | undefined): boolean {
-  if (!header || !secret) return false;
-  const a = new TextEncoder().encode(header);
-  const b = new TextEncoder().encode(secret);
-  let diff = a.length ^ b.length;
-  for (let i = 0; i < Math.max(a.length, b.length); i++) diff |= (a[i] ?? 0) ^ (b[i] ?? 0);
-  return diff === 0;
-}
 
 export async function handleAdaptyWebhook(req: Request): Promise<Response> {
   if (!isAuthorized(req.headers.get("authorization"), Deno.env.get("LYNCIL_ADAPTY_WEBHOOK_SECRET"))) {
