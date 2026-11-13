@@ -211,6 +211,19 @@ guideline 5.1.1(v)). Both need the team-wide `APPLE_SIGN_IN_TEAM_ID`,
 (`_shared/apple-sign-in.ts`); until they are set, apple-token answers 503 and
 revocation is skipped with a warning.
 
+Affirmations' **offers** (`*_affirmations_offers.sql`, subscription-offers
+skill): the app's Supabase user id, lowercased, is also its Adapty
+`customer_user_id` and Amplitude `user_id`, so `delete-my-data` erases the user
+at Adapty (both projects) and Amplitude too. The app registers its APNs token
+through `affirmations_register_device` (`affirmations.devices`); the only
+server push is the win-back: Adapty posts `trial_expired` /
+`subscription_expired` to `affirmations/adapty-webhook` (`winback.ts`, the
+`AFFIRMATIONS_ADAPTY_WEBHOOK_SECRET` as the Authorization header), which
+re-checks Adapty, keeps one row per ending in `affirmations.winback_pushes` and
+pushes "A gift from Here 🎁" (`"offer": "winback"`). Seasons and rules are the
+`affirmations` rows of `shared.offer_seasons` / `shared.offer_rules`. Connect
+the webhook in Adapty only once an app version that opens the offer is live.
+
 **Lingo** (the language-learning apps — Hutarka teaches English, Hejka
 Polish, the next one adds an entry to `functions/lingo/apps.ts`; `lingo`
 schema: ai_usage and the lesson tables; storage bucket `lingo-tts-cache`): one

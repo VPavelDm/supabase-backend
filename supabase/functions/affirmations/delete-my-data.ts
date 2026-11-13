@@ -1,6 +1,6 @@
 // delete-my-data: erases what Affirmations holds about the caller — their
 // library (their affirmations, collections, listening sessions with their
-// moods, favorites) and
+// moods, favorites), their device tokens and win-back pushes, and
 // the daily usage counters in affirmations.ai_usage — then the auth user
 // unless another app on the project still holds something of theirs
 // (_shared/erase-user.ts). A user who signed in with Apple has the app's
@@ -8,12 +8,21 @@
 // signs out locally afterwards and starts over as a new anonymous user.
 //
 // The clips in affirmations-tts-cache are keyed by a hash of their text, with
-// no user id. The app identifies nobody at Amplitude or Adapty (neither SDK is
-// given the user id), so there is no third-party erasure here.
+// no user id. Elsewhere: the app identifies the user by this id at Amplitude
+// and Adapty (UserIdentity on iOS), so both are asked to forget it, each
+// skipped with a warning while its secrets are unset (AFFIRMATIONS_ADAPTY_*,
+// AFFIRMATIONS_AMPLITUDE_*; see index.ts). Amplitude: the App Store builds'
+// project only, as Lyncil's.
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
-import { deleteAuthUserIfUnused, verifiedUserId } from "../_shared/erase-user.ts";
+import {
+  deleteAuthUserIfUnused,
+  eraseAt,
+  eraseFromAdapty,
+  eraseFromAmplitude,
+  verifiedUserId,
+} from "../_shared/erase-user.ts";
 import { appleConfig, revokeRefreshToken } from "../_shared/apple-sign-in.ts";
 import { AFFIRMATIONS_APPLE_CLIENT_ID } from "./apple-token.ts";
 import { isAppCall } from "./auth.ts";
@@ -32,16 +41,29 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
 
   // Collections and sessions take their items with them; the user's own
   // affirmations go last, once nothing of theirs points at them.
-  const [favorites, sessions, collections, affirmations, counters] = await sql.begin((tx) => [
+  const [favorites, sessions, collections, affirmations, counters, , devices] = await sql.begin((tx) => [
     tx`delete from affirmations.favorites where user_id = ${id}::uuid returning affirmation_id`,
     tx`delete from affirmations.sessions where user_id = ${id}::uuid returning id`,
     tx`delete from affirmations.collections where owner_id = ${id}::uuid returning id`,
     tx`delete from affirmations.affirmations where owner_id = ${id}::uuid returning id`,
     tx`delete from affirmations.ai_usage where caller = ${`user:${userId}`} returning day`,
     tx`delete from affirmations.apple_tokens where user_id = ${id}::uuid returning user_id`,
+    tx`delete from affirmations.devices where user_id = ${id}::uuid returning device_token`,
+    tx`delete from affirmations.winback_pushes where user_id = ${id}::uuid returning user_id`,
   ]);
 
-  const account = await deleteAuthUserIfUnused(FN, userId);
+  const env = (name: string) => Deno.env.get(name);
+  const [account, adapty, adaptyStaging, amplitude] = await Promise.all([
+    deleteAuthUserIfUnused(FN, userId),
+    eraseAt(FN, "adapty", id, () => eraseFromAdapty(env("AFFIRMATIONS_ADAPTY_SECRET_KEY"), id)),
+    eraseAt(FN, "adapty-staging", id, () => eraseFromAdapty(env("AFFIRMATIONS_ADAPTY_STAGING_SECRET_KEY"), id)),
+    eraseAt(FN, "amplitude", id, () =>
+      eraseFromAmplitude({
+        apiKey: env("AFFIRMATIONS_AMPLITUDE_API_KEY"),
+        secretKey: env("AFFIRMATIONS_AMPLITUDE_SECRET_KEY"),
+        host: env("AFFIRMATIONS_AMPLITUDE_HOST"),
+      }, id, "affirmations delete-my-data")),
+  ]);
   console.log(JSON.stringify({
     fn: FN,
     event: "deleted",
@@ -50,8 +72,12 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
     sessions: sessions.length,
     favorites: favorites.length,
     counters: counters.length,
+    devices: devices.length,
     apple,
     account,
+    adapty,
+    adaptyStaging,
+    amplitude,
   }));
   return json({ deleted: true });
 }

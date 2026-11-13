@@ -76,6 +76,8 @@ async function userHoldsAppData(userId: string): Promise<boolean> {
       or exists (select 1 from affirmations.sessions where user_id = ${id}::uuid)
       or exists (select 1 from affirmations.favorites where user_id = ${id}::uuid)
       or exists (select 1 from affirmations.apple_tokens where user_id = ${id}::uuid)
+      or exists (select 1 from affirmations.devices where user_id = ${id}::uuid)
+      or exists (select 1 from affirmations.winback_pushes where user_id = ${id}::uuid)
       or exists (select 1 from lingo.ai_usage where caller = ${`user:${id}`})
       or exists (select 1 from storage.objects
                  where bucket_id in ('capsule-photos', 'capsule-voice-notes', 'lyncil-tracks')
