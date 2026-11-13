@@ -8,8 +8,9 @@
 // ELEVENLABS_API_KEY work as project-wide fallbacks):
 //   AFFIRMATIONS_APP_KEY, AFFIRMATIONS_OPENAI_API_KEY,
 //   AFFIRMATIONS_OPENAI_MODEL (optional), AFFIRMATIONS_ELEVENLABS_API_KEY
-// Sign in with Apple's token exchange and revocation use the team-wide
-// APPLE_SIGN_IN_TEAM_ID, APPLE_SIGN_IN_KEY_ID and APPLE_SIGN_IN_PRIVATE_KEY
+// Sign in with Apple's token exchange and revocation (apple-token.ts,
+// delete-my-data.ts): AFFIRMATIONS_APPLE_SIGN_IN_TEAM_ID,
+// AFFIRMATIONS_APPLE_SIGN_IN_KEY_ID, AFFIRMATIONS_APPLE_SIGN_IN_PRIVATE_KEY
 // (_shared/apple-sign-in.ts).
 // Offers (winback.ts, delete-my-data.ts):
 //   AFFIRMATIONS_ADAPTY_WEBHOOK_SECRET (Adapty's webhook Authorization header),

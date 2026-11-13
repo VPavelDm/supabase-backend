@@ -4,14 +4,16 @@
 // Calories' _shared/apple_sign_in.ts.
 //
 // Both calls authenticate with a client secret: an ES256 JWT signed with a
-// Sign in with Apple key (.p8) from the Apple Developer account. One key serves
-// every app of the team. Secrets (`supabase secrets set`):
-//   APPLE_SIGN_IN_TEAM_ID      the team id (Membership → Team ID)
-//   APPLE_SIGN_IN_KEY_ID       the key's id (Keys → the key with "Sign in with Apple")
-//   APPLE_SIGN_IN_PRIVATE_KEY  the .p8 file's contents, PEM lines included
-// The client id is the calling app's bundle id, passed in by its route.
-// appleConfig() returns null until all three are set, and callers treat that
-// as "skip, with a warning".
+// Sign in with Apple key (.p8) from the Apple Developer account. Apple ties a
+// key to one primary App ID, so each app has its own key and its own secrets
+// (`supabase secrets set`), prefixed with the app's name:
+//   <APP>_APPLE_SIGN_IN_TEAM_ID      the team id (Membership → Team ID)
+//   <APP>_APPLE_SIGN_IN_KEY_ID       the key's id (Keys → the app's key with "Sign in with Apple")
+//   <APP>_APPLE_SIGN_IN_PRIVATE_KEY  the .p8 file's contents, PEM lines included
+// with <APP> one of AFFIRMATIONS, FUTURA, LYNCIL (APPLE_APPS below).
+// The client id is the app's bundle id. appleConfig() returns null until all
+// three of an app's secrets are set, and callers treat that as "skip, with a
+// warning".
 
 const TOKEN_URL = "https://appleid.apple.com/auth/token";
 const REVOKE_URL = "https://appleid.apple.com/auth/revoke";
@@ -29,10 +31,20 @@ export interface AppleConfig {
   clientId: string;
 }
 
-export function appleConfig(clientId: string, env: Env = (name) => Deno.env.get(name)): AppleConfig | null {
-  const teamId = env("APPLE_SIGN_IN_TEAM_ID");
-  const keyId = env("APPLE_SIGN_IN_KEY_ID");
-  const privateKey = env("APPLE_SIGN_IN_PRIVATE_KEY");
+export type AppleApp = "affirmations" | "futura" | "lyncil";
+
+/** Each app's bundle id (Apple issues its codes to that client) and secret names. */
+const APPLE_APPS: Record<AppleApp, { clientId: string; secretPrefix: string }> = {
+  affirmations: { clientId: "com.affirmations.sound", secretPrefix: "AFFIRMATIONS_" },
+  futura: { clientId: "com.futura.capsules", secretPrefix: "FUTURA_" },
+  lyncil: { clientId: "com.vaitsikhouskaya.ala.lyncil", secretPrefix: "LYNCIL_" },
+};
+
+export function appleConfig(app: AppleApp, env: Env = (name) => Deno.env.get(name)): AppleConfig | null {
+  const { clientId, secretPrefix } = APPLE_APPS[app];
+  const teamId = env(`${secretPrefix}APPLE_SIGN_IN_TEAM_ID`);
+  const keyId = env(`${secretPrefix}APPLE_SIGN_IN_KEY_ID`);
+  const privateKey = env(`${secretPrefix}APPLE_SIGN_IN_PRIVATE_KEY`);
   if (!teamId || !keyId || !privateKey) return null;
   return { teamId, keyId, privateKey, clientId };
 }

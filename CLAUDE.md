@@ -214,10 +214,16 @@ for the local stack). Right after signing in the app posts Apple's
 authorization code to `affirmations/apple-token`, which trades it for a refresh
 token (only if that Apple account is linked to the caller) and keeps it in
 `affirmations.apple_tokens`; `delete-my-data` revokes it first (App Store
-guideline 5.1.1(v)). Both need the team-wide `APPLE_SIGN_IN_TEAM_ID`,
-`APPLE_SIGN_IN_KEY_ID` and `APPLE_SIGN_IN_PRIVATE_KEY` secrets
-(`_shared/apple-sign-in.ts`); until they are set, apple-token answers 503 and
-revocation is skipped with a warning.
+guideline 5.1.1(v)). Futura and Lyncil do the same through `futura/apple-token`
+/ `lyncil/apple-token` into `futura.apple_tokens` / `lyncil.apple_tokens`
+(`*_futura_apple_tokens.sql`, `*_lyncil_apple_tokens.sql`), with
+`com.futura.capsules` and `com.vaitsikhouskaya.ala.lyncil` in the provider's
+client ids. Apple ties a Sign in with Apple key to one primary App ID, so each
+app has its own key and secrets: `<APP>_APPLE_SIGN_IN_TEAM_ID`,
+`<APP>_APPLE_SIGN_IN_KEY_ID` and `<APP>_APPLE_SIGN_IN_PRIVATE_KEY` with `<APP>`
+`AFFIRMATIONS`, `FUTURA` or `LYNCIL` (`_shared/apple-sign-in.ts`). Until an
+app's secrets are set, its apple-token answers 503 and revocation is skipped
+with a warning.
 
 Affirmations' **offers** (`*_affirmations_offers.sql`, subscription-offers
 skill): the app's Supabase user id, lowercased, is also its Adapty

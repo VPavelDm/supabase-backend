@@ -304,7 +304,7 @@ max_frequency = "5s"
 # Native Sign in with Apple (ID token from the app): client_id lists the apps'
 # bundle ids, comma-separated. No secret needed; that is for the web OAuth flow.
 enabled = true
-client_id = "com.affirmations.sound"
+client_id = "com.futura.capsules,com.vaitsikhouskaya.ala.lyncil,com.affirmations.sound"
 secret = ""
 # Overrides the default auth redirectUrl.
 redirect_uri = ""

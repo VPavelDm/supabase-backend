@@ -1,6 +1,8 @@
 // delete-my-data: erases everything Lyncil holds about the caller, then the
 // auth user unless another app on the project still holds something of
-// theirs (_shared/erase-user.ts). The app signs out locally afterwards and
+// theirs (_shared/erase-user.ts). A user who signed in with Apple has the
+// app's Apple authorization revoked first (App Store guideline 5.1.1(v)), as
+// in affirmations/delete-my-data.ts. The app signs out locally afterwards and
 // starts over as a new anonymous user.
 //
 // Here: the profile, and through it every song, song job, feedback, device
@@ -22,6 +24,9 @@
 //     Amplitude project (the one App Store builds send to)
 //   LYNCIL_AMPLITUDE_HOST: optional, https://analytics.eu.amplitude.com for an
 //     EU project
+//   LYNCIL_APPLE_SIGN_IN_TEAM_ID, LYNCIL_APPLE_SIGN_IN_KEY_ID,
+//     LYNCIL_APPLE_SIGN_IN_PRIVATE_KEY: the Apple revocation
+//     (_shared/apple-sign-in.ts)
 
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
@@ -33,6 +38,7 @@ import {
   removeUserFolder,
   verifiedUserId,
 } from "../_shared/erase-user.ts";
+import { appleConfig, revokeRefreshToken } from "../_shared/apple-sign-in.ts";
 import { isAppCall } from "./auth.ts";
 
 const FN = "lyncil/delete-my-data";
@@ -42,10 +48,15 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
   const userId = await verifiedUserId(req);
   if (!userId) return json({ error: "Unauthorized" }, 401);
 
+  // Before the token's row goes: a deletion retried after a failure further
+  // down would otherwise find nothing to revoke.
+  const apple = await revokeAppleSignIn(userId);
+
   const songs = await sql.begin(async (tx) => {
     const [row] = await tx`select count(*)::int as songs from lyncil.songs where user_id = ${userId}::uuid`;
     await tx`delete from lyncil.profiles where id = ${userId}::uuid`;
     await tx`delete from lyncil.ai_usage where caller in (${`user:${userId}`}, ${`adfree:user:${userId}`})`;
+    await tx`delete from lyncil.apple_tokens where user_id = ${userId}::uuid`;
     return row.songs as number;
   });
 
@@ -67,6 +78,44 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
       }, userId, "lyncil delete-my-data")),
   ]);
 
-  console.log(JSON.stringify({ fn: FN, event: "deleted", songs, files, account, adapty, adaptyStaging, amplitude }));
+  console.log(JSON.stringify({
+    fn: FN,
+    event: "deleted",
+    songs,
+    files,
+    apple,
+    account,
+    adapty,
+    adaptyStaging,
+    amplitude,
+  }));
   return json({ deleted: true });
+}
+
+/// Revokes the app's Sign in with Apple authorization when the user signed in
+/// with Apple. Never throws: a failure is logged for a manual follow-up (the
+/// user can also remove the app in their Apple Account settings), and the
+/// deletion goes on.
+async function revokeAppleSignIn(userId: string): Promise<"revoked" | "none" | "skipped" | "failed"> {
+  try {
+    const [row] = await sql`
+      select refresh_token from lyncil.apple_tokens where user_id = ${userId}::uuid`;
+    if (!row) return "none";
+    const config = appleConfig("lyncil");
+    if (!config) {
+      console.warn(JSON.stringify({ level: "warn", fn: FN, event: "apple_revoke_skipped", reason: "not_configured" }));
+      return "skipped";
+    }
+    await revokeRefreshToken(config, row.refresh_token as string);
+    return "revoked";
+  } catch (e) {
+    console.error(JSON.stringify({
+      level: "error",
+      fn: FN,
+      event: "apple_revoke_failed",
+      user_id: userId,
+      message: e instanceof Error ? e.message : String(e),
+    }));
+    return "failed";
+  }
 }

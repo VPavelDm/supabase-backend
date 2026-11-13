@@ -67,9 +67,11 @@ async function userHoldsAppData(userId: string): Promise<boolean> {
     select
       exists (select 1 from futura.profiles where auth_id = ${id}::uuid)
       or exists (select 1 from futura.capsules where user_id = ${id}::uuid)
+      or exists (select 1 from futura.apple_tokens where user_id = ${id}::uuid)
       or exists (select 1 from lyncil.profiles where id = ${id}::uuid)
       or exists (select 1 from lyncil.ai_usage
                  where caller in (${`user:${id}`}, ${`adfree:user:${id}`}))
+      or exists (select 1 from lyncil.apple_tokens where user_id = ${id}::uuid)
       or exists (select 1 from affirmations.ai_usage where caller = ${`user:${id}`})
       or exists (select 1 from affirmations.affirmations where owner_id = ${id}::uuid)
       or exists (select 1 from affirmations.collections where owner_id = ${id}::uuid)

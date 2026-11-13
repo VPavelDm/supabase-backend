@@ -24,7 +24,6 @@ import {
   verifiedUserId,
 } from "../_shared/erase-user.ts";
 import { appleConfig, revokeRefreshToken } from "../_shared/apple-sign-in.ts";
-import { AFFIRMATIONS_APPLE_CLIENT_ID } from "./apple-token.ts";
 import { isAppCall } from "./auth.ts";
 
 const FN = "affirmations/delete-my-data";
@@ -91,7 +90,7 @@ async function revokeAppleSignIn(userId: string): Promise<"revoked" | "none" | "
     const [row] = await sql`
       select refresh_token from affirmations.apple_tokens where user_id = ${userId}::uuid`;
     if (!row) return "none";
-    const config = appleConfig(AFFIRMATIONS_APPLE_CLIENT_ID);
+    const config = appleConfig("affirmations");
     if (!config) {
       console.warn(JSON.stringify({ level: "warn", fn: FN, event: "apple_revoke_skipped", reason: "not_configured" }));
       return "skipped";

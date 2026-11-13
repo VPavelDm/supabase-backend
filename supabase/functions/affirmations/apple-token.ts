@@ -10,7 +10,7 @@
 //   400  no code, or Apple refused it (expired after five minutes, used, another client)
 //   401  no app key, or a missing or invalid user token
 //   403  the code belongs to an Apple account that is not linked to the caller
-//   503  the APPLE_SIGN_IN_* secrets are not set (_shared/apple-sign-in.ts)
+//   503  the AFFIRMATIONS_APPLE_SIGN_IN_* secrets are not set (_shared/apple-sign-in.ts)
 
 import { createClient } from "npm:@supabase/supabase-js@2.47.10";
 import { sql } from "../_shared/db.ts";
@@ -21,8 +21,6 @@ import { AppleCodeRejected, appleConfig, exchangeCode } from "../_shared/apple-s
 import { isAppCall } from "./auth.ts";
 
 const FN = "affirmations/apple-token";
-/** The app's bundle id: Apple issues its sign-in codes to it. */
-export const AFFIRMATIONS_APPLE_CLIENT_ID = "com.affirmations.sound";
 
 const log = (level: "info" | "warn" | "error", event: string, fields: Record<string, unknown> = {}) =>
   console[level === "info" ? "log" : level](JSON.stringify({ level, fn: FN, event, ...fields }));
@@ -38,7 +36,7 @@ export async function handleAppleToken(req: Request): Promise<Response> {
     return json({ error: "authorization_code is required" }, 400);
   }
 
-  const config = appleConfig(AFFIRMATIONS_APPLE_CLIENT_ID);
+  const config = appleConfig("affirmations");
   if (!config) {
     log("warn", "not_configured");
     return json({ error: "Sign in with Apple is not configured" }, 503);
