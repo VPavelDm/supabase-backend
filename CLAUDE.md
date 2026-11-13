@@ -278,7 +278,9 @@ the migration is in.
 
 Lingo's **win-back push** (`*_lingo_winback_push.sql`, subscription-offers
 skill; the offers themselves run in the apps through onboarding-ios'
-`OfferCenter`): the app's Supabase user id, lowercased, is its Adapty
+`OfferCenter`; their seasons and rules are the `hutarka` / `hejka` rows of
+`shared.offer_seasons` / `shared.offer_rules`, copied from Calyo's in
+`*_lingo_offer_seasons.sql`): the app's Supabase user id, lowercased, is its Adapty
 `customer_user_id`. Each app registers its APNs token through
 `lingo_register_device(p_app, …)` (`lingo.devices`, one row per token with the
 app it belongs to). Each app's Adapty projects post `trial_expired` /
