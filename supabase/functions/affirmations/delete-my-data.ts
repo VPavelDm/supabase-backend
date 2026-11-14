@@ -49,6 +49,7 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
     tx`delete from affirmations.apple_tokens where user_id = ${id}::uuid returning user_id`,
     tx`delete from affirmations.devices where user_id = ${id}::uuid returning device_token`,
     tx`delete from affirmations.winback_pushes where user_id = ${id}::uuid returning user_id`,
+    tx`delete from affirmations.profiles where user_id = ${id}::uuid`,
   ]);
 
   const env = (name: string) => Deno.env.get(name);
