@@ -1,6 +1,7 @@
 // delete-my-data: erases what Affirmations holds about the caller — their
 // library (their affirmations, collections, listening sessions with their
-// moods, favorites), their device tokens and win-back pushes, and
+// moods, favorites, breathing sessions and saved breathing exercises), their
+// device tokens and win-back pushes, and
 // the daily usage counters in affirmations.ai_usage — then the auth user
 // unless another app on the project still holds something of theirs
 // (_shared/erase-user.ts). A user who signed in with Apple has the app's
@@ -39,8 +40,11 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
   const apple = await revokeAppleSignIn(id);
 
   // Collections and sessions take their items with them; the user's own
-  // affirmations go last, once nothing of theirs points at them.
-  const [favorites, sessions, collections, affirmations, counters, , devices] = await sql.begin((tx) => [
+  // affirmations go last, once nothing of theirs points at them. Breathing
+  // sessions go before the presets they may point at.
+  const [
+    favorites, sessions, collections, affirmations, counters, , devices, , , breatheSessions, breathePresets,
+  ] = await sql.begin((tx) => [
     tx`delete from affirmations.favorites where user_id = ${id}::uuid returning affirmation_id`,
     tx`delete from affirmations.sessions where user_id = ${id}::uuid returning id`,
     tx`delete from affirmations.collections where owner_id = ${id}::uuid returning id`,
@@ -50,6 +54,8 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
     tx`delete from affirmations.devices where user_id = ${id}::uuid returning device_token`,
     tx`delete from affirmations.winback_pushes where user_id = ${id}::uuid returning user_id`,
     tx`delete from affirmations.profiles where user_id = ${id}::uuid`,
+    tx`delete from affirmations.breathe_sessions where user_id = ${id}::uuid returning id`,
+    tx`delete from affirmations.breathe_presets where user_id = ${id}::uuid returning id`,
   ]);
 
   const env = (name: string) => Deno.env.get(name);
@@ -71,6 +77,8 @@ export async function handleDeleteMyData(req: Request): Promise<Response> {
     collections: collections.length,
     sessions: sessions.length,
     favorites: favorites.length,
+    breatheSessions: breatheSessions.length,
+    breathePresets: breathePresets.length,
     counters: counters.length,
     devices: devices.length,
     apple,
