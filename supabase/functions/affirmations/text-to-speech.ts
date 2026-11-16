@@ -31,6 +31,16 @@ function speed(value: unknown): number {
   return Math.min(1.2, Math.max(0.7, number));
 }
 
+// ElevenLabs' 0–1 settings beside speed (stability, similarity_boost, style).
+// Kept only when the caller sends them: Breathe's short cues ask for a steady
+// voice, and every other clip keeps the settings, and so the cache key, it had.
+const UNIT_SETTINGS = ["stability", "similarity_boost", "style"] as const;
+
+function unit(value: unknown): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
+  return Math.min(1, Math.max(0, value));
+}
+
 async function sha256(input: string): Promise<string> {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input));
   return Array.from(new Uint8Array(digest))
@@ -54,7 +64,11 @@ export async function handleTextToSpeech(req: Request): Promise<Response> {
   const voiceId = typeof body?.voice_id === "string" ? body.voice_id.trim() : "";
   const modelId = typeof body?.model_id === "string" ? body.model_id : DEFAULT_MODEL_ID;
   const settings = body?.voice_settings as Record<string, unknown> | undefined;
-  const voiceSettings = { speed: speed(settings?.speed) };
+  const voiceSettings: Record<string, number> = { speed: speed(settings?.speed) };
+  for (const key of UNIT_SETTINGS) {
+    const value = unit(settings?.[key]);
+    if (value !== undefined) voiceSettings[key] = value;
+  }
 
   if (!text) return json({ error: "text is required" }, 400);
   if (text.length > MAX_TEXT) return json({ error: "text is too long" }, 400);
