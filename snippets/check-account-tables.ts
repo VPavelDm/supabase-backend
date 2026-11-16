@@ -33,6 +33,7 @@ const TREDDY = "keyed by the Threads account; Treddy never creates Supabase user
 
 /** Tables that hold nothing of a Supabase user's, and why. */
 const NOT_PER_USER: Record<string, string> = {
+  "affirmations.shield_texts": "the App Blocker's shield copy, the same for every user",
   "lingo.chapters": LINGO_CATALOG,
   "lingo.lesson_steps": LINGO_CATALOG,
   "lingo.lessons": LINGO_CATALOG,
