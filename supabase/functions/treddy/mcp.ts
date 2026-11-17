@@ -1,6 +1,6 @@
 // Treddy's MCP server (Streamable HTTP, stateless, JSON responses): lets an
 // assistant the user connected — Claude, ChatGPT — read the account's
-// planning context and SUGGEST posts. Suggestions are rows with status
+// planning context and its published posts' stats, and SUGGEST posts. Suggestions are rows with status
 // 'suggested', which the publisher never claims; only the user, approving
 // in the app, turns one into a scheduled post. So the worst a confused or
 // prompt-injected assistant can do is fill the review list — capped per
@@ -17,6 +17,14 @@ import { type Grant, grantForBearer, publicURL, withinDailyCap } from "./mcp-aut
 import { parseSettings } from "./settings.ts";
 import { isPostText, MAX_FOLLOW_UPS, MAX_TEXT_LENGTH } from "./sync.ts";
 import { notifyDevices } from "./notify.ts";
+import {
+  fetchAccountInsights,
+  fetchFollowerCount,
+  fetchOwnPosts,
+  fetchPostInsights,
+  POST_METRICS,
+  ThreadsAPIError,
+} from "./threads-api.ts";
 
 const SUPPORTED_VERSIONS = ["2025-11-25", "2025-06-18", "2025-03-26"];
 const MAX_POSTS_PER_CALL = 30;
@@ -24,11 +32,17 @@ const MAX_PENDING = 60;
 const MAX_SUGGEST_CALLS_PER_DAY = 20;
 const MAX_DAYS_AHEAD = 60;
 const LIST_LIMIT = 200;
+const STATS_PERIODS = [7, 30, 90];
+const MAX_STATS_POSTS = 300;
+const MAX_STATS_CALLS_PER_DAY = 10;
+const INSIGHTS_AT_ONCE = 8;
 
 const INSTRUCTIONS =
   "Treddy plans and autoposts the user's Threads posts. Call get_planning_context first to " +
   "learn their voice, language, posting times and time zone, and list_planned_posts to avoid " +
-  "clashing with what is already planned. Before every suggest_posts call, show the user the " +
+  "clashing with what is already planned. get_post_stats returns the posts the user published on " +
+  "Threads in the last 7, 30 or 90 days with views, likes, replies, reposts, quotes and shares, for " +
+  "looking at what works. Before every suggest_posts call, show the user the " +
   "exact posts and times in the chat and ask whether to send them to Treddy; call it only after " +
   "they say yes in a later message, and send only what they agreed to. suggest_posts only adds " +
   "suggestions: the user reviews and approves each one in the Treddy app, and nothing is " +
@@ -58,6 +72,26 @@ const TOOLS = [
       properties: {
         from: { type: "string", format: "date-time", description: "ISO 8601, inclusive" },
         to: { type: "string", format: "date-time", description: "ISO 8601, exclusive; at most 90 days after from" },
+      },
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: true, openWorldHint: false },
+  },
+  {
+    name: "get_post_stats",
+    title: "Get post stats",
+    description:
+      "The user's own Threads posts from the last 7, 30 or 90 days (default 30), each with its " +
+      "lifetime views, likes, replies (the conversations under it), reposts, quotes, shares and " +
+      "engagement rate, plus totals, per-post averages, account-wide numbers for the period " +
+      "(profile views, interactions) and the follower count. Covers every top-level post, " +
+      "including ones posted outside Treddy (via_treddy says which); replies and reposts of " +
+      `other people's posts aren't included. At most ${MAX_STATS_POSTS} posts, newest first; ` +
+      "text is shortened. Local times are in the user's time zone.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        days: { type: "integer", enum: STATS_PERIODS, default: 30, description: "How far back to look" },
       },
       additionalProperties: false,
     },
@@ -183,6 +217,8 @@ export async function handleMCP(req: Request): Promise<Response> {
             return rpcResult(id, textResult(await planningContext(grant)));
           case "list_planned_posts":
             return rpcResult(id, textResult(await listPlannedPosts(grant, args)));
+          case "get_post_stats":
+            return rpcResult(id, textResult(JSON.stringify(await postStats(grant, args))));
           case "suggest_posts":
             return rpcResult(id, textResult(await suggestPosts(grant, args)));
           default:
@@ -271,6 +307,156 @@ async function listPlannedPosts(grant: Grant, args: Record<string, unknown>) {
       follow_ups: row.follow_ups,
       ...(row.source ? { suggested_by: row.source } : {}),
     })),
+  };
+}
+
+/// Runs `work` over `items`, at most `limit` at a time, keeping the order.
+async function mapLimited<T, R>(items: T[], limit: number, work: (item: T) => Promise<R>): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (next < items.length) {
+      const index = next++;
+      results[index] = await work(items[index]);
+    }
+  }));
+  return results;
+}
+
+/// Threads' answer, put the way an assistant can pass on to the user.
+function threadsProblem(error: unknown): ToolError {
+  if (error instanceof ThreadsAPIError && error.isAuthError) {
+    return new ToolError(
+      "Threads no longer accepts Treddy's sign-in. Ask the user to open Treddy and sign in to Threads again.",
+    );
+  }
+  if (error instanceof ThreadsAPIError && [4, 17, 32, 613].includes(error.code ?? -1)) {
+    return new ToolError("Threads' rate limit for this account is reached. Try again in an hour or so.");
+  }
+  console.error("post stats: Threads failed", error);
+  return new ToolError("Threads didn't return the posts just now. Try again in a few minutes.");
+}
+
+function rate(part: number, whole: number): number | null {
+  return whole > 0 ? Math.round((part / whole) * 10_000) / 10_000 : null;
+}
+
+async function postStats(grant: Grant, args: Record<string, unknown>) {
+  const days = args.days ?? 30;
+  if (typeof days !== "number" || !STATS_PERIODS.includes(days)) {
+    throw new ToolError(`days must be one of ${STATS_PERIODS.join(", ")}.`);
+  }
+  const rows = await sql`
+    select access_token, needs_reauth, time_zone from treddy.accounts
+    where threads_user_id = ${grant.threads_user_id}`;
+  const account = rows[0];
+  if (!account) throw new ToolError("This Treddy account no longer exists.");
+  if (account.needs_reauth) throw threadsProblem(new ThreadsAPIError("needs reauth", 190));
+  // Every call costs the user's own Threads allowance (the one autoposting
+  // runs on too), one request per post: a looping assistant stops here.
+  if (!(await withinDailyCap(`mcp-stats:${grant.id}`, MAX_STATS_CALLS_PER_DAY))) {
+    throw new ToolError("Today's limit of stats requests is reached. Try again tomorrow.");
+  }
+
+  const until = new Date();
+  const since = new Date(until.getTime() - days * 86_400_000);
+  const token = account.access_token as string;
+  let fetched;
+  try {
+    fetched = await fetchOwnPosts(token, since, MAX_STATS_POSTS + 1);
+  } catch (error) {
+    throw threadsProblem(error);
+  }
+  const more = fetched.length > MAX_STATS_POSTS;
+  // A repost of someone else's post shows up in the list but has no numbers.
+  const posts = fetched.slice(0, MAX_STATS_POSTS).filter((post) => post.media_type !== "REPOST_FACADE");
+
+  let authFailed = false;
+  const numbers = await mapLimited(posts, INSIGHTS_AT_ONCE, async (post) => {
+    try {
+      return await fetchPostInsights(token, post.id);
+    } catch (error) {
+      if (error instanceof ThreadsAPIError && error.isAuthError) authFailed = true;
+      return null;
+    }
+  });
+  if (authFailed) throw threadsProblem(new ThreadsAPIError("auth", 190));
+
+  const [accountWindow, followers, treddyRows] = await Promise.all([
+    fetchAccountInsights(token, since, until).catch(() => null),
+    fetchFollowerCount(token).catch(() => null),
+    sql`
+      select coalesce(part_media_ids->>0, published_media_id) as media_id from treddy.posts
+      where threads_user_id = ${grant.threads_user_id} and status = 'published'
+        and published_at >= ${new Date(since.getTime() - 86_400_000)}`,
+  ]);
+  const viaTreddy = new Set(treddyRows.map((row) => row.media_id).filter(Boolean));
+
+  let local: Intl.DateTimeFormat | null = null;
+  try {
+    if (account.time_zone) {
+      local = new Intl.DateTimeFormat("en-GB", {
+        timeZone: account.time_zone, weekday: "short", year: "numeric", month: "2-digit",
+        day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false,
+      });
+    }
+  } catch {
+    local = null; // An unknown zone name: leave local times out.
+  }
+
+  const totals: Record<string, number> = Object.fromEntries(POST_METRICS.map((metric) => [metric, 0]));
+  let measured = 0;
+  const list = posts.map((post, index) => {
+    const stats = numbers[index];
+    if (stats) {
+      measured += 1;
+      for (const metric of POST_METRICS) totals[metric] += stats[metric] ?? 0;
+    }
+    const interactions = stats
+      ? (stats.likes ?? 0) + (stats.replies ?? 0) + (stats.reposts ?? 0) + (stats.quotes ?? 0) + (stats.shares ?? 0)
+      : 0;
+    const posted = new Date(post.timestamp);
+    return {
+      id: post.id,
+      posted_at: post.timestamp,
+      ...(local && !Number.isNaN(posted.getTime()) ? { local_time: local.format(posted) } : {}),
+      permalink: post.permalink,
+      media_type: post.media_type,
+      ...(post.is_quote_post ? { quote_post: true } : {}),
+      via_treddy: viaTreddy.has(post.id),
+      text: post.text.length > 280 ? `${post.text.slice(0, 280)}…` : post.text,
+      ...(stats
+        ? {
+          ...Object.fromEntries(POST_METRICS.map((metric) => [metric, stats[metric] ?? 0])),
+          engagement_rate: rate(interactions, stats.views ?? 0),
+        }
+        : { stats: "unavailable" }),
+    };
+  });
+
+  const allInteractions = totals.likes + totals.replies + totals.reposts + totals.quotes + totals.shares;
+  return {
+    period: { days, from: since.toISOString(), to: until.toISOString(), time_zone: account.time_zone ?? null },
+    posts_count: posts.length,
+    ...(more ? { note: `More than ${MAX_STATS_POSTS} posts in this period; only the newest ${MAX_STATS_POSTS} are here.` } : {}),
+    totals: { ...totals, engagement_rate: rate(allInteractions, totals.views) },
+    average_per_post: measured > 0
+      ? Object.fromEntries(POST_METRICS.map((metric) => [metric, Math.round((totals[metric] / measured) * 10) / 10]))
+      : null,
+    account: {
+      followers: followers,
+      ...(accountWindow
+        ? {
+          profile_views_in_period: accountWindow.views ?? null,
+          likes_in_period: accountWindow.likes ?? null,
+          replies_in_period: accountWindow.replies ?? null,
+          reposts_in_period: accountWindow.reposts ?? null,
+          quotes_in_period: accountWindow.quotes ?? null,
+          note: "Account-wide: interactions during the period on any post, older ones included.",
+        }
+        : {}),
+    },
+    posts: list,
   };
 }
 

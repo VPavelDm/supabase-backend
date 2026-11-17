@@ -105,3 +105,94 @@ export async function refreshToken(
     expiresInSeconds: Number(body.expires_in ?? 60 * 60 * 24 * 60),
   };
 }
+
+// MARK: - Reading the user's own posts and their numbers (the MCP stats tool)
+
+export interface OwnPost {
+  id: string;
+  text: string;
+  timestamp: string;
+  permalink: string | null;
+  media_type: string;
+  is_quote_post: boolean;
+}
+
+/// The user's own top-level posts since `since`, newest first, at most
+/// `limit` of them. Replies (and so the follow-ups of a chain) aren't here:
+/// Threads lists those under /me/replies.
+export async function fetchOwnPosts(token: string, since: Date, limit: number): Promise<OwnPost[]> {
+  const posts: OwnPost[] = [];
+  let after: string | null = null;
+  while (posts.length < limit) {
+    const url = new URL(`${GRAPH}/me/threads`);
+    url.searchParams.set("fields", "id,text,timestamp,permalink,media_type,is_quote_post");
+    url.searchParams.set("since", String(Math.floor(since.getTime() / 1000)));
+    url.searchParams.set("limit", "100");
+    if (after) url.searchParams.set("after", after);
+    const body = await parseOrThrow(await fetch(url, authorized(token)));
+    const page = Array.isArray(body.data) ? body.data as Record<string, unknown>[] : [];
+    for (const item of page) {
+      posts.push({
+        id: String(item.id),
+        text: typeof item.text === "string" ? item.text : "",
+        timestamp: String(item.timestamp ?? ""),
+        permalink: typeof item.permalink === "string" ? item.permalink : null,
+        media_type: String(item.media_type ?? ""),
+        is_quote_post: item.is_quote_post === true,
+      });
+    }
+    const paging = body.paging as { next?: string; cursors?: { after?: string } } | undefined;
+    after = paging?.next ? paging.cursors?.after ?? null : null;
+    if (!after || page.length === 0) break;
+  }
+  return posts.slice(0, limit);
+}
+
+/// Reads `{data: [{name, values: [{value}]} | {name, total_value: {value}}]}`
+/// into name → number; a series (one value per day) is summed.
+function insightNumbers(body: Record<string, unknown>): Record<string, number> {
+  const numbers: Record<string, number> = {};
+  for (const item of Array.isArray(body.data) ? body.data as Record<string, unknown>[] : []) {
+    const name = String(item.name);
+    const total = (item.total_value as { value?: unknown } | undefined)?.value;
+    if (typeof total === "number") {
+      numbers[name] = total;
+    } else if (Array.isArray(item.values)) {
+      numbers[name] = (item.values as { value?: unknown }[])
+        .reduce((sum, entry) => sum + (typeof entry.value === "number" ? entry.value : 0), 0);
+    }
+  }
+  return numbers;
+}
+
+export const POST_METRICS = ["views", "likes", "replies", "reposts", "quotes", "shares"] as const;
+
+/// Lifetime numbers of one of the user's posts (needs threads_manage_insights).
+export async function fetchPostInsights(token: string, mediaID: string): Promise<Record<string, number>> {
+  const url = new URL(`${GRAPH}/${encodeURIComponent(mediaID)}/insights`);
+  url.searchParams.set("metric", POST_METRICS.join(","));
+  return insightNumbers(await parseOrThrow(await fetch(url, authorized(token))));
+}
+
+/// Account-wide numbers between two times: `views` here is profile views,
+/// and the others count interactions on any of the user's posts during the
+/// window, old ones included.
+export async function fetchAccountInsights(
+  token: string,
+  since: Date,
+  until: Date,
+): Promise<Record<string, number>> {
+  const url = new URL(`${GRAPH}/me/threads_insights`);
+  url.searchParams.set("metric", "views,likes,replies,reposts,quotes");
+  url.searchParams.set("since", String(Math.floor(since.getTime() / 1000)));
+  url.searchParams.set("until", String(Math.floor(until.getTime() / 1000)));
+  return insightNumbers(await parseOrThrow(await fetch(url, authorized(token))));
+}
+
+/// Today's follower count; this metric takes no time range.
+export async function fetchFollowerCount(token: string): Promise<number | null> {
+  const url = new URL(`${GRAPH}/me/threads_insights`);
+  url.searchParams.set("metric", "followers_count");
+  const numbers = insightNumbers(await parseOrThrow(await fetch(url, authorized(token))));
+  return numbers.followers_count ?? null;
+}

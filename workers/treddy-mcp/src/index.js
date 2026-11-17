@@ -191,7 +191,7 @@ async function authorize(env, url) {
     : `<span class="who unverified">Unverified app “${escapeHTML(start.client_name)}” · returns to ${escapeHTML(start.redirect_host)}</span>`;
   const body = `
     <h1>Connect to Treddy</h1>
-    <p>This lets the app read your planning context and suggest posts. Nothing is posted until you approve it in Treddy.</p>
+    <p>This lets the app read your planning context and your posts' stats, and suggest posts. Nothing is posted until you approve it in Treddy.</p>
     ${who}
     <div class="code" id="code">${escapeHTML(start.user_code)}</div>
     <ol>
