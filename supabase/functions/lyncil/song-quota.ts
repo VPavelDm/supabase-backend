@@ -193,6 +193,16 @@ function addMonths(date: Date, months: number): Date {
 function billingWindow(plan: "weekly" | "monthly" | "annual", level: AccessLevel, now: Date): { start: Date; end: Date } {
   const purchased = new Date(level.purchased_at ?? level.starts_at ?? now);
   const expires = level.expires_at ? new Date(level.expires_at) : null;
+  // Apple renews up to a day early, and Adapty can then report the next
+  // period before it begins. Counted from that future date, nothing had been
+  // made, so until the renewal every song went through and none were counted
+  // (de252044, 2026-11-18: 14 songs over a spent week in the 4.5 h before
+  // it renewed). Until the renewal, the period that ends there is the
+  // current one.
+  if (purchased > now) {
+    const start = plan === "weekly" ? new Date(purchased.getTime() - 7 * DAY_MS) : addMonths(purchased, -1);
+    return { start, end: purchased };
+  }
   if (plan === "annual") {
     // Month k of the year: [purchase + k months, purchase + k+1 months).
     let months = (now.getUTCFullYear() - purchased.getUTCFullYear()) * 12 +
