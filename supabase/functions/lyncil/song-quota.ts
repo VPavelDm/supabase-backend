@@ -13,7 +13,8 @@
 // Which plan a product is comes from its level in the App Store group
 // (store-products.ts): level 1 is a songs plan, its cadence the product's
 // billing period; any other level (2, or the unused plans parked on 3 and
-// beyond) is legacy.
+// beyond) is legacy. Google Play has no levels: its products are graded from
+// a list (PLAY_PLANS), never through App Store Connect.
 //
 // The plan comes from Adapty's server-side API, looked up by customer user id:
 // the app identifies every install with its Supabase user id (anonymous
@@ -33,7 +34,7 @@
 import { sql } from "../_shared/db.ts";
 import { json } from "../_shared/router.ts";
 import { callerUserId, isAppCall, isStagingBuild } from "./auth.ts";
-import { SONGS_LEVEL, storeProduct } from "./store-products.ts";
+import { SONGS_LEVEL, type StoreProduct, storeProduct } from "./store-products.ts";
 
 export type Plan = "free" | "legacy" | "weekly" | "monthly" | "annual";
 
@@ -80,10 +81,35 @@ const SONG_PLANS: Record<string, "weekly" | "monthly" | "annual"> = {
   "lyncil_yearly_no_trial_59_99": "annual",
 };
 
+/// Google Play sells the App Store ids (one base plan each), graded the way
+/// an App Store buyer of the same product is: the songs plans by their
+/// cadence, the lyrics plans (level 2 in App Store Connect) as legacy, and
+/// the offer plan as annual, which is what the App Store one comes to: it
+/// sits in a subscription group of its own, so App Store Connect's table
+/// never has it and its year-long billing dates make it annual.
+///
+/// Play has no group levels and App Store Connect knows nothing of Play, so
+/// this list is all a Play id is graded by. An id missing from it is logged
+/// and graded legacy (lyrics only), not guessed from its dates: the guess
+/// makes any unlisted product a songs plan, and every song costs real money,
+/// so a new lyrics plan or a test product left off this list would hand out
+/// 20–30 paid tracks a period to each buyer. Grading a new songs plan as
+/// legacy instead shows its buyers the paywall on "Make a song" until it is
+/// added here, which the error in the logs is there to catch.
+const PLAY_PLANS: Record<string, Exclude<Plan, "free">> = {
+  ...SONG_PLANS,
+  "lyncil_weekly_3_99": "legacy",
+  "lyncil_monthly_8_99": "legacy",
+  "lyncil_yearly_discount": "annual",
+};
+
 export class PlanUnavailableError extends Error {}
 
 interface AccessLevel {
   access_level_id: string;
+  /// The store that sold it: app_store, play_store, …
+  store?: string | null;
+  /// On Google Play possibly `productId:basePlanId`.
   store_product_id?: string;
   purchased_at?: string | null;
   starts_at?: string | null;
@@ -144,10 +170,28 @@ export async function hasPremium(userId: string, stagingBuild: boolean, now = ne
   return (await premiumAccess(userId, now, stagingBuild)) !== null;
 }
 
-async function planOf(level: AccessLevel): Promise<Exclude<Plan, "free">> {
-  const productId = level.store_product_id;
+function planOf(level: AccessLevel): Promise<Exclude<Plan, "free">> {
+  return gradePlan(level, storeProduct);
+}
+
+/// The plan an access level buys. `lookup` is storeProduct, passed in so the
+/// grading can be run without a database.
+export async function gradePlan(
+  level: Pick<AccessLevel, "store" | "store_product_id" | "purchased_at" | "starts_at" | "expires_at">,
+  lookup: (productId: string) => Promise<StoreProduct | null>,
+): Promise<Exclude<Plan, "free">> {
+  const reported = level.store_product_id;
+  // Play ids may come as `productId:basePlanId`. App Store product ids can't
+  // hold a colon, so one also says Play when Adapty leaves the store out.
+  const productId = reported?.split(":")[0];
+  if (level.store === "play_store" || reported?.includes(":")) {
+    const plan = productId ? PLAY_PLANS[productId] : undefined;
+    if (plan) return plan;
+    console.error(`unknown Google Play product ${reported}; graded legacy (lyrics only)`);
+    return "legacy";
+  }
   const listed = productId ? SONG_PLANS[productId] : undefined;
-  const product = productId ? await storeProduct(productId) : null;
+  const product = productId ? await lookup(productId) : null;
   if (product) {
     if (product.groupLevel !== SONGS_LEVEL) {
       if (listed) {
